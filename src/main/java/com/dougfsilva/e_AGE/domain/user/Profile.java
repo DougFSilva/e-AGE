@@ -1,7 +1,5 @@
 package com.dougfsilva.e_AGE.domain.user;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,14 +9,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"username"})
+@EqualsAndHashCode(of = {"profileType"})
 @ToString
-public class User {
+public class Profile {
 	
-	private String username;
-	
-	private Password password;
-	
-	private List<Profile> profiles;
+	private ProfileType profileType;
 
 }
