@@ -1,8 +1,8 @@
 package com.dougfsilva.e_AGE.domain.person;
 
 import java.time.LocalDate;
-import java.util.List;
 
+import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.user.User;
 
 import lombok.AllArgsConstructor;
@@ -18,6 +18,8 @@ import lombok.ToString;
 @ToString
 public class Person {
 
+	private String ID;
+
 	private User user;
 
 	private String name;
@@ -26,13 +28,31 @@ public class Person {
 
 	private String phone;
 
-	private List<Email> email;
+	private Email email;
 
 	private LocalDate dateOfBirth;
 
-	public Person(String name, String rg, String phone, List<Email> email, LocalDate dateOfBirth) {
+	private Address address;
+
+	public Person(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address) {
 		this.name = name;
 		this.rg = rg;
+		this.phone = phone;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+	}
+
+	public Person(String name, String rg, String phone, Email email, LocalDate dateOfBirth) {
+		this.name = name;
+		this.rg = rg;
+		this.phone = phone;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public Person(String name, String phone, Email email, LocalDate dateOfBirth) {
+		this.name = name;
 		this.phone = phone;
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
