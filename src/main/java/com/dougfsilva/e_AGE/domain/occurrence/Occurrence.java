@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
-import com.dougfsilva.e_AGE.domain.student.Studant;
+import com.dougfsilva.e_AGE.domain.student.Student;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -27,7 +27,7 @@ public class Occurrence {
 
 	private Employee Reporter;
 
-	private Studant studant;
+	private Student studant;
 
 	private Clazz clazz;
 
@@ -49,7 +49,7 @@ public class Occurrence {
 
 	private Employee closureResponsible;
 
-	public Occurrence(LocalDateTime openingDate, Employee reporter, Studant studant, Clazz clazz, String curricularUnit,
+	public Occurrence(LocalDateTime openingDate, Employee reporter, Student studant, Clazz clazz, String curricularUnit,
 			OccurrenceType occurrenceType, Boolean restricted, Boolean forwarding, String description) {
 		this.openingDate = openingDate;
 		Reporter = reporter;

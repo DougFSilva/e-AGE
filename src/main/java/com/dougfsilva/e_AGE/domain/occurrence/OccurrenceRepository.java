@@ -6,8 +6,8 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
-import com.dougfsilva.e_AGE.domain.pagination.PageRequest;
-import com.dougfsilva.e_AGE.domain.student.Studant;
+import com.dougfsilva.e_AGE.domain.student.Student;
+import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface OccurrenceRepository {
 
@@ -25,7 +25,7 @@ public interface OccurrenceRepository {
 	
 	List<Occurrence> findAllByReporter(Employee reporter, PageRequest pageRequest);
 	
-	List<Occurrence> findAllByStudant(Studant studant, PageRequest pageRequest);
+	List<Occurrence> findAllByStudant(Student studant, PageRequest pageRequest);
 	
 	List<Occurrence> findAllByClazz(Clazz clazz, PageRequest pageRequest);
 	

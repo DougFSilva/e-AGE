@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.domain.notification;
+package com.dougfsilva.e_AGE.domain.utilities;
 
 public interface Notifiable {
 

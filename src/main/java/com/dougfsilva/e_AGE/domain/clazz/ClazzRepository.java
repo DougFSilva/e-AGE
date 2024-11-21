@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.pagination.PageRequest;
-import com.dougfsilva.e_AGE.domain.student.Studant;
+import com.dougfsilva.e_AGE.domain.student.Student;
+import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface ClazzRepository {
 
@@ -21,7 +21,7 @@ public interface ClazzRepository {
 	
 	List<Clazz> findAllByCourse(Course course, PageRequest pageRequest);
 	
-	List<Clazz> findAllByStudant(Studant studant);
+	List<Clazz> findAllByStudant(Student studant);
 	
 	List<Clazz> findAll(PageRequest pageRequest);
 

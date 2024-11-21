@@ -3,7 +3,8 @@ package com.dougfsilva.e_AGE.domain.person;
 import java.util.List;
 import java.util.Optional;
 
-import com.dougfsilva.e_AGE.domain.pagination.PageRequest;
+import com.dougfsilva.e_AGE.domain.user.User;
+import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface PersonRepository {
 
@@ -16,6 +17,8 @@ public interface PersonRepository {
 	Optional<Person> findByID(String ID);
 
 	Optional<Person> findByRg(String rg);
+	
+	Optional<Person> findByUser(User user);
 
 	List<Person> findAllByNameContains(String name, PageRequest pageRequest);
 

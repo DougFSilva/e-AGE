@@ -19,7 +19,7 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode(of = {"enrollment"})
 @ToString
-public class Studant {
+public class Student {
 	
 	private String ID;
 	
@@ -35,7 +35,7 @@ public class Studant {
 	
 	private Enterprise enterprise;
 
-	public Studant(String enrollment, Person person, List<Clazz> classes) {
+	public Student(String enrollment, Person person, List<Clazz> classes) {
 		this.enrollment = enrollment;
 		this.person = person;
 		this.classes = classes;

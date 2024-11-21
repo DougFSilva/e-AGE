@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.domain.pagination;
+package com.dougfsilva.e_AGE.domain.utilities.pagination;
 
 import java.util.List;
 

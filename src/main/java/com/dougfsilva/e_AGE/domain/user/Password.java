@@ -1,37 +1,39 @@
 package com.dougfsilva.e_AGE.domain.user;
 
-import com.dougfsilva.e_AGE.domain.exception.InvalidUserOrPasswordException;
+import com.dougfsilva.e_AGE.domain.utilities.exception.InvalidUserOrPasswordException;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@NoArgsConstructor
 @Getter
 @ToString
 public class Password {
-	
-	private String password;
-	
-	public Password(String password, PasswordEncoder encoder) {
-		
-		if(!password.matches("^(.*[0-9]).*$")){
-			throw new InvalidUserOrPasswordException("A senha deve conter pelo menos um dígito!");
-		}
-		if(!password.matches("^(?=.*[A-Z]).*$")){
-			throw new InvalidUserOrPasswordException("A senha deve conter pelo menos uma letra maiúscula!");
-		}
-		if(!password.matches("^(?=.*[a-z]).*$")){
-			throw new InvalidUserOrPasswordException("A senha deve conter pelo menos uma letra minúscula!");
-		}
-		if(!password.matches("^(?=.*[@#$%^&-+=().]).*$")){
-			throw new InvalidUserOrPasswordException("A senha deve conter pelo menos um caracter especial!");
-		}
-		if(!password.matches("^(?=\\S+$).*$")){
-			throw new InvalidUserOrPasswordException("A senha náo deve conter espaços em branco!");
-		}
-		if(password.length()<6 || password.length()>20){
-			throw new InvalidUserOrPasswordException("A senha deve conter de 6 a 20 caracteres!");
-		}
-		this.password = encoder.encode(password);
-	}
+    
+    private String password;
+    
+    public Password(String password, PasswordEncoder encoder) {
+        
+        if (!password.matches("^(.*[0-9]).*$")) {
+            throw new InvalidUserOrPasswordException("The password must contain at least one digit!");
+        }
+        if (!password.matches("^(?=.*[A-Z]).*$")) {
+            throw new InvalidUserOrPasswordException("The password must contain at least one uppercase letter!");
+        }
+        if (!password.matches("^(?=.*[a-z]).*$")) {
+            throw new InvalidUserOrPasswordException("The password must contain at least one lowercase letter!");
+        }
+        if (!password.matches("^(?=.*[@#$%^&-+=().]).*$")) {
+            throw new InvalidUserOrPasswordException("The password must contain at least one special character!");
+        }
+        if (!password.matches("^(?=\\S+$).*$")) {
+            throw new InvalidUserOrPasswordException("The password must not contain any white spaces!");
+        }
+        if (password.length() < 6 || password.length() > 20) {
+            throw new InvalidUserOrPasswordException("The password must be between 6 and 20 characters long!");
+        }
+        this.password = encoder.encode(password);
+    }
 
 }

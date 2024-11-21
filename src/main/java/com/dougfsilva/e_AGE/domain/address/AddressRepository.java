@@ -3,7 +3,7 @@ package com.dougfsilva.e_AGE.domain.address;
 import java.util.List;
 import java.util.Optional;
 
-import com.dougfsilva.e_AGE.domain.pagination.PageRequest;
+import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface AddressRepository {
 

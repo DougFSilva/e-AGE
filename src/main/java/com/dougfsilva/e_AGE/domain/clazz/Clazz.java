@@ -3,7 +3,7 @@ package com.dougfsilva.e_AGE.domain.clazz;
 import java.util.List;
 
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.student.Studant;
+import com.dougfsilva.e_AGE.domain.student.Student;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -26,7 +26,7 @@ public class Clazz {
 	
 	private String name;
 	
-	private List<Studant> studants;
+	private List<Student> students;
 	
 	private String image;
 
