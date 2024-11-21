@@ -27,6 +27,8 @@ public class Clazz {
 	private String name;
 	
 	private List<Studant> studants;
+	
+	private String image;
 
 	public Clazz(String code, Course course, String name) {
 		this.code = code;

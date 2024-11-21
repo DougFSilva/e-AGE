@@ -15,6 +15,8 @@ import lombok.ToString;
 @EqualsAndHashCode(of = { "enrollment" })
 @ToString
 public class Employee {
+	
+	private String ID;
 
 	private String enrollment;
 

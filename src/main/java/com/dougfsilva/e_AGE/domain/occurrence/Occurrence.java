@@ -15,39 +15,52 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"code"})
+@EqualsAndHashCode()
 @ToString
 public class Occurrence {
 
-	private String code;
-	
+	private String ID;
+
 	private LocalDateTime openingDate;
-	
+
 	private LocalDateTime closingDate;
-	
+
 	private Employee Reporter;
-	
+
 	private Studant studant;
-	
+
 	private Clazz clazz;
-	
+
 	private String curricularUnit;
-	
+
 	private OccurrenceType occurrenceType;
-	
+
 	private Boolean restricted;
-	
+
 	private Boolean forwarding;
-	
+
 	private String description;
-	
+
 	private String resolutionDescription;
-	
+
 	private Boolean open;
-	
+
 	private String studantSignature;
-	
+
 	private Employee closureResponsible;
-	
+
+	public Occurrence(LocalDateTime openingDate, Employee reporter, Studant studant, Clazz clazz, String curricularUnit,
+			OccurrenceType occurrenceType, Boolean restricted, Boolean forwarding, String description) {
+		this.openingDate = openingDate;
+		Reporter = reporter;
+		this.studant = studant;
+		this.clazz = clazz;
+		this.curricularUnit = curricularUnit;
+		this.occurrenceType = occurrenceType;
+		this.restricted = restricted;
+		this.forwarding = forwarding;
+		this.description = description;
+
+	}
 
 }

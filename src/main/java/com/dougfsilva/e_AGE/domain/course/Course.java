@@ -20,6 +20,8 @@ public class Course {
 	private String title;
 
 	private TechnologicalArea technologicalArea;
+	
+	private String image;
 
 	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea) {
 		Modality = modality;

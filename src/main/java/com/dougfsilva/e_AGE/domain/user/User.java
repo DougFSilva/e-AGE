@@ -15,10 +15,19 @@ import lombok.ToString;
 @ToString
 public class User {
 	
+	private String ID;
+	
 	private String username;
 	
 	private Password password;
 	
 	private List<Profile> profiles;
 
+	public User(String username, Password password, List<Profile> profiles) {
+		this.username = username;
+		this.password = password;
+		this.profiles = profiles;
+	}
+
+	
 }

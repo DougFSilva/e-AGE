@@ -12,10 +12,20 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = {"TIN"})
 public class Enterprise {
+	
+	private String ID;
 
 	private String TIN;
 	
 	private String name;
 	
 	private Address address;
+
+	public Enterprise(String tIN, String name, Address address) {
+		TIN = tIN;
+		this.name = name;
+		this.address = address;
+	}
+	
+	
 }
