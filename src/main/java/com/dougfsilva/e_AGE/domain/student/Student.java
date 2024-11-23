@@ -8,37 +8,56 @@ import com.dougfsilva.e_AGE.domain.guardian.Guardian;
 import com.dougfsilva.e_AGE.domain.person.Person;
 import com.dougfsilva.e_AGE.domain.user.User;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @Setter
 @Getter
-@EqualsAndHashCode(of = {"enrollment"})
+@EqualsAndHashCode(of = { "enrollment" })
 @ToString
 public class Student {
-	
+
 	private String ID;
-	
+
 	private String enrollment;
 
 	private User user;
-	
+
 	private Person person;
-	
+
 	private List<Clazz> classes;
-	
+
 	private Guardian guardian;
-	
+
 	private Enterprise enterprise;
+
+	private StudentStatus status;
+	
+
+	public Student(String enrollment, Person person, List<Clazz> classes, Enterprise enterprise) {
+		this.enrollment = enrollment;
+		this.person = person;
+		this.classes = classes;
+		this.enterprise = enterprise;
+		this.status = StudentStatus.ENROLLED;
+	}
 
 	public Student(String enrollment, Person person, List<Clazz> classes) {
 		this.enrollment = enrollment;
 		this.person = person;
 		this.classes = classes;
+		this.status = StudentStatus.ENROLLED;
 	}
-	
+
+	public Student(String enrollment, Person person, List<Clazz> classes, Guardian guardian, Enterprise enterprise) {
+		this.enrollment = enrollment;
+		this.person = person;
+		this.classes = classes;
+		this.guardian = guardian;
+		this.enterprise = enterprise;
+		this.status = StudentStatus.ENROLLED;
+	}
+
 }
