@@ -16,20 +16,20 @@ public class TestAddressRepository implements AddressRepository{
 
 	@Override
 	public void delete(Address address) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Address update(Address address, Address updatedAddress) {
+	public Address update(Address address) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Address(address.getID(), address.getCountry(), address.getState(), address.getCity(), address.getDistrict(), address.getStreet());
 	}
 
 	@Override
 	public Optional<Address> findById(String ID) {
 		// TODO Auto-generated method stub
-		return Optional.empty();
+		return Optional.ofNullable(new Address("A321","Brazil", "São Paulo", "18125-000", "Alumínio", "Itararé", "Rua Jasiel"));
+		//return Optional.ofNullable(null);
 	}
 
 	@Override

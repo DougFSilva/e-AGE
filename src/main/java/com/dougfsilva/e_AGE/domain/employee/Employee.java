@@ -1,7 +1,6 @@
 package com.dougfsilva.e_AGE.domain.employee;
 
 import com.dougfsilva.e_AGE.domain.person.Person;
-import com.dougfsilva.e_AGE.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,8 +20,6 @@ public class Employee {
 	private String enrollment;
 
 	private Person person;
-
-	private User user;
 
 	private StaffRole staffRole;
 

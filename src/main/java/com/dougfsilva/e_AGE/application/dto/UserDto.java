@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.dto;
 
 import java.util.List;
 
-import com.dougfsilva.e_AGE.domain.user.Profile;
 import com.dougfsilva.e_AGE.domain.user.User;
 
 import lombok.EqualsAndHashCode;
@@ -18,12 +17,12 @@ public class UserDto {
 
 	private String username;
 
-	private List<Profile> profiles;
+	private List<String> profiles;
 
 	public UserDto(User user) {
 		this.ID = user.getID();
 		this.username = user.getUsername();
-		this.profiles = user.getProfiles();
+		this.profiles = user.getProfiles().stream().map(p -> p.getProfileType().name()).toList();
 	}
-
+	
 }

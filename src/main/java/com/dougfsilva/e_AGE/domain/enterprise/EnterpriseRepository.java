@@ -11,7 +11,7 @@ public interface EnterpriseRepository {
 	
 	void delete(Enterprise enterprise);
 	
-	Enterprise update(Enterprise enterprise, Enterprise updatedEnterprise);
+	Enterprise update(Enterprise enterprise);
 	
 	Optional<Enterprise> findByID(String ID);
 	

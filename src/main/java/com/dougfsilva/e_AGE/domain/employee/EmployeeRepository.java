@@ -11,7 +11,7 @@ public interface EmployeeRepository {
 	
 	void delete(Employee employee);
 	
-	Employee update(Employee employee, Employee updatedEmployee);
+	Employee update(Employee employee);
 	
 	Optional<Employee> findByID(String ID);
 	

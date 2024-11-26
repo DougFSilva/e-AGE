@@ -11,7 +11,7 @@ public interface GuardianRepository {
 	
 	void delete(Guardian guardian);
 	
-	Guardian update(Guardian guardian, Guardian updatedGuardian);
+	Guardian update(Guardian guardian);
 	
 	Optional<Guardian> findByID(String ID);
 	

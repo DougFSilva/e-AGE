@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.domain.course;
 import java.util.List;
 import java.util.Optional;
 
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface CourseRepository {
@@ -11,7 +12,7 @@ public interface CourseRepository {
 	
 	void delete(Course course);
 	
-	Course update(Course course, Course updatedCourse);
+	Course update(Course course);
 	
 	Optional<Course> findByID(String ID);
 	

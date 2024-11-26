@@ -11,7 +11,7 @@ public interface AddressRepository {
 	
 	void delete(Address address);
 	
-	Address update (Address address, Address updatedAddress);
+	Address update (Address address);
 	
 	Optional<Address> findById(String ID);
 	

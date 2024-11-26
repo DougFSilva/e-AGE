@@ -1,5 +1,7 @@
 package com.dougfsilva.e_AGE.domain.course;
 
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -6,7 +6,6 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.guardian.Guardian;
 import com.dougfsilva.e_AGE.domain.person.Person;
-import com.dougfsilva.e_AGE.domain.user.User;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,8 +21,6 @@ public class Student {
 	private String ID;
 
 	private String enrollment;
-
-	private User user;
 
 	private Person person;
 

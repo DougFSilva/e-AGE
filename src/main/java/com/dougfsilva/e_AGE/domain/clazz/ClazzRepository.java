@@ -13,7 +13,7 @@ public interface ClazzRepository {
 
 	void delete(Clazz clazz);
 
-	Clazz update(Clazz clazz, Clazz updatedClazz);
+	Clazz update(Clazz clazz);
 	
 	Optional<Clazz> findByID(String ID);
 	

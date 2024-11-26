@@ -14,7 +14,7 @@ public interface StudentRepository {
 	
 	void delete(Student student);
 	
-	Student update(Student student, Student updatedStudent);
+	Student update(Student student);
 	
 	Optional<Student> findByID(String ID);
 	

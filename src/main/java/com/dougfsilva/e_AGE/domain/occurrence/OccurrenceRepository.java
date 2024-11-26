@@ -15,7 +15,7 @@ public interface OccurrenceRepository {
 	
 	void delete(Occurrence occurrence);
 	
-	Occurrence update(Occurrence occurrence, Occurrence updatedOccurrence);
+	Occurrence update(Occurrence occurrence);
 	
 	Optional<Occurrence> findByID(String ID);
 	
