@@ -5,24 +5,23 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.student.Student;
+import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface ClazzRepository {
 
-	Clazz create(Clazz clazz);
+	Clazz save(Clazz clazz);
 
 	void delete(Clazz clazz);
 
-	Clazz update(Clazz clazz);
-	
 	Optional<Clazz> findByID(String ID);
 	
-	List<Clazz> findAllByNameContains(String name, PageRequest pageRequest);
+	Page<Clazz> findAllByNameContains(String name, PageRequest pageRequest);
 	
-	List<Clazz> findAllByCourse(Course course, PageRequest pageRequest);
+	Page<Clazz> findAllByCourse(Course course, PageRequest pageRequest);
 	
 	List<Clazz> findAllByStudant(Student studant);
 	
-	List<Clazz> findAll(PageRequest pageRequest);
+	Page<Clazz> findAll(PageRequest pageRequest);
 
 }

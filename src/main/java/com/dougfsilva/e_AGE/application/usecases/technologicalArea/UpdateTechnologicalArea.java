@@ -3,7 +3,8 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 import java.util.Arrays;
 
 import com.dougfsilva.e_AGE.application.dto.UserDto;
-import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologialAreaRepository;
+import com.dougfsilva.e_AGE.application.dto.request.UpdateTechnologicalAreaRequest;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
@@ -14,7 +15,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class UpdateTechnologicalArea {
 
-	private final TechnologialAreaRepository repository;
+	private final TechnologicalAreaRepository repository;
 
 	private final FindTechnologicalArea findTechnologicalArea;
 
@@ -22,12 +23,12 @@ public class UpdateTechnologicalArea {
 
 	private final Logger logger;
 
-	public TechnologicalArea update(String ID, String title, String description) {
+	public TechnologicalArea update(UpdateTechnologicalAreaRequest request) {
 		checker.requireProfiles(getClass(), Arrays.asList(ProfileType.ADMIN));
-		TechnologicalArea area = findTechnologicalArea.findByID(ID);
-		area.setTitle(title);
-		area.setDescription(description);
-		TechnologicalArea updatedArea = repository.update(area);
+		TechnologicalArea area = findTechnologicalArea.findByID(request.ID());
+		area.setTitle(request.tilte());
+		area.setDescription(request.description());
+		TechnologicalArea updatedArea = repository.save(area);
 		logger.info(String.format("%S updated by %S", updatedArea, new UserDto(checker.getUser())));
 		return updatedArea;
 	}

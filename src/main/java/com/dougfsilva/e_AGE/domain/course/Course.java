@@ -17,7 +17,7 @@ public class Course {
 
 	private String ID;
 
-	private CourseModality Modality;
+	private CourseModality modality;
 
 	private String title;
 
@@ -25,8 +25,15 @@ public class Course {
 	
 	private String image;
 
+	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea, String image) {
+		this.modality = modality;
+		this.title = title;
+		this.technologicalArea = technologicalArea;
+		this.image = image;
+	}
+	
 	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea) {
-		Modality = modality;
+		this.modality = modality;
 		this.title = title;
 		this.technologicalArea = technologicalArea;
 	}

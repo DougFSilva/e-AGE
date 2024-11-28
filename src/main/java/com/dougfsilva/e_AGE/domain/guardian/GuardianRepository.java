@@ -1,19 +1,17 @@
 package com.dougfsilva.e_AGE.domain.guardian;
 
-import java.util.List;
 import java.util.Optional;
 
+import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface GuardianRepository {
 
-	Guardian create(Guardian guardian);
+	Guardian save(Guardian guardian);
 	
 	void delete(Guardian guardian);
 	
-	Guardian update(Guardian guardian);
-	
 	Optional<Guardian> findByID(String ID);
 	
-	List<Guardian> findAll(PageRequest pageRequest);
+	Page<Guardian> findAll(PageRequest pageRequest);
 }

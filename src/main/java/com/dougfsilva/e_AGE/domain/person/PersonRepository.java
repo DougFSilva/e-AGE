@@ -1,18 +1,16 @@
 package com.dougfsilva.e_AGE.domain.person;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.user.User;
+import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
 public interface PersonRepository {
 
-	Person create(Person person);
+	Person save(Person person);
 
 	void delete(Person person);
-
-	Person update(Person person);
 
 	Optional<Person> findByID(String ID);
 
@@ -20,14 +18,14 @@ public interface PersonRepository {
 	
 	Optional<Person> findByUser(User user);
 
-	List<Person> findAllByNameContains(String name, PageRequest pageRequest);
+	Page<Person> findAllByNameContains(String name, PageRequest pageRequest);
 
-	List<Person> findAllByStateContains(String stateName, PageRequest pageRequest);
+	Page<Person> findAllByStateContains(String stateName, PageRequest pageRequest);
 
-	List<Person> findAllByCityContains(String cityName, PageRequest pageRequest);
+	Page<Person> findAllByCityContains(String cityName, PageRequest pageRequest);
 
-	List<Person> findAllByDistrictContains(String districtName, PageRequest pageRequest);
+	Page<Person> findAllByDistrictContains(String districtName, PageRequest pageRequest);
 
-	List<Person> findAll(PageRequest pageRequest);
+	Page<Person> findAll(PageRequest pageRequest);
 
 }

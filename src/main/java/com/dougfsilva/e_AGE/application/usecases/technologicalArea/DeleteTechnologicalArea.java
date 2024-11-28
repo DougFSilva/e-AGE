@@ -3,7 +3,7 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 import java.util.Arrays;
 
 import com.dougfsilva.e_AGE.application.dto.UserDto;
-import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologialAreaRepository;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class DeleteTechnologicalArea {
 
-	private final TechnologialAreaRepository repository;
+	private final TechnologicalAreaRepository repository;
 	
 	private final FindTechnologicalArea findTechnologicalArea;
 	
