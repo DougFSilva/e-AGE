@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.usecases.course;
 
 import java.util.Arrays;
 
-import com.dougfsilva.e_AGE.application.dto.UserDto;
 import com.dougfsilva.e_AGE.application.dto.request.CreateCourseRequest;
 import com.dougfsilva.e_AGE.application.usecases.technologicalArea.FindTechnologicalArea;
 import com.dougfsilva.e_AGE.domain.course.Course;
@@ -12,6 +11,7 @@ import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
 import com.dougfsilva.e_AGE.domain.utilities.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
+import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
 
 import lombok.AllArgsConstructor;
 
@@ -34,7 +34,7 @@ public class CreateCourse {
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.technologicalAreaID());
 		Course course = new Course(request.modality(), request.title(), technologicalArea, imageUrl);
 		Course createdCourse = repository.save(course);
-		logger.info(String.format("%S created by %S", createdCourse, new UserDto(checker.getUser())));
+		StandardLogger.createdObjectLogger(createdCourse, checker, logger);
 		return createdCourse;
 	}
 }

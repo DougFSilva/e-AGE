@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.usecases.course;
 
 import java.util.Arrays;
 
-import com.dougfsilva.e_AGE.application.dto.UserDto;
 import com.dougfsilva.e_AGE.application.dto.request.UpdateCourseRequest;
 import com.dougfsilva.e_AGE.application.usecases.technologicalArea.FindTechnologicalArea;
 import com.dougfsilva.e_AGE.domain.course.Course;
@@ -11,6 +10,7 @@ import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
+import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
 
 import lombok.AllArgsConstructor;
 
@@ -35,7 +35,7 @@ public class UpdateCourse {
 		course.setTitle(request.title());
 		course.setTechnologicalArea(technologicalArea);
 		Course updatedCourse = repository.save(course);
-		logger.info(String.format("%S updated by %S", updatedCourse, new UserDto(checker.getUser())));
+		StandardLogger.updatedObjectLogger(updatedCourse, checker, logger);
 		return updatedCourse;
 	}
 }

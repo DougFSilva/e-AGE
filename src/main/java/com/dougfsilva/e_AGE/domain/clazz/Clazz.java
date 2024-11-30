@@ -1,9 +1,6 @@
 package com.dougfsilva.e_AGE.domain.clazz;
 
-import java.util.List;
-
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.student.Student;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -26,14 +23,13 @@ public class Clazz {
 	
 	private String name;
 	
-	private List<Student> students;
-	
 	private String image;
 
-	public Clazz(String code, Course course, String name) {
+	public Clazz(String code, Course course, String name, String image) {
 		this.code = code;
 		this.course = course;
 		this.name = name;
+		this.image = image;
 	}
 	
 }

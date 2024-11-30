@@ -8,6 +8,7 @@ import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
+import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
 
 import lombok.AllArgsConstructor;
 
@@ -27,5 +28,6 @@ public class DeleteCourse {
 		Course course = findCourse.findByID(ID);
 		repository.delete(course);
 		logger.info(String.format("%S deleted by %S", course, new UserDto(checker.getUser())));
+		StandardLogger.deletedObjectLogger(course, checker, logger);
 	}
 }

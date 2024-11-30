@@ -2,12 +2,12 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
 import java.util.Arrays;
 
-import com.dougfsilva.e_AGE.application.dto.UserDto;
-import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
+import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
 
 import lombok.AllArgsConstructor;
 
@@ -26,6 +26,6 @@ public class DeleteTechnologicalArea {
 		checker.requireProfiles(getClass(), Arrays.asList(ProfileType.ADMIN));
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(ID);
 		repository.delete(technologicalArea);
-		logger.info(String.format("%S deleted by %S", technologicalArea, new UserDto(checker.getUser())));
+		StandardLogger.deletedObjectLogger(technologicalArea, checker, logger);
 	}
 }

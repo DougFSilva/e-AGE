@@ -2,13 +2,13 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
 import java.util.Arrays;
 
-import com.dougfsilva.e_AGE.application.dto.UserDto;
 import com.dougfsilva.e_AGE.application.dto.request.CreateTechnologicalAreaRequest;
-import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.user.ProfileType;
 import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
+import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
 
 import lombok.AllArgsConstructor;
 
@@ -25,7 +25,7 @@ public class CreateTechnologicalArea {
 		checker.requireProfiles(getClass(), Arrays.asList(ProfileType.ADMIN));
 		TechnologicalArea technologicalArea = new TechnologicalArea(request.tilte(),request.tilte());
 		TechnologicalArea createdTechnologicalArea = repository.save(technologicalArea);
-		logger.info(String.format("%S created by %S", createdTechnologicalArea, new UserDto(checker.getUser())));
+		StandardLogger.createdObjectLogger(createdTechnologicalArea, checker, logger);
 		return createdTechnologicalArea;
 
 	}
