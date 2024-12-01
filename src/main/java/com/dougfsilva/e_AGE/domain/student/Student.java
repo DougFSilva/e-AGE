@@ -1,10 +1,13 @@
 package com.dougfsilva.e_AGE.domain.student;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.guardian.Guardian;
+import com.dougfsilva.e_AGE.domain.person.Email;
 import com.dougfsilva.e_AGE.domain.person.Person;
 
 import lombok.EqualsAndHashCode;
@@ -14,47 +17,28 @@ import lombok.ToString;
 
 @Setter
 @Getter
-@EqualsAndHashCode(of = { "enrollment" })
+@EqualsAndHashCode(callSuper = true)
 @ToString
-public class Student {
-
-	private String ID;
+public class Student extends Person {
 
 	private String enrollment;
 
-	private Person person;
-
-	private List<Clazz> classes;
+	private List<Clazz> clazzes;
 
 	private Guardian guardian;
 
 	private Enterprise enterprise;
 
 	private StudentStatus status;
-	
 
-	public Student(String enrollment, Person person, List<Clazz> classes, Enterprise enterprise) {
+	public Student(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address,
+			String enrollment, List<Clazz> clazzes, Guardian guardian, Enterprise enterprise, StudentStatus status) {
+		super(name, rg, phone, email, dateOfBirth, address);
 		this.enrollment = enrollment;
-		this.person = person;
-		this.classes = classes;
-		this.enterprise = enterprise;
-		this.status = StudentStatus.ENROLLED;
-	}
-
-	public Student(String enrollment, Person person, List<Clazz> classes) {
-		this.enrollment = enrollment;
-		this.person = person;
-		this.classes = classes;
-		this.status = StudentStatus.ENROLLED;
-	}
-
-	public Student(String enrollment, Person person, List<Clazz> classes, Guardian guardian, Enterprise enterprise) {
-		this.enrollment = enrollment;
-		this.person = person;
-		this.classes = classes;
+		this.clazzes = clazzes;
 		this.guardian = guardian;
 		this.enterprise = enterprise;
-		this.status = StudentStatus.ENROLLED;
+		this.status = status;
 	}
-
+	
 }

@@ -1,13 +1,10 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import java.util.Arrays;
-
+import com.dougfsilva.e_AGE.application.usecases.utilities.DeleteImage;
+import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
-import com.dougfsilva.e_AGE.domain.user.ProfileType;
-import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
-import com.dougfsilva.e_AGE.domain.utilities.Logger;
-import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
 
@@ -18,14 +15,14 @@ public class DeleteTechnologicalArea {
 	
 	private final FindTechnologicalArea findTechnologicalArea;
 	
-	private final AuthChecker checker;
+	private final DeleteImage deleteImage ;
 	
-	private final Logger logger;
+	private final StandardLogger logger;
 	
 	public void delete(String ID) {
-		checker.requireProfiles(getClass(), Arrays.asList(ProfileType.ADMIN));
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(ID);
 		repository.delete(technologicalArea);
-		StandardLogger.deletedObjectLogger(technologicalArea, checker, logger);
+		deleteImage.execute(ID, ImageType.TECHNOLOGICAL_AREA);
+		logger.deletedObjectLog(technologicalArea);
 	}
 }

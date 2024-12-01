@@ -1,14 +1,11 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import java.util.Arrays;
-
 import com.dougfsilva.e_AGE.application.dto.request.CreateTechnologicalAreaRequest;
+import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
-import com.dougfsilva.e_AGE.domain.user.ProfileType;
-import com.dougfsilva.e_AGE.domain.utilities.AuthChecker;
-import com.dougfsilva.e_AGE.domain.utilities.Logger;
-import com.dougfsilva.e_AGE.domain.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
 
@@ -16,16 +13,16 @@ import lombok.AllArgsConstructor;
 public class CreateTechnologicalArea {
 
 	private final TechnologicalAreaRepository repository;
+	
+	private final StoreImage storeImage;
 
-	private final AuthChecker checker;
+	private final StandardLogger logger;
 
-	private final Logger logger;
-
-	public TechnologicalArea create(CreateTechnologicalAreaRequest request) {
-		checker.requireProfiles(getClass(), Arrays.asList(ProfileType.ADMIN));
-		TechnologicalArea technologicalArea = new TechnologicalArea(request.tilte(),request.tilte());
+	public TechnologicalArea execute(CreateTechnologicalAreaRequest request) {
+		String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.tilte());
+		TechnologicalArea technologicalArea = new TechnologicalArea(request.tilte(),request.tilte(), imageUrl);
 		TechnologicalArea createdTechnologicalArea = repository.save(technologicalArea);
-		StandardLogger.createdObjectLogger(createdTechnologicalArea, checker, logger);
+		logger.createdObjectLog(createdTechnologicalArea);
 		return createdTechnologicalArea;
 
 	}

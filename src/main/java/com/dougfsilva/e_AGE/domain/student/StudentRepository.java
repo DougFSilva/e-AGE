@@ -14,6 +14,8 @@ public interface StudentRepository {
 	
 	void delete(Student student);
 	
+	void deleteAllByClazz(Clazz clazz);
+	
 	Optional<Student> findByID(String ID);
 	
 	Page<Student> findAllByClazz(Clazz clazz, PageRequest pageRequest);

@@ -14,9 +14,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = { "rg" })
+@EqualsAndHashCode(of = { "ID", "rg" })
 @ToString
-public class Person {
+public abstract class Person {
 
 	private String ID;
 
@@ -41,21 +41,6 @@ public class Person {
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-	}
-
-	public Person(String name, String rg, String phone, Email email, LocalDate dateOfBirth) {
-		this.name = name;
-		this.rg = rg;
-		this.phone = phone;
-		this.email = email;
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	public Person(String name, String phone, Email email, LocalDate dateOfBirth) {
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.dateOfBirth = dateOfBirth;
 	}
 
 }

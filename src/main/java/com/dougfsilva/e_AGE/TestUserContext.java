@@ -11,7 +11,7 @@ import com.dougfsilva.e_AGE.domain.utilities.UserContext;
 public class TestUserContext implements UserContext {
 
 	@Override
-	public User getAuthenticatedUser() {
+	public User getCurrentUser() {
 		return new User("Douglas", new Password(), Arrays.asList(new Profile(ProfileType.STUDENT)));
 	}
 

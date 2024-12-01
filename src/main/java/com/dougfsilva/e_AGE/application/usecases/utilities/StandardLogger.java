@@ -1,0 +1,40 @@
+package com.dougfsilva.e_AGE.application.usecases.utilities;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.dougfsilva.e_AGE.application.dto.response.UserResponse;
+import com.dougfsilva.e_AGE.domain.utilities.Logger;
+import com.dougfsilva.e_AGE.domain.utilities.UserContext;
+
+public class StandardLogger {
+	
+	private final UserResponse user;
+	
+	private final Logger logger;
+	
+	public StandardLogger(UserContext userContext, Logger logger) {
+		this.user = UserResponse.fromUser(userContext.getCurrentUser());
+		this.logger = logger;
+	}
+
+	public void createdObjectLog(Object object) {
+		logger.info(String.format("%S created by %S", object, user));
+	}
+
+	public void deletedObjectLog(Object object) {
+		logger.info(String.format("%S deleted by %S", object, user));
+	}
+
+	public void updatedObjectLog(Object object) {
+		logger.info(String.format("%S updated by %S", object, user));
+	}
+	
+	public void imageStoreErrorLog(MultipartFile image) {
+		logger.warn(String.format("Failed to load image %S by user %S",image.getName(), user));
+	}
+	
+	public void imageDeleteErrorLog(String imageUrl) {
+		logger.warn(String.format("Failed to delete image %S by user %S", imageUrl, user));
+	}
+
+}

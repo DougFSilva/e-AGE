@@ -21,14 +21,11 @@ public class Clazz {
 	
 	private Course course;
 	
-	private String name;
-	
 	private String image;
 
-	public Clazz(String code, Course course, String name, String image) {
+	public Clazz(String code, Course course, String image) {
 		this.code = code;
 		this.course = course;
-		this.name = name;
 		this.image = image;
 	}
 	

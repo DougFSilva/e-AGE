@@ -1,22 +1,24 @@
 package com.dougfsilva.e_AGE.domain.guardian;
 
+import java.time.LocalDate;
+
+import com.dougfsilva.e_AGE.domain.address.Address;
+import com.dougfsilva.e_AGE.domain.person.Email;
 import com.dougfsilva.e_AGE.domain.person.Person;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 @ToString
-public class Guardian {
+public class Guardian extends Person {
 	
-	private String ID;
-	
-	private Person name;
-	
+	public Guardian(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address) {
+		super(name, rg, phone, email, dateOfBirth, address);
+	}
+
 }

@@ -18,10 +18,13 @@ public class TechnologicalArea {
 	private String title;
 	
 	private String Description;
+	
+	private String image;
 
-	public TechnologicalArea(String title, String description) {
+	public TechnologicalArea(String title, String description, String image) {
 		this.title = title;
 		Description = description;
+		this.image = image;
 	}
 	
 	

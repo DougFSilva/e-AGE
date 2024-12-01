@@ -20,15 +20,15 @@ public class Page<T> {
 	private Integer number;
 
 	private Integer size;
-	
+
 	private Long totalElements;
-	
+
 	private Long totalPages;
-	
+
 	private Boolean hasContent;
 
 	private Boolean isFirst;
 
 	private Boolean isLast;
-	
+
 }

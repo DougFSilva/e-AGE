@@ -1,5 +1,7 @@
 package com.dougfsilva.e_AGE.application.dto.request;
 
-public record UpdateTechnologicalAreaRequest(String ID, String tilte, String description) {
+import org.springframework.web.multipart.MultipartFile;
+
+public record UpdateTechnologicalAreaRequest(String ID, String tilte, String description, MultipartFile image) {
 
 }
