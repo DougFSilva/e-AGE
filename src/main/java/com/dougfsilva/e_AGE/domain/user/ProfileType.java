@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public enum ProfileType {
 
-	ADMIN(1, "ROLE_ADMIN"), PROFESSOR(2, "ROLE_PROFESSOR"), STUDENT(3, "ROLE_STUDENT"), VIEWER(4, "ROLE_VIEWER");
+	ADMIN(1, "ROLE_ADMIN"), PROFESSOR(2, "ROLE_PROFESSOR"), STUDENT(3, "ROLE_STUDENT"), RESPONSIBLE(4,"ROLE_RESPONSIBLE"), VIEWER(5, "ROLE_VIEWER");
 	
 	private long code;
 	private String description;

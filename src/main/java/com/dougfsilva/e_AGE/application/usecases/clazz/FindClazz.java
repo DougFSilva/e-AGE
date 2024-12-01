@@ -45,7 +45,7 @@ public class FindClazz {
 	
 	public List<ClazzResponse> findAllByStudent(String studentID){
 		Student student = findStudent.findByID(studentID);
-		return repository.findAllByStudant(student).stream().map(ClazzResponse::new).collect(Collectors.toList());
+		return repository.findAllByStudent(student).stream().map(ClazzResponse::new).collect(Collectors.toList());
 	}
 	
 	public Page<ClazzResponse> findAll(PageRequest pageRequest){

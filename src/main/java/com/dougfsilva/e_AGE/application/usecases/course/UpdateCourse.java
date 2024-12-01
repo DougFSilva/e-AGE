@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.application.usecases.course;
 
-import com.dougfsilva.e_AGE.application.dto.request.UpdateCourseRequest;
+import com.dougfsilva.e_AGE.application.dto.request.CourseDataRequest;
 import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
 import com.dougfsilva.e_AGE.application.usecases.technologicalArea.FindTechnologicalArea;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
@@ -25,10 +25,10 @@ public class UpdateCourse {
 	
 	private final StandardLogger logger;
 	
-	public CourseResponse execute(UpdateCourseRequest request) {
+	public CourseResponse execute(String ID, CourseDataRequest request) {
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.technologicalAreaID());
 		String imageUrl = storeImage.execute(request.image(), ImageType.COURSE, request.title());
-		Course course = findCourse.findByID(request.ID());
+		Course course = findCourse.findByID(ID);
 		course.setModality(request.modality());
 		course.setTitle(request.title());
 		course.setTechnologicalArea(technologicalArea);

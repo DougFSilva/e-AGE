@@ -5,6 +5,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
+import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.AllArgsConstructor;
 public class DeleteClazz {
 
 	private final ClazzRepository repository;
-
+	
 	private final StudentRepository studentRepository;
 
 	private final FindClazz findClazz;
@@ -24,7 +25,11 @@ public class DeleteClazz {
 
 	public void execute(String ID) {
 		Clazz clazz = findClazz.findByID(ID);
-		studentRepository.deleteAllByClazz(clazz);
+		if(studentRepository.countByClazz(clazz) > 0) {
+			throw new DataIntegrityViolationException(
+					String.format("The Clazz %S cannot be deleted because there are Students still associated with it", 
+							clazz.getCode()));
+		}
 		deleteImage.execute(clazz.getImage(), ImageType.CLAZZ);
 		repository.delete(clazz);
 		logger.deletedObjectLog(clazz);

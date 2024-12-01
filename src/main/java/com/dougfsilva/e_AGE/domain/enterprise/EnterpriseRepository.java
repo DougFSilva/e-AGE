@@ -16,4 +16,5 @@ public interface EnterpriseRepository {
 	Page<Enterprise> findAllByNameContains(String name, PageRequest pageRequest);
 	
 	Page<Enterprise> findAll(PageRequest pageRequest);
+	
 }

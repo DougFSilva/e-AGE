@@ -1,0 +1,10 @@
+* Ao apagar Curso deve-se apagar as turmas e os alunos como opção, envinado um Booelan de confirmação se quer apagar alunos e turmas também 
+Ou se for mais fácil não permitir que seja apagado os itens que tem outros pertencentes, tipo não apagr curso se tiver turma cadastrada
+
+Fazer isso para endereço tbm
+
+Adicionar nos repositories buscar quantidade para usar como parametro para não deixar apagar algum objeto
+
+Criar uma empresa padrão para quando aluno não tiver endereço
+
+Adicionar numero na turma

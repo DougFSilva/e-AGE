@@ -18,4 +18,5 @@ public interface UserRepository {
 	Page<User> findAllByProfyleType(ProfileType profileType, PageRequest pageRequest);
 	
 	Page<User> findAll(PageRequest pageRequest);
+	
 }

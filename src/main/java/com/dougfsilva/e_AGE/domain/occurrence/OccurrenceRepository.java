@@ -36,5 +36,5 @@ public interface OccurrenceRepository {
 	Page<Occurrence> findAllByOpen(Boolean open, PageRequest pageRequest);
 	
 	Page<Occurrence> findAll(PageRequest pageRequest);
-	 
+	
 }

@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.domain.guardian;
+package com.dougfsilva.e_AGE.domain.responsible;
 
 import java.time.LocalDate;
 
@@ -15,9 +15,9 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode(callSuper = true)
 @ToString
-public class Guardian extends Person {
+public class Responsible extends Person {
 	
-	public Guardian(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address) {
+	public Responsible(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address) {
 		super(name, rg, phone, email, dateOfBirth, address);
 	}
 

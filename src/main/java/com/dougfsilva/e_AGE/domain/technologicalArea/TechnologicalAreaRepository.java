@@ -14,7 +14,7 @@ public interface TechnologicalAreaRepository {
 	Optional<TechnologicalArea> findByID(String ID);
 
 	Page<TechnologicalArea> findAllByTitleContains(String title, PageRequest pageRequest);
-
+	
 	Page<TechnologicalArea> findAll(PageRequest pageRequest);
-
+	
 }

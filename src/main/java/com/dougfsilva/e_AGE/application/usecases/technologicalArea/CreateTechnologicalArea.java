@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import com.dougfsilva.e_AGE.application.dto.request.CreateTechnologicalAreaRequest;
+import com.dougfsilva.e_AGE.application.dto.request.TechnologicalAreaDataRequest;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
@@ -18,7 +18,7 @@ public class CreateTechnologicalArea {
 
 	private final StandardLogger logger;
 
-	public TechnologicalArea execute(CreateTechnologicalAreaRequest request) {
+	public TechnologicalArea execute(TechnologicalAreaDataRequest request) {
 		String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.tilte());
 		TechnologicalArea technologicalArea = new TechnologicalArea(request.tilte(),request.tilte(), imageUrl);
 		TechnologicalArea createdTechnologicalArea = repository.save(technologicalArea);

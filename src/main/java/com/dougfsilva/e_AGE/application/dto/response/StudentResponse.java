@@ -39,7 +39,7 @@ public class StudentResponse {
 
 	private List<ClazzResponse> clazzes;
 
-	private GuardianResponse guardian;
+	private ResponsibleResponse responsible;
 
 	private Enterprise enterprise;
 
@@ -56,7 +56,7 @@ public class StudentResponse {
 		this.address = student.getAddress();
 		this.enrollment = student.getEnrollment();
 		this.clazzes = student.getClazzes().stream().map(ClazzResponse::new).collect(Collectors.toList());
-		this.guardian = GuardianResponse.fromGuardian(student.getGuardian());
+		this.responsible = ResponsibleResponse.fromResponsible(student.getResponsible());
 		this.enterprise = student.getEnterprise();
 		this.status = student.getStatus();
 	}

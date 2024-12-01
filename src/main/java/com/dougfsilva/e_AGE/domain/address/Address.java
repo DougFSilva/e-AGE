@@ -27,21 +27,16 @@ public class Address {
 
 	private String street;
 
-	public Address(String country, String state, String postalCode, String city, String district, String street) {
+	private String number;
+
+	public Address(String country, String state, String postalCode, String city, String district, String street,
+			String number) {
 		this.country = country;
 		this.state = state;
 		this.postalCode = postalCode;
 		this.city = city;
 		this.district = district;
 		this.street = street;
-	}
-
-	public Address(String country, String state, String postalCode, String city, String district) {
-		this.country = country;
-		this.state = state;
-		this.postalCode = postalCode;
-		this.city = city;
-		this.district = district;
 	}
 
 }

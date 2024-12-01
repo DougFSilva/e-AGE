@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.application.usecases.clazz;
 
-import com.dougfsilva.e_AGE.application.dto.request.UpdateClazzRequest;
+import com.dougfsilva.e_AGE.application.dto.request.ClazzDataRequest;
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
 import com.dougfsilva.e_AGE.application.usecases.course.FindCourse;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
@@ -25,10 +25,10 @@ public class UpdateClazz {
 	
 	private final StandardLogger logger;
 	
-	public ClazzResponse execute(UpdateClazzRequest request) {
+	public ClazzResponse execute(String ID, ClazzDataRequest request) {
 		Course course = findCourse.findByID(request.courseID());
 		String imageUrl = storeImage.execute(request.image(), ImageType.CLAZZ, request.code());
-		Clazz clazz = findClazz.findByID(request.ID());
+		Clazz clazz = findClazz.findByID(ID);
 		clazz.setCode(request.code());
 		clazz.setCourse(course);
 		clazz.setImage(imageUrl);

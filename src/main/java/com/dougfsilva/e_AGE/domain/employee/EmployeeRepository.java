@@ -16,4 +16,5 @@ public interface EmployeeRepository {
 	Page<Employee> findAllByStaffRole(StaffRole staffRole, PageRequest pageRequest);
 	
 	Page<Employee> findAll(PageRequest pageRequest);
+	
 }

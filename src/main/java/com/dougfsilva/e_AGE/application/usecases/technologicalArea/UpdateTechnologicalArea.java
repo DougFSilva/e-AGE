@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import com.dougfsilva.e_AGE.application.dto.request.UpdateTechnologicalAreaRequest;
+import com.dougfsilva.e_AGE.application.dto.request.TechnologicalAreaDataRequest;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
@@ -20,9 +20,9 @@ public class UpdateTechnologicalArea {
 
 	private final StandardLogger logger;
 
-	public TechnologicalArea update(UpdateTechnologicalAreaRequest request) {
+	public TechnologicalArea update(String ID, TechnologicalAreaDataRequest request) {
 		String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.tilte());
-		TechnologicalArea area = findTechnologicalArea.findByID(request.ID());
+		TechnologicalArea area = findTechnologicalArea.findByID(ID);
 		area.setTitle(request.tilte());
 		area.setDescription(request.description());
 		area.setImage(imageUrl);

@@ -21,8 +21,8 @@ public class Enterprise {
 	
 	private Address address;
 
-	public Enterprise(String tIN, String name, Address address) {
-		TIN = tIN;
+	public Enterprise(String TIN, String name, Address address) {
+		this.TIN = TIN;
 		this.name = name;
 		this.address = address;
 	}

@@ -20,4 +20,5 @@ public interface AddressRepository {
 	Page<Address> findAllByDistrictContains(String districtName, PageRequest pageRequest);
 	
 	Page<Address> findAll(PageRequest pageRequest);
+	
 }
