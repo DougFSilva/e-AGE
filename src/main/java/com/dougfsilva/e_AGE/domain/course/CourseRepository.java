@@ -18,8 +18,8 @@ public interface CourseRepository {
 	
 	Page<Course> findAllByTechnologicalArea(TechnologicalArea technologicalArea, PageRequest pageRequest);
 	
-	Long countByTechnologialArea(TechnologicalArea technologicalArea);
-	
 	Page<Course> findAll(PageRequest pageRequest);
+	
+	Boolean existsByTechnologialArea(TechnologicalArea technologicalArea);
 	
 }

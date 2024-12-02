@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.domain.student;
 import java.util.List;
 import java.util.Optional;
 
+import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.responsible.Responsible;
@@ -13,22 +14,22 @@ public interface StudentRepository {
 
 	Student save(Student student);
 	
-	Student saveAll(List<Student> students);
-	
 	void delete(Student student);
 	
 	Optional<Student> findByID(String ID);
 	
 	Page<Student> findAllByClazz(Clazz clazz, PageRequest pageRequest);
 	
-	Long countByClazz(Clazz clazz);
-	
-	List<Student> findAllByResponsible(Responsible responsible, PageRequest pageRequest);
+	List<Student> findAllByResponsible(Responsible responsible);
 	
 	Page<Student> findAllByEnterprise(Enterprise enterprise, PageRequest pageRequest);
 	
-	List<Student> findAllByEnterprise(Enterprise enterprise);
+	Long countByEnterprise(Enterprise enterprise);
 	
 	Page<Student> findAll(PageRequest pageRequest);
+	
+	Boolean existsByClazz(Clazz clazz);
+	
+	Boolean existsByAddress(Address address);
 	
 }

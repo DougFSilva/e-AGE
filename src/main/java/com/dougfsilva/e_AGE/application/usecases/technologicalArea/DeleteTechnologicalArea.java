@@ -25,7 +25,7 @@ public class DeleteTechnologicalArea {
 	
 	public void delete(String ID) {
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(ID);
-		if (courseRepository.countByTechnologialArea(technologicalArea) > 0) {
+		if (courseRepository.existsByTechnologialArea(technologicalArea)) {
 			throw new DataIntegrityViolationException(
 					String.format("The technological area %S cannot be deleted because there are courses still associated with it", 
 							technologicalArea.getTitle()));

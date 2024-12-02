@@ -19,8 +19,8 @@ public class CreateTechnologicalArea {
 	private final StandardLogger logger;
 
 	public TechnologicalArea execute(TechnologicalAreaDataRequest request) {
-		String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.tilte());
-		TechnologicalArea technologicalArea = new TechnologicalArea(request.tilte(),request.tilte(), imageUrl);
+		String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.title());
+		TechnologicalArea technologicalArea = new TechnologicalArea(request.title(),request.title(), imageUrl);
 		TechnologicalArea createdTechnologicalArea = repository.save(technologicalArea);
 		logger.createdObjectLog(createdTechnologicalArea);
 		return createdTechnologicalArea;

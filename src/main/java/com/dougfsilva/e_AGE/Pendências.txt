@@ -1,10 +1,13 @@
-* Ao apagar Curso deve-se apagar as turmas e os alunos como opção, envinado um Booelan de confirmação se quer apagar alunos e turmas também 
-Ou se for mais fácil não permitir que seja apagado os itens que tem outros pertencentes, tipo não apagr curso se tiver turma cadastrada
-
-Fazer isso para endereço tbm
-
-Adicionar nos repositories buscar quantidade para usar como parametro para não deixar apagar algum objeto
-
+GArantir que ao apagar algum endereço não haja nenhuma pessoa o empresa pertencente a ele
+Quando deletar um aluno ou empresa ou outro, deletar também o endereço e nao permitir que o endereço seja apagado caso haja algum usando ele
 Criar uma empresa padrão para quando aluno não tiver endereço
-
 Adicionar numero na turma
+Ao deletar student deletar também responsible caso não haja outro aluno com o mesmo Responsible
+O retorno dos métodos create devem ser do tipo Response?
+
+deleteAllByTurma
+deleteAllTurmaByCourse
+formar alunos,
+transferir alunos de turma
+Concluir find do address
+Atualziar os updates fazendo as validações

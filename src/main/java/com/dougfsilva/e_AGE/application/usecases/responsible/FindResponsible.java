@@ -15,10 +15,10 @@ public class FindResponsible {
 	private final ResponsibleRepository repository;
 
 	public Responsible findByID(String ID) {
-		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Guardian with ID %S not found!", ID)));
+		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Responsible with ID %S not found!", ID)));
 	}
 	
-	public ResponsibleResponse findByIDAsGuardianResponse(String ID) {
+	public ResponsibleResponse findByIDAsResponsibleResponse(String ID) {
 		return ResponsibleResponse.fromResponsible(findByID(ID));
 	}
 	

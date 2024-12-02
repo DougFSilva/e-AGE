@@ -26,13 +26,21 @@ public class UpdateCourse {
 	private final StandardLogger logger;
 	
 	public CourseResponse execute(String ID, CourseDataRequest request) {
-		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.technologicalAreaID());
-		String imageUrl = storeImage.execute(request.image(), ImageType.COURSE, request.title());
 		Course course = findCourse.findByID(ID);
-		course.setModality(request.modality());
-		course.setTitle(request.title());
-		course.setTechnologicalArea(technologicalArea);
-		course.setImage(imageUrl);
+		if(request.technologicalAreaID() != null && !request.technologicalAreaID().isBlank()) {
+			TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.technologicalAreaID());
+			course.setTechnologicalArea(technologicalArea);
+		}
+		if(request.image() != null && !request.image().isEmpty()) {
+			String imageUrl = storeImage.execute(request.image(), ImageType.COURSE, request.title());
+			course.setImage(imageUrl);
+		}
+		if(request.modality() != null) {
+			course.setModality(request.modality());
+		}
+		if(request.title() != null && !request.title().isBlank()) {
+			course.setTitle(request.title());
+		}
 		Course updatedCourse = repository.save(course);
 		logger.updatedObjectLog(updatedCourse);
 		return CourseResponse.fromCourse(updatedCourse);

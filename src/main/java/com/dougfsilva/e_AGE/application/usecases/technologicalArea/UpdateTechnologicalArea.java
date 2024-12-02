@@ -21,11 +21,18 @@ public class UpdateTechnologicalArea {
 	private final StandardLogger logger;
 
 	public TechnologicalArea update(String ID, TechnologicalAreaDataRequest request) {
-		String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.tilte());
 		TechnologicalArea area = findTechnologicalArea.findByID(ID);
-		area.setTitle(request.tilte());
-		area.setDescription(request.description());
-		area.setImage(imageUrl);
+		if(request.image() != null && !request.image().isEmpty()) {
+			String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.title());
+			area.setImage(imageUrl);
+		}
+		
+		if(request.title() != null && !request.title().isBlank()) {
+			area.setTitle(request.title());
+		}
+		if(request.description() != null && !request.description().isBlank()) {
+			area.setDescription(request.description());
+		}
 		TechnologicalArea updatedArea = repository.save(area);
 		logger.updatedObjectLog(updatedArea);
 		return updatedArea;

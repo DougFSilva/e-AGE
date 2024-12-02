@@ -25,9 +25,9 @@ public class DeleteClazz {
 
 	public void execute(String ID) {
 		Clazz clazz = findClazz.findByID(ID);
-		if(studentRepository.countByClazz(clazz) > 0) {
+		if(studentRepository.existsByClazz(clazz)) {
 			throw new DataIntegrityViolationException(
-					String.format("The Clazz %S cannot be deleted because there are Students still associated with it", 
+					String.format("The Class %S cannot be deleted because there are Students still associated with it", 
 							clazz.getCode()));
 		}
 		deleteImage.execute(clazz.getImage(), ImageType.CLAZZ);

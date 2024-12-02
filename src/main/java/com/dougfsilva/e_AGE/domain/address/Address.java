@@ -9,7 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = { "country", "state", "postalCode", "city", "district" })
+@EqualsAndHashCode(of = { "country", "state", "postalCode", "city", "number" })
 @ToString
 public class Address {
 

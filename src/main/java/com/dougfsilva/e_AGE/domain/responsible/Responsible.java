@@ -20,5 +20,9 @@ public class Responsible extends Person {
 	public Responsible(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address) {
 		super(name, rg, phone, email, dateOfBirth, address);
 	}
-
+	
+	public Responsible(String name, String rg, String phone, Email email, LocalDate dateOfBirth) {
+		super(name, rg, phone, email, dateOfBirth);
+	}
+	
 }

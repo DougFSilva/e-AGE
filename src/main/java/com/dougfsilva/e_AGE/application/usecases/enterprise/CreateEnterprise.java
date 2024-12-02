@@ -1,8 +1,7 @@
 package com.dougfsilva.e_AGE.application.usecases.enterprise;
 
-import com.dougfsilva.e_AGE.application.dto.request.AddressDataRequest;
 import com.dougfsilva.e_AGE.application.dto.request.EnterpriseDataRequest;
-import com.dougfsilva.e_AGE.application.usecases.address.CreateAddress;
+import com.dougfsilva.e_AGE.application.usecases.Address.CreateAddress;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
@@ -20,9 +19,8 @@ public class CreateEnterprise {
 	private final StandardLogger logger;
 	
 	public Enterprise execute(EnterpriseDataRequest request) {
-		Address createdAddress = createAddress.execute(new AddressDataRequest(request.country(), request.state(), request.postalCode(), request.city(),
-				request.district(), request.street(), request.number()));
-		Enterprise enterprise = new Enterprise(request.TIN(), request.name(), createdAddress);
+		Address address = createAddress.execute(request.addressDataRequest()); 
+		Enterprise enterprise = new Enterprise(request.TIN(), request.name(), address);
 		Enterprise createdEnterprise = repository.save(enterprise);
 		logger.createdObjectLog(createdEnterprise);
 		return createdEnterprise;

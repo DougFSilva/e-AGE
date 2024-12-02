@@ -20,12 +20,12 @@ public interface ClazzRepository {
 	
 	Page<Clazz> findAllByCourse(Course course, PageRequest pageRequest);
 	
-	Long countByCourse(Course course);
-	
 	List<Clazz> findAllByStudent(Student student);
 	
 	Page<Clazz> findAll(PageRequest pageRequest);
 	
 	Page<Clazz> findAll();
+	
+	Boolean existsByCourse(Course course);
 
 }

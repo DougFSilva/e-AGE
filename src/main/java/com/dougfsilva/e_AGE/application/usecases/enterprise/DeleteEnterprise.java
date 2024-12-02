@@ -1,12 +1,10 @@
 package com.dougfsilva.e_AGE.application.usecases.enterprise;
 
-import java.util.List;
-
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
-import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
+import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -23,11 +21,11 @@ public class DeleteEnterprise {
 	
 	public void execute(String ID) {
 		Enterprise enterprise = findEnterprise.findByID(ID);
-		List<Student> studentsByEnterprise = studentRepository.findAllByEnterprise(enterprise);
-		studentsByEnterprise.forEach(student -> {
-			student.setEnterprise(null);
-		});
-		studentRepository.saveAll(studentsByEnterprise);
+		if(studentRepository.countByEnterprise(enterprise) > 0) {
+			throw new DataIntegrityViolationException(
+					String.format("The Enterprise %S cannot be deleted because there are Students still associated with it", 
+							enterprise.getName()));
+		}
 		repository.delete(enterprise);
 		logger.deletedObjectLog(enterprise);
 	}

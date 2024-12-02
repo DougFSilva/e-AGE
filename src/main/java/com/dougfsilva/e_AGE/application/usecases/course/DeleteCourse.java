@@ -25,7 +25,7 @@ public class DeleteCourse {
 	
 	public void execute(String ID) {
 		Course course = findCourse.findByID(ID);
-		if(clazzRepository.countByCourse(course) > 0) {
+		if(clazzRepository.existsByCourse(course)) {
 			throw new DataIntegrityViolationException(
 					String.format("The Course %S cannot be deleted because there are classes still associated with it", 
 							course.getTitle()));

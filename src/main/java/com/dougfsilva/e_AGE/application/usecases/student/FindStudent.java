@@ -44,7 +44,7 @@ public class FindStudent {
 	
 	public List<StudentResponse> findAllByResposible(String responsibleID, PageRequest pageRequest){
 		Responsible responsible = findResponsible.findByID(responsibleID);
-		return repository.findAllByResponsible(responsible, pageRequest).stream().map(StudentResponse::new).collect(Collectors.toList());
+		return repository.findAllByResponsible(responsible).stream().map(StudentResponse::new).collect(Collectors.toList());
 	}
 	
 	public Page<Student> findAllByEnterprise(String enterpriseID, PageRequest pageRequest){

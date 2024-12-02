@@ -1,6 +1,9 @@
 package com.dougfsilva.e_AGE.application.usecases.course;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.dougfsilva.e_AGE.application.dto.request.CourseDataRequest;
+import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
 import com.dougfsilva.e_AGE.application.usecases.technologicalArea.FindTechnologicalArea;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
@@ -22,12 +25,13 @@ public class CreateCourse {
 
 	private final StandardLogger logger;
 
-	public Course create(CourseDataRequest request) {
+	@Transactional
+	public CourseResponse create(CourseDataRequest request) {
 		String imageUrl = storeImage.execute(request.image(), ImageType.COURSE, request.title());
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.technologicalAreaID());
 		Course course = new Course(request.modality(), request.title(), technologicalArea, imageUrl);
 		Course createdCourse = repository.save(course);
 		logger.createdObjectLog(createdCourse);
-		return createdCourse;
+		return CourseResponse.fromCourse(createdCourse);
 	}
 }

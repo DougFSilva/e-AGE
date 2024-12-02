@@ -42,5 +42,13 @@ public abstract class Person {
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 	}
+	
+	public Person(String name, String rg, String phone, Email email, LocalDate dateOfBirth) {
+		this.name = name;
+		this.rg = rg;
+		this.phone = phone;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+	}
 
 }
