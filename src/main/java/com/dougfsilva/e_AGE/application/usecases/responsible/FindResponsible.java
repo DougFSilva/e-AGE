@@ -22,6 +22,10 @@ public class FindResponsible {
 		return ResponsibleResponse.fromResponsible(findByID(ID));
 	}
 	
+	Page<ResponsibleResponse> findAllByNameContaining(String name, PageRequest pageRequest){
+		return ResponsibleResponse.fromPage(repository.findAllByNameContaining(name, pageRequest));
+	}
+	
 	public Page<ResponsibleResponse> findAll(PageRequest pageRequest){
 		return ResponsibleResponse.fromPage(repository.findAll(pageRequest));
 	}

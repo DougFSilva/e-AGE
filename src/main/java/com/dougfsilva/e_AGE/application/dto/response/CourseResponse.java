@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.application.dto.response;
 
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 import com.dougfsilva.e_AGE.domain.course.Course;
@@ -20,6 +21,12 @@ public class CourseResponse {
 	private String technologicalAreaTitle;
 
 	private String image;
+	
+	private Boolean isClosed;
+	
+	private LocalDate creationDate;
+
+    private LocalDate closingDate;
 
 	public CourseResponse(Course course) {
 		this.ID = course.getID();
@@ -27,6 +34,9 @@ public class CourseResponse {
 		this.title = course.getTitle();
 		this.technologicalAreaTitle = course.getTechnologicalArea().getTitle();
 		this.image = course.getImage();
+		this.isClosed = course.getIsClosed();
+		this.creationDate = course.getCreationDate();
+		this.closingDate = course.getClosingDate();
 	}
 
 	public static Page<CourseResponse> fromPage(Page<Course> courses) {

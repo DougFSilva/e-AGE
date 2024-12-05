@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.application.usecases.enterprise;
 
+import com.dougfsilva.e_AGE.application.usecases.address.DeleteAddress;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
@@ -17,16 +18,19 @@ public class DeleteEnterprise {
 	
 	private final FindEnterprise findEnterprise;
 	
+	private final DeleteAddress deleteAddress;
+	
 	private final StandardLogger logger;
 	
 	public void execute(String ID) {
 		Enterprise enterprise = findEnterprise.findByID(ID);
-		if(studentRepository.countByEnterprise(enterprise) > 0) {
+		if(studentRepository.existsByEnterprise(enterprise)) {
 			throw new DataIntegrityViolationException(
-					String.format("The Enterprise %S cannot be deleted because there are Students still associated with it", 
+					String.format("The Enterprise %S cannot be deleted because there are Students still associated with it!", 
 							enterprise.getName()));
 		}
 		repository.delete(enterprise);
+		deleteAddress.execute(enterprise.getAddress().getID());
 		logger.deletedObjectLog(enterprise);
 	}
 }

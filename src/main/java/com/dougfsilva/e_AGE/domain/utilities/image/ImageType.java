@@ -9,7 +9,6 @@ public enum ImageType {
 
 	 TECHNOLOGICAL_AREA("Technological Area"),
 	 COURSE("Course"),
-	 CLAZZ("Class"),
 	 STUDENT("Student"),
 	 EMPLOYEE("Employee"),
 	 GUARDIAN("Guardian");

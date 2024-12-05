@@ -36,5 +36,13 @@ public class StandardLogger {
 	public void imageDeleteErrorLog(String imageUrl) {
 		logger.warn(String.format("Failed to delete image %S by user %S", imageUrl, user));
 	}
+	
+	public void closingLog(Object object) {
+		logger.info(String.format("%S closed by %S", object, user));
+	}
+	
+	public void ReopenLog(Object object) {
+		logger.info(String.format("%S reopen by %S", object, user));
+	}
 
 }

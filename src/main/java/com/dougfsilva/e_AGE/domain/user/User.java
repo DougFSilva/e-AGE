@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.domain.user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class User {
 	
 	private Password password;
 	
-	private List<Profile> profiles;
+	private List<Profile> profiles = new ArrayList<>();
 
 	public User(String username, Password password, List<Profile> profiles) {
 		this.username = username;

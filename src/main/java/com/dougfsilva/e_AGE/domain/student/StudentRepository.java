@@ -3,7 +3,6 @@ package com.dougfsilva.e_AGE.domain.student;
 import java.util.List;
 import java.util.Optional;
 
-import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.responsible.Responsible;
@@ -30,6 +29,8 @@ public interface StudentRepository {
 	
 	Boolean existsByClazz(Clazz clazz);
 	
-	Boolean existsByAddress(Address address);
+	Boolean existsByResponsible(Responsible responsible);
+	
+	Boolean existsByEnterprise(Enterprise enterprise);
 	
 }

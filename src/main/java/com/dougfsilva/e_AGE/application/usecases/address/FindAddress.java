@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.application.usecases.Address;
+package com.dougfsilva.e_AGE.application.usecases.address;
 
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.address.AddressRepository;

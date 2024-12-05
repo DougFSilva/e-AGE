@@ -1,5 +1,7 @@
 package com.dougfsilva.e_AGE.application.usecases.course;
 
+import java.time.LocalDate;
+
 import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
 import com.dougfsilva.e_AGE.application.usecases.technologicalArea.FindTechnologicalArea;
 import com.dougfsilva.e_AGE.domain.course.Course;
@@ -37,7 +39,17 @@ public class FindCourse {
 		return CourseResponse.fromPage(repository.findAllByTechnologicalArea(technologicalArea, pageRequest));
 	}
 
+	Page<CourseResponse> findAllByCreationDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest){
+		return CourseResponse.fromPage(repository.findAllByCreationDatePeriod(min, max, pageRequest));
+	}
+	
+	Page<CourseResponse> findAllByClosingDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest){
+		return CourseResponse.fromPage(repository.findAllByClosingDatePeriod(min, max, pageRequest));
+	}
+	
 	public Page<CourseResponse> findAll(PageRequest pageRequest) {
 		return CourseResponse.fromPage(repository.findAll(pageRequest));
 	}
+	
+	
 }

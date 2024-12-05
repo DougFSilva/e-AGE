@@ -12,6 +12,8 @@ public interface TechnologicalAreaRepository {
 	void delete(TechnologicalArea technologicalArea);
 
 	Optional<TechnologicalArea> findByID(String ID);
+	
+	Optional<TechnologicalArea> findByTitle(String title);
 
 	Page<TechnologicalArea> findAllByTitleContains(String title, PageRequest pageRequest);
 	

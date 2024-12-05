@@ -1,5 +1,7 @@
 package com.dougfsilva.e_AGE.domain.course;
 
+import java.time.LocalDate;
+
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 
 import lombok.AllArgsConstructor;
@@ -24,18 +26,20 @@ public class Course {
 	private TechnologicalArea technologicalArea;
 	
 	private String image;
+	
+	private Boolean isClosed;
+	
+	private LocalDate creationDate;
 
-	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea, String image) {
+    private LocalDate closingDate;
+
+	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea, String image, Boolean isClosed, LocalDate creationDate) {
 		this.modality = modality;
 		this.title = title;
 		this.technologicalArea = technologicalArea;
 		this.image = image;
+		this.isClosed = isClosed;
+		this.creationDate = creationDate;
 	}
 	
-	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea) {
-		this.modality = modality;
-		this.title = title;
-		this.technologicalArea = technologicalArea;
-	}
-
 }

@@ -1,15 +1,12 @@
 package com.dougfsilva.e_AGE.application.usecases.clazz;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
 import com.dougfsilva.e_AGE.application.usecases.course.FindCourse;
-import com.dougfsilva.e_AGE.application.usecases.student.FindStudent;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -22,8 +19,6 @@ public class FindClazz {
 	private final ClazzRepository repository;
 	
 	private final FindCourse findCourse;
-	
-	private final FindStudent findStudent;
 	
 	public Clazz findByID(String ID) {
 		return repository.findByID(ID).orElseThrow(
@@ -43,9 +38,12 @@ public class FindClazz {
 		return ClazzResponse.fromPage(repository.findAllByCourse(course, pageRequest));
 	}
 	
-	public List<ClazzResponse> findAllByStudent(String studentID){
-		Student student = findStudent.findByID(studentID);
-		return repository.findAllByStudent(student).stream().map(ClazzResponse::new).collect(Collectors.toList());
+	Page<ClazzResponse> findAllByCreationDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest){
+		return ClazzResponse.fromPage(repository.findAllByCreationDatePeriod(min, max, pageRequest));
+	}
+
+	Page<ClazzResponse> findAllByClosingDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest){
+		return  ClazzResponse.fromPage(repository.findAllByClosingDatePeriod(min, max, pageRequest));
 	}
 	
 	public Page<ClazzResponse> findAll(PageRequest pageRequest){

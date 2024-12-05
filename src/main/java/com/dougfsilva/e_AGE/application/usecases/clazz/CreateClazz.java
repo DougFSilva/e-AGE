@@ -1,14 +1,13 @@
 package com.dougfsilva.e_AGE.application.usecases.clazz;
 
-import com.dougfsilva.e_AGE.application.dto.request.ClazzDataRequest;
+import com.dougfsilva.e_AGE.application.dto.request.CreateClazzRequest;
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
 import com.dougfsilva.e_AGE.application.usecases.course.FindCourse;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
-import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
+import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -19,14 +18,17 @@ public class CreateClazz {
 
 	private final FindCourse findCourse;
 
-	private final StoreImage storeImage;
-
 	private final StandardLogger logger;
 
-	public ClazzResponse execute(ClazzDataRequest request) {
-		Course course = findCourse.findByID(request.courseID());
-		String imageUrl = storeImage.execute(request.image(), ImageType.CLAZZ, request.code());
-		Clazz clazz = new Clazz(request.code(), course, imageUrl);
+	public ClazzResponse execute(CreateClazzRequest request) {
+		repository.findByCode(request.getCode().toUpperCase()).ifPresent(c -> {
+			throw new DataIntegrityViolationException(String.format(" Clazz with code %S already exists!", c.getCode()));
+		});
+		Course course = findCourse.findByID(request.getCourseID());
+		if(course.getIsClosed()) {
+			throw new DataIntegrityViolationException("It is not possible to create a class for a closed course!");
+		}
+		Clazz clazz = new Clazz(request.getNumber(), request.getCode().toUpperCase(), course, false, request.getCreationDate());
 		Clazz createdClazz = repository.save(clazz);
 		logger.createdObjectLog(createdClazz);
 		return ClazzResponse.fromClazz(createdClazz);

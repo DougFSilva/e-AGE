@@ -1,6 +1,6 @@
-package com.dougfsilva.e_AGE.application.usecases.Address;
+package com.dougfsilva.e_AGE.application.usecases.address;
 
-import com.dougfsilva.e_AGE.application.dto.request.AddressDataRequest;
+import com.dougfsilva.e_AGE.application.dto.request.CreateAddressRequest;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.address.AddressRepository;
 
@@ -11,9 +11,9 @@ public class CreateAddress {
 
 	private final AddressRepository repository;
 
-	public Address execute(AddressDataRequest request) {
-		Address address = new Address(request.country(), request.state(), request.postalCode(), request.city(),
-				request.district(), request.street(), request.number());
+	public Address execute(CreateAddressRequest request) {
+		Address address = new Address(request.getCountry(), request.getState(), request.getPostalCode(), request.getCity(),
+				request.getDistrict(), request.getStreet(), request.getNumber());
 		return repository.save(address);
 	}
 }

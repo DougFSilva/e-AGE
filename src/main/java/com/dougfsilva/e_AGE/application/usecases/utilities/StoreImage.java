@@ -21,7 +21,7 @@ public class StoreImage {
 			if (image == null || image.isEmpty()) {
 				imageUrl = imageStorageService.getDefaultImage(imageType);
 			} else {
-				imageUrl = imageStorageService.storeImage(image, imageType, name);
+				imageUrl = imageStorageService.storeImage(image, imageType, name.trim().toLowerCase());
 			}
 		} catch (Exception e) {
 			logger.imageStoreErrorLog(image);

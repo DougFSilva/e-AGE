@@ -1,10 +1,11 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import com.dougfsilva.e_AGE.application.dto.request.TechnologicalAreaDataRequest;
+import com.dougfsilva.e_AGE.application.dto.request.UpdateTechnologicalAreaRequest;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
+import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -20,18 +21,20 @@ public class UpdateTechnologicalArea {
 
 	private final StandardLogger logger;
 
-	public TechnologicalArea update(String ID, TechnologicalAreaDataRequest request) {
-		TechnologicalArea area = findTechnologicalArea.findByID(ID);
-		if(request.image() != null && !request.image().isEmpty()) {
-			String imageUrl = storeImage.execute(request.image(), ImageType.TECHNOLOGICAL_AREA, request.title());
+	public TechnologicalArea update(UpdateTechnologicalAreaRequest request) {
+		TechnologicalArea area = findTechnologicalArea.findByID(request.getID());
+		if(!request.getTitle().equalsIgnoreCase(area.getTitle()) && request.getTitle() != null && !request.getTitle().isBlank()) {
+			repository.findByTitle(request.getTitle().toUpperCase()).ifPresent(t -> {
+				throw new DataIntegrityViolationException(String.format("Tehcnologial Area with title %S already exists!", t.getTitle()));
+			});
+			area.setTitle(request.getTitle());
+		}
+		if(request.getDescription() != null && !request.getDescription().isBlank()) {
+			area.setDescription(request.getDescription());
+		}
+		if(request.getImage() != null && !request.getImage().isEmpty()) {
+			String imageUrl = storeImage.execute(request.getImage(), ImageType.TECHNOLOGICAL_AREA, request.getTitle());
 			area.setImage(imageUrl);
-		}
-		
-		if(request.title() != null && !request.title().isBlank()) {
-			area.setTitle(request.title());
-		}
-		if(request.description() != null && !request.description().isBlank()) {
-			area.setDescription(request.description());
 		}
 		TechnologicalArea updatedArea = repository.save(area);
 		logger.updatedObjectLog(updatedArea);

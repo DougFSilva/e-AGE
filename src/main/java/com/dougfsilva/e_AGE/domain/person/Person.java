@@ -16,13 +16,15 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode(of = { "ID", "rg" })
 @ToString
-public abstract class Person {
+public class Person {
 
 	private String ID;
 
 	private User user;
 
 	private String name;
+
+	private Sex sex;
 
 	private String rg;
 
@@ -34,17 +36,20 @@ public abstract class Person {
 
 	private Address address;
 
-	public Person(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address) {
+	public Person(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
+			Address address) {
 		this.name = name;
+		this.sex = sex;
 		this.rg = rg;
 		this.phone = phone;
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 	}
-	
-	public Person(String name, String rg, String phone, Email email, LocalDate dateOfBirth) {
+
+	public Person(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth) {
 		this.name = name;
+		this.sex = sex;
 		this.rg = rg;
 		this.phone = phone;
 		this.email = email;

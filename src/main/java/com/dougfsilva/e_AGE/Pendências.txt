@@ -1,13 +1,30 @@
-GArantir que ao apagar algum endereço não haja nenhuma pessoa o empresa pertencente a ele
-Quando deletar um aluno ou empresa ou outro, deletar também o endereço e nao permitir que o endereço seja apagado caso haja algum usando ele
 Criar uma empresa padrão para quando aluno não tiver endereço
-Adicionar numero na turma
 Ao deletar student deletar também responsible caso não haja outro aluno com o mesmo Responsible
-O retorno dos métodos create devem ser do tipo Response?
-
-deleteAllByTurma
-deleteAllTurmaByCourse
-formar alunos,
+alunos countByCourse
+Fechar turma e formar turma
 transferir alunos de turma
-Concluir find do address
-Atualziar os updates fazendo as validações
+formar alunos,
+Ao deletar aluno não pode haver nenhuma certificação
+Ao buscar alunos pela classe, buscar Students e DropoutStudents
+Ordenar por nome os alunos da classe
+Não permitir matricular o aluno duas vezes na mesma turma
+
+Endpoint para relatórios
+Imprimir PDF
+Importar por csv ou excel
+Talvez FindAllByClose em cursos e turmas
+Colocar exclamação nas mensagens das exceções
+Comentar código
+
+
+Remover um Responsible de um aluno, se o responsible ficar sem nenhum aluno ele deve ser removido
+Talvez usar Hashset
+Adicionar verificação de rg para employee, student e responsible
+Buscar alunos por empresa, mas somente alunos com matriculas ativas
+Ao deletar um aluno, deletar todas as matriculas desse aluno
+Não permitir ter duas matriculas iguais
+Ao deletar uma classe deve se deletar todas as matrículas da classe e todas as drop da classe
+
+###Frontend
+Adicionar empresa por grupo de alunos. No frontend filtrar alunos por turma e clicar sobre os alunos desejados e adicionar empresa
+No frontend ao criar um responsible para o aluno inserir um box para copiar o endereço do aluno para o responsible

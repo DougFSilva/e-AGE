@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.application.dto.response;
 
+import java.time.LocalDate;
 import java.util.stream.Collectors;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
@@ -13,18 +14,27 @@ import lombok.Getter;
 public class ClazzResponse {
 
 	private String ID;
+	
+	private Integer number;
 
 	private String code;
 	
 	private CourseResponse course;
 	
-	private String image;
+	private Boolean isClosed;
+
+	private LocalDate creationDate;
+
+    private LocalDate closingDate;
 	
 	public ClazzResponse(Clazz clazz) {
 		this.ID = clazz.getID();
+		this.number = clazz.getNumber();
 		this.code = clazz.getCode();
 		this.course = CourseResponse.fromCourse(clazz.getCourse());
-		this.image = clazz.getImage();
+		this.isClosed = course.getIsClosed();
+		this.creationDate = course.getCreationDate();
+		this.closingDate = course.getClosingDate();
 	}
 	
 	public static Page<ClazzResponse> fromPage(Page<Clazz> clazzes) {

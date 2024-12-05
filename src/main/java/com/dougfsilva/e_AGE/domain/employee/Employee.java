@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.person.Email;
 import com.dougfsilva.e_AGE.domain.person.Person;
+import com.dougfsilva.e_AGE.domain.person.Sex;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,12 +22,11 @@ public class Employee extends Person{
 
 	private StaffRole staffRole;
 
-	public Employee(String name, String rg, String phone, Email email, LocalDate dateOfBirth, Address address,
-			String enrollment, StaffRole staffRole) {
-		super(name, rg, phone, email, dateOfBirth, address);
+	public Employee(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
+			Address address, String enrollment, StaffRole staffRole) {
+		super(name, sex, rg, phone, email, dateOfBirth, address);
 		this.enrollment = enrollment;
 		this.staffRole = staffRole;
 	}
 
-	
 }
