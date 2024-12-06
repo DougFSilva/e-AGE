@@ -10,7 +10,7 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import lombok.Getter;
 
 @Getter
-public class EnrollResponse {
+public class EnrollmentResponse {
 
 	private String ID;
 	
@@ -24,7 +24,7 @@ public class EnrollResponse {
 	
 	private EnrollmentStatus status;
 	
-	public EnrollResponse(Enrollment enrollment) {
+	public EnrollmentResponse(Enrollment enrollment) {
 		this.ID = enrollment.getID();
 		this.registration = enrollment.getRegistration();
 		this.student = StudentResponse.fromStudent(enrollment.getStudent());
@@ -32,11 +32,11 @@ public class EnrollResponse {
 		this.date = enrollment.getDate();
 	}
 
-	public static Page<EnrollResponse> fromPage(Page<Enrollment> enrollment) {
-		return new Page<EnrollResponse>(
+	public static Page<EnrollmentResponse> fromPage(Page<Enrollment> enrollment) {
+		return new Page<EnrollmentResponse>(
 				enrollment.getContent()
 				.stream()
-				.map(EnrollResponse::new)
+				.map(EnrollmentResponse::new)
 				.collect(Collectors.toList()), 
 				enrollment.getNumber(), 
 				enrollment.getSize(),
@@ -47,8 +47,8 @@ public class EnrollResponse {
 				enrollment.getIsLast());
 	}
 	
-	 public static EnrollResponse fromEnrollment(Enrollment enrollment) {
-	        return new EnrollResponse(enrollment);
+	 public static EnrollmentResponse fromEnrollment(Enrollment enrollment) {
+	        return new EnrollmentResponse(enrollment);
 	    }
 
 }

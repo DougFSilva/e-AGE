@@ -25,7 +25,7 @@ public class Occurrence {
 
 	private LocalDateTime closingDate;
 
-	private Employee Reporter;
+	private Employee reporter;
 
 	private Student studant;
 
@@ -52,7 +52,7 @@ public class Occurrence {
 	public Occurrence(LocalDateTime openingDate, Employee reporter, Student studant, Clazz clazz, String curricularUnit,
 			OccurrenceType occurrenceType, Boolean restricted, Boolean forwarding, String description) {
 		this.openingDate = openingDate;
-		Reporter = reporter;
+		this.reporter = reporter;
 		this.studant = studant;
 		this.clazz = clazz;
 		this.curricularUnit = curricularUnit;

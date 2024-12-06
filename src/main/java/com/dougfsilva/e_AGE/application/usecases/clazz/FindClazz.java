@@ -1,6 +1,7 @@
 package com.dougfsilva.e_AGE.application.usecases.clazz;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
 import com.dougfsilva.e_AGE.application.usecases.course.FindCourse;
@@ -36,6 +37,11 @@ public class FindClazz {
 	public Page<ClazzResponse> findAllByCourse(String courseID, PageRequest pageRequest){
 		Course course = findCourse.findByID(courseID);
 		return ClazzResponse.fromPage(repository.findAllByCourse(course, pageRequest));
+	}
+	
+	public List<Clazz> findAllByCourse(String courseID){
+		Course course = findCourse.findByID(courseID);
+		return repository.findAllByCourse(course);
 	}
 	
 	Page<ClazzResponse> findAllByCreationDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest){

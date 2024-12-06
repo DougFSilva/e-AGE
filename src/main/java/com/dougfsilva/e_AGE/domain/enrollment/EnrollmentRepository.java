@@ -32,4 +32,5 @@ public interface EnrollmentRepository {
 	
 	Boolean existsByClazz(Clazz clazz);
 	
+	Boolean existsByRegistration(String registration);
 }

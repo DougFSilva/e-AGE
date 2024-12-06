@@ -2,7 +2,11 @@ package com.dougfsilva.e_AGE.application.usecases.utilities;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
+import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
 import com.dougfsilva.e_AGE.application.dto.response.UserResponse;
+import com.dougfsilva.e_AGE.domain.clazz.Clazz;
+import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
 import com.dougfsilva.e_AGE.domain.utilities.UserContext;
 
@@ -41,8 +45,16 @@ public class StandardLogger {
 		logger.info(String.format("%S closed by %S", object, user));
 	}
 	
-	public void ReopenLog(Object object) {
+	public void reopenLog(Object object) {
 		logger.info(String.format("%S reopen by %S", object, user));
+	}
+	
+	public void enrollLog(Student student, Clazz clazz) {
+		logger.info(String.format("Student %S enroll in class %S by %S", StudentResponse.fromStudent(student), ClazzResponse.fromClazz(clazz), user));
+	}
+	
+	public void disenrollLog(Student student, Clazz clazz) {
+		logger.info(String.format("Student %S disenroll in class %S by %S", StudentResponse.fromStudent(student), ClazzResponse.fromClazz(clazz), user));
 	}
 
 }
