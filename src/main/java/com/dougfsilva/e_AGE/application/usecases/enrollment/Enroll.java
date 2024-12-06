@@ -27,10 +27,13 @@ public class Enroll {
 	
 	public EnrollmentResponse executa(EnrollRequest request) {
 		if(repository.existsByRegistration(request.getRegistration())) {
-			throw new DataIntegrityViolationException(String.format("Enrollment with registration %S already exists", request.getRegistration()));
+			throw new DataIntegrityViolationException(String.format("Enrollment with registration %S already exists!", request.getRegistration()));
 		}
 		Student student = findStudent.findByID(request.getStudentID());
 		Clazz clazz = findClazz.findByID(request.getClazzID());
+		if(repository.existsByClazzAndStudent(student, clazz)) {
+			throw new DataIntegrityViolationException(String.format("The student %S is already enrolled in the class %S!", student.getName(), clazz.getCode()));
+		}
 		Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
 		Enrollment createEnrollment = repository.save(enrollment);
 		logger.enrollLog(student, clazz);

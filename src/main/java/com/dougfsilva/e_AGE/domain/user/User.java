@@ -22,12 +22,15 @@ public class User {
 	
 	private Password password;
 	
+	private Boolean passwordChanged;
+	
 	private List<Profile> profiles = new ArrayList<>();
 
-	public User(String username, Password password, List<Profile> profiles) {
+	public User(String username, Password password, List<Profile> profiles, Boolean passwordChanged) {
 		this.username = username;
 		this.password = password;
 		this.profiles = profiles;
+		this.passwordChanged = passwordChanged;
 	}
 	
 }

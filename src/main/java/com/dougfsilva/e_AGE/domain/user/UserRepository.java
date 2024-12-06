@@ -19,4 +19,6 @@ public interface UserRepository {
 	
 	Page<User> findAll(PageRequest pageRequest);
 	
+	Boolean existsByUsername(String username);
+	
 }

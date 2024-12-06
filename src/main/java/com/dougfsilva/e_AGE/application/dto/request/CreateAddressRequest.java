@@ -1,8 +1,10 @@
 package com.dougfsilva.e_AGE.application.dto.request;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+@AllArgsConstructor
 @Getter
 @ToString
 public class CreateAddressRequest {
@@ -21,15 +23,4 @@ public class CreateAddressRequest {
 	
 	private String number;
 
-	public CreateAddressRequest(String country, String state, String postalCode, String city, String district,
-			String street, String number) {
-		this.country = country;
-		this.state = state;
-		this.postalCode = postalCode;
-		this.city = city;
-		this.district = district;
-		this.street = street;
-		this.number = number;
-	}
-	
 }

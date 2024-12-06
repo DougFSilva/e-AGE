@@ -20,11 +20,14 @@ public class UserResponse {
 	private String username;
 
 	private List<String> profiles;
+	
+	private Boolean passwordChanged;
 
 	public UserResponse(User user) {
 		this.ID = user.getID();
 		this.username = user.getUsername();
 		this.profiles = user.getProfiles().stream().map(p -> p.getProfileType().name()).toList();
+		this.passwordChanged = user.getPasswordChanged();
 	}
 	
 	public static Page<UserResponse> fromPage(Page<User> users) {

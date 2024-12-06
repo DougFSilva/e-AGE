@@ -9,11 +9,16 @@ import lombok.ToString;
 @ToString
 public enum ProfileType {
 
-	ADMIN(1, "ROLE_ADMIN"), PROFESSOR(2, "ROLE_PROFESSOR"), STUDENT(3, "ROLE_STUDENT"), RESPONSIBLE(4,"ROLE_RESPONSIBLE"), VIEWER(5, "ROLE_VIEWER");
-	
+	ADMIN(1, "ROLE_ADMIN"), 
+	MANAGEMENT(2, "ROLE_MANAGEMENT"), 
+	PROFESSOR(3, "ROLE_PROFESSOR"),
+	STUDENT(4, "ROLE_STUDENT"), 
+	RESPONSIBLE(5, "ROLE_RESPONSIBLE"), 
+	VIEWER(6, "ROLE_VIEWER");
+
 	private long code;
 	private String description;
-	
+
 	public static ProfileType toEnum(String description) {
 		if (description == null) {
 			return null;
@@ -24,7 +29,18 @@ public enum ProfileType {
 			}
 
 		}
-		throw new IllegalArgumentException("Perfil inválido");
+		throw new IllegalArgumentException("Invalid Profile!");
+	}
+
+	public static ProfileType fromCode(Long code) {
+		if(code != null) {
+			for (ProfileType x : ProfileType.values()) {
+				if (x.getCode() == code) {
+					return x;
+				}
+			}
+		}
+		throw new IllegalArgumentException("Invalid Profile Code: " + code);
 	}
 
 }

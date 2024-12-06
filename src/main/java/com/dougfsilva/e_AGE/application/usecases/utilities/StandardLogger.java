@@ -7,6 +7,7 @@ import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
 import com.dougfsilva.e_AGE.application.dto.response.UserResponse;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.student.Student;
+import com.dougfsilva.e_AGE.domain.user.User;
 import com.dougfsilva.e_AGE.domain.utilities.Logger;
 import com.dougfsilva.e_AGE.domain.utilities.UserContext;
 
@@ -55,6 +56,10 @@ public class StandardLogger {
 	
 	public void disenrollLog(Student student, Clazz clazz) {
 		logger.info(String.format("Student %S disenroll in class %S by %S", StudentResponse.fromStudent(student), ClazzResponse.fromClazz(clazz), user));
+	}
+	
+	public void userCreatedLog(User createdUser) {
+		logger.info(String.format("User %S created!", createdUser));
 	}
 
 }
