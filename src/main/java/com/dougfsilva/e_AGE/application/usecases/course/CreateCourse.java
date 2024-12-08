@@ -7,8 +7,8 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ public class CreateCourse {
 		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.getTechnologicalAreaID());
 		Course course = new Course(request.getModality(), request.getTitle(), technologicalArea, imageUrl, false, request.getCreationDate());
 		Course createdCourse = repository.save(course);
-		logger.createdObjectLog(createdCourse);
+		logger.info(String.format("Created Course ID %S - %S", createdCourse.getID(), createdCourse.getTitle()));
 		return CourseResponse.fromCourse(createdCourse);
 	}
 }

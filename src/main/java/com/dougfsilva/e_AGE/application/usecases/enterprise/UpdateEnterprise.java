@@ -6,7 +6,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -37,7 +37,7 @@ public class UpdateEnterprise {
 			enterprise.setAddress(address);
 		}
 		Enterprise updatedEnterprise = repository.save(enterprise);
-		logger.updatedObjectLog(updatedEnterprise);
+		logger.info(String.format("Updated Enterprise ID %S - %S", updatedEnterprise.getID(), updatedEnterprise.getName()));
 		return updatedEnterprise;
 	}
 }

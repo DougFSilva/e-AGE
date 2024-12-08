@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.domain.user;
 
-import com.dougfsilva.e_AGE.domain.utilities.exception.InvalidUserOrPasswordException;
+import com.dougfsilva.e_AGE.domain.exception.InvalidUserOrPasswordException;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

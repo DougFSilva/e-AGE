@@ -18,6 +18,6 @@ public class DeleteUser {
 	public void execute(String ID) {
 		User user = findUser.findByID(ID);
 		repository.delete(user);
-		logger.deletedObjectLog(user);
+		logger.info(String.format("Deleted User ID %S - %S", user.getID(), user.getUsername()));
 	}
 }

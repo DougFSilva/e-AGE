@@ -8,7 +8,7 @@ import com.dougfsilva.e_AGE.application.usecases.course.FindCourse;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
@@ -23,7 +23,7 @@ public class FindClazz {
 	
 	public Clazz findByID(String ID) {
 		return repository.findByID(ID).orElseThrow(
-				() -> new ObjectNotFoundException(String.format("Clazz with ID %S not found!", ID)));
+				() -> new ObjectNotFoundException(String.format("Clazz with ID %s not found!", ID)));
 	}
 	
 	public ClazzResponse findByIDAsClazzResponse(String ID) {

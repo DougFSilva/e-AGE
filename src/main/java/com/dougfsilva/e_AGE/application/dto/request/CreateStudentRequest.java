@@ -2,6 +2,8 @@ package com.dougfsilva.e_AGE.application.dto.request;
 
 import java.time.LocalDate;
 
+import com.dougfsilva.e_AGE.domain.responsible.Responsible;
+
 import lombok.Getter;
 import lombok.ToString;
 
@@ -9,18 +11,14 @@ import lombok.ToString;
 @ToString
 public class CreateStudentRequest extends CreatePersonRequest {
 
-	private String enrollment;
-
+	private Responsible responsible;
+	
 	private String enterpriseID;
-
+	
 	public CreateStudentRequest(String name, String sex, String rg, String phone, String email, LocalDate dateOfBirth,
-			CreateAddressRequest address, String enrollment, String enterpriseID) {
-		super(name, sex, rg, phone, email, dateOfBirth, address);
-
-		if (enrollment == null || enrollment.isBlank()) {
-			throw new IllegalArgumentException("Enrollment cannot be null or empty!");
-		}
-		this.enrollment = enrollment;
+			CreateAddressRequest address, Boolean createdDefaultUser, Responsible responsible, String enterpriseID) {
+		super(name, sex, rg, phone, email, dateOfBirth, address, createdDefaultUser);
+		this.responsible = responsible;
 		this.enterpriseID = enterpriseID;
 	}
 

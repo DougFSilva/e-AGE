@@ -15,6 +15,11 @@ public class UpdateAddress {
 	
 	public Address execute(UpdateAddressRequest request) {
 		Address address = findAddress.findByID(request.getID());
+		updateClazzData(address, request);
+		return repository.save(address);
+	}
+	
+	private void updateClazzData(Address address, UpdateAddressRequest request) {
 		if(request.getCountry() != null && request.getCountry().isBlank()) {
 			address.setCountry(request.getCountry());
 		}
@@ -36,6 +41,5 @@ public class UpdateAddress {
 		if(request.getNumber() != null && !request.getNumber().isBlank()) {
 			address.setNumber(request.getNumber());
 		}
-		return repository.save(address);
 	}
 }

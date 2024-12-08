@@ -6,7 +6,7 @@ import com.dougfsilva.e_AGE.domain.certificate.CertificateRepository;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -35,6 +35,6 @@ public class DeleteCourse {
 		}
 		repository.delete(course);
 		deleteImage.execute(course.getImage(), ImageType.COURSE);
-		logger.deletedObjectLog(course);
+		logger.info(String.format("Deleted Course ID %S - %S", course.getID(), course.getTitle()));
 	}
 }

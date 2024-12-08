@@ -12,9 +12,8 @@ public enum ProfileType {
 	ADMIN(1, "ROLE_ADMIN"), 
 	MANAGEMENT(2, "ROLE_MANAGEMENT"), 
 	PROFESSOR(3, "ROLE_PROFESSOR"),
-	STUDENT(4, "ROLE_STUDENT"), 
-	RESPONSIBLE(5, "ROLE_RESPONSIBLE"), 
-	VIEWER(6, "ROLE_VIEWER");
+	EMPLOYEE(4, "ROLE_EMPLOYEE"),
+	STUDENT(5, "ROLE_STUDENT");
 
 	private long code;
 	private String description;

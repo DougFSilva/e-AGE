@@ -19,4 +19,6 @@ public interface EnterpriseRepository {
 	
 	Page<Enterprise> findAll(PageRequest pageRequest);
 	
+	Boolean existsByTIN(String TIN);
+	
 }

@@ -1,8 +1,8 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 

@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.domain.utilities.exception;
+package com.dougfsilva.e_AGE.domain.exception;
 
 public class InvalidUserOrPasswordException extends RuntimeException {
 

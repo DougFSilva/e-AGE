@@ -4,8 +4,8 @@ import com.dougfsilva.e_AGE.application.usecases.address.DeleteAddress;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -31,6 +31,6 @@ public class DeleteEnterprise {
 		}
 		repository.delete(enterprise);
 		deleteAddress.execute(enterprise.getAddress().getID());
-		logger.deletedObjectLog(enterprise);
+		logger.info(String.format("Delete Enterprise ID %S - %S", enterprise.getID(), enterprise.getName()));
 	}
 }

@@ -9,7 +9,7 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -33,7 +33,7 @@ public class CloseCourse {
 		course.setIsClosed(true);
 		course.setClosingDate(date);
 		Course closedCourse = repository.save(course);
-		logger.closingLog(closedCourse);
+		logger.info(String.format("Closed Course ID %S - %S", closedCourse.getID(), closedCourse.getTitle()));
 		return CourseResponse.fromCourse(closedCourse);
 	}
 }

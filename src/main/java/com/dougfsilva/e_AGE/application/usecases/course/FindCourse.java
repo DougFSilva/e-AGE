@@ -7,8 +7,8 @@ import com.dougfsilva.e_AGE.application.usecases.technologicalArea.FindTechnolog
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseModality;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
-import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 

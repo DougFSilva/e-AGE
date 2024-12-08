@@ -1,9 +1,9 @@
 package com.dougfsilva.e_AGE.application.usecases.user;
 
 import com.dougfsilva.e_AGE.application.dto.response.UserResponse;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.user.User;
 import com.dougfsilva.e_AGE.domain.user.UserRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
 

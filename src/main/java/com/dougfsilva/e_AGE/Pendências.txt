@@ -1,13 +1,11 @@
-Ao deletar student deletar também responsible caso não haja outro aluno com o mesmo Responsible e deletar as matrículas
+Ao deletar student deletar também USuario, Adress, Responsible caso não haja outro aluno com o mesmo Responsible. Deletar as matrículas e ocorrências
+Ao deletar employeer somente possivel se não tiver ocorrências.
 alunos countByCourse
 Fechar turma e formar turma
 transferir alunos de turma
 formar alunos,
 Ao deletar aluno não pode haver nenhuma certificação
-Ao buscar alunos pela classe, buscar Students e DropoutStudents
 Ordenar por nome os alunos da classe
-
-Ao deletar aluno deve deletar Address e também responsible caso não haja outro aluno com o mesmo Responsible
 
 Endpoint para relatórios
 Imprimir PDF
@@ -21,21 +19,23 @@ Inserir Usuário no Responsible
 Inserir Usuário no Employee
 Desistir Aluno
 
-Ao cadastrar Aluno gerar um user com email e rg e solicitar para mudar senha ao realizar primeiro acesso
-Ao cadastrar Employeer gerar um user com email e rg e solicitar para mudar senha ao realizar primeiro acesso - Gerar usuário Employee que pode ser alterado por admin
-Ao cadastrar Responsible gerar um user com email e rg e solicitar para mudar senha ao realizar primeiro acesso
-Enviar Email ao criar um usuário com as informações de login e senha
+
+Enviar Email ao criar um usuário com as informações de login e senha?
 Criar uma tabela de configurações no banco de dados e adicionar cache
 Criar um usuário admin ao iniciar o sistema 
-
-Remover um Responsible de um aluno, se o responsible ficar sem nenhum aluno ele deve ser removido
+Alterar senha
 Talvez usar Hashset
 Buscar alunos por empresa, mas somente alunos com matriculas ativas
-Ao deletar um aluno, deletar todas as matriculas desse aluno
 Ao deletar uma classe deve se deletar todas as matrículas da classe e todas as drop da classe. Então deixar a opção deletar todas as matrículas pela classe e
 	deletar todas as desistencias pela classe
-Para deletar um estudante deve-se deletar todas as ocorrências do mesmo
 Opção para manter a matrícula do aluno ao transferir de turma. Ou outra classe para mover aluno usando o mesmo numero de matricula
+O email de quem envia deve estar salvo em configurações no banco de dados
+Criar usecase para enviar notificações
+Tratar Trim() no controller
+Updated password
+Create User, ou ADD user alem do default USER
+Atualizar perfil de usuário somente usuário admin e Management pode
+Registros de ocorrências privados só podem ser visualizados por quem criou e por usuários do tipo Management. Nem mesmo admim pode ver
 
 ###Frontend
 Adicionar empresa por grupo de alunos. No frontend filtrar alunos por turma e clicar sobre os alunos desejados e adicionar empresa

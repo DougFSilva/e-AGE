@@ -6,10 +6,12 @@ import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.person.Sex;
 import com.dougfsilva.e_AGE.domain.user.User;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
+@EqualsAndHashCode(of = {"ID", "rg"})
 @ToString
 public abstract class PersonResponse {
 

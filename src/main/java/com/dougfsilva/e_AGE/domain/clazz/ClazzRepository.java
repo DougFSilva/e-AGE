@@ -31,5 +31,7 @@ public interface ClazzRepository {
 	Page<Clazz> findAll(PageRequest pageRequest);
 
 	Boolean existsByCourse(Course course);
+	
+	Boolean existsByCode(String code);
 
 }

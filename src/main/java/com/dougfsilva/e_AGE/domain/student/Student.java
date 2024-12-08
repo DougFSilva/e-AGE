@@ -32,8 +32,9 @@ public class Student extends Person {
 	}
 	
 	public Student(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address) {
+			Address address, Responsible responsible) {
 		super(name, sex, rg, phone, email, dateOfBirth, address);
+		this.responsible = responsible;
 	}
 	
 	

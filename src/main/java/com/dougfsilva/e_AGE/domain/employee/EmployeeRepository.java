@@ -13,8 +13,12 @@ public interface EmployeeRepository {
 	
 	Optional<Employee> findByID(String ID);
 	
+	Optional<Employee> findByRegistration(String registration);
+	
 	Page<Employee> findAllByStaffRole(StaffRole staffRole, PageRequest pageRequest);
 	
 	Page<Employee> findAll(PageRequest pageRequest);
+	
+	Boolean existsByRegistration(String registration);
 	
 }

@@ -55,6 +55,4 @@ public class StudentResponse extends PersonResponse{
 		return new StudentResponse(student);
 	}
 
-	
-	
 }

@@ -1,6 +1,5 @@
 package com.dougfsilva.e_AGE.domain.student;
 
-import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
@@ -18,8 +17,6 @@ public interface StudentRepository {
 	Optional<Student> findByID(String ID);
 	
 	Page<Student> findAllByClazz(Clazz clazz, PageRequest pageRequest);
-	
-	List<Student> findAllByResponsible(Responsible responsible);
 	
 	Page<Student> findAllByEnterprise(Enterprise enterprise, PageRequest pageRequest);
 	

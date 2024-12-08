@@ -20,7 +20,7 @@ public class DeleteImage {
 			imageStorageService.deleteImage(imageUrl, imageType);
 			return true;
 		} catch (Exception e) {
-			logger.imageDeleteErrorLog(imageUrl);
+			logger.info(String.format("Deleted Image %S", imageUrl));
 			return false;
 		}
 	}

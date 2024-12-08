@@ -7,9 +7,13 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@EqualsAndHashCode(of = {"ID"})
+@ToString
 public class EnrollmentResponse {
 
 	private String ID;

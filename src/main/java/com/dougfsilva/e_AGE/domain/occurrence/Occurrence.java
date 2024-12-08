@@ -15,7 +15,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode()
+@EqualsAndHashCode(of = {"ID"})
 @ToString
 public class Occurrence {
 

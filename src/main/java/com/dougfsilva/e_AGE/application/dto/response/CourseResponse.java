@@ -7,9 +7,13 @@ import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseModality;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@EqualsAndHashCode(of = {"ID"})
+@ToString
 public class CourseResponse {
 
 	private String ID;

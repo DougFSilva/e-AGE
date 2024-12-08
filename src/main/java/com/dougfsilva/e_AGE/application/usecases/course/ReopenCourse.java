@@ -21,7 +21,7 @@ public class ReopenCourse {
 		course.setClosingDate(null);
 		course.setIsClosed(false);
 		Course reopenCourse = repository.save(course);
-		logger.reopenLog(reopenCourse);
+		logger.info(String.format("Reopened Course ID %S - %S", reopenCourse.getID(), reopenCourse.getTitle()));
 		return CourseResponse.fromCourse(reopenCourse);
 	}
 }

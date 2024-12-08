@@ -9,8 +9,8 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.student.Student;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -36,7 +36,7 @@ public class Enroll {
 		}
 		Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
 		Enrollment createEnrollment = repository.save(enrollment);
-		logger.enrollLog(student, clazz);
+		logger.info(String.format("Student %S enrolled in Class %S", student.getName(), clazz.getCode()));
 		return EnrollmentResponse.fromEnrollment(createEnrollment);
 		
 	}

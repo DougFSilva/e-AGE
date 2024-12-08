@@ -8,9 +8,11 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @EqualsAndHashCode(of = {"ID"})
+@ToString
 public class ClazzResponse {
 
 	private String ID;

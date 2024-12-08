@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.application.usecases.utilities;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.dougfsilva.e_AGE.domain.utilities.exception.ImageStorageException;
+import com.dougfsilva.e_AGE.domain.exception.ImageStorageException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -24,7 +24,7 @@ public class StoreImage {
 				imageUrl = imageStorageService.storeImage(image, imageType, name.trim().toLowerCase());
 			}
 		} catch (Exception e) {
-			logger.imageStoreErrorLog(image);
+			logger.error(String.format("Error storing image %S", name));
 			throw new ImageStorageException(e.getMessage());
 		}
 		return imageUrl;

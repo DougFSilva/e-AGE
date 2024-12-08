@@ -7,8 +7,8 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +46,7 @@ public class UpdateCourse {
 			course.setModality(request.getModality());
 		}
 		Course updatedCourse = repository.save(course);
-		logger.updatedObjectLog(updatedCourse);
+		logger.info(String.format("Updated Course ID %S - %S", updatedCourse.getID(), updatedCourse.getTitle()));
 		return CourseResponse.fromCourse(updatedCourse);
 	}
 }

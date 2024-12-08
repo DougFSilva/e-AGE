@@ -3,9 +3,9 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 import com.dougfsilva.e_AGE.application.usecases.utilities.DeleteImage;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +32,6 @@ public class DeleteTechnologicalArea {
 		}
 		repository.delete(technologicalArea);
 		deleteImage.execute(ID, ImageType.TECHNOLOGICAL_AREA);
-		logger.deletedObjectLog(technologicalArea);
+		logger.info(String.format("Deleted Technological Area ID %S - %S", technologicalArea.getID(), technologicalArea.getTitle()));
 	}
 }

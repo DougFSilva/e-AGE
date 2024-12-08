@@ -5,7 +5,7 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.dropout.DropoutRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -26,11 +26,11 @@ public class DeleteClazz {
 		Clazz clazz = findClazz.findByID(ID);
 		if(enrollmentRepository.existsByClazz(clazz) || dropoutRepository.existsByClazz(clazz)) {
 			throw new DataIntegrityViolationException(
-					String.format("The Class %S cannot be deleted because there are Students still associated with it!", 
+					String.format("The Class %s cannot be deleted because there are Students still associated with it!", 
 							clazz.getCode()));
 		}
 		repository.delete(clazz);
-		logger.deletedObjectLog(clazz);
+		logger.info(String.format("Delete Class ID %s - %s", clazz.getID(), clazz.getCode()));
 	}
 
 }

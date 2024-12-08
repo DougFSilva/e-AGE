@@ -13,8 +13,8 @@ import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
-import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
@@ -55,7 +55,6 @@ public class FindEnrollment {
 		return EnrollmentResponse.fromPage(repository.findAllByCourse(course));
 	}
 	
-
 	Page<EnrollmentResponse> findAllByDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest) {
 		return EnrollmentResponse.fromPage(repository.findAllByDatePeriod(min, max, pageRequest));
 	}

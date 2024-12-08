@@ -18,15 +18,18 @@ import lombok.ToString;
 @ToString
 public class Employee extends Person{
 	
-	private String enrollment;
+	private String registration;
 
 	private StaffRole staffRole;
+	
+	private Boolean active;
 
 	public Employee(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address, String enrollment, StaffRole staffRole) {
+			Address address, String registration, StaffRole staffRole, Boolean active) {
 		super(name, sex, rg, phone, email, dateOfBirth, address);
-		this.enrollment = enrollment;
+		this.registration = registration;
 		this.staffRole = staffRole;
+		this.active = active;
 	}
 
 }

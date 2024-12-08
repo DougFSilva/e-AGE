@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.application.usecases.enterprise;
 
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 

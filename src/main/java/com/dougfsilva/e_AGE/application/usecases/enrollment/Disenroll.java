@@ -18,6 +18,6 @@ public class Disenroll {
 	public void execute(String ID) {
 		Enrollment enrollment = findEnrollment.findByID(ID);
 		repository.delete(ID);
-		logger.disenrollLog(enrollment.getStudent(), enrollment.getClazz());
+		logger.info(String.format("Student %S disenrolled in Class %S", enrollment.getStudent().getName(), enrollment.getClazz().getCode()));
 	}
 }

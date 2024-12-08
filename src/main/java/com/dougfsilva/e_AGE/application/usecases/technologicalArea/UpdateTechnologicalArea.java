@@ -3,9 +3,9 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 import com.dougfsilva.e_AGE.application.dto.request.UpdateTechnologicalAreaRequest;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
+import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
-import com.dougfsilva.e_AGE.domain.utilities.exception.DataIntegrityViolationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
 import lombok.AllArgsConstructor;
@@ -37,7 +37,7 @@ public class UpdateTechnologicalArea {
 			area.setImage(imageUrl);
 		}
 		TechnologicalArea updatedArea = repository.save(area);
-		logger.updatedObjectLog(updatedArea);
+		logger.info(String.format("Updated Technological Area ID %S - %S", updatedArea.getID(), updatedArea.getTitle()));
 		return updatedArea;
 	}
 }

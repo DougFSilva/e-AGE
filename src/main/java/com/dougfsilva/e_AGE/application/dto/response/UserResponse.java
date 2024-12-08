@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"ID"})
 @ToString
 public class UserResponse {
 
