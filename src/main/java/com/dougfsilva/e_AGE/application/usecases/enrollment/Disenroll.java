@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.application.usecases.enrollment;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
+import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
 
 import lombok.AllArgsConstructor;
 
@@ -16,8 +17,14 @@ public class Disenroll {
 	private final StandardLogger logger;
 	
 	public void execute(String ID) {
-		Enrollment enrollment = findEnrollment.findByID(ID);
-		repository.delete(ID);
-		logger.info(String.format("Student %S disenrolled in Class %S", enrollment.getStudent().getName(), enrollment.getClazz().getCode()));
+		try {
+			Enrollment enrollment = findEnrollment.findByID(ID);
+			repository.delete(ID);
+			logger.info(String.format("Student %s disenrolled in Class %s", enrollment.getStudent().getName(), enrollment.getClazz().getCode()));
+		} catch (Exception e) {
+			logger.error("Unexpected error when disenrolling student: " + e.getMessage());
+			throw new EnrollmentOperationException("Error while disenroll student", e);
+		}
+	
 	}
 }

@@ -9,7 +9,7 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
-import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
+import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 
 import lombok.AllArgsConstructor;
@@ -26,18 +26,31 @@ public class Enroll {
 	private StandardLogger logger;
 	
 	public EnrollmentResponse executa(EnrollRequest request) {
-		if(repository.existsByRegistration(request.getRegistration())) {
-			throw new DataIntegrityViolationException(String.format("Enrollment with registration %S already exists!", request.getRegistration()));
+		try {
+			validateUniqueRegistration(request.getRegistration());
+			Student student = findStudent.findByID(request.getStudentID());
+			Clazz clazz = findClazz.findByID(request.getClazzID());
+			validateHasStudentEnrollment(student, clazz);
+			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
+			Enrollment createEnrollment = repository.save(enrollment);
+			logger.info(String.format("Student %s enrolled in Class %s", student.getName(), clazz.getCode()));
+			return EnrollmentResponse.fromEnrollment(createEnrollment);
+		} catch (Exception e) {
+			logger.error("Unexpected error when enrolling student: " + e.getMessage());
+			throw new EnrollmentOperationException("Error while enroll student", e);
 		}
-		Student student = findStudent.findByID(request.getStudentID());
-		Clazz clazz = findClazz.findByID(request.getClazzID());
-		if(repository.existsByClazzAndStudent(student, clazz)) {
-			throw new DataIntegrityViolationException(String.format("The student %S is already enrolled in the class %S!", student.getName(), clazz.getCode()));
-		}
-		Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
-		Enrollment createEnrollment = repository.save(enrollment);
-		logger.info(String.format("Student %S enrolled in Class %S", student.getName(), clazz.getCode()));
-		return EnrollmentResponse.fromEnrollment(createEnrollment);
 		
+	}
+	
+	private void validateUniqueRegistration(String registration) {
+		if(repository.existsByRegistration(registration)) {
+			throw new EnrollmentOperationException(String.format("Enrollment with registration %s already exists!", registration));
+		}
+	}
+	
+	private void validateHasStudentEnrollment(Student student, Clazz clazz) {
+		if(repository.existsByClazzAndStudent(student, clazz)) {
+			throw new EnrollmentOperationException(String.format("The student %s is already enrolled in the class %s!", student.getName(), clazz.getCode()));
+		}
 	}
 }

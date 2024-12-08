@@ -12,7 +12,7 @@ public class EmployeeValidator {
 	
 	public void validateUniqueRegistration(String registration) {
 		if (employeeRepository.existsByRegistration(registration)) {
-			throw new EmployeeOperationException(String.format("Employee with registration %S already registered!", registration));
+			throw new EmployeeOperationException(String.format("Employee with registration %s already registered!", registration));
 		}
 	}
 }

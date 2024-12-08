@@ -21,4 +21,6 @@ public interface EnterpriseRepository {
 	
 	Boolean existsByTIN(String TIN);
 	
+	Boolean existsByName(String name);
+	
 }
