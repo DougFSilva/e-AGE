@@ -3,11 +3,11 @@ package com.dougfsilva.e_AGE.application.usecases.employee;
 import com.dougfsilva.e_AGE.application.dto.request.UpdateEmployeeRequest;
 import com.dougfsilva.e_AGE.application.dto.response.EmployeeResponse;
 import com.dougfsilva.e_AGE.application.usecases.address.UpdateAddress;
+import com.dougfsilva.e_AGE.application.usecases.person.PersonValidator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
-import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
-import com.dougfsilva.e_AGE.domain.person.PersonRepository;
+import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
 
 import lombok.AllArgsConstructor;
 
@@ -16,20 +16,27 @@ public class UpdateEmployee {
 
 	private final EmployeeRepository repository;
 
-	private final PersonRepository personRepository;
-
 	private final UpdateAddress updateAddress;
 
 	private final FindEmployee findEmployee;
 
+	private final PersonValidator personValidator;
+
+	private final EmployeeValidator validator;
+
 	private final StandardLogger logger;
 
 	public EmployeeResponse execute(UpdateEmployeeRequest request) {
-		Employee employee = findEmployee.findByID(request.getID());
-		updateEmployeeData(employee, request);
-		Employee updatedEmployee = repository.save(employee);
-		logger.info(String.format("Updated Employee ID %s - %s", employee.getID(), employee.getName()));
-		return EmployeeResponse.fromEmployee(updatedEmployee);
+		try {
+			Employee employee = findEmployee.findByID(request.getID());
+			updateEmployeeData(employee, request);
+			Employee updatedEmployee = repository.save(employee);
+			logger.info(String.format("Updated Employee ID %s - %s", employee.getID(), employee.getName()));
+			return EmployeeResponse.fromEmployee(updatedEmployee);
+		} catch (Exception e) {
+			logger.error("Unexpected error when updating employee: " + e.getMessage());
+			throw new EmployeeOperationException("Error while update employee", e);
+		}
 
 	}
 
@@ -42,7 +49,7 @@ public class UpdateEmployee {
 		}
 		if (request.getRg() != null && !request.getRg().isBlank()
 				&& !request.getRg().equalsIgnoreCase(employee.getRg())) {
-			validateUniqueRg(request.getRg());
+			personValidator.validateUniqueRg(request.getRg());
 			employee.setRg(request.getRg());
 		}
 		if (request.getPhone() != null && !request.getPhone().isBlank()) {
@@ -59,7 +66,7 @@ public class UpdateEmployee {
 		}
 		if (request.getRegistration() != null && !request.getRegistration().isBlank()
 				&& !request.getRegistration().equalsIgnoreCase(employee.getRegistration())) {
-			validateUniqueRegistration(request.getRegistration());
+			validator.validateUniqueRegistration(request.getRegistration());
 			employee.setRegistration(request.getRegistration());
 		}
 		if (request.getStaffRole() != null) {
@@ -67,19 +74,6 @@ public class UpdateEmployee {
 		}
 		if (request.getActive() != null) {
 			employee.setActive(request.getActive());
-		}
-	}
-
-	private void validateUniqueRg(String rg) {
-		if (personRepository.existsByRg(rg)) {
-			throw new DataIntegrityViolationException(String.format("Person with Rg %S already exists!", rg));
-		}
-	}
-
-	private void validateUniqueRegistration(String registration) {
-		if (repository.existsByRegistration(registration)) {
-			throw new DataIntegrityViolationException(
-					String.format("Employee with Registration %S already exists!", registration));
 		}
 	}
 }

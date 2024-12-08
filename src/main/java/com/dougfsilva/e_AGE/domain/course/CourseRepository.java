@@ -29,4 +29,6 @@ public interface CourseRepository {
 	
 	Boolean existsByTechnologialArea(TechnologicalArea technologicalArea);
 	
+	Boolean existsByTitle(String title);
+	
 }

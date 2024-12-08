@@ -21,8 +21,8 @@ public class CreateAddress {
 					request.getDistrict(), request.getStreet(), request.getNumber());
 			return repository.save(address);
 		} catch (Exception e) {
-			logger.error("Unexpected error: " + e.getMessage());
-			throw new AddressOperationException("Error while delete the address", e);
+			logger.error("Unexpected error when creating address: " + e.getMessage());
+			throw new AddressOperationException("Error while create address", e);
 		}
 		
 	}

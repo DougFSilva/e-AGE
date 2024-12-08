@@ -7,7 +7,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StoreImage;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
+import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -21,18 +21,24 @@ public class CreateCourse {
 	private final FindTechnologicalArea findTechnologicalArea;
 
 	private final StoreImage storeImage;
+	
+	private final CourseValidator validator;
 
 	private final StandardLogger logger;
 
 	public CourseResponse create(CreateCourseRequest request) {
-		repository.findByTitle(request.getTitle().toUpperCase()).ifPresent(c -> {
-			throw new DataIntegrityViolationException(String.format("Course with title %S already exists!", request.getTitle()));
-		});
-		String imageUrl = storeImage.execute(request.getImage(), ImageType.COURSE, request.getTitle());
-		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.getTechnologicalAreaID());
-		Course course = new Course(request.getModality(), request.getTitle(), technologicalArea, imageUrl, false, request.getCreationDate());
-		Course createdCourse = repository.save(course);
-		logger.info(String.format("Created Course ID %S - %S", createdCourse.getID(), createdCourse.getTitle()));
-		return CourseResponse.fromCourse(createdCourse);
+		try {
+			validator.validateUniqueTitle(request.getTitle());
+			String imageUrl = storeImage.execute(request.getImage(), ImageType.COURSE, request.getTitle());
+			TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.getTechnologicalAreaID());
+			Course course = new Course(request.getModality(), request.getTitle(), technologicalArea, imageUrl, false, request.getCreationDate());
+			Course createdCourse = repository.save(course);
+			logger.info(String.format("Created Course ID %s - %s", createdCourse.getID(), createdCourse.getTitle()));
+			return CourseResponse.fromCourse(createdCourse);
+		} catch (Exception e) {
+			logger.error("Unexpected error when creating course: " + e.getMessage());
+			throw new CourseOperationException("Error while create course", e);
+		}
+		
 	}
 }
