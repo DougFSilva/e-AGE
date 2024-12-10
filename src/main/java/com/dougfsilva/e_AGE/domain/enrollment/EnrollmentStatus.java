@@ -7,7 +7,8 @@ public enum EnrollmentStatus {
 
     ENROLLED("Student is currently enrolled"),
     DROPPED("Student has dropped the course"),
-    COMPLETED("Student has completed the class");
+    COMPLETED("Student has completed the class"),
+	REPEATING("Student is retaking the course due to failure");
 
     private final String description;
 

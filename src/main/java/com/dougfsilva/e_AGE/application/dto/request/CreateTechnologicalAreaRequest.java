@@ -8,7 +8,6 @@ import lombok.ToString;
 public class CreateTechnologicalAreaRequest {
 
 	private String title;
-
 	private String description;
 
 	public CreateTechnologicalAreaRequest(String title, String description) {

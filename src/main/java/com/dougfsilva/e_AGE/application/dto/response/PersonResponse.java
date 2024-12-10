@@ -16,23 +16,14 @@ import lombok.ToString;
 public abstract class PersonResponse {
 
 	private String ID;
-
 	private UserResponse user;
-
 	private String name;
-	
 	private Sex sex;
-
 	private String rg;
-
 	private String phone;
-
 	private String email;
-
 	private LocalDate dateOfBirth;
-
 	private Address address;
-	
 	private String image;
 
 	public PersonResponse(String ID, User user, String name, Sex sex, String rg, String phone, String email,

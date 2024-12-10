@@ -8,9 +8,7 @@ import lombok.ToString;
 public class CreateEnterpriseRequest {
 
 	private String TIN; 
-	
 	private String name;
-	
 	private CreateAddressRequest address;
 	
 	public CreateEnterpriseRequest(String TIN, String name, CreateAddressRequest address) {

@@ -13,9 +13,7 @@ import lombok.ToString;
 public class CreateUserRequest {
 
 	private String username;
-
 	private String password;
-
 	private List<Profile> profiles;
 
 	public CreateUserRequest(String username, String password, ProfileType profile) {

@@ -16,9 +16,7 @@ import lombok.ToString;
 public class EmployeeResponse extends PersonResponse {
 
 	private String registration;
-
 	private StaffRole staffRole;
-	
 	private Boolean active;
 
 	public EmployeeResponse(Employee employee) {

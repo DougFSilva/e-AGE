@@ -17,7 +17,6 @@ import lombok.ToString;
 public class StudentResponse extends PersonResponse{
 	
 	private Responsible responsible;
-
 	private Enterprise enterprise;
 
 	public StudentResponse(Student student) {

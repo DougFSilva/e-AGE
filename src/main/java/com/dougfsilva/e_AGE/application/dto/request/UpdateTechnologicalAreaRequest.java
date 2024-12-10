@@ -10,11 +10,8 @@ import lombok.ToString;
 public class UpdateTechnologicalAreaRequest {
 	
 	private String ID;
-
 	private String title;
-
 	private String description;
-
 	private MultipartFile image;
 
 	public UpdateTechnologicalAreaRequest(String ID, String title, String description, MultipartFile image) {

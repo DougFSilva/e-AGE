@@ -16,11 +16,8 @@ import lombok.ToString;
 public class UserResponse {
 
 	private String ID;
-
 	private String username;
-
 	private List<String> profiles;
-	
 	private Boolean passwordChanged;
 
 	public UserResponse(User user) {

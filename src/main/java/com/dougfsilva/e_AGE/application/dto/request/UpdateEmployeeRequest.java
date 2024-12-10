@@ -12,9 +12,7 @@ import lombok.ToString;
 public class UpdateEmployeeRequest extends UpdatePersonRequest {
 
 	private String registration;
-
 	private StaffRole staffRole;
-	
 	private Boolean active;
 
 	public UpdateEmployeeRequest(String ID, String name, String sex, String rg, String phone, String email,

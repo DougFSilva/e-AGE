@@ -10,11 +10,8 @@ import lombok.ToString;
 public class EnrollRequest {
 
 	private String registration;
-
 	private String studentID;
-
 	private String clazzID;
-
 	private LocalDate date;
 
 	public EnrollRequest(String registration, String studentID, String clazzID, LocalDate date) {

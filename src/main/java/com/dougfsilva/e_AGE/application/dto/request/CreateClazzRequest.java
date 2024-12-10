@@ -10,11 +10,8 @@ import lombok.ToString;
 public class CreateClazzRequest {
 
 	private Integer number;
-	
     private String code;
-    
     private String courseID;
-    
     private LocalDate creationDate;
 
     public CreateClazzRequest(Integer number, String code, String courseID, LocalDate creationDate) {

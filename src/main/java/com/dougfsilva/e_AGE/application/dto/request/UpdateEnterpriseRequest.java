@@ -8,11 +8,8 @@ import lombok.ToString;
 public class UpdateEnterpriseRequest {
 	
 	private String ID;
-
 	private String TIN;
-
 	private String name;
-
 	private UpdateAddressRequest address;
 
 	public UpdateEnterpriseRequest(String ID, String tIN, String name, UpdateAddressRequest address) {

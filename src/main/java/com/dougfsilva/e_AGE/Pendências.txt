@@ -1,4 +1,8 @@
 Eliminar espaçamentos no domínio
+Desistir aluno
+Repetir aluno
+Formar aluno
+EnrollmentUpdater para atualizar data e status e matricula
 Ao deletar student deletar também Usuario, Adress, Responsible. Deletar as matrículas e ocorrências. Aluno depende de occurrence, Certificate e Dropout também
 Ao deletar employeer somente possivel se não tiver ocorrências.
 alunos countByCourse

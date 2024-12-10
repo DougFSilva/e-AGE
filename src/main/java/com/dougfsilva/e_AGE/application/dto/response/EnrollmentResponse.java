@@ -17,15 +17,10 @@ import lombok.ToString;
 public class EnrollmentResponse {
 
 	private String ID;
-	
 	private String registration;
-	
 	private StudentResponse student;
-	
 	private ClazzResponse clazz;
-	
 	private LocalDate date;
-	
 	private EnrollmentStatus status;
 	
 	public EnrollmentResponse(Enrollment enrollment) {

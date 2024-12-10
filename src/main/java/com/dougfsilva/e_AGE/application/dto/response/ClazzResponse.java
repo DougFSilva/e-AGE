@@ -16,17 +16,11 @@ import lombok.ToString;
 public class ClazzResponse {
 
 	private String ID;
-	
 	private Integer number;
-
 	private String code;
-	
 	private CourseResponse course;
-	
 	private Boolean isClosed;
-
 	private LocalDate creationDate;
-
     private LocalDate closingDate;
 	
 	public ClazzResponse(Clazz clazz) {

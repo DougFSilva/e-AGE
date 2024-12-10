@@ -20,14 +20,16 @@ public class Enroller {
 	private final EnrollmentRepository repository;
 	private final StudentFinder studentFinder;
 	private final ClazzFinder clazzFinder;
-	private StandardLogger logger;
+	private final EnrollmentValidator validator;
+	private final StandardLogger logger;
 	
 	public EnrollmentResponse enroll(EnrollRequest request) {
 		try {
-			validateUniqueRegistration(request.getRegistration());
+			validator.uniqueRegistration(request.getRegistration());
 			Student student = studentFinder.findByID(request.getStudentID());
 			Clazz clazz = clazzFinder.findByID(request.getClazzID());
-			validateHasStudentEnrollment(student, clazz);
+			validator.clazzIsNotClosed(clazz);
+			validator.studentNotEnrolledInClazz(student, clazz);
 			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
 			Enrollment createEnrollment = repository.save(enrollment);
 			logger.info(String.format("Student %s enrolled in Class %s", student.getName(), clazz.getCode()));
@@ -39,15 +41,4 @@ public class Enroller {
 		
 	}
 	
-	private void validateUniqueRegistration(String registration) {
-		if(repository.existsByRegistration(registration)) {
-			throw new EnrollmentOperationException(String.format("Enrollment with registration %s already exists!", registration));
-		}
-	}
-	
-	private void validateHasStudentEnrollment(Student student, Clazz clazz) {
-		if(repository.existsByClazzAndStudent(student, clazz)) {
-			throw new EnrollmentOperationException(String.format("The student %s is already enrolled in the class %s!", student.getName(), clazz.getCode()));
-		}
-	}
 }

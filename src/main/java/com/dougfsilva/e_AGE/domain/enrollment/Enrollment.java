@@ -25,8 +25,7 @@ public class Enrollment {
 	private LocalDate date;
 	private EnrollmentStatus status;
 
-	public Enrollment(String registration, Student student, Clazz clazz, LocalDate date,
-			EnrollmentStatus status) {
+	public Enrollment(String registration, Student student, Clazz clazz, LocalDate date, EnrollmentStatus status) {
 		this.registration = registration;
 		this.student = student;
 		this.clazz = clazz;
