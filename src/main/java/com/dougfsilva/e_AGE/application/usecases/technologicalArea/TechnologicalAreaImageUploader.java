@@ -29,8 +29,9 @@ public class TechnologicalAreaImageUploader {
 			String imageUrl = imageService.uploadImage(image, ImageType.TECHNOLOGICAL_AREA,
 					ImageNameGenerator.byTechnologicalArea(area));
 			area.setImage(imageUrl);
-			area = repository.save(area);
-			return area;
+			TechnologicalArea updatedArea = repository.save(area);
+	        logger.info(String.format("Image uploaded successfully for technological area ID %s - %s ", area.getID(), area.getTitle()));
+			return updatedArea;
 		} catch (Exception e) {
 			logger.error("Unexpected error when uploading technological area image: " + e.getMessage());
 			throw new ImageOperationException("Error while upload technological area image", e);

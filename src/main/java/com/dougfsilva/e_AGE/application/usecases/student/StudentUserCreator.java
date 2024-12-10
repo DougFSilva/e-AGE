@@ -1,7 +1,7 @@
-package com.dougfsilva.e_AGE.application.usecases.user;
+package com.dougfsilva.e_AGE.application.usecases.student;
 
 import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
-import com.dougfsilva.e_AGE.application.usecases.student.StudentFinder;
+import com.dougfsilva.e_AGE.application.usecases.user.UserCreator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.student.Student;

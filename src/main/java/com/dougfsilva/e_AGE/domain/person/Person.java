@@ -36,10 +36,10 @@ public class Person {
 
 	private Address address;
 	
-	private String imageUrl;
+	private String image;
 
 	public Person(User user, String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address, String imageUrl) {
+			Address address, String image) {
 		this.user = user;
 		this.name = name;
 		this.sex = sex;
@@ -48,12 +48,12 @@ public class Person {
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.imageUrl = imageUrl;
+		this.image = image;
 	}
 
 
 	public Person(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address, String imageUrl) {
+			Address address, String image) {
 		this.name = name;
 		this.sex = sex;
 		this.rg = rg;
@@ -61,6 +61,7 @@ public class Person {
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
+		this.image = image;
 	}
 
 }

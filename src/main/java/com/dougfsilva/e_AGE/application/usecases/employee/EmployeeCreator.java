@@ -4,7 +4,6 @@ import com.dougfsilva.e_AGE.application.dto.request.CreateEmployeeRequest;
 import com.dougfsilva.e_AGE.application.dto.response.EmployeeResponse;
 import com.dougfsilva.e_AGE.application.usecases.address.AddressCreator;
 import com.dougfsilva.e_AGE.application.usecases.person.PersonValidator;
-import com.dougfsilva.e_AGE.application.usecases.user.EmployeeUserCreator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.employee.Employee;

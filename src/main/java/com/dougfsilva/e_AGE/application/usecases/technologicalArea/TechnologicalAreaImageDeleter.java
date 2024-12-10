@@ -18,17 +18,16 @@ public class TechnologicalAreaImageDeleter {
 	private final ImageStorageService  imageService;
 	private final StandardLogger logger;
 
-	public TechnologicalArea deleteByID(String ID) {
+	public void deleteByID(String ID) {
 		try {
 			TechnologicalArea area = areaFinder.findByID(ID);
 			imageService.deleteImage(ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(area));
 			area.setImage(null);
 			repository.save(area);
-			return area;
+	        logger.info(String.format("Image deleted successfully for technological ID %s - %s ", area.getID(), area.getTitle()));
 		} catch (Exception e) {
 			logger.error("Unexpected error when deleting technological area image: " + e.getMessage());
 			throw new ImageOperationException("Error while delete technological area image", e);
 		}
-
 	}
 }

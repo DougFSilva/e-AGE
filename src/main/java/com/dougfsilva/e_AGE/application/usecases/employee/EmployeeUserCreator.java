@@ -1,9 +1,8 @@
-package com.dougfsilva.e_AGE.application.usecases.user;
+package com.dougfsilva.e_AGE.application.usecases.employee;
 
 import java.util.Arrays;
 
 import com.dougfsilva.e_AGE.application.dto.response.EmployeeResponse;
-import com.dougfsilva.e_AGE.application.usecases.employee.EmployeeFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
