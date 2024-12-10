@@ -19,4 +19,6 @@ public interface TechnologicalAreaRepository {
 	
 	Page<TechnologicalArea> findAll(PageRequest pageRequest);
 	
+	Boolean existsByTitle(String title);
+	
 }

@@ -12,7 +12,6 @@ import lombok.ToString;
 public class CreateEmployeeRequest extends CreatePersonRequest {
 
 	private String registration;
-
 	private StaffRole staffRole;
 	
 	public CreateEmployeeRequest(String name, String sex, String rg, String phone, String email, LocalDate dateOfBirth,

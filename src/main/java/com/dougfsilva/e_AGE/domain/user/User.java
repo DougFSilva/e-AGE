@@ -17,13 +17,9 @@ import lombok.ToString;
 public class User {
 	
 	private String ID;
-	
 	private String username;
-	
 	private Password password;
-	
 	private Boolean passwordChanged;
-	
 	private List<Profile> profiles = new ArrayList<>();
 
 	public User(String username, Password password, List<Profile> profiles, Boolean passwordChanged) {

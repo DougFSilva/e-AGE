@@ -72,6 +72,13 @@ public class CourseRepositoryImpl implements CourseRepository{
 		return null;
 	}
 
+	@Override
+	public Boolean existsByTitle(String title) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }

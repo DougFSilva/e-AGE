@@ -25,15 +25,15 @@ public class Student extends Person {
 	private Enterprise enterprise;
 
 	public Student(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address, Responsible responsible, Enterprise enterprise) {
-		super(name, sex, rg, phone, email, dateOfBirth, address);
+			Address address, String image, Responsible responsible, Enterprise enterprise) {
+		super(name, sex, rg, phone, email, dateOfBirth, address, image);
 		this.responsible = responsible;
 		this.enterprise = enterprise;
 	}
 	
 	public Student(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address, Responsible responsible) {
-		super(name, sex, rg, phone, email, dateOfBirth, address);
+			Address address, String image, Responsible responsible) {
+		super(name, sex, rg, phone, email, dateOfBirth, address, image);
 		this.responsible = responsible;
 	}
 	

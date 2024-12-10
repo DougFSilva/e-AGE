@@ -25,21 +25,21 @@ public class Course {
 
 	private TechnologicalArea technologicalArea;
 	
-	private String image;
-	
 	private Boolean isClosed;
 	
 	private LocalDate creationDate;
 
     private LocalDate closingDate;
+    
+	private String image;
 
-	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea, String image, Boolean isClosed, LocalDate creationDate) {
+	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea, Boolean isClosed, LocalDate creationDate, String image) {
 		this.modality = modality;
 		this.title = title;
 		this.technologicalArea = technologicalArea;
-		this.image = image;
 		this.isClosed = isClosed;
 		this.creationDate = creationDate;
+		this.image = image;
 	}
 	
 }

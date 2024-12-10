@@ -25,8 +25,8 @@ public class Employee extends Person{
 	private Boolean active;
 
 	public Employee(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address, String registration, StaffRole staffRole, Boolean active) {
-		super(name, sex, rg, phone, email, dateOfBirth, address);
+			Address address, String image, String registration, StaffRole staffRole, Boolean active) {
+		super(name, sex, rg, phone, email, dateOfBirth, address, image);
 		this.registration = registration;
 		this.staffRole = staffRole;
 		this.active = active;

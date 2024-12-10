@@ -32,6 +32,8 @@ public abstract class PersonResponse {
 	private LocalDate dateOfBirth;
 
 	private Address address;
+	
+	private String image;
 
 	public PersonResponse(String ID, User user, String name, Sex sex, String rg, String phone, String email,
 			LocalDate dateOfBirth, Address address) {

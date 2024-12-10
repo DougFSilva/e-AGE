@@ -13,19 +13,12 @@ import lombok.ToString;
 public class UpdatePersonRequest {
 
 	private String ID;
-
 	private String name;
-	
 	private Sex sex;
-
 	private String rg;
-
 	private String phone;
-
 	private Email email;
-
 	private LocalDate dateOfBirth;
-
 	private UpdateAddressRequest address;
 
 	public UpdatePersonRequest(String ID, String name, String sex, String rg, String phone, String email, LocalDate dateOfBirth,

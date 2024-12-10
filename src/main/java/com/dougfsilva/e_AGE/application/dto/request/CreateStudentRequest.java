@@ -12,7 +12,6 @@ import lombok.ToString;
 public class CreateStudentRequest extends CreatePersonRequest {
 
 	private Responsible responsible;
-	
 	private String enterpriseID;
 	
 	public CreateStudentRequest(String name, String sex, String rg, String phone, String email, LocalDate dateOfBirth,

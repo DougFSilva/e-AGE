@@ -10,7 +10,7 @@ public class PersonValidator {
 
 	private final PersonRepository repository;
 	
-	public void validateUniqueRg(String rg) {
+	public void uniqueRg(String rg) {
 		if(repository.existsByRg(rg)) {
 			throw new PersonOperationException(String.format("Person with rg %s already registered!", rg));
 		}

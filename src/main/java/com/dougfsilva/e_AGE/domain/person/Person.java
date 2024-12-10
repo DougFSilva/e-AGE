@@ -35,9 +35,12 @@ public class Person {
 	private LocalDate dateOfBirth;
 
 	private Address address;
+	
+	private String imageUrl;
 
-	public Person(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
-			Address address) {
+	public Person(User user, String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
+			Address address, String imageUrl) {
+		this.user = user;
 		this.name = name;
 		this.sex = sex;
 		this.rg = rg;
@@ -45,15 +48,19 @@ public class Person {
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
+		this.imageUrl = imageUrl;
 	}
 
-	public Person(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth) {
+
+	public Person(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,
+			Address address, String imageUrl) {
 		this.name = name;
 		this.sex = sex;
 		this.rg = rg;
 		this.phone = phone;
 		this.email = email;
 		this.dateOfBirth = dateOfBirth;
+		this.address = address;
 	}
 
 }

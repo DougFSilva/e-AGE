@@ -10,7 +10,7 @@ public class EmployeeValidator {
 
 	private final EmployeeRepository employeeRepository;
 	
-	public void validateUniqueRegistration(String registration) {
+	public void uniqueRegistration(String registration) {
 		if (employeeRepository.existsByRegistration(registration)) {
 			throw new EmployeeOperationException(String.format("Employee with registration %s already registered!", registration));
 		}

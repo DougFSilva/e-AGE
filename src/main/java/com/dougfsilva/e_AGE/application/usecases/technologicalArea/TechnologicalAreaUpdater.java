@@ -1,0 +1,41 @@
+package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
+
+import com.dougfsilva.e_AGE.application.dto.request.UpdateTechnologicalAreaRequest;
+import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaOperationException;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
+
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+public class TechnologicalAreaUpdater {
+
+	private final TechnologicalAreaRepository repository;
+	private final TechnologicalAreaFinder areaFinder;
+	private final TechnologicalAreaValidator validator;
+	private final StandardLogger logger;
+
+	public TechnologicalArea update(UpdateTechnologicalAreaRequest request) {
+		try {
+			TechnologicalArea area = areaFinder.findByID(request.getID());
+			updateTechnologicalAreaData(area, request);
+			TechnologicalArea updatedArea = repository.save(area);
+			logger.info(String.format("Updated Technological Area ID %s - %s", updatedArea.getID(), updatedArea.getTitle()));
+			return updatedArea;
+		} catch (Exception e) {
+			logger.error("Unexpected error when updating technological area: " + e.getMessage());
+			throw new TechnologicalAreaOperationException("Error while update technological area", e);
+		}
+	}
+
+	private void updateTechnologicalAreaData(TechnologicalArea area, UpdateTechnologicalAreaRequest request) {
+		if (request.getTitle() != null && !request.getTitle().isBlank() && !request.getTitle().equalsIgnoreCase(area.getTitle())) {
+			validator.uniqueTitle(request.getTitle());
+			area.setTitle(request.getTitle());
+		}
+		if (request.getDescription() != null && !request.getDescription().isBlank()) {
+			area.setDescription(request.getDescription());
+		}
+	}
+}

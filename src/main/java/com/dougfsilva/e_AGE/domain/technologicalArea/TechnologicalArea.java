@@ -9,16 +9,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"title"})
+@EqualsAndHashCode(of = { "title" })
 @ToString
 public class TechnologicalArea {
-	
+
 	private String ID;
 
 	private String title;
-	
+
 	private String Description;
-	
+
 	private String image;
 
 	public TechnologicalArea(String title, String description, String image) {
@@ -26,6 +26,5 @@ public class TechnologicalArea {
 		Description = description;
 		this.image = image;
 	}
-	
-	
+
 }

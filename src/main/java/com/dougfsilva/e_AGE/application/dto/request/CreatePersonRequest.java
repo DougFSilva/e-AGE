@@ -13,19 +13,12 @@ import lombok.ToString;
 public abstract class CreatePersonRequest {
 
 	private String name;
-
 	private Sex sex;
-
 	private String rg;
-
 	private String phone;
-
 	private Email email;
-
 	private LocalDate dateOfBirth;
-
 	private CreateAddressRequest address;
-
 	private Boolean createDefaultUser;
 
 	public CreatePersonRequest(String name, String sex, String rg, String phone, String email, LocalDate dateOfBirth,

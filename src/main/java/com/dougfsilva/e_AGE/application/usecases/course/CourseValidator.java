@@ -13,18 +13,16 @@ import lombok.AllArgsConstructor;
 public class CourseValidator {
 
 	private final CourseRepository repository;
-	
 	private final ClazzRepository clazzRepository;
-	
 	private final CertificateRepository certificateRepository;
 
-	public void validateUniqueTitle(String title) {
+	public void uniqueTitle(String title) {
 		if(repository.existsByTitle(title)) {
 			throw new CourseOperationException(String.format("Course with title %s already exists!", title));
 		}
 	}
 	
-	public void validateNoClazzRegisteredInTheCourseOrCertification(Course course) {
+	public void hasNoClazzRegisteredInTheCourseOrInTheCertification(Course course) {
 		if (clazzRepository.existsByCourse(course) || certificateRepository.existsByCourse(course)) {
 			throw new DataIntegrityViolationException(String.format(
 					"The Course %s cannot be deleted because there are classes or certificate still associated with it!",

@@ -11,22 +11,21 @@ import lombok.AllArgsConstructor;
 public class EnterpriseValidator {
 
 	private final EnterpriseRepository repository;
-	
 	private final StudentRepository studentRepository;
 	
-	public void validateUniqueTIN(String TIN) {
+	public void uniqueTIN(String TIN) {
 		if(repository.existsByTIN(TIN)) {
 			throw new EnterpriseOperationException(String.format("Enterprise with TIN %s already registered!", TIN));
 		}
 	}
 	
-	public void validateUniqueName(String name) {
+	public void uniqueName(String name) {
 		if(repository.existsByName(name)) {
 			throw new EnterpriseOperationException(String.format("Enterprise with name %s already exists!", name));
 		}
 	}
 	
-	public void validateNoStudentsRegisteredWithTheEnterprise(Enterprise enterprise) {
+	public void hasNoStudentsRegisteredInTheEnterprise(Enterprise enterprise) {
 		if(studentRepository.existsByEnterprise(enterprise)) {
 			throw new EnterpriseOperationException(
 					String.format("The Enterprise %s cannot be deleted because there are Students still associated with it!", 

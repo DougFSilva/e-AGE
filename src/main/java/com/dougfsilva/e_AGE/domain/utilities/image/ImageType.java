@@ -10,8 +10,7 @@ public enum ImageType {
 	 TECHNOLOGICAL_AREA("Technological Area"),
 	 COURSE("Course"),
 	 STUDENT("Student"),
-	 EMPLOYEE("Employee"),
-	 GUARDIAN("Guardian");
+	 EMPLOYEE("Employee");
 	
 	private String description;
 	

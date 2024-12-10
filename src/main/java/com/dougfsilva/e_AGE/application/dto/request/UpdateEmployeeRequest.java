@@ -18,8 +18,7 @@ public class UpdateEmployeeRequest extends UpdatePersonRequest {
 	private Boolean active;
 
 	public UpdateEmployeeRequest(String ID, String name, String sex, String rg, String phone, String email,
-			LocalDate dateOfBirth, UpdateAddressRequest address, String registration, StaffRole staffRole,
-			Boolean active) {
+			LocalDate dateOfBirth, UpdateAddressRequest address, String registration, StaffRole staffRole, Boolean active) {
 		super(ID, name, sex, rg, phone, email, dateOfBirth, address);
 		this.registration = registration;
 		this.staffRole = staffRole;
