@@ -1,9 +1,6 @@
-
-Ao deletar student deletar também USuario, Adress, Responsible caso não haja outro aluno com o mesmo Responsible. Deletar as matrículas e ocorrências
+Eliminar espaçamentos no domínio
+Ao deletar student deletar também Usuario, Adress, Responsible. Deletar as matrículas e ocorrências. Aluno depende de occurrence, Certificate e Dropout também
 Ao deletar employeer somente possivel se não tiver ocorrências.
-Resolver problema de curso com nome repetido...ou código...verificar
-Verificar operações de imagens principalmente update
-Precisa mesmo de uma classe Certificate?
 alunos countByCourse
 Fechar turma e formar turma
 transferir alunos de turma
@@ -23,8 +20,6 @@ Inserir Usuário no Responsible
 Inserir Usuário no Employee
 Desistir Aluno
 
-Juntar os atributos, eliminando os espaços para todas classes
-
 
 Enviar Email ao criar um usuário com as informações de login e senha?
 Criar uma tabela de configurações no banco de dados e adicionar cache
@@ -39,10 +34,9 @@ O email de quem envia deve estar salvo em configurações no banco de dados
 Criar usecase para enviar notificações
 Tratar Trim() no controller
 Updated password
-Create User, ou ADD user alem do default USER
 Atualizar perfil de usuário somente usuário admin e Management pode
 Registros de ocorrências privados só podem ser visualizados por quem criou e por usuários do tipo Management. Nem mesmo admim pode ver
-Alterar nome de metodo execute???
+
 ###Frontend
 Adicionar empresa por grupo de alunos. No frontend filtrar alunos por turma e clicar sobre os alunos desejados e adicionar empresa
 No frontend ao criar um responsible para o aluno inserir um box para copiar o endereço do aluno para o responsible

@@ -29,5 +29,6 @@ public interface StudentRepository {
 	Boolean existsByResponsible(Responsible responsible);
 	
 	Boolean existsByEnterprise(Enterprise enterprise);
+
 	
 }

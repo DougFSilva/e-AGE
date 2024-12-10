@@ -14,20 +14,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of= {"student", "clazz"})
+@EqualsAndHashCode(of= {"ID","student", "clazz"})
 @ToString
 public class Enrollment {
 
 	private String ID;
-	
 	private String registration;
-	
 	private Student student;
-	
 	private Clazz clazz;
-	
 	private LocalDate date;
-	
 	private EnrollmentStatus status;
 
 	public Enrollment(String registration, Student student, Clazz clazz, LocalDate date,

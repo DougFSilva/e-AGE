@@ -20,7 +20,6 @@ public class Enroller {
 	private final EnrollmentRepository repository;
 	private final StudentFinder studentFinder;
 	private final ClazzFinder clazzFinder;
-	
 	private StandardLogger logger;
 	
 	public EnrollmentResponse enroll(EnrollRequest request) {
