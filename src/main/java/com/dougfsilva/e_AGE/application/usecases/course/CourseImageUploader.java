@@ -8,6 +8,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ImageOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
@@ -30,7 +31,7 @@ public class CourseImageUploader {
 			logger.info(String.format("Image uploaded successfully for course ID %s - %s ", updatedCourse.getID(),
 					updatedCourse.getTitle()));
 			return CourseResponse.fromCourse(updatedCourse);
-		} catch (ObjectNotFoundException | IllegalArgumentException e) {
+		} catch (ObjectNotFoundException | IllegalArgumentException | ImageOperationException e) {
 			String message = String.format("Error while uploading course image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);

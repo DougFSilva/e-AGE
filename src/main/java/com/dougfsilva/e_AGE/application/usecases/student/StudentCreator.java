@@ -58,8 +58,9 @@ public class StudentCreator {
 			logger.warn(message, e);
 			throw new StudentOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when creating student: " + e.getMessage());
-			throw new StudentOperationException("Error while create student", e);
+			String message = String.format("Unexpected error when creating student %s : %s", request.getName(), e.getMessage());
+			logger.error(message, e);
+			throw new StudentOperationException(message, e);
 		}
 	}
 	

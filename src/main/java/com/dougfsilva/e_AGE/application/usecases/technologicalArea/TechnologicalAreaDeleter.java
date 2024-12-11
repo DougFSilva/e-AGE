@@ -2,7 +2,9 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
 import com.dougfsilva.e_AGE.application.usecases.utilities.ImageNameGenerator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaOperationException;
+import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidatorException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
@@ -26,9 +28,14 @@ public class TechnologicalAreaDeleter {
 			repository.delete(technologicalArea);
 			imageService.deleteImage(ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(technologicalArea));
 			logger.info(String.format("Deleted Technological Area ID %s - %s", technologicalArea.getID(), technologicalArea.getTitle()));
-		} catch (Exception e) {
-			logger.error("Unexpected error when deleting technological area: " + e.getMessage());
-			throw new TechnologicalAreaOperationException("Error while delete technological area address", e);
+		} catch (ObjectNotFoundException | TechnologicalAreaValidatorException e) {
+			String message = String.format("Error while deleting technological area ID %s : %s", ID, e.getMessage());
+			logger.warn(message, e);
+			throw new TechnologicalAreaOperationException(message, e);
+		}catch (Exception e) {
+			String message = String.format("Unexpected error when deleting technological area ID %s : %s", ID, e.getMessage());
+			logger.error(message, e);
+			throw new TechnologicalAreaOperationException(message, e);
 		}
 		
 	}

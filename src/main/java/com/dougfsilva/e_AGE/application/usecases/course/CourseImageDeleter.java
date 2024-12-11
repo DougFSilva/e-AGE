@@ -5,6 +5,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ImageOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
@@ -24,7 +25,7 @@ public class CourseImageDeleter {
 			Course course = courseFinder.findByID(ID);
 			deleteImage(course);
 			logger.info(String.format("Image deleted successfully for course ID %s, %s ", course.getID(), course.getTitle()));
-		} catch (ObjectNotFoundException e) {
+		} catch (ObjectNotFoundException | ImageOperationException e) {
 			String message = String.format("Error while deleting course image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
