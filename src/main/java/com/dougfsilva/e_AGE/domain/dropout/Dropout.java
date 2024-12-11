@@ -19,13 +19,9 @@ import lombok.ToString;
 public class Dropout {
 
 	private String ID;
-	
 	private Student student;
-	
 	private Clazz clazz;
-	
 	private String reason;
-	
 	private LocalDate date;
 
 	public Dropout(Student student, Clazz clazz, String reason, LocalDate date) {
