@@ -3,6 +3,8 @@ package com.dougfsilva.e_AGE.application.usecases.student;
 import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
 import com.dougfsilva.e_AGE.application.usecases.user.UserCreator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.StudentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
@@ -25,10 +27,17 @@ public class StudentUserCreator {
 			User user = userCreator.create(student);
 			student.setUser(user);
 			return StudentResponse.fromStudent(repository.save(student));
-		}
-		catch (Exception e) {
-			logger.error("Unexpected error when creating user to student: " + e.getMessage());
-			throw new UserOperationException("Error while create user to student", e);
+		} catch (ObjectNotFoundException e) {
+			String message = String.format("Error while creating user to student %s : %s", ID, e.getMessage());
+			logger.warn(message, e);
+			throw new StudentOperationException(message, e);
+		} catch(UserOperationException e) {
+			logger.warn(e.getMessage(), e);
+			throw new StudentOperationException(e.getMessage(), e);
+		} catch (Exception e) {
+			String message = String.format("Unexpected error when creating user to student %s : %s", ID, e.getMessage());
+			logger.error(message, e);
+			throw new StudentOperationException(message, e);
 		}
 	}
 }

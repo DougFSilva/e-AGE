@@ -5,14 +5,15 @@ import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
 import com.dougfsilva.e_AGE.application.usecases.address.AddressCreator;
 import com.dougfsilva.e_AGE.application.usecases.enterprise.EnterpriseFinder;
 import com.dougfsilva.e_AGE.application.usecases.person.PersonValidator;
-import com.dougfsilva.e_AGE.application.usecases.user.UserCreator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.PersonValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.StudentOperationException;
+import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
-import com.dougfsilva.e_AGE.domain.user.User;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -25,7 +26,7 @@ public class StudentCreator {
 	private final AddressCreator addressCreator;
 	private final EnterpriseFinder enterpriseFinder;
 	private final ImageStorageService imageService;
-	private final UserCreator userCreator;
+	private final StudentUserCreator studentUserCreator;
 	private final PersonValidator personValidator;
 	private final StandardLogger logger;
 	
@@ -49,17 +50,23 @@ public class StudentCreator {
 				student.setEnterprise(enterprise);
 			}
 			Student createdStudent = repository.save(student);
-			if(request.getCreateDefaultUser() != null && request.getCreateDefaultUser()) {
-				User user = userCreator.create(createdStudent);
-				createdStudent.setUser(user);
-				repository.save(createdStudent);
-			}
-			logger.info(String.format("Created Student ID %s - %s", createdStudent.getID(), createdStudent.getName()));
+			createUser(request, createdStudent);
+			logger.info(String.format("Created student ID %s, %s", createdStudent.getID(), createdStudent.getName()));
 			return StudentResponse.fromStudent(createdStudent);
+		} catch (ObjectNotFoundException | PersonValidatorException | UserOperationException e) {
+			String message = String.format("Error while creating student %s : %s", request.getName(), e.getMessage());
+			logger.warn(message, e);
+			throw new StudentOperationException(message, e);
 		} catch (Exception e) {
 			logger.error("Unexpected error when creating student: " + e.getMessage());
 			throw new StudentOperationException("Error while create student", e);
 		}
 	}
-
+	
+	private void createUser(CreateStudentRequest request, Student student) {
+		if(request.getCreateDefaultUser() != null && request.getCreateDefaultUser()) {
+			studentUserCreator.createByID(student.getID());
+		}
+	}
+	
 }

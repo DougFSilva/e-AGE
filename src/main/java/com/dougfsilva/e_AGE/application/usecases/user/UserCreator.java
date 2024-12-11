@@ -6,6 +6,7 @@ import java.util.List;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
+import com.dougfsilva.e_AGE.domain.exception.UserValidatorException;
 import com.dougfsilva.e_AGE.domain.person.Person;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.user.Password;
@@ -26,26 +27,42 @@ public class UserCreator {
 
 	public User create(Person person) {
 		try {
-			if (person.getUser() != null) {
-				throw new UserOperationException(String.format("%s already has a user", person.getName()));
-			}
-			String username = person.getRg();
-			Password password = new Password("Ps" + person.getRg() + "@", encoder);
-			List<Profile> profiles = getProfile(person);
-			User user = new User(username, password, profiles, false);
+			User user = userBuilder(person);
 			logger.info(String.format("User created for Person: %s, Username: %s", person.getName(), user.getUsername()));
-			return repository.save(user);
+			return user;
+		} catch (IllegalArgumentException | UserValidatorException e) {
+			String message = String.format("Error while creating user to %s : %s", person.getName(), e.getMessage());
+			logger.warn(message, e);
+			throw new UserOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when creating user: " + e.getMessage());
-			throw new UserOperationException("Error while create user", e);
+			String message = String.format("Unexpected error when creating user to %s : %s", person.getName(), e.getMessage());
+			logger.error(message, e);
+			throw new UserOperationException(message, e);
 		}
+	}
+	
+	private User userBuilder(Person person) {
+		hasUser(person);
+		String username = person.getRg();
+		Password password = new Password("Ps" + person.getRg() + "@", encoder);
+		List<Profile> profiles = getProfile(person);
+		User user = new User(username, password, profiles, false);
+		return repository.save(user);
 	}
 
 	private List<Profile> getProfile(Person person) {
 		return switch (person) {
 		case Employee employee -> Arrays.asList(new Profile(ProfileType.EMPLOYEE));
 		case Student student -> Arrays.asList(new Profile(ProfileType.STUDENT));
-		default -> throw new IllegalArgumentException("Unexpected value: " + person);
+		default -> throw new IllegalArgumentException("Unexpected profile: " + person.getName());
 		};
 	}
+	
+	private void hasUser(Person person) {
+		if (person.getUser() != null) {
+			throw new UserValidatorException(String.format("%s already has a user", person.getName()));
+		}
+	}
+	
+	
 }

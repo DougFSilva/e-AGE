@@ -5,7 +5,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
 import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ImageOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
@@ -25,7 +25,7 @@ public class EmployeeImageDeleter {
 			Employee employee = employeeFinder.findByID(ID);
 			deleteImage(employee);
 			logger.info(String.format("Image deleted successfully for employee ID %s - %s", employee.getID(), employee.getName()));
-		} catch (ObjectNotFoundException | EmployeeValidatorException e) {
+		} catch (ObjectNotFoundException | ImageOperationException e) {
 			String message = String.format("Error while deleting image of employee ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);

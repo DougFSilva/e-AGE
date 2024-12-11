@@ -6,8 +6,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
+import com.dougfsilva.e_AGE.domain.exception.EnterpriseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidatorException;
 
 import lombok.AllArgsConstructor;
@@ -27,16 +26,16 @@ public class EnterpriseCreator {
 			Address address = addressCreator.create(request.getAddress()); 
 			Enterprise enterprise = new Enterprise(request.getTIN(), request.getName(), address);
 			Enterprise createdEnterprise = repository.save(enterprise);
-			logger.info(String.format("Created Enterprise ID %s, %s", createdEnterprise.getID(), createdEnterprise.getName()));
+			logger.info(String.format("Created enterprise ID %s, %s", createdEnterprise.getID(), createdEnterprise.getName()));
 			return createdEnterprise;
 		} catch (EnterpriseValidatorException e) {
 			String message = String.format("Error while creating enterprise %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
-			throw new EnrollmentOperationException(message, e);
+			throw new EnterpriseOperationException(message, e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when creating enterprise %s", request.getName(), e.getMessage());
 			logger.error(message, e);
-			throw new EmployeeOperationException(message, e);
+			throw new EnterpriseOperationException(message, e);
 		}
 	}
 	

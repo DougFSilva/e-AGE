@@ -10,6 +10,7 @@ import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
 import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EmployeeValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.PersonValidatorException;
 
 import lombok.AllArgsConstructor;
 
@@ -30,7 +31,7 @@ public class EmployeeUpdater {
 			Employee updatedEmployee = repository.save(employee);
 			logger.info(String.format("Updated Employee ID %s, %s", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(updatedEmployee);
-		} catch (ObjectNotFoundException | EmployeeValidatorException e) {
+		} catch (ObjectNotFoundException | EmployeeValidatorException | PersonValidatorException e) {
 			String message = String.format("Error while updating employee %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);

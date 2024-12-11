@@ -4,7 +4,7 @@ import com.dougfsilva.e_AGE.domain.certificate.CertificateRepository;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
+import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
 
 import lombok.AllArgsConstructor;
 
@@ -17,13 +17,13 @@ public class CourseValidator {
 
 	public void uniqueTitle(String title) {
 		if(repository.existsByTitle(title)) {
-			throw new CourseOperationException(String.format("Course with title %s already exists!", title));
+			throw new CourseValidationException(String.format("Course with title %s already exists!", title));
 		}
 	}
 	
 	public void hasNoClazzRegisteredInTheCourseOrInTheCertification(Course course) {
 		if (clazzRepository.existsByCourse(course) || certificateRepository.existsByCourse(course)) {
-			throw new CourseOperationException(String.format(
+			throw new CourseValidationException(String.format(
 					"The Course %s cannot be deleted because there are classes or certificate still associated with it!",
 					course.getTitle()));
 		}

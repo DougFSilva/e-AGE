@@ -9,7 +9,7 @@ import com.dougfsilva.e_AGE.domain.dropout.DropoutRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
-import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.DropoutOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -33,12 +33,12 @@ public class DropoutHandler {
 		} catch (ObjectNotFoundException e) {
 			String message = String.format("Error while dropping student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
-			throw new ClazzOperationException(message, e);
+			throw new DropoutOperationException(message, e);
 		} catch (Exception e) {
 			String message = String.format(
 					"Unexpected error when dropping out student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.error(message, e);
-			throw new ClazzOperationException(message, e);
+			throw new DropoutOperationException(message, e);
 		}
 	}
 	

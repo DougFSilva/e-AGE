@@ -4,8 +4,7 @@ import com.dougfsilva.e_AGE.application.usecases.address.AddressDeleter;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
+import com.dougfsilva.e_AGE.domain.exception.EnterpriseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
@@ -27,15 +26,15 @@ public class EnterpriseDeleter {
 			validator.hasNoStudentsRegisteredInTheEnterprise(enterprise);
 			repository.delete(enterprise);
 			addressDeleter.deleteByID(enterprise.getAddress().getID());
-			logger.info(String.format("Delete Enterprise ID %s, %s", enterprise.getID(), enterprise.getName()));
+			logger.info(String.format("Delete enterprise ID %s, %s", enterprise.getID(), enterprise.getName()));
 		} catch (ObjectNotFoundException | EnterpriseValidatorException e) {
 			String message = String.format("Error while deleting enterprise ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
-			throw new EnrollmentOperationException(message, e);
+			throw new EnterpriseOperationException(message, e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when deleting enterprise ID %s", ID , e.getMessage());
 			logger.error(message, e);
-			throw new EmployeeOperationException(message, e);
+			throw new EnterpriseOperationException(message, e);
 		}
 	}
 	

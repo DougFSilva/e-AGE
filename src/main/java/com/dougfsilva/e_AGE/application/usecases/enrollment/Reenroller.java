@@ -8,7 +8,6 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
@@ -44,7 +43,7 @@ public class Reenroller {
 		}  catch (Exception e) {
 			String message = String.format("Unexpected error when reactivating enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.error(message, e);
-			throw new EmployeeOperationException(message, e);
+			throw new EnrollmentOperationException(message, e);
 		}
 	}
 

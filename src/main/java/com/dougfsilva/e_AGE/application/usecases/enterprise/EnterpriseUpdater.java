@@ -6,8 +6,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
+import com.dougfsilva.e_AGE.domain.exception.EnterpriseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
@@ -28,16 +27,16 @@ public class EnterpriseUpdater {
 			Enterprise enterprise = enterpriseFinder.findByID(request.getID());
 			updateEnterpriseData(enterprise, request);
 			Enterprise updatedEnterprise = repository.save(enterprise);
-			logger.info(String.format("Updated Enterprise ID %s - %s", updatedEnterprise.getID(), updatedEnterprise.getName()));
+			logger.info(String.format("Updated enterprise ID %s - %s", updatedEnterprise.getID(), updatedEnterprise.getName()));
 			return updatedEnterprise;
 		} catch (ObjectNotFoundException | EnterpriseValidatorException e) {
 			String message = String.format("Error while updating enterprise ID %s : %s", request.getID(), e.getMessage());
 			logger.warn(message, e);
-			throw new EnrollmentOperationException(message, e);
+			throw new EnterpriseOperationException(message, e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when updating enterprise ID %s : %s", request.getID() , e.getMessage());
 			logger.error(message, e);
-			throw new EmployeeOperationException(message, e);
+			throw new EnterpriseOperationException(message, e);
 		}
 	}
 	

@@ -3,7 +3,6 @@ package com.dougfsilva.e_AGE.application.usecases.enrollment;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
@@ -28,7 +27,7 @@ public class Disenroller {
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when deleting enrollment ID %s : %s", ID, e.getMessage());
 			logger.error(message, e);
-			throw new EmployeeOperationException(message, e);
+			throw new EnrollmentOperationException(message, e);
 		}
 	}
 }

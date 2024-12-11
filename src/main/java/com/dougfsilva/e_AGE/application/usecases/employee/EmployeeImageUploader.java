@@ -8,6 +8,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
 import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ImageOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
@@ -29,7 +30,7 @@ public class EmployeeImageUploader {
 			Employee updatedEmployee = uploadImage(employee, image);
 			logger.info(String.format("Image uploaded successfully for employee ID %s, %s ", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(updatedEmployee);
-		} catch (ObjectNotFoundException | IllegalArgumentException e) {
+		} catch (ObjectNotFoundException | IllegalArgumentException | ImageOperationException e) {
 			String message = String.format("Error while uploading employee image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
