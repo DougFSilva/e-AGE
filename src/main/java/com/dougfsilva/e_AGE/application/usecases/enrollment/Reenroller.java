@@ -8,7 +8,10 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
+import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
+import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -20,33 +23,31 @@ public class Reenroller {
 	private final ClazzFinder clazzFinder;
 	private final EnrollmentValidator validator;
 	private final StandardLogger logger;
-	
+
 	public EnrollmentResponse reenroll(ReenrollRequest request) {
 		try {
 			Clazz clazz = clazzFinder.findByID(request.getClazzID());
 			validator.clazzIsNotClosed(clazz);
 			Enrollment currentEnrollment = enrollmentFinder.findByID(request.getEnrollmentID());
 			validator.studentNotEnrolledInClazz(currentEnrollment.getStudent(), clazz);
-			Enrollment newEnrollment = new Enrollment(
-					currentEnrollment.getRegistration(), 
-					currentEnrollment.getStudent(), 
-					clazz, 
-					request.getDate(), 
-					EnrollmentStatus.ENROLLED);
+			Enrollment newEnrollment = new Enrollment(currentEnrollment.getRegistration(),
+					currentEnrollment.getStudent(), clazz, request.getDate(), EnrollmentStatus.ENROLLED);
 			Enrollment createdEnrollment = repository.save(newEnrollment);
 			updateCurrentEnrollment(currentEnrollment);
-			logger.info(String.format("Stundent %s reenrolled to clazz %s", createdEnrollment.getStudent().getName(), clazz.getCode()));
+			logger.info(String.format("Stundent %s reenrolled to clazz %s", createdEnrollment.getStudent().getName(),
+					clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(createdEnrollment);
-		}catch (EnrollmentOperationException e) {
-	        logger.error("Enrollment operation failed: " + e.getMessage());
-	        throw new EnrollmentOperationException("Error while reenrolling student: " + e.getMessage(), e); 
-		}
-		catch (Exception e) {
-			logger.error("Unexpected error when reenrolling student: " + e.getMessage());
-			throw new EnrollmentOperationException("Error while reenroll student", e);
+		} catch (ObjectNotFoundException | EnrollmentValidatorException e) {
+			String message = String.format("Error while reactivating enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
+			logger.warn(message, e);
+			throw new EnrollmentOperationException(message, e);
+		}  catch (Exception e) {
+			String message = String.format("Unexpected error when reactivating enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
+			logger.error(message, e);
+			throw new EmployeeOperationException(message, e);
 		}
 	}
-	
+
 	private void updateCurrentEnrollment(Enrollment enrollment) {
 		enrollment.setStatus(EnrollmentStatus.COMPLETED);
 		repository.save(enrollment);
