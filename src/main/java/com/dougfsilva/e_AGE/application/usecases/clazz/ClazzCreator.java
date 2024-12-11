@@ -29,18 +29,16 @@ public class ClazzCreator {
 			Clazz clazz = new Clazz(request.getNumber(), request.getCode().toUpperCase(), course, false,
 					request.getCreationDate());
 			Clazz createdClazz = repository.save(clazz);
-			logger.info(String.format("Create Class ID %s - %s ", createdClazz.getID(), createdClazz.getCode()));
+			logger.info(String.format("Created class ID %s, code %s ", createdClazz.getID(), createdClazz.getCode()));
 			return ClazzResponse.fromClazz(createdClazz);
-		}catch (ObjectNotFoundException e) {
-			String message = String.format("Error while create Class %s : %s", request.getCode(), e.getMessage());
-			logger.warn(message);
-			throw new ClazzOperationException(message);
-		}catch (ClazzValidatorException e) {
-			logger.error("Error while create class: " + e.getMessage());
-			throw new ClazzOperationException("Error while create Class: " + e.getMessage());
+		} catch (ObjectNotFoundException | ClazzValidatorException e) {
+			String message = String.format("Error while create class code %s : %s", request.getCode(), e.getMessage());
+			logger.warn(message, e);
+			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when creating Class: " + e.getMessage());
-			throw new ClazzOperationException("Unexpected error when creating Class", e);
+			String message = String.format("Unexpected error when creating class code %s : %s", request.getCode(), e.getMessage());
+			logger.error(message, e);
+			throw new ClazzOperationException(message, e);
 		}
 
 	}

@@ -8,6 +8,8 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -25,11 +27,16 @@ public class ClazzUpdater {
 			Clazz clazz = clazzFinder.findByID(request.getID());
 			updateClazzData(clazz, request);
 			Clazz updatedClazz = repository.save(clazz);
-			logger.info(String.format("Update Class ID %s - %s", updatedClazz.getID(), updatedClazz.getCode()));
+			logger.info(String.format("Updated class ID %s, code %s", updatedClazz.getID(), updatedClazz.getCode()));
 			return ClazzResponse.fromClazz(updatedClazz);
+		} catch (ObjectNotFoundException | ClazzValidatorException e) {
+			String message = String.format("Error while update class code %s : %s", request.getCode(), e.getMessage());
+			logger.warn(message, e);
+			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when updating class: " + e.getMessage());
-			throw new ClazzOperationException("Error while update class", e);
+			String message = String.format("Unexpected error when updating class code %s : %s", request.getCode(), e.getMessage());
+			logger.error(message, e);
+			throw new ClazzOperationException(message, e);
 		}
 
 	}

@@ -11,6 +11,8 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -28,20 +30,22 @@ public class ClazzCloser {
 			List<Enrollment> enrollments = enrollmentRepository.findAllByClazz(clazz);
 			checkForEnrolledStudents(enrollments);
 			Clazz closedClazz = closeClazz(clazz, date);
-			logger.info(String.format("Closed Class ID %s - %s", closedClazz.getID(), closedClazz.getCode()));
+			logger.info(String.format("Closed class ID %s, code %s", closedClazz.getID(), closedClazz.getCode()));
 			return ClazzResponse.fromClazz(closedClazz);
-		} catch (ClazzOperationException e) {
-			logger.warn("Error closing class: " + e.getMessage());
-			throw e;
-		} catch (Exception e) {
-			logger.error("Unexpected error when closing class: " + e.getMessage());
-			throw new ClazzOperationException("Error while close class", e);
+		} catch (ObjectNotFoundException | ClazzValidatorException e) {
+			String message = String.format("Error while close class ID %s : %s", ID, e.getMessage());
+			logger.warn(message, e);
+			throw new ClazzOperationException(message, e);
+		}  catch (Exception e) {
+			String message = String.format("Unexpected error when closing class ID %s : %s", ID, e.getMessage());
+			logger.error(message, e);
+			throw new ClazzOperationException(message, e);
 		}
 	}
 
 	private void checkForEnrolledStudents(List<Enrollment> enrollments) {
 		if (enrollments.stream().anyMatch(enrollment -> enrollment.getStatus() == EnrollmentStatus.ENROLLED)) {
-			throw new ClazzOperationException("Class cannot be closed because there are enrolled students!");
+			throw new ClazzValidatorException("Class cannot be closed because there are enrolled students!");
 		}
 	}
 
