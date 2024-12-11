@@ -36,7 +36,7 @@ public class ClazzCloser {
 			String message = String.format("Error while close class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
-		}  catch (Exception e) {
+		} catch (Exception e) {
 			String message = String.format("Unexpected error when closing class ID %s : %s", ID, e.getMessage());
 			logger.error(message, e);
 			throw new ClazzOperationException(message, e);

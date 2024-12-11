@@ -4,7 +4,9 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.ImageNameGenerator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -26,10 +28,14 @@ public class CourseDeleter {
 			repository.delete(course);
 			imageService.deleteImage(ImageType.COURSE, ImageNameGenerator.byCourse(course));
 			logger.info(String.format("Deleted Course ID %s - %s", course.getID(), course.getTitle()));
+		} catch (ObjectNotFoundException | CourseValidationException e) {
+			String message = String.format("Error while delete course ID %s : %s", ID, e.getMessage());
+			logger.warn(message, e);
+			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when deleting course: " + e.getMessage());
-			throw new CourseOperationException("Error while update course", e);
+			String message = String.format("Unexpected error when deleting course ID %s : %s", ID, e.getMessage());
+			logger.error(message, e);
+			throw new ClazzOperationException(message, e);
 		}
-
 	}
 }

@@ -38,7 +38,6 @@ public class ClazzUpdater {
 			logger.error(message, e);
 			throw new ClazzOperationException(message, e);
 		}
-
 	}
 
 	public void updateClazzData(Clazz clazz, UpdateClazzRequest request) {
