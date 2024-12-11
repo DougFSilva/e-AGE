@@ -8,17 +8,11 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 public interface TechnologicalAreaRepository {
 
 	TechnologicalArea save(TechnologicalArea technologicalArea);
-
 	void delete(TechnologicalArea technologicalArea);
-
 	Optional<TechnologicalArea> findByID(String ID);
-	
 	Optional<TechnologicalArea> findByTitle(String title);
-
 	Page<TechnologicalArea> findAllByTitleContains(String title, PageRequest pageRequest);
-	
 	Page<TechnologicalArea> findAll(PageRequest pageRequest);
-	
 	Boolean existsByTitle(String title);
 	
 }

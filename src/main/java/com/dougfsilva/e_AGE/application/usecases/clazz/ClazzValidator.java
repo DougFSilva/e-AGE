@@ -5,7 +5,7 @@ import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.dropout.DropoutRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
-import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzValidatorException;
 
 import lombok.AllArgsConstructor;
 
@@ -18,20 +18,19 @@ public class ClazzValidator {
 
 	public void uniqueCode(String code) {
 		if (repository.existsByCode(code)) {
-			throw new ClazzOperationException(String.format("Course with title %s already exists!", code));
-
+			throw new ClazzValidatorException(String.format("Course with title %s already exists!", code));
 		}
 	}
 
 	public void openCourse(Course course) {
 		if (course.getIsClosed()) {
-			throw new ClazzOperationException("It is not possible to create a class for a closed course!");
+			throw new ClazzValidatorException("It is not possible to create a class for a closed course!");
 		}
 	}
 	
 	public void hasNoEnrollmentRegisteredInTheClazz(Clazz clazz) {
 		if (enrollmentRepository.existsByClazz(clazz) || dropoutRepository.existsByClazz(clazz)) {
-			throw new ClazzOperationException(String.format(
+			throw new ClazzValidatorException(String.format(
 					"The Class %s cannot be deleted because there are Students still associated with it!",
 					clazz.getCode()));
 		}

@@ -17,11 +17,8 @@ import lombok.Setter;
 public class Certificate {
 
 	private String ID;
-	
 	private Student student;
-	
 	private Course course;
-	
 	private LocalDate certificationDate;
 
 	public Certificate(Student student, Course course, LocalDate certificationDate) {

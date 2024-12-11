@@ -37,7 +37,11 @@ public class Reenroller {
 			updateCurrentEnrollment(currentEnrollment);
 			logger.info(String.format("Stundent %s reenrolled to clazz %s", createdEnrollment.getStudent().getName(), clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(createdEnrollment);
-		} catch (Exception e) {
+		}catch (EnrollmentOperationException e) {
+	        logger.error("Enrollment operation failed: " + e.getMessage());
+	        throw new EnrollmentOperationException("Error while reenrolling student: " + e.getMessage(), e); 
+		}
+		catch (Exception e) {
 			logger.error("Unexpected error when reenrolling student: " + e.getMessage());
 			throw new EnrollmentOperationException("Error while reenroll student", e);
 		}

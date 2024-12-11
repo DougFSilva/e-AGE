@@ -20,33 +20,19 @@ import lombok.ToString;
 public class Occurrence {
 
 	private String ID;
-
 	private LocalDateTime openingDate;
-
 	private LocalDateTime closingDate;
-
 	private Employee reporter;
-
 	private Student studant;
-
 	private Clazz clazz;
-
 	private String curricularUnit;
-
 	private OccurrenceType occurrenceType;
-
 	private Boolean restricted;
-
 	private Boolean forwarding;
-
 	private String description;
-
 	private String resolutionDescription;
-
 	private Boolean open;
-
 	private String studantSignature;
-
 	private Employee closureResponsible;
 
 	public Occurrence(LocalDateTime openingDate, Employee reporter, Student studant, Clazz clazz, String curricularUnit,

@@ -19,23 +19,14 @@ import lombok.ToString;
 public class Person {
 
 	private String ID;
-
 	private User user;
-
 	private String name;
-
 	private Sex sex;
-
 	private String rg;
-
 	private String phone;
-
 	private Email email;
-
 	private LocalDate dateOfBirth;
-
 	private Address address;
-	
 	private String image;
 
 	public Person(User user, String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,

@@ -12,29 +12,17 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 public interface OccurrenceRepository {
 
 	Occurrence save(Occurrence occurrence);
-	
 	void delete(Occurrence occurrence);
-	
 	Optional<Occurrence> findByID(String ID);
-	
 	Page<Occurrence> findAllByOpeningDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByClosingDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByReporter(Employee reporter, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByStudant(Student studant, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByClazz(Clazz clazz, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByOccurrenceType(OccurrenceType occurrenceType, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByRestricted(Boolean restricted, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByForwarding(Boolean forwarding, PageRequest pageRequest);
-	
 	Page<Occurrence> findAllByOpen(Boolean open, PageRequest pageRequest);
-	
 	Page<Occurrence> findAll(PageRequest pageRequest);
 	
 }

@@ -8,17 +8,11 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 public interface UserRepository {
 
 	User save(User user);
-	
 	void delete(User user);
-	
 	Optional<User> findByID(String ID);
-	
 	Optional<User> findByUsername(String username);
-	
 	Page<User> findAllByProfyleType(ProfileType profileType, PageRequest pageRequest);
-	
 	Page<User> findAll(PageRequest pageRequest);
-	
 	Boolean existsByUsername(String username);
 	
 }

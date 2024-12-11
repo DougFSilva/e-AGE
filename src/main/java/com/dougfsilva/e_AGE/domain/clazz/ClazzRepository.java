@@ -11,27 +11,16 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 public interface ClazzRepository {
 
 	Clazz save(Clazz clazz);
-
 	void delete(Clazz clazz);
-
 	Optional<Clazz> findByID(String ID);
-	
 	Optional<Clazz> findByCode(String code);
-
 	Page<Clazz> findAllByNameContains(String name, PageRequest pageRequest);
-
 	Page<Clazz> findAllByCourse(Course course, PageRequest pageRequest);
-	
 	List<Clazz> findAllByCourse(Course course);
-
 	Page<Clazz> findAllByCreationDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
-
 	Page<Clazz> findAllByClosingDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
-
 	Page<Clazz> findAll(PageRequest pageRequest);
-
 	Boolean existsByCourse(Course course);
-	
 	Boolean existsByCode(String code);
 
 }

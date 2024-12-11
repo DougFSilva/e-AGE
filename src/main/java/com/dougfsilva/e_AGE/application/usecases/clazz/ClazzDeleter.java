@@ -21,7 +21,10 @@ public class ClazzDeleter {
 			validator.hasNoEnrollmentRegisteredInTheClazz(clazz);
 			repository.delete(clazz);
 			logger.info(String.format("Delete Class ID %s - %s", clazz.getID(), clazz.getCode()));
-		} catch (Exception e) {
+		} catch (ClazzOperationException e) {
+			logger.error("Error delete class: " + e.getMessage());
+			throw e;
+		}catch (Exception e) {
 			logger.error("Unexpected error when deleting class: " + e.getMessage());
 			throw new ClazzOperationException("Error while delete class", e);
 		}

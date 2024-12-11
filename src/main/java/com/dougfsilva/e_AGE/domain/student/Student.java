@@ -21,7 +21,6 @@ import lombok.ToString;
 public class Student extends Person {
 	
 	private Responsible responsible;
-
 	private Enterprise enterprise;
 
 	public Student(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,

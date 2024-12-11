@@ -14,11 +14,8 @@ import lombok.Setter;
 public class Enterprise {
 
 	private String ID;
-
 	private String TIN;
-
 	private String name;
-
 	private Address address;
 
 	public Enterprise(String TIN, String name, Address address) {

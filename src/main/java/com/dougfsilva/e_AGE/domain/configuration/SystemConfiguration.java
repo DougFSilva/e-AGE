@@ -14,8 +14,6 @@ import lombok.ToString;
 public class SystemConfiguration {
 
 	private String ID;
-	
 	private String key;
-	
 	private String value;
 }

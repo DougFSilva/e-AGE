@@ -8,17 +8,11 @@ import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 public interface EmployeeRepository {
 
 	Employee save(Employee employee);
-	
 	void delete(Employee employee);
-	
 	Optional<Employee> findByID(String ID);
-	
 	Optional<Employee> findByRegistration(String registration);
-	
 	Page<Employee> findAllByStaffRole(StaffRole staffRole, PageRequest pageRequest);
-	
 	Page<Employee> findAll(PageRequest pageRequest);
-	
 	Boolean existsByRegistration(String registration);
 	
 }

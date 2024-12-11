@@ -22,7 +22,7 @@ public class Enroller {
 	private final ClazzFinder clazzFinder;
 	private final EnrollmentValidator validator;
 	private final StandardLogger logger;
-	
+
 	public EnrollmentResponse enroll(EnrollRequest request) {
 		try {
 			validator.uniqueRegistration(request.getRegistration());
@@ -30,15 +30,19 @@ public class Enroller {
 			Clazz clazz = clazzFinder.findByID(request.getClazzID());
 			validator.clazzIsNotClosed(clazz);
 			validator.studentNotEnrolledInClazz(student, clazz);
-			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
+			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(),
+					EnrollmentStatus.ENROLLED);
 			Enrollment createEnrollment = repository.save(enrollment);
 			logger.info(String.format("Student %s enrolled in Class %s", student.getName(), clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(createEnrollment);
+		} catch (EnrollmentOperationException e) {
+			logger.error("Enrollment operation failed: " + e.getMessage());
+			throw new EnrollmentOperationException("Error while enrolling student: " + e.getMessage(), e);
 		} catch (Exception e) {
 			logger.error("Unexpected error when enrolling student: " + e.getMessage());
 			throw new EnrollmentOperationException("Error while enroll student", e);
 		}
-		
+
 	}
-	
+
 }

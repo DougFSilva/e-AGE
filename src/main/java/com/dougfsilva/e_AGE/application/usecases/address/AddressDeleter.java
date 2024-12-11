@@ -4,6 +4,8 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.address.AddressRepository;
 import com.dougfsilva.e_AGE.domain.exception.AddressOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -18,10 +20,15 @@ public class AddressDeleter {
 		try {
 			Address address = addressFinder.findByID(ID);
 			repository.delete(address);
+		} catch (ObjectNotFoundException e) {
+			String message = String.format("Error while delete address ID %s : %s", ID, e.getMessage());
+			logger.warn(message, e);
+			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when deleting address: " + e.getMessage());
-			throw new AddressOperationException("Error while delete address", e);
+			String message = String.format("Unexpected error when deleting address ID %s : %s", ID, e.getMessage());
+			logger.error(message, e);
+			throw new AddressOperationException(message, e);
 		}
-		
+
 	}
 }

@@ -19,9 +19,7 @@ import lombok.ToString;
 public class Employee extends Person{
 	
 	private String registration;
-
 	private StaffRole staffRole;
-	
 	private Boolean active;
 
 	public Employee(String name, Sex sex, String rg, String phone, Email email, LocalDate dateOfBirth,

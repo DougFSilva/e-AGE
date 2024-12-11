@@ -5,6 +5,8 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.address.AddressRepository;
 import com.dougfsilva.e_AGE.domain.exception.AddressOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
 
@@ -20,11 +22,15 @@ public class AddressUpdater {
 			Address address = addressFinder.findByID(request.getID());
 			updateClazzData(address, request);
 			return repository.save(address);
+		} catch (ObjectNotFoundException e) {
+			String message = String.format("Error while update address ID %s : %s", request.getID(), e.getMessage());
+			logger.warn(message, e);
+			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when updating address: " + e.getMessage());
-			throw new AddressOperationException("Error while update the address", e);
+			String message = String.format("Unexpected error when updating address ID %s : %s ", request.getID(), e.getMessage());
+			logger.error(message, e);
+			throw new AddressOperationException(message, e);
 		}
-
 	}
 
 	private void updateClazzData(Address address, UpdateAddressRequest request) {

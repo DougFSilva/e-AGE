@@ -14,9 +14,7 @@ import lombok.ToString;
 public class Responsible {
 	
 	private String name;
-	
 	private Email email;
-	
 	private String phone;
 	
 }

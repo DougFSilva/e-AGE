@@ -1,5 +1,5 @@
-Eliminar espaçamentos no domínio
-Desistir aluno
+Converter Optional<User> em Optional<UseResponse> ????
+Corrigir tratamento de exceções, onde as capturas são feitas e refatorar e inserir Logs para todas situações necessárias
 Repetir aluno
 Formar aluno
 EnrollmentUpdater para atualizar data e status e matricula

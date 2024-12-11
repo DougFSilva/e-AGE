@@ -18,19 +18,12 @@ import lombok.ToString;
 public class Course {
 
 	private String ID;
-
 	private CourseModality modality;
-
 	private String title;
-
 	private TechnologicalArea technologicalArea;
-	
 	private Boolean isClosed;
-	
 	private LocalDate creationDate;
-
     private LocalDate closingDate;
-    
 	private String image;
 
 	public Course(CourseModality modality, String title, TechnologicalArea technologicalArea, Boolean isClosed, LocalDate creationDate, String image) {
