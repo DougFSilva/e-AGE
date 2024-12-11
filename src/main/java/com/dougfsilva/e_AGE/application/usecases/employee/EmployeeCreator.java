@@ -9,6 +9,8 @@ import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
 import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
+import com.dougfsilva.e_AGE.domain.exception.EmployeeValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -43,15 +45,23 @@ public class EmployeeCreator {
 					request.getStaffRole(),
 					true);
 			Employee createdEmployee = repository.save(employee);
-			if(request.getCreateDefaultUser() != null && request.getCreateDefaultUser()) {
-				employeeUserCreator.createByID(createdEmployee.getID());
-			}
-			logger.info(String.format("Created Employee ID %s - %s", employee.getID(), employee.getName()));
+			createUser(request, createdEmployee);
+			logger.info(String.format("Created employee ID %s, %s", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(createdEmployee);
+		} catch (ObjectNotFoundException | EmployeeValidatorException e) {
+			String message = String.format("Error while create employee %s : %s", request.getName(), e.getMessage());
+			logger.warn(message, e);
+			throw new EmployeeOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when creating employee: " + e.getMessage());
-			throw new EmployeeOperationException("Error while create employee", e);
+			String message = String.format("Unexpected error when creating employee %s : %s", request.getName(), e.getMessage());
+			logger.error(message, e);
+			throw new EmployeeOperationException(message, e);
 		}
-		
+	}
+	
+	private void createUser(CreateEmployeeRequest request, Employee employee) {
+		if(request.getCreateDefaultUser() != null && request.getCreateDefaultUser()) {
+			employeeUserCreator.createByID(employee.getID());
+		}
 	}
 }

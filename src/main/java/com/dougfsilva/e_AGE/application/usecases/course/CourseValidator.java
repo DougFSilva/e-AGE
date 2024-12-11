@@ -5,7 +5,6 @@ import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
-import com.dougfsilva.e_AGE.domain.exception.DataIntegrityViolationException;
 
 import lombok.AllArgsConstructor;
 
@@ -24,7 +23,7 @@ public class CourseValidator {
 	
 	public void hasNoClazzRegisteredInTheCourseOrInTheCertification(Course course) {
 		if (clazzRepository.existsByCourse(course) || certificateRepository.existsByCourse(course)) {
-			throw new DataIntegrityViolationException(String.format(
+			throw new CourseOperationException(String.format(
 					"The Course %s cannot be deleted because there are classes or certificate still associated with it!",
 					course.getTitle()));
 		}

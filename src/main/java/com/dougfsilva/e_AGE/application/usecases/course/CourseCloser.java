@@ -9,7 +9,7 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
@@ -34,11 +34,11 @@ public class CourseCloser {
 		} catch (ObjectNotFoundException | CourseValidationException e) {
 			String message = String.format("Error while close course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
-			throw new ClazzOperationException(message, e);
+			throw new CourseOperationException(message, e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when closing course ID %s : %s", ID, e.getMessage());
 			logger.error(message, e);
-			throw new ClazzOperationException(message, e);
+			throw new CourseOperationException(message, e);
 		}
 	}
 

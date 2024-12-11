@@ -6,7 +6,7 @@ import com.dougfsilva.e_AGE.application.usecases.technologicalArea.Technological
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
+import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
@@ -32,11 +32,11 @@ public class CourseUpdater {
 		} catch (ObjectNotFoundException | CourseValidationException e) {
 			String message = String.format("Error while update course %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
-			throw new ClazzOperationException(message, e);
+			throw new CourseOperationException(message, e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when updating course %s : %s", request.getTitle(), e.getMessage());
 			logger.error(message, e);
-			throw new ClazzOperationException(message, e);
+			throw new CourseOperationException(message, e);
 		}
 
 	}
