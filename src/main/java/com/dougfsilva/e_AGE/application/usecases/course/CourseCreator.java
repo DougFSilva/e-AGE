@@ -39,7 +39,7 @@ public class CourseCreator {
 			logger.info(String.format("Created Course ID %s, %s", createdCourse.getID(), createdCourse.getTitle()));
 			return CourseResponse.fromCourse(createdCourse);
 		} catch (ObjectNotFoundException | CourseValidationException e) {
-			String message = String.format("Error while create course %s : %s", request.getTitle(), e.getMessage());
+			String message = String.format("Error while creating course %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

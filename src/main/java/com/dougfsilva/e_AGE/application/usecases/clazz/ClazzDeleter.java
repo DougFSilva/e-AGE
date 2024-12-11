@@ -24,7 +24,7 @@ public class ClazzDeleter {
 			repository.delete(clazz);
 			logger.info(String.format("Deleted class ID %s, code %s", clazz.getID(), clazz.getCode()));
 		} catch (ObjectNotFoundException | ClazzValidatorException e) {
-			String message = String.format("Error while delete class ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while deleting class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

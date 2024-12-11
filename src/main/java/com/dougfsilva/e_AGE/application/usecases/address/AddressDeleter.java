@@ -21,7 +21,7 @@ public class AddressDeleter {
 			Address address = addressFinder.findByID(ID);
 			repository.delete(address);
 		} catch (ObjectNotFoundException e) {
-			String message = String.format("Error while delete address ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while deleting address ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

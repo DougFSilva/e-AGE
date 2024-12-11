@@ -23,7 +23,7 @@ public class CourseOpener {
 			logger.info(String.format("Opened Course ID %s,  %s", openedCourse.getID(), openedCourse.getTitle()));
 			return CourseResponse.fromCourse(openedCourse);
 		} catch (ObjectNotFoundException e) {
-			String message = String.format("Error while open course ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while opening course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

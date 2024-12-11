@@ -29,7 +29,7 @@ public class CourseDeleter {
 			imageService.deleteImage(ImageType.COURSE, ImageNameGenerator.byCourse(course));
 			logger.info(String.format("Deleted Course ID %s - %s", course.getID(), course.getTitle()));
 		} catch (ObjectNotFoundException | CourseValidationException e) {
-			String message = String.format("Error while delete course ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while deleting course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

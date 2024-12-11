@@ -31,7 +31,7 @@ public class DropoutHandler {
 			logger.info(String.format("Student %s dropped out of class %s",createdDropout.getStudent().getName(), createdDropout.getClazz().getCode()));
 			return DropoutResponse.fromDropout(createdDropout);
 		} catch (ObjectNotFoundException e) {
-			String message = String.format("Error while drop student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
+			String message = String.format("Error while dropping student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

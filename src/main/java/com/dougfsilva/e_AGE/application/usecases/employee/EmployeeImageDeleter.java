@@ -26,7 +26,7 @@ public class EmployeeImageDeleter {
 			deleteImage(employee);
 			logger.info(String.format("Image deleted successfully for employee ID %s - %s", employee.getID(), employee.getName()));
 		} catch (ObjectNotFoundException | EmployeeValidatorException e) {
-			String message = String.format("Error while delete image of employee ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while deleting image of employee ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
 		} catch (Exception e) {

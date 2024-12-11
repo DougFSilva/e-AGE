@@ -25,7 +25,7 @@ public class CourseImageDeleter {
 			deleteImage(course);
 			logger.info(String.format("Image deleted successfully for course ID %s, %s ", course.getID(), course.getTitle()));
 		} catch (ObjectNotFoundException e) {
-			String message = String.format("Error while delete course image ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while deleting course image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

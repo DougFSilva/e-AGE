@@ -31,7 +31,7 @@ public class CourseImageUploader {
 					updatedCourse.getTitle()));
 			return CourseResponse.fromCourse(updatedCourse);
 		} catch (ObjectNotFoundException | IllegalArgumentException e) {
-			String message = String.format("Error while upload course image ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while uploading course image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

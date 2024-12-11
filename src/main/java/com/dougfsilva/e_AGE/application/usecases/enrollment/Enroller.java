@@ -9,7 +9,10 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
+import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
+import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 
 import lombok.AllArgsConstructor;
@@ -30,19 +33,18 @@ public class Enroller {
 			Clazz clazz = clazzFinder.findByID(request.getClazzID());
 			validator.clazzIsNotClosed(clazz);
 			validator.studentNotEnrolledInClazz(student, clazz);
-			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(),
-					EnrollmentStatus.ENROLLED);
+			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
 			Enrollment createEnrollment = repository.save(enrollment);
-			logger.info(String.format("Student %s enrolled in Class %s", student.getName(), clazz.getCode()));
+			logger.info(String.format("Student %s enrolled in class %s", student.getName(), clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(createEnrollment);
-		} catch (EnrollmentOperationException e) {
-			logger.error("Enrollment operation failed: " + e.getMessage());
-			throw new EnrollmentOperationException("Error while enrolling student: " + e.getMessage(), e);
+		} catch (ObjectNotFoundException | EnrollmentValidatorException e) {
+			String message = String.format("Error while creating enrollment to student ID %s : %s", request.getStudentID(), e.getMessage());
+			logger.warn(message, e);
+			throw new EnrollmentOperationException(message, e);
 		} catch (Exception e) {
-			logger.error("Unexpected error when enrolling student: " + e.getMessage());
-			throw new EnrollmentOperationException("Error while enroll student", e);
+			String message = String.format("Unexpected error when creating enrollment to student ID %s : %s", request.getStudentID(), e.getMessage());
+			logger.error(message, e);
+			throw new EmployeeOperationException(message, e);
 		}
-
 	}
-
 }

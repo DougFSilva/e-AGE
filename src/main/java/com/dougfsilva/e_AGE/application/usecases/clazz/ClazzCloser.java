@@ -33,7 +33,7 @@ public class ClazzCloser {
 			logger.info(String.format("Closed class ID %s, code %s", closedClazz.getID(), closedClazz.getCode()));
 			return ClazzResponse.fromClazz(closedClazz);
 		} catch (ObjectNotFoundException | ClazzValidatorException e) {
-			String message = String.format("Error while close class ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while closing class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

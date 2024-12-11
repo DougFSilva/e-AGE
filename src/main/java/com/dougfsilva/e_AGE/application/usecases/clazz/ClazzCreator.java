@@ -32,7 +32,7 @@ public class ClazzCreator {
 			logger.info(String.format("Created class ID %s, code %s ", createdClazz.getID(), createdClazz.getCode()));
 			return ClazzResponse.fromClazz(createdClazz);
 		} catch (ObjectNotFoundException | ClazzValidatorException e) {
-			String message = String.format("Error while create class code %s : %s", request.getCode(), e.getMessage());
+			String message = String.format("Error while creating class code %s : %s", request.getCode(), e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

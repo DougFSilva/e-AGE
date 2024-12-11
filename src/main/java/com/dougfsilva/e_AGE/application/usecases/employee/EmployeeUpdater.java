@@ -31,7 +31,7 @@ public class EmployeeUpdater {
 			logger.info(String.format("Updated Employee ID %s, %s", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(updatedEmployee);
 		} catch (ObjectNotFoundException | EmployeeValidatorException e) {
-			String message = String.format("Error while update employee %s : %s", request.getName(), e.getMessage());
+			String message = String.format("Error while updating employee %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
 		} catch (Exception e) {

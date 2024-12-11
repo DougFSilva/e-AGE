@@ -30,7 +30,7 @@ public class CourseUpdater {
 			logger.info(String.format("Updated Course ID %s, %s", updatedCourse.getID(), updatedCourse.getTitle()));
 			return CourseResponse.fromCourse(updatedCourse);
 		} catch (ObjectNotFoundException | CourseValidationException e) {
-			String message = String.format("Error while update course %s : %s", request.getTitle(), e.getMessage());
+			String message = String.format("Error while updating course %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

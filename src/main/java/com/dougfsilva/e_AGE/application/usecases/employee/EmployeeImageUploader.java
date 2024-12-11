@@ -30,7 +30,7 @@ public class EmployeeImageUploader {
 			logger.info(String.format("Image uploaded successfully for employee ID %s, %s ", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(updatedEmployee);
 		} catch (ObjectNotFoundException | IllegalArgumentException e) {
-			String message = String.format("Error while upload employee image ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while uploading employee image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
 		} catch (Exception e) {

@@ -23,7 +23,7 @@ public class AddressUpdater {
 			updateClazzData(address, request);
 			return repository.save(address);
 		} catch (ObjectNotFoundException e) {
-			String message = String.format("Error while update address ID %s : %s", request.getID(), e.getMessage());
+			String message = String.format("Error while updating address ID %s : %s", request.getID(), e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

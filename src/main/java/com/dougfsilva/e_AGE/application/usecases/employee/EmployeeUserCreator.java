@@ -37,7 +37,7 @@ public class EmployeeUserCreator {
 			logger.info(String.format("Created user to employee ID %s, %s", updatedEmployee.getID(), updatedEmployee.getName()));
 			return EmployeeResponse.fromEmployee(updatedEmployee);
 		} catch (ObjectNotFoundException | UserOperationException e) {
-			String message = String.format("Error while create user to employee ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while creating user to employee ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
 		} catch (Exception e) {

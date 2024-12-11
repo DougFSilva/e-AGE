@@ -49,7 +49,7 @@ public class EmployeeCreator {
 			logger.info(String.format("Created employee ID %s, %s", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(createdEmployee);
 		} catch (ObjectNotFoundException | EmployeeValidatorException e) {
-			String message = String.format("Error while create employee %s : %s", request.getName(), e.getMessage());
+			String message = String.format("Error while creating employee %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
 		} catch (Exception e) {

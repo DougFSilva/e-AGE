@@ -32,7 +32,7 @@ public class CourseCloser {
 			logger.info(String.format("Closed Course ID %s, %s", closedCourse.getID(), closedCourse.getTitle()));
 			return CourseResponse.fromCourse(closedCourse);
 		} catch (ObjectNotFoundException | CourseValidationException e) {
-			String message = String.format("Error while close course ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while closing course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
 		} catch (Exception e) {

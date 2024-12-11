@@ -24,7 +24,7 @@ public class ClazzOpener {
 			logger.info(String.format("Opened clazz ID %s, code %s", openedClazz.getID(), openedClazz.getCode()));
 			return ClazzResponse.fromClazz(openedClazz);
 		} catch (ObjectNotFoundException e) {
-			String message = String.format("Error while open class ID %s : %s", ID, e.getMessage());
+			String message = String.format("Error while opening class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {

@@ -30,7 +30,7 @@ public class ClazzUpdater {
 			logger.info(String.format("Updated class ID %s, code %s", updatedClazz.getID(), updatedClazz.getCode()));
 			return ClazzResponse.fromClazz(updatedClazz);
 		} catch (ObjectNotFoundException | ClazzValidatorException e) {
-			String message = String.format("Error while update class code %s : %s", request.getCode(), e.getMessage());
+			String message = String.format("Error while updating class code %s : %s", request.getCode(), e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
 		} catch (Exception e) {
