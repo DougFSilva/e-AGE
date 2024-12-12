@@ -8,6 +8,7 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
+import com.dougfsilva.e_AGE.domain.exception.CertificateValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidatorException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
@@ -28,6 +29,7 @@ public class Reenroller {
 			Clazz clazz = clazzFinder.findByID(request.getClazzID());
 			validator.clazzIsNotClosed(clazz);
 			Enrollment currentEnrollment = enrollmentFinder.findByID(request.getEnrollmentID());
+			checkEnrollmentStatus(currentEnrollment);
 			validator.studentNotEnrolledInClazz(currentEnrollment.getStudent(), clazz);
 			Enrollment newEnrollment = new Enrollment(currentEnrollment.getRegistration(),
 					currentEnrollment.getStudent(), clazz, request.getDate(), EnrollmentStatus.ENROLLED);
@@ -50,5 +52,11 @@ public class Reenroller {
 	private void updateCurrentEnrollment(Enrollment enrollment) {
 		enrollment.setStatus(EnrollmentStatus.COMPLETED);
 		repository.save(enrollment);
+	}
+	
+	private void checkEnrollmentStatus(Enrollment enrollment) {
+		if (enrollment.getStatus() == EnrollmentStatus.DROPPED) {
+			throw new CertificateValidatorException("Cannot certify a dropout student");
+		}
 	}
 }

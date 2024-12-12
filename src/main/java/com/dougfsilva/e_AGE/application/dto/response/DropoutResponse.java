@@ -14,15 +14,15 @@ import lombok.ToString;
 public class DropoutResponse {
 
 	private String ID;
-	private StudentResponse studentResponse;
-	private ClazzResponse clazzResponse;
+	private StudentResponse student;
+	private ClazzResponse clazz;
 	private String reason;
 	private LocalDate date;
 	
 	public DropoutResponse(Dropout dropout) {
 		this.ID = dropout.getID();
-		this.studentResponse = StudentResponse.fromStudent(dropout.getStudent());
-		this.clazzResponse = ClazzResponse.fromClazz(dropout.getClazz());
+		this.student = StudentResponse.fromStudent(dropout.getStudent());
+		this.clazz = ClazzResponse.fromClazz(dropout.getClazz());
 		this.reason = dropout.getReason();
 		this.date = dropout.getDate();
 	}

@@ -15,7 +15,7 @@ import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class DropoutHandler {
+public class StudentDropout {
 
 	private final DropoutRepository repository;
 	private final EnrollmentRepository enrollmentRepository;
@@ -25,7 +25,7 @@ public class DropoutHandler {
 	public DropoutResponse dropout(CreateDropoutRequest request) {
 		try {
 			Enrollment enrollment = enrollmentFinder.findByID(request.getEnrollmentID());
-			updateStatus(enrollment);
+			updateEnrollmentStatus(enrollment);
 			Dropout dropout = new Dropout(enrollment.getStudent(), enrollment.getClazz(), request.getReason(), request.getDate());
 			Dropout createdDropout = repository.save(dropout);
 			logger.info(String.format("Student %s dropped out of class %s",createdDropout.getStudent().getName(), createdDropout.getClazz().getCode()));
@@ -42,7 +42,7 @@ public class DropoutHandler {
 		}
 	}
 	
-	private void updateStatus(Enrollment enrollment) {
+	private void updateEnrollmentStatus(Enrollment enrollment) {
 		enrollment.setStatus(EnrollmentStatus.DROPPED);
 		enrollmentRepository.save(enrollment);
 	}

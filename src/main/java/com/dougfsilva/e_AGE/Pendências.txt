@@ -1,7 +1,11 @@
-Converter Optional<User> em Optional<UseResponse> ????
-Corrigir tratamento de exceções, onde as capturas são feitas e refatorar e inserir Logs para todas situações necessárias
-Repetir aluno
-Formar aluno
+Rematricula em massa
+Deletar desistencia
+Deletar certificado
+CertificateFinder
+CertificateDeleter
+DropoutDeleter
+DropoutFinder
+Cadastrar aluno e matricular no mesmo endpoit. Individual e em massa
 EnrollmentUpdater para atualizar data e status e matricula
 Ao deletar student deletar também Usuario, Adress, Responsible. Deletar as matrículas e ocorrências. Aluno depende de occurrence, Certificate e Dropout também
 Ao deletar employeer somente possivel se não tiver ocorrências.

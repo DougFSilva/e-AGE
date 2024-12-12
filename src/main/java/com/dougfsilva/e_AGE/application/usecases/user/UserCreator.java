@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
+import com.dougfsilva.e_AGE.domain.exception.InvalidUserOrPasswordException;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.exception.UserValidatorException;
 import com.dougfsilva.e_AGE.domain.person.Person;
@@ -30,7 +31,7 @@ public class UserCreator {
 			User user = userBuilder(person);
 			logger.info(String.format("User created for Person: %s, Username: %s", person.getName(), user.getUsername()));
 			return user;
-		} catch (IllegalArgumentException | UserValidatorException e) {
+		} catch (IllegalArgumentException | UserValidatorException | InvalidUserOrPasswordException e) {
 			String message = String.format("Error while creating user to %s : %s", person.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new UserOperationException(message, e);
