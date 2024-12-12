@@ -18,14 +18,13 @@ import lombok.AllArgsConstructor;
 public class TechnologicalAreaImageUploader {
 
 	private final TechnologicalAreaRepository repository;
-	private final TechnologicalAreaFinder areaFinder;
 	private final ImageStorageService imageService;
 	private final StandardLogger logger;
 
 	public TechnologicalArea upload(String ID, MultipartFile image) {
 		try {
 			validateImage(image);
-			TechnologicalArea area = areaFinder.findByID(ID);
+			TechnologicalArea area = repository.findByIdOrThrow(ID);
 			TechnologicalArea updatedArea = uploadImage(area, image);
 	        logger.info(String.format("Image uploaded successfully for technological area ID %s - %s ", area.getID(), area.getTitle()));
 			return updatedArea;

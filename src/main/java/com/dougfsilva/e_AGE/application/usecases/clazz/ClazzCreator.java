@@ -2,11 +2,11 @@ package com.dougfsilva.e_AGE.application.usecases.clazz;
 
 import com.dougfsilva.e_AGE.application.dto.request.CreateClazzRequest;
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
-import com.dougfsilva.e_AGE.application.usecases.course.CourseFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
+import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ClazzValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
@@ -17,14 +17,14 @@ import lombok.AllArgsConstructor;
 public class ClazzCreator {
 
 	private final ClazzRepository repository;
-	private final CourseFinder courseFinder;
+	private final CourseRepository courseRepository;
 	private final ClazzValidator validator;
 	private final StandardLogger logger;
 
 	public ClazzResponse create(CreateClazzRequest request) {
 		try {
 			validator.uniqueCode(request.getCode());
-			Course course = courseFinder.findByID(request.getCourseID());
+			Course course = courseRepository.findByIdOrThrow(request.getCourseID());
 			validator.openCourse(course);
 			Clazz clazz = new Clazz(request.getNumber(), request.getCode().toUpperCase(), course, false,
 					request.getCreationDate());

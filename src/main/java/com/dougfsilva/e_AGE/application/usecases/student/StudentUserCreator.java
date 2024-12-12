@@ -17,13 +17,12 @@ public class StudentUserCreator {
 
 	private final StudentRepository repository;
 	private final UserCreator userCreator;
-	private final StudentFinder studentFinder;
 	private final StandardLogger logger;
 	
 	public StudentResponse createByID(String ID) {
 		
 		try {
-			Student student = studentFinder.findByID(ID);
+			Student student = repository.findByIdOrThrow(ID);
 			User user = userCreator.create(student);
 			student.setUser(user);
 			return StudentResponse.fromStudent(repository.save(student));

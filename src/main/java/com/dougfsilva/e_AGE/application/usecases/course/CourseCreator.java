@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.usecases.course;
 
 import com.dougfsilva.e_AGE.application.dto.request.CreateCourseRequest;
 import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
-import com.dougfsilva.e_AGE.application.usecases.technologicalArea.TechnologicalAreaFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
@@ -10,6 +9,7 @@ import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -19,7 +19,7 @@ import lombok.AllArgsConstructor;
 public class CourseCreator {
 
 	private final CourseRepository repository;
-	private final TechnologicalAreaFinder findTechnologicalArea;
+	private final TechnologicalAreaRepository technologicalAreaRepository;
 	private final ImageStorageService imageService;
 	private final CourseValidator validator;
 	private final StandardLogger logger;
@@ -27,7 +27,7 @@ public class CourseCreator {
 	public CourseResponse create(CreateCourseRequest request) {
 		try {
 			validator.uniqueTitle(request.getTitle());
-			TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.getTechnologicalAreaID());
+			TechnologicalArea technologicalArea = technologicalAreaRepository.findByIdOrThrow(request.getTechnologicalAreaID());
 			Course course = new Course(
 					request.getModality(), 
 					request.getTitle(), 

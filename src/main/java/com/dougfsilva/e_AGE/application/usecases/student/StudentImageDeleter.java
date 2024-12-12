@@ -16,13 +16,12 @@ import lombok.AllArgsConstructor;
 public class StudentImageDeleter {
 
 	private final StudentRepository repository;
-	private final StudentFinder studentFinder;
 	private final ImageStorageService  imageService;
 	private final StandardLogger logger;
 
 	public void deleteByID(String ID) {
 		try {
-			Student student = studentFinder.findByID(ID);
+			Student student = repository.findByIdOrThrow(ID);
 			imageService.deleteImage(ImageType.STUDENT, ImageNameGenerator.byStudent(student));
 			student.setImage(null);
 			repository.save(student);

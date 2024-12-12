@@ -12,12 +12,11 @@ import lombok.AllArgsConstructor;
 public class DropoutDeleter {
 
 	private final DropoutRepository repository;
-	private final DropoutFinder dropoutFinder;
 	private final StandardLogger logger;
 	
 	public void deleteByID(String ID) {
 		try {
-			Dropout dropout = dropoutFinder.findByID(ID);
+			Dropout dropout = repository.findByIdOrThrow(ID);
 			repository.delete(dropout);
 			logger.info(String.format("Deleted Dropout ID %s", ID));
 		} catch (ObjectNotFoundException e) {

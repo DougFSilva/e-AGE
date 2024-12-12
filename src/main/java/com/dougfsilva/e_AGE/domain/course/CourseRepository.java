@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.domain.course;
 import java.time.LocalDate;
 import java.util.Optional;
 
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -12,6 +13,10 @@ public interface CourseRepository {
 	Course save(Course course);
 	void delete(Course course);
 	Optional<Course> findByID(String ID);
+	default Course findByIdOrThrow(String ID) {
+	    return findByID(ID)
+	        .orElseThrow(() -> new ObjectNotFoundException("Course not found for ID: " + ID));
+	}
 	Optional<Course> findByTitle(String title);
 	Page<Course> findAllByModality(CourseModality modality, PageRequest pageRequest);
 	Page<Course> findAllByTechnologicalArea(TechnologicalArea technologicalArea, PageRequest pageRequest);

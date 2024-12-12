@@ -12,12 +12,11 @@ import lombok.AllArgsConstructor;
 public class CertificateDeleter {
 
 	private final CertificateRepository repository;
-	private final CertificateFinder certificateFinder;
 	private final StandardLogger logger;
 	
 	public void deleteByID(String ID) {
 		try {
-			Certificate certificate = certificateFinder.findByID(ID);
+			Certificate certificate = repository.findByIdOrThrow(ID);
 			repository.delete(certificate);
 			logger.info(String.format("Deleted certificate ID %s", ID));
 		} catch (ObjectNotFoundException e) {

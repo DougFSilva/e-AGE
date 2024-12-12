@@ -16,14 +16,13 @@ import lombok.AllArgsConstructor;
 public class CourseDeleter {
 
 	private final CourseRepository repository;
-	private final CourseFinder courseFinder;
 	private final ImageStorageService imageService;
 	private final CourseValidator validator;
 	private final StandardLogger logger;
 
 	public void deleteByID(String ID) {
 		try {
-			Course course = courseFinder.findByID(ID);
+			Course course = repository.findByIdOrThrow(ID);
 			validator.hasNoClazzRegisteredInTheCourseOrInTheCertification(course);
 			repository.delete(course);
 			imageService.deleteImage(ImageType.COURSE, ImageNameGenerator.byCourse(course));

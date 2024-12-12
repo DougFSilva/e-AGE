@@ -13,12 +13,11 @@ import lombok.AllArgsConstructor;
 public class AddressDeleter {
 
 	private final AddressRepository repository;
-	private final AddressFinder addressFinder;
 	private final StandardLogger logger;
 
 	public void deleteByID(String ID) {
 		try {
-			Address address = addressFinder.findByID(ID);
+			Address address = repository.findByIDOrThrow(ID);
 			repository.delete(address);
 		} catch (ObjectNotFoundException e) {
 			String message = String.format("Error while deleting address ID %s : %s", ID, e.getMessage());

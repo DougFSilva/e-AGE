@@ -15,13 +15,8 @@ public class EmployeeFinder {
 
 	private final EmployeeRepository repository;
 
-	public Employee findByID(String ID) {
-		return repository.findByID(ID)
-				.orElseThrow(() -> new ObjectNotFoundException(String.format("Employee with ID %s not found", ID)));
-	}
-
-	public EmployeeResponse findByIDAsEmployeeResponse(String ID) {
-		return EmployeeResponse.fromEmployee(findByID(ID));
+	public EmployeeResponse findByID(String ID) {
+		return EmployeeResponse.fromEmployee(repository.findByIdOrThrow(ID));
 	}
 
 	public EmployeeResponse findByRegistration(String registration) {

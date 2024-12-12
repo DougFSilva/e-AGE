@@ -14,12 +14,11 @@ import lombok.AllArgsConstructor;
 public class ClazzOpener {
 
 	private final ClazzRepository repository;
-	private final ClazzFinder clazzFinder;
 	private final StandardLogger logger;
 	
 	public ClazzResponse openByID(String ID) {
 		try {
-			Clazz clazz = clazzFinder.findByID(ID);
+			Clazz clazz = repository.findByIdOrThrow(ID);
 			Clazz openedClazz = openClazz(clazz);
 			logger.info(String.format("Opened clazz ID %s, code %s", openedClazz.getID(), openedClazz.getCode()));
 			return ClazzResponse.fromClazz(openedClazz);

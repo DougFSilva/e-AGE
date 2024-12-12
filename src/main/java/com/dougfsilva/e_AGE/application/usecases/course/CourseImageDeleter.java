@@ -16,13 +16,12 @@ import lombok.AllArgsConstructor;
 public class CourseImageDeleter {
 
 	private final CourseRepository repository;
-	private final CourseFinder courseFinder;
 	private final ImageStorageService  imageService;
 	private final StandardLogger logger;
 
 	public void deleteByID(String ID) {
 		try {
-			Course course = courseFinder.findByID(ID);
+			Course course = repository.findByIdOrThrow(ID);
 			deleteImage(course);
 			logger.info(String.format("Image deleted successfully for course ID %s, %s ", course.getID(), course.getTitle()));
 		} catch (ObjectNotFoundException | ImageOperationException e) {

@@ -2,10 +2,9 @@ package com.dougfsilva.e_AGE.application.usecases.enrollment;
 
 import com.dougfsilva.e_AGE.application.dto.request.EnrollRequest;
 import com.dougfsilva.e_AGE.application.dto.response.EnrollmentResponse;
-import com.dougfsilva.e_AGE.application.usecases.clazz.ClazzFinder;
-import com.dougfsilva.e_AGE.application.usecases.student.StudentFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
+import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
@@ -13,6 +12,7 @@ import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
+import com.dougfsilva.e_AGE.domain.student.StudentRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -20,16 +20,16 @@ import lombok.AllArgsConstructor;
 public class Enroller {
 
 	private final EnrollmentRepository repository;
-	private final StudentFinder studentFinder;
-	private final ClazzFinder clazzFinder;
+	private final StudentRepository studentRepository;
+	private final ClazzRepository clazzRepository;
 	private final EnrollmentValidator validator;
 	private final StandardLogger logger;
 
 	public EnrollmentResponse enroll(EnrollRequest request) {
 		try {
 			validator.uniqueRegistration(request.getRegistration());
-			Student student = studentFinder.findByID(request.getStudentID());
-			Clazz clazz = clazzFinder.findByID(request.getClazzID());
+			Student student = studentRepository.findByIdOrThrow(request.getStudentID());
+			Clazz clazz = clazzRepository.findByIdOrThrow(request.getClazzID());
 			validator.clazzIsNotClosed(clazz);
 			validator.studentNotEnrolledInClazz(student, clazz);
 			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);

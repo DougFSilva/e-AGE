@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.course.Course;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -15,6 +16,10 @@ public interface EnrollmentRepository {
 	Enrollment save(Enrollment enrollment);
 	void delete(String ID);
 	Optional<Enrollment> findByID(String ID);
+	default Enrollment findByIdOrThrow(String ID) {
+	    return findByID(ID)
+	        .orElseThrow(() -> new ObjectNotFoundException("Enrollment not found for ID: " + ID));
+	}
 	List<Enrollment> findAllByStudent(Student student);
 	List<Enrollment> findAllByClazz(Clazz clazz);
 	Page<Enrollment> findAllByCourse(Course course);

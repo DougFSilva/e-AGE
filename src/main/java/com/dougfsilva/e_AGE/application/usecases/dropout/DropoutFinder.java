@@ -7,9 +7,7 @@ import java.util.stream.Collectors;
 import com.dougfsilva.e_AGE.application.dto.response.DropoutResponse;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.dropout.Dropout;
 import com.dougfsilva.e_AGE.domain.dropout.DropoutRepository;
-import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -21,12 +19,8 @@ public class DropoutFinder {
 
 	private final DropoutRepository repository;
 	
-	public Dropout findByID(String ID) {
-		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Dropout with ID %s not found!", ID)));
-	}
-	
-	public DropoutResponse findByIDAsDropoutResponse(String ID) {
-		return DropoutResponse.fromDropout(findByID(ID));
+	public DropoutResponse findByID(String ID) {
+		return DropoutResponse.fromDropout(repository.findByIdOrThrow(ID));
 	}
 	
 	List<DropoutResponse> findAllByStudent(Student student){

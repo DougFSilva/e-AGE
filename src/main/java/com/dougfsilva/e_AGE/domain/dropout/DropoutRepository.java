@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.course.Course;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -15,6 +16,10 @@ public interface DropoutRepository {
 	Dropout save(Dropout dropout);
 	void delete(Dropout dropout);
 	Optional<Dropout> findByID(String ID);
+	default Dropout findByIdOrThrow(String ID) {
+	    return findByID(ID)
+	        .orElseThrow(() -> new ObjectNotFoundException("Dropout not found for ID: " + ID));
+	}
 	List<Dropout> findAllByStudent(Student student);
 	List<Dropout> findAllByClazz(Clazz clazz);
 	Page<Dropout> findAllByCourse(Course course);

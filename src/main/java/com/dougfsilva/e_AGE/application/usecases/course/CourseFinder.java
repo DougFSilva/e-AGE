@@ -3,12 +3,10 @@ package com.dougfsilva.e_AGE.application.usecases.course;
 import java.time.LocalDate;
 
 import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
-import com.dougfsilva.e_AGE.application.usecases.technologicalArea.TechnologicalAreaFinder;
-import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseModality;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
-import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
 
@@ -18,15 +16,10 @@ import lombok.AllArgsConstructor;
 public class CourseFinder {
 
 	private final CourseRepository repository;
-	private final TechnologicalAreaFinder findTechnologicalArea;
+	private final TechnologicalAreaRepository technologicalAreaRepository;
 
-	public Course findByID(String ID) {
-		return repository.findByID(ID)
-				.orElseThrow(() -> new ObjectNotFoundException(String.format("Course with ID %s not found!", ID)));
-	}
-
-	public CourseResponse findByIDAsCourseResponse(String ID) {
-		return CourseResponse.fromCourse(findByID(ID));
+	public CourseResponse findByID(String ID) {
+		return CourseResponse.fromCourse(repository.findByIdOrThrow(ID));
 	}
 
 	public Page<CourseResponse> findAllByModality(CourseModality modality, PageRequest pageRequest) {
@@ -34,7 +27,7 @@ public class CourseFinder {
 	}
 
 	public Page<CourseResponse> findAllByTechnologicalArea(String technologicalAreaID, PageRequest pageRequest) {
-		TechnologicalArea technologicalArea = findTechnologicalArea.findByID(technologicalAreaID);
+		TechnologicalArea technologicalArea = technologicalAreaRepository.findByIdOrThrow(technologicalAreaID);
 		return CourseResponse.fromPage(repository.findAllByTechnologicalArea(technologicalArea, pageRequest));
 	}
 
@@ -49,6 +42,5 @@ public class CourseFinder {
 	public Page<CourseResponse> findAll(PageRequest pageRequest) {
 		return CourseResponse.fromPage(repository.findAll(pageRequest));
 	}
-	
 	
 }

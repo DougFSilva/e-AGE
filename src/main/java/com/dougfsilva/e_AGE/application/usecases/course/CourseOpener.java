@@ -13,12 +13,11 @@ import lombok.AllArgsConstructor;
 public class CourseOpener {
 
 	private final CourseRepository repository;
-	private final CourseFinder courseFinder;
 	private final StandardLogger logger;
 	
 	public CourseResponse openByID(String ID) {
 		try {
-			Course course = courseFinder.findByID(ID);
+			Course course = repository.findByIdOrThrow(ID);
 			Course openedCourse = openCourse(course);
 			logger.info(String.format("Opened Course ID %s,  %s", openedCourse.getID(), openedCourse.getTitle()));
 			return CourseResponse.fromCourse(openedCourse);

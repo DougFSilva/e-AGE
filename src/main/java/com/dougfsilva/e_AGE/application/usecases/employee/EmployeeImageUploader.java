@@ -19,14 +19,13 @@ import lombok.AllArgsConstructor;
 public class EmployeeImageUploader {
 
 	private final EmployeeRepository repository;
-	private final EmployeeFinder employeeFinder;
 	private final ImageStorageService imageService;
 	private final StandardLogger logger;
 
 	public EmployeeResponse upload(String ID, MultipartFile image) {
 		try {
 			validateImage(image);
-			Employee employee = employeeFinder.findByID(ID);
+			Employee employee = repository.findByIdOrThrow(ID);
 			Employee updatedEmployee = uploadImage(employee, image);
 			logger.info(String.format("Image uploaded successfully for employee ID %s, %s ", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(updatedEmployee);

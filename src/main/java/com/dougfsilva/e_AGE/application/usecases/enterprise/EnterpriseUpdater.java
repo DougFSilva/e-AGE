@@ -16,7 +16,6 @@ import lombok.AllArgsConstructor;
 public class EnterpriseUpdater {
 
 	private final EnterpriseRepository repository;
-	private final EnterpriseFinder enterpriseFinder;
 	private final AddressUpdater addressUpdater;
 	private final EnterpriseValidator validator;
 	
@@ -24,7 +23,7 @@ public class EnterpriseUpdater {
 	
 	public Enterprise update(UpdateEnterpriseRequest request) {
 		try {
-			Enterprise enterprise = enterpriseFinder.findByID(request.getID());
+			Enterprise enterprise = repository.findByIdOrThrow(request.getID());
 			updateEnterpriseData(enterprise, request);
 			Enterprise updatedEnterprise = repository.save(enterprise);
 			logger.info(String.format("Updated enterprise ID %s - %s", updatedEnterprise.getID(), updatedEnterprise.getName()));

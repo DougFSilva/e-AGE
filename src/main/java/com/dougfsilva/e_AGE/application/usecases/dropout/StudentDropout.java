@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.usecases.dropout;
 
 import com.dougfsilva.e_AGE.application.dto.request.CreateDropoutRequest;
 import com.dougfsilva.e_AGE.application.dto.response.DropoutResponse;
-import com.dougfsilva.e_AGE.application.usecases.enrollment.EnrollmentFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.dropout.Dropout;
 import com.dougfsilva.e_AGE.domain.dropout.DropoutRepository;
@@ -19,12 +18,11 @@ public class StudentDropout {
 
 	private final DropoutRepository repository;
 	private final EnrollmentRepository enrollmentRepository;
-	private final EnrollmentFinder enrollmentFinder;
 	private final StandardLogger logger;
 	
 	public DropoutResponse dropout(CreateDropoutRequest request) {
 		try {
-			Enrollment enrollment = enrollmentFinder.findByID(request.getEnrollmentID());
+			Enrollment enrollment = enrollmentRepository.findByIdOrThrow(request.getEnrollmentID());
 			updateEnrollmentStatus(enrollment);
 			Dropout dropout = new Dropout(enrollment.getStudent(), enrollment.getClazz(), request.getReason(), request.getDate());
 			Dropout createdDropout = repository.save(dropout);

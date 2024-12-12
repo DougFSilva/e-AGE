@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.usecases.certificate;
 
 import com.dougfsilva.e_AGE.application.dto.request.CreateCertificateRequest;
 import com.dougfsilva.e_AGE.application.dto.response.CertificateResponse;
-import com.dougfsilva.e_AGE.application.usecases.enrollment.EnrollmentFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.certificate.Certificate;
 import com.dougfsilva.e_AGE.domain.certificate.CertificateRepository;
@@ -21,12 +20,11 @@ public class StudentCertifier {
 
 	private final CertificateRepository repository;
 	private final EnrollmentRepository enrollmentRepository;
-	private final EnrollmentFinder enrollmentFinder;
 	private final StandardLogger logger;
 	
 	public CertificateResponse certify(CreateCertificateRequest request) {
 		try {
-			Enrollment enrollment = enrollmentFinder.findByID(request.getEnrollmentID());
+			Enrollment enrollment = enrollmentRepository.findByIdOrThrow(request.getEnrollmentID());
 			checkEnrollmentStatus(enrollment);
 			updateEnrollmentStatus(enrollment);
 			Course course = enrollment.getClazz().getCourse();

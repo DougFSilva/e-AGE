@@ -20,12 +20,11 @@ public class CourseCloser {
 
 	private final CourseRepository repository;
 	private final ClazzRepository clazzRepository;
-	private final CourseFinder courseFinder;
 	private StandardLogger logger;
 
 	public CourseResponse closerByID(String ID, LocalDate date) {
 		try {
-			Course course = courseFinder.findByID(ID);
+			Course course = repository.findByIdOrThrow(ID);
 			List<Clazz> clazzes = clazzRepository.findAllByCourse(course);
 			checkForOpenedClazz(clazzes);
 			Course closedCourse = closeCourse(course, date);

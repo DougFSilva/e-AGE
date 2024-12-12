@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 public class EnterpriseDeleter {
 
 	private final EnterpriseRepository repository;
-	private final EnterpriseFinder enterpriseFinder;
 	private final AddressDeleter addressDeleter;
 	private final EnterpriseValidator validator;
 	
@@ -22,7 +21,7 @@ public class EnterpriseDeleter {
 	
 	public void deleteByID(String ID) {
 		try {
-			Enterprise enterprise = enterpriseFinder.findByID(ID);
+			Enterprise enterprise = repository.findByIdOrThrow(ID);
 			validator.hasNoStudentsRegisteredInTheEnterprise(enterprise);
 			repository.delete(enterprise);
 			addressDeleter.deleteByID(enterprise.getAddress().getID());

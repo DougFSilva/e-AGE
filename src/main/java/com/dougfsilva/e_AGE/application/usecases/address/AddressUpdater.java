@@ -14,12 +14,11 @@ import lombok.AllArgsConstructor;
 public class AddressUpdater {
 
 	private final AddressRepository repository;
-	private final AddressFinder addressFinder;
 	private final StandardLogger logger;
 
 	public Address update(UpdateAddressRequest request) {
 		try {
-			Address address = addressFinder.findByID(request.getID());
+			Address address = repository.findByIDOrThrow(request.getID());
 			updateClazzData(address, request);
 			return repository.save(address);
 		} catch (ObjectNotFoundException e) {

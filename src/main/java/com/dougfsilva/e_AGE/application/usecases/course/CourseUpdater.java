@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.application.usecases.course;
 
 import com.dougfsilva.e_AGE.application.dto.request.UpdateCourseRequest;
 import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
-import com.dougfsilva.e_AGE.application.usecases.technologicalArea.TechnologicalAreaFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
@@ -10,6 +9,7 @@ import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
 import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
+import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -17,14 +17,13 @@ import lombok.AllArgsConstructor;
 public class CourseUpdater {
 
 	private final CourseRepository repository;
-	private final TechnologicalAreaFinder findTechnologicalArea;
-	private final CourseFinder courseFinder;
+	private final TechnologicalAreaRepository technologicalAreaRepository;
 	private final CourseValidator validator;
 	private final StandardLogger logger;
 
 	public CourseResponse update(UpdateCourseRequest request) {
 		try {
-			Course course = courseFinder.findByID(request.getID());
+			Course course = repository.findByIdOrThrow(request.getID());
 			updateCourseData(course, request);
 			Course updatedCourse = repository.save(course);
 			logger.info(String.format("Updated Course ID %s, %s", updatedCourse.getID(), updatedCourse.getTitle()));
@@ -48,7 +47,7 @@ public class CourseUpdater {
 		}
 		if (request.getTechnologicalAreaID() != null && !request.getTechnologicalAreaID().isBlank()
 				&& !request.getTechnologicalAreaID().equalsIgnoreCase(course.getID())) {
-			TechnologicalArea technologicalArea = findTechnologicalArea.findByID(request.getTechnologicalAreaID());
+			TechnologicalArea technologicalArea = technologicalAreaRepository.findByIdOrThrow(request.getTechnologicalAreaID());
 			course.setTechnologicalArea(technologicalArea);
 		}
 		if (request.getModality() != null) {

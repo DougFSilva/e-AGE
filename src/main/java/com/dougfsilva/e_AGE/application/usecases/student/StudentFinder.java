@@ -1,11 +1,10 @@
 package com.dougfsilva.e_AGE.application.usecases.student;
 
 import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
-import com.dougfsilva.e_AGE.application.usecases.clazz.ClazzFinder;
-import com.dougfsilva.e_AGE.application.usecases.enterprise.EnterpriseFinder;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
+import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
-import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
@@ -17,24 +16,20 @@ import lombok.AllArgsConstructor;
 public class StudentFinder {
 
 	private final StudentRepository repository;
-	private final ClazzFinder clazzFinder;
-	private final EnterpriseFinder enterpriseFinder;
+	private final ClazzRepository clazzRepository;
+	private final EnterpriseRepository enterpriseRepository;
 	
-	public Student findByID(String ID) {
-		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Student with ID %s not Found!", ID)));
-	}
-
-	public StudentResponse findByIDAsStudentResponse(String ID) {
-		return StudentResponse.fromStudent(findByID(ID));
+	public StudentResponse findByIDA(String ID) {
+		return StudentResponse.fromStudent(repository.findByIdOrThrow(ID));
 	}
 	
 	public Page<StudentResponse> findAllByClazz(String clazzID, PageRequest pageRequest){
-		Clazz clazz = clazzFinder.findByID(clazzID);
+		Clazz clazz = clazzRepository.findByIdOrThrow(clazzID);
 		return StudentResponse.fromPage(repository.findAllByClazz(clazz, pageRequest));
 	}
 	
 	public Page<Student> findAllByEnterprise(String enterpriseID, PageRequest pageRequest){
-		Enterprise enterprise = enterpriseFinder.findByID(enterpriseID);
+		Enterprise enterprise = enterpriseRepository.findByIdOrThrow(enterpriseID);
 		return repository.findAllByEnterprise(enterprise, pageRequest);
 	}
 	

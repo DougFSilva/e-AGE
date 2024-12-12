@@ -2,11 +2,11 @@ package com.dougfsilva.e_AGE.application.usecases.clazz;
 
 import com.dougfsilva.e_AGE.application.dto.request.UpdateClazzRequest;
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
-import com.dougfsilva.e_AGE.application.usecases.course.CourseFinder;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
+import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
 import com.dougfsilva.e_AGE.domain.exception.ClazzValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
@@ -17,14 +17,13 @@ import lombok.AllArgsConstructor;
 public class ClazzUpdater {
 
 	private final ClazzRepository repository;
-	private final ClazzFinder clazzFinder;
-	private final CourseFinder courseFinder;
+	private final CourseRepository courseRepository;
 	private final ClazzValidator validator;
 	private final StandardLogger logger;
 
 	public ClazzResponse update(UpdateClazzRequest request) {
 		try {
-			Clazz clazz = clazzFinder.findByID(request.getID());
+			Clazz clazz = repository.findByIdOrThrow(request.getID());
 			updateClazzData(clazz, request);
 			Clazz updatedClazz = repository.save(clazz);
 			logger.info(String.format("Updated class ID %s, code %s", updatedClazz.getID(), updatedClazz.getCode()));
@@ -47,7 +46,7 @@ public class ClazzUpdater {
 			clazz.setCode(request.getCode());
 		}
 		if (request.getCourseID() != null && !request.getCourseID().isBlank()) {
-			Course course = courseFinder.findByID(request.getCourseID());
+			Course course = courseRepository.findByIdOrThrow(request.getCourseID());
 			validator.openCourse(course);
 			clazz.setCourse(course);
 		}

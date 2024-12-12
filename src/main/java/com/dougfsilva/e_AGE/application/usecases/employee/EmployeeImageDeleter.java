@@ -16,13 +16,12 @@ import lombok.AllArgsConstructor;
 public class EmployeeImageDeleter {
 
 	private final EmployeeRepository repository;
-	private final EmployeeFinder employeeFinder;
 	private final ImageStorageService  imageService;
 	private final StandardLogger logger;
 
 	public void deleteByID(String ID) {
 		try {
-			Employee employee = employeeFinder.findByID(ID);
+			Employee employee = repository.findByIdOrThrow(ID);
 			deleteImage(employee);
 			logger.info(String.format("Image deleted successfully for employee ID %s - %s", employee.getID(), employee.getName()));
 		} catch (ObjectNotFoundException | ImageOperationException e) {

@@ -12,12 +12,11 @@ import lombok.AllArgsConstructor;
 public class UserDeleter {
 
 	private final UserRepository repository;
-	private final UserFinder userFinder;
 	private final StandardLogger logger;
 	
 	public void deleteByID(String ID) {
 		try {
-			User user = userFinder.findByID(ID);
+			User user = repository.findByIdOrThrow(ID);
 			repository.delete(user);
 			logger.info(String.format("Deleted User ID %s - %s", user.getID(), user.getUsername()));
 		}  catch (ObjectNotFoundException e) {

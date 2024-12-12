@@ -19,14 +19,13 @@ import lombok.AllArgsConstructor;
 public class CourseImageUploader {
 
 	private final CourseRepository repository;
-	private final CourseFinder courseFinder;
 	private final ImageStorageService imageService;
 	private final StandardLogger logger;
 
 	public CourseResponse upload(String ID, MultipartFile image) {
 		try {
 			validateImage(image);
-			Course course = courseFinder.findByID(ID);
+			Course course = repository.findByIdOrThrow(ID);
 			Course updatedCourse = uploadImage(course, image);
 			logger.info(String.format("Image uploaded successfully for course ID %s - %s ", updatedCourse.getID(),
 					updatedCourse.getTitle()));

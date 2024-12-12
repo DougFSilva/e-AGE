@@ -21,12 +21,11 @@ public class ClazzCloser {
 
 	private final ClazzRepository repository;
 	private final EnrollmentRepository enrollmentRepository;
-	private final ClazzFinder clazzFinder;
 	private final StandardLogger logger;
 
 	public ClazzResponse closeByID(String ID, LocalDate date) {
 		try {
-			Clazz clazz = clazzFinder.findByID(ID);
+			Clazz clazz = repository.findByIdOrThrow(ID);
 			List<Enrollment> enrollments = enrollmentRepository.findAllByClazz(clazz);
 			checkForEnrolledStudents(enrollments);
 			Clazz closedClazz = closeClazz(clazz, date);

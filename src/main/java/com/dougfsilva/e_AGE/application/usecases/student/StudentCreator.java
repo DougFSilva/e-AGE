@@ -3,11 +3,11 @@ package com.dougfsilva.e_AGE.application.usecases.student;
 import com.dougfsilva.e_AGE.application.dto.request.CreateStudentRequest;
 import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
 import com.dougfsilva.e_AGE.application.usecases.address.AddressCreator;
-import com.dougfsilva.e_AGE.application.usecases.enterprise.EnterpriseFinder;
 import com.dougfsilva.e_AGE.application.usecases.person.PersonValidator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
+import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.exception.PersonValidationException;
 import com.dougfsilva.e_AGE.domain.exception.StudentOperationException;
@@ -23,8 +23,8 @@ import lombok.AllArgsConstructor;
 public class StudentCreator {
 
 	private final StudentRepository repository;
+	private final EnterpriseRepository enterpriseRepository;
 	private final AddressCreator addressCreator;
-	private final EnterpriseFinder enterpriseFinder;
 	private final ImageStorageService imageService;
 	private final StudentUserCreator studentUserCreator;
 	private final PersonValidator personValidator;
@@ -46,7 +46,7 @@ public class StudentCreator {
 					imageService.getDefaultImage(ImageType.STUDENT),
 					request.getResponsible());
 			if(request.getEnterpriseID() != null && !request.getEnterpriseID().isBlank()) {
-				Enterprise enterprise = enterpriseFinder.findByID(request.getEnterpriseID());
+				Enterprise enterprise = enterpriseRepository.findByIdOrThrow(request.getEnterpriseID());
 				student.setEnterprise(enterprise);
 			}
 			Student createdStudent = repository.save(student);

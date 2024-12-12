@@ -19,14 +19,13 @@ import lombok.AllArgsConstructor;
 public class StudentImageUploader {
 	
 	private final StudentRepository repository;
-	private final StudentFinder studentFinder;
 	private final ImageStorageService imageService;
 	private final StandardLogger logger;
 
 	public StudentResponse upload(String ID, MultipartFile image) {
 		try {
 			validateImage(image);
-			Student student = studentFinder.findByID(ID);
+			Student student = repository.findByIdOrThrow(ID);
 			Student updatedStudent = uploadImage(student, image);
 	        logger.info(String.format("Image uploaded successfully for student ID %s - %s ", student.getID(), student.getName()));
 			return StudentResponse.fromStudent(updatedStudent);

@@ -17,13 +17,12 @@ public class EmployeeUserCreator {
 
 	private final EmployeeRepository repository;
 	private final UserCreator userCreator;
-	private final EmployeeFinder employeeFinder;
 	private final StandardLogger logger;
 	
 	public EmployeeResponse createByID(String ID) {
 		
 		try {
-			Employee employee = employeeFinder.findByID(ID);
+			Employee employee = repository.findByIdOrThrow(ID);
 			User user = userCreator.create(employee);
 			employee.setUser(user);
 			return EmployeeResponse.fromEmployee(repository.save(employee));

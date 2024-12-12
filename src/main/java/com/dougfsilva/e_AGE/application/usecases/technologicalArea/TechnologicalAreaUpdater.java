@@ -14,13 +14,12 @@ import lombok.AllArgsConstructor;
 public class TechnologicalAreaUpdater {
 
 	private final TechnologicalAreaRepository repository;
-	private final TechnologicalAreaFinder areaFinder;
 	private final TechnologicalAreaValidator validator;
 	private final StandardLogger logger;
 
 	public TechnologicalArea update(UpdateTechnologicalAreaRequest request) {
 		try {
-			TechnologicalArea area = areaFinder.findByID(request.getID());
+			TechnologicalArea area = repository.findByIdOrThrow(request.getID());
 			updateTechnologicalAreaData(area, request);
 			TechnologicalArea updatedArea = repository.save(area);
 			logger.info(String.format("Updated Technological Area ID %s - %s", updatedArea.getID(), updatedArea.getTitle()));

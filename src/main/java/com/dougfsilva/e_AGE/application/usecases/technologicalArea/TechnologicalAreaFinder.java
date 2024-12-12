@@ -1,6 +1,5 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
@@ -12,11 +11,6 @@ import lombok.AllArgsConstructor;
 public class TechnologicalAreaFinder {
 
 	private final TechnologicalAreaRepository repository;
-
-	public TechnologicalArea findByID(String ID) {
-		return repository.findByID(ID).orElseThrow(
-				() -> new ObjectNotFoundException(String.format("Technological Area with ID %s not found!", ID)));
-	}
 
 	public Page<TechnologicalArea> findAllByTitleContains(String title, PageRequest pageRequest) {
 		return repository.findAllByTitleContains(title, pageRequest);

@@ -12,12 +12,11 @@ import lombok.AllArgsConstructor;
 public class Disenroller {
 
 	private final EnrollmentRepository repository;
-	private final EnrollmentFinder enrollmentFinder;
 	private final StandardLogger logger;
 	
 	public void disenrollByID(String ID) {
 		try {
-			Enrollment enrollment = enrollmentFinder.findByID(ID);
+			Enrollment enrollment = repository.findByIdOrThrow(ID);
 			repository.delete(ID);
 			logger.info(String.format("Student %s disenrolled in class %s", enrollment.getStudent().getName(), enrollment.getClazz().getCode()));
 		} catch (ObjectNotFoundException e) {

@@ -5,10 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.dougfsilva.e_AGE.application.dto.response.CertificateResponse;
-import com.dougfsilva.e_AGE.domain.certificate.Certificate;
 import com.dougfsilva.e_AGE.domain.certificate.CertificateRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
-import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -20,13 +18,8 @@ public class CertificateFinder {
 
 	private final CertificateRepository repository;
 
-	public Certificate findByID(String ID) {
-		return repository.findByID(ID)
-				.orElseThrow(() -> new ObjectNotFoundException(String.format("Certificate with ID %s not found!", ID)));
-	}
-
-	public CertificateResponse findByIDAsCertificateResponse(String ID) {
-		return CertificateResponse.fromCertificate(findByID(ID));
+	public CertificateResponse findByID(String ID) {
+		return CertificateResponse.fromCertificate(repository.findByIdOrThrow(ID));
 	}
 
 	List<CertificateResponse> findAllByStudent(Student student) {

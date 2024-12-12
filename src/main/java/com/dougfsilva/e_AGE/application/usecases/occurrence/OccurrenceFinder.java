@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 import com.dougfsilva.e_AGE.application.dto.response.OccurrenceResponse;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
-import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
-import com.dougfsilva.e_AGE.domain.occurrence.Occurrence;
 import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceRepository;
 import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceType;
 import com.dougfsilva.e_AGE.domain.student.Student;
@@ -22,12 +20,8 @@ public class OccurrenceFinder {
 
 	private final OccurrenceRepository repository;
 	
-	public Occurrence findByID(String ID) {
-		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Occurrence with ID %s not found!", ID)));
-	}
-	
-	public OccurrenceResponse findByIDAsOccurrenceResponse(String ID) {
-		return OccurrenceResponse.fromOccurrence(findByID(ID));
+	public OccurrenceResponse findByIDA(String ID) {
+		return OccurrenceResponse.fromOccurrence(repository.findByIdOrThrow(ID));
 	}
 	
 	Page<OccurrenceResponse> findAllByOpeningDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest){
@@ -67,7 +61,7 @@ public class OccurrenceFinder {
 	}
 	
 	Page<OccurrenceResponse> findAll(PageRequest pageRequest){
-		return OccurrenceResponse.fromPage
+		return OccurrenceResponse.fromPage(repository.findAll(pageRequest));
 	}
 	
 }

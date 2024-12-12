@@ -13,13 +13,12 @@ import lombok.AllArgsConstructor;
 public class ClazzDeleter {
 
 	private final ClazzRepository repository;
-	private final ClazzFinder clazzFinder;
 	private final ClazzValidator validator;
 	private final StandardLogger logger;
 
 	public void deleteByID(String ID) {
 		try {
-			Clazz clazz = clazzFinder.findByID(ID);
+			Clazz clazz = repository.findByIdOrThrow(ID);
 			validator.hasNoEnrollmentRegisteredInTheClazz(clazz);
 			repository.delete(clazz);
 			logger.info(String.format("Deleted class ID %s, code %s", clazz.getID(), clazz.getCode()));

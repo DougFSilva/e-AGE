@@ -16,14 +16,13 @@ import lombok.AllArgsConstructor;
 public class TechnologicalAreaDeleter {
 
 	private final TechnologicalAreaRepository repository;
-	private final TechnologicalAreaFinder areaFinder;
 	private final ImageStorageService imageService ;
 	private final TechnologicalAreaValidator validator;
 	private final StandardLogger logger;
 	
 	public void deleteByID(String ID) {
 		try {
-			TechnologicalArea technologicalArea = areaFinder.findByID(ID);
+			TechnologicalArea technologicalArea = repository.findByIdOrThrow(ID);
 			validator.hasNoCoursesInTechnologicalArea(technologicalArea);
 			repository.delete(technologicalArea);
 			imageService.deleteImage(ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(technologicalArea));

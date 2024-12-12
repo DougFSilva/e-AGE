@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
+import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.PageRequest;
@@ -15,6 +16,10 @@ public interface OccurrenceRepository {
 	Occurrence save(Occurrence occurrence);
 	void delete(Occurrence occurrence);
 	Optional<Occurrence> findByID(String ID);
+	default Occurrence findByIdOrThrow(String ID) {
+	    return findByID(ID)
+	        .orElseThrow(() -> new ObjectNotFoundException("Occurrence not found for ID: " + ID));
+	}
 	Page<Occurrence> findAllByOpeningDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
 	Page<Occurrence> findAllByClosingDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
 	Page<Occurrence> findAllByReporter(Employee reporter, PageRequest pageRequest);

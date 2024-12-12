@@ -19,14 +19,13 @@ public class EmployeeUpdater {
 
 	private final EmployeeRepository repository;
 	private final AddressUpdater addressUpdater;
-	private final EmployeeFinder employeeFinder;
 	private final PersonValidator personValidator;
 	private final EmployeeValidator validator;
 	private final StandardLogger logger;
 
 	public EmployeeResponse update(UpdateEmployeeRequest request) {
 		try {
-			Employee employee = employeeFinder.findByID(request.getID());
+			Employee employee = repository.findByIdOrThrow(request.getID());
 			updateEmployeeData(employee, request);
 			Employee updatedEmployee = repository.save(employee);
 			logger.info(String.format("Updated Employee ID %s, %s", employee.getID(), employee.getName()));
