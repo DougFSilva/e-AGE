@@ -1,6 +1,7 @@
 package com.dougfsilva.e_AGE.domain.occurrence;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
@@ -17,7 +18,7 @@ public interface OccurrenceRepository {
 	Page<Occurrence> findAllByOpeningDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
 	Page<Occurrence> findAllByClosingDatePeriod(LocalDate min, LocalDate max, PageRequest pageRequest);
 	Page<Occurrence> findAllByReporter(Employee reporter, PageRequest pageRequest);
-	Page<Occurrence> findAllByStudant(Student studant, PageRequest pageRequest);
+	List<Occurrence> findAllByStudant(Student studant);
 	Page<Occurrence> findAllByClazz(Clazz clazz, PageRequest pageRequest);
 	Page<Occurrence> findAllByOccurrenceType(OccurrenceType occurrenceType, PageRequest pageRequest);
 	Page<Occurrence> findAllByRestricted(Boolean restricted, PageRequest pageRequest);

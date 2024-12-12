@@ -9,9 +9,9 @@ import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
 import com.dougfsilva.e_AGE.domain.exception.EmployeeOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EmployeeValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.EmployeeValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
-import com.dougfsilva.e_AGE.domain.exception.PersonValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.PersonValidationException;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
@@ -50,7 +50,7 @@ public class EmployeeCreator {
 			createUser(request, createdEmployee);
 			logger.info(String.format("Created employee ID %s, %s", employee.getID(), employee.getName()));
 			return EmployeeResponse.fromEmployee(createdEmployee);
-		} catch (ObjectNotFoundException | EmployeeValidatorException | PersonValidatorException | UserOperationException e) {
+		} catch (ObjectNotFoundException | EmployeeValidationException | PersonValidationException | UserOperationException e) {
 			String message = String.format("Error while creating employee %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);

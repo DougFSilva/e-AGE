@@ -7,7 +7,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.exception.InvalidUserOrPasswordException;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
-import com.dougfsilva.e_AGE.domain.exception.UserValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.UserValidationException;
 import com.dougfsilva.e_AGE.domain.person.Person;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.user.Password;
@@ -31,7 +31,7 @@ public class UserCreator {
 			User user = userBuilder(person);
 			logger.info(String.format("User created for Person: %s, Username: %s", person.getName(), user.getUsername()));
 			return user;
-		} catch (IllegalArgumentException | UserValidatorException | InvalidUserOrPasswordException e) {
+		} catch (IllegalArgumentException | UserValidationException | InvalidUserOrPasswordException e) {
 			String message = String.format("Error while creating user to %s : %s", person.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new UserOperationException(message, e);
@@ -61,7 +61,7 @@ public class UserCreator {
 	
 	private void hasUser(Person person) {
 		if (person.getUser() != null) {
-			throw new UserValidatorException(String.format("%s already has a user", person.getName()));
+			throw new UserValidationException(String.format("%s already has a user", person.getName()));
 		}
 	}
 	

@@ -3,7 +3,7 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 import com.dougfsilva.e_AGE.application.dto.request.CreateTechnologicalAreaRequest;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaOperationException;
-import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
@@ -30,7 +30,7 @@ public class TechnologicalAreaCreator {
 			TechnologicalArea createArea = repository.save(area);
 			logger.info(String.format("Create Technological Area ID %s - %s", createArea.getID(), createArea.getTitle()));
 			return createArea;
-		} catch (TechnologicalAreaValidatorException e) {
+		} catch (TechnologicalAreaValidationException e) {
 			String message = String.format("Error while creating technological area %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
 			throw new TechnologicalAreaOperationException(message, e);

@@ -7,7 +7,7 @@ import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
 import com.dougfsilva.e_AGE.domain.exception.EnterpriseOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class EnterpriseUpdater {
 			Enterprise updatedEnterprise = repository.save(enterprise);
 			logger.info(String.format("Updated enterprise ID %s - %s", updatedEnterprise.getID(), updatedEnterprise.getName()));
 			return updatedEnterprise;
-		} catch (ObjectNotFoundException | EnterpriseValidatorException e) {
+		} catch (ObjectNotFoundException | EnterpriseValidationException e) {
 			String message = String.format("Error while updating enterprise ID %s : %s", request.getID(), e.getMessage());
 			logger.warn(message, e);
 			throw new EnterpriseOperationException(message, e);

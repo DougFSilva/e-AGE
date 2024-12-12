@@ -4,7 +4,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
-import com.dougfsilva.e_AGE.domain.exception.ClazzValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class ClazzDeleter {
 			validator.hasNoEnrollmentRegisteredInTheClazz(clazz);
 			repository.delete(clazz);
 			logger.info(String.format("Deleted class ID %s, code %s", clazz.getID(), clazz.getCode()));
-		} catch (ObjectNotFoundException | ClazzValidatorException e) {
+		} catch (ObjectNotFoundException | ClazzValidationException e) {
 			String message = String.format("Error while deleting class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);

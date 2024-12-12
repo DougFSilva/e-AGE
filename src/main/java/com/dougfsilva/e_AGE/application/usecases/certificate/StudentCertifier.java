@@ -11,7 +11,7 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.exception.CertificateOperationException;
-import com.dougfsilva.e_AGE.domain.exception.CertificateValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.CertificateValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -35,7 +35,7 @@ public class StudentCertifier {
 			logger.info(String.format("Student %s certified in course %s", createdCertificate.getStudent().getName(),
 					createdCertificate.getCourse().getTitle()));
 			return CertificateResponse.fromCertificate(createdCertificate);
-		} catch (ObjectNotFoundException | CertificateValidatorException e) {
+		} catch (ObjectNotFoundException | CertificateValidationException e) {
 			String message = String.format("Error while certifier student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
 			throw new CertificateOperationException(message, e);
@@ -54,7 +54,7 @@ public class StudentCertifier {
 
 	private void checkEnrollmentStatus(Enrollment enrollment) {
 		if (enrollment.getStatus() == EnrollmentStatus.DROPPED) {
-			throw new CertificateValidatorException("Cannot certify a dropout student");
+			throw new CertificateValidationException("Cannot certify a dropout student");
 		}
 	}
 }

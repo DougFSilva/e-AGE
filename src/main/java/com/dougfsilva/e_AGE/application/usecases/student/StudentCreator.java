@@ -9,7 +9,7 @@ import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
-import com.dougfsilva.e_AGE.domain.exception.PersonValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.PersonValidationException;
 import com.dougfsilva.e_AGE.domain.exception.StudentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.student.Student;
@@ -53,7 +53,7 @@ public class StudentCreator {
 			createUser(request, createdStudent);
 			logger.info(String.format("Created student ID %s, %s", createdStudent.getID(), createdStudent.getName()));
 			return StudentResponse.fromStudent(createdStudent);
-		} catch (ObjectNotFoundException | PersonValidatorException | UserOperationException e) {
+		} catch (ObjectNotFoundException | PersonValidationException | UserOperationException e) {
 			String message = String.format("Error while creating student %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new StudentOperationException(message, e);

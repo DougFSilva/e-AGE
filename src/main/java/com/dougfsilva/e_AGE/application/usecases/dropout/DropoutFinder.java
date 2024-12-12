@@ -22,7 +22,7 @@ public class DropoutFinder {
 	private final DropoutRepository repository;
 	
 	public Dropout findByID(String ID) {
-		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Object with ID %s not found!", ID)));
+		return repository.findByID(ID).orElseThrow(() -> new ObjectNotFoundException(String.format("Dropout with ID %s not found!", ID)));
 	}
 	
 	public DropoutResponse findByIDAsDropoutResponse(String ID) {

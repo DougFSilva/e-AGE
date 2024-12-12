@@ -4,7 +4,7 @@ import com.dougfsilva.e_AGE.application.dto.request.UpdateTechnologicalAreaReque
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaOperationException;
-import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidationException;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 
@@ -25,7 +25,7 @@ public class TechnologicalAreaUpdater {
 			TechnologicalArea updatedArea = repository.save(area);
 			logger.info(String.format("Updated Technological Area ID %s - %s", updatedArea.getID(), updatedArea.getTitle()));
 			return updatedArea;
-		} catch (ObjectNotFoundException | TechnologicalAreaValidatorException e) {
+		} catch (ObjectNotFoundException | TechnologicalAreaValidationException e) {
 			String message = String.format("Error while updating technological area %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
 			throw new TechnologicalAreaOperationException(message, e);

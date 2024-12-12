@@ -7,7 +7,7 @@ import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
 import com.dougfsilva.e_AGE.domain.exception.EnterpriseOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidationException;
 
 import lombok.AllArgsConstructor;
 
@@ -28,7 +28,7 @@ public class EnterpriseCreator {
 			Enterprise createdEnterprise = repository.save(enterprise);
 			logger.info(String.format("Created enterprise ID %s, %s", createdEnterprise.getID(), createdEnterprise.getName()));
 			return createdEnterprise;
-		} catch (EnterpriseValidatorException e) {
+		} catch (EnterpriseValidationException e) {
 			String message = String.format("Error while creating enterprise %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
 			throw new EnterpriseOperationException(message, e);

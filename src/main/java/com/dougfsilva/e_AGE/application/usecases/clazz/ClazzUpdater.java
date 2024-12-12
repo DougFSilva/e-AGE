@@ -8,7 +8,7 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
-import com.dougfsilva.e_AGE.domain.exception.ClazzValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.ClazzValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class ClazzUpdater {
 			Clazz updatedClazz = repository.save(clazz);
 			logger.info(String.format("Updated class ID %s, code %s", updatedClazz.getID(), updatedClazz.getCode()));
 			return ClazzResponse.fromClazz(updatedClazz);
-		} catch (ObjectNotFoundException | ClazzValidatorException e) {
+		} catch (ObjectNotFoundException | ClazzValidationException e) {
 			String message = String.format("Error while updating class code %s : %s", request.getCode(), e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);

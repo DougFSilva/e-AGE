@@ -1,10 +1,4 @@
 Rematricula em massa
-Deletar desistencia
-Deletar certificado
-CertificateFinder
-CertificateDeleter
-DropoutDeleter
-DropoutFinder
 Cadastrar aluno e matricular no mesmo endpoit. Individual e em massa
 EnrollmentUpdater para atualizar data e status e matricula
 Ao deletar student deletar também Usuario, Adress, Responsible. Deletar as matrículas e ocorrências. Aluno depende de occurrence, Certificate e Dropout também

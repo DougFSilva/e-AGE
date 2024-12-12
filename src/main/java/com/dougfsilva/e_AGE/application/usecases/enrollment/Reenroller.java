@@ -8,9 +8,9 @@ import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
-import com.dougfsilva.e_AGE.domain.exception.CertificateValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.CertificateValidationException;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class Reenroller {
 			logger.info(String.format("Stundent %s reenrolled to clazz %s", createdEnrollment.getStudent().getName(),
 					clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(createdEnrollment);
-		} catch (ObjectNotFoundException | EnrollmentValidatorException e) {
+		} catch (ObjectNotFoundException | EnrollmentValidationException e) {
 			String message = String.format("Error while reactivating enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
 			throw new EnrollmentOperationException(message, e);
@@ -56,7 +56,7 @@ public class Reenroller {
 	
 	private void checkEnrollmentStatus(Enrollment enrollment) {
 		if (enrollment.getStatus() == EnrollmentStatus.DROPPED) {
-			throw new CertificateValidatorException("Cannot certify a dropout student");
+			throw new CertificateValidationException("Cannot certify a dropout student");
 		}
 	}
 }

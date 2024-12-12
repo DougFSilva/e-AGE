@@ -22,7 +22,7 @@ public class CertificateFinder {
 
 	public Certificate findByID(String ID) {
 		return repository.findByID(ID)
-				.orElseThrow(() -> new ObjectNotFoundException(String.format("Object with ID %s not found!", ID)));
+				.orElseThrow(() -> new ObjectNotFoundException(String.format("Certificate with ID %s not found!", ID)));
 	}
 
 	public CertificateResponse findByIDAsCertificateResponse(String ID) {

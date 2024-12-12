@@ -10,7 +10,7 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidatorException;
+import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 
@@ -36,7 +36,7 @@ public class Enroller {
 			Enrollment createEnrollment = repository.save(enrollment);
 			logger.info(String.format("Student %s enrolled in class %s", student.getName(), clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(createEnrollment);
-		} catch (ObjectNotFoundException | EnrollmentValidatorException e) {
+		} catch (ObjectNotFoundException | EnrollmentValidationException e) {
 			String message = String.format("Error while creating enrollment to student ID %s : %s", request.getStudentID(), e.getMessage());
 			logger.warn(message, e);
 			throw new EnrollmentOperationException(message, e);
