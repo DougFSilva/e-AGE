@@ -4,6 +4,7 @@ import com.dougfsilva.e_AGE.application.dto.request.CreateStudentRequest;
 import com.dougfsilva.e_AGE.application.dto.response.StudentResponse;
 import com.dougfsilva.e_AGE.application.usecases.address.AddressCreator;
 import com.dougfsilva.e_AGE.application.usecases.person.PersonValidator;
+import com.dougfsilva.e_AGE.application.usecases.user.UserCreator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
@@ -14,6 +15,7 @@ import com.dougfsilva.e_AGE.domain.exception.StudentOperationException;
 import com.dougfsilva.e_AGE.domain.exception.UserOperationException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
+import com.dougfsilva.e_AGE.domain.user.User;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageStorageService;
 import com.dougfsilva.e_AGE.domain.utilities.image.ImageType;
 
@@ -26,7 +28,7 @@ public class StudentCreator {
 	private final EnterpriseRepository enterpriseRepository;
 	private final AddressCreator addressCreator;
 	private final ImageStorageService imageService;
-	private final StudentUserCreator studentUserCreator;
+	private final UserCreator userCreator;
 	private final PersonValidator personValidator;
 	private final StandardLogger logger;
 	
@@ -34,23 +36,16 @@ public class StudentCreator {
 		
 		try {
 			personValidator.uniqueRg(request.getRg());
-			Address address = addressCreator.create(request.getAddress());
-			Student student = new Student(
-					request.getName(),
-					request.getSex(),
-					request.getRg(),
-					request.getPhone(),
-					request.getEmail(),
-					request.getDateOfBirth(),
-					address,
-					imageService.getDefaultImage(ImageType.STUDENT),
-					request.getResponsible());
+			Student student = buildStudent(request);
 			if(request.getEnterpriseID() != null && !request.getEnterpriseID().isBlank()) {
 				Enterprise enterprise = enterpriseRepository.findByIdOrThrow(request.getEnterpriseID());
 				student.setEnterprise(enterprise);
 			}
+			if (request.getCreateDefaultUser()) {
+				User user = userCreator.create(student);
+				student.setUser(user);
+			}
 			Student savedStudent = repository.save(student);
-			createUser(request, savedStudent);
 			logger.info(String.format("Created student ID %s, %s", savedStudent.getID(), savedStudent.getName()));
 			return StudentResponse.fromStudent(savedStudent);
 		} catch (ObjectNotFoundException | PersonValidationException | UserOperationException e) {
@@ -64,10 +59,19 @@ public class StudentCreator {
 		}
 	}
 	
-	private void createUser(CreateStudentRequest request, Student student) {
-		if(request.getCreateDefaultUser()) {
-			studentUserCreator.createByID(student.getID());
-		}
+	private Student buildStudent(CreateStudentRequest request) {
+		Address address = addressCreator.create(request.getAddress());
+		return new Student(
+				request.getName(),
+				request.getSex(),
+				request.getRg(),
+				request.getPhone(),
+				request.getEmail(),
+				request.getDateOfBirth(),
+				address,
+				imageService.getDefaultImage(ImageType.STUDENT),
+				request.getResponsible());
 	}
+	
 	
 }

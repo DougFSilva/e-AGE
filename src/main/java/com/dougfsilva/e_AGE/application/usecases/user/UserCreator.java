@@ -29,8 +29,9 @@ public class UserCreator {
 	public User create(Person person) {
 		try {
 			User user = userBuilder(person);
-			logger.info(String.format("User created for Person: %s, Username: %s", person.getName(), user.getUsername()));
-			return user;
+			User savedUser = repository.save(user);
+			logger.info(String.format("User created for Person: %s, Username: %s", person.getName(), savedUser.getUsername()));
+			return savedUser;
 		} catch (IllegalArgumentException | UserValidationException | InvalidUserOrPasswordException e) {
 			String message = String.format("Error while creating user to %s : %s", person.getName(), e.getMessage());
 			logger.warn(message, e);
@@ -43,12 +44,12 @@ public class UserCreator {
 	}
 	
 	private User userBuilder(Person person) {
-		hasUser(person);
+		ensureNoUser(person);
 		String username = person.getRg();
 		Password password = new Password("Ps" + person.getRg() + "@", encoder);
 		List<Profile> profiles = getProfile(person);
 		User user = new User(username, password, profiles, false);
-		return repository.save(user);
+		return user;
 	}
 
 	private List<Profile> getProfile(Person person) {
@@ -59,7 +60,7 @@ public class UserCreator {
 		};
 	}
 	
-	private void hasUser(Person person) {
+	private void ensureNoUser(Person person) {
 		if (person.getUser() != null) {
 			throw new UserValidationException(String.format("%s already has a user", person.getName()));
 		}

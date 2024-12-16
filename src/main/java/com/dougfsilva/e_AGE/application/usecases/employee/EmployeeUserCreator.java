@@ -25,14 +25,12 @@ public class EmployeeUserCreator {
 			Employee employee = repository.findByIdOrThrow(ID);
 			User user = userCreator.create(employee);
 			employee.setUser(user);
-			return EmployeeResponse.fromEmployee(repository.save(employee));
-		} catch (ObjectNotFoundException e) {
+			Employee savedEmployee = repository.save(employee);
+			return EmployeeResponse.fromEmployee(savedEmployee);
+		} catch (ObjectNotFoundException | UserOperationException e) {
 			String message = String.format("Error while creating user to employee %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new EmployeeOperationException(message, e);
-		} catch(UserOperationException e) {
-			logger.warn(e.getMessage(), e);
-			throw new EmployeeOperationException(e.getMessage(), e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when creating user to employee %s : %s", ID, e.getMessage());
 			logger.error(message, e);

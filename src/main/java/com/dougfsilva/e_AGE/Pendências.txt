@@ -3,7 +3,6 @@ Verificar todas classes validator
 EmployeeDeleter
 findClazzByStudent List
 StuedentDeleter
-Verificar criação de usuário default para alunos e empregados. Talvez usar UserCreator direto
 Mudar retorno dos objetos salvos como saved
 FindByUser para student?
 Validar tamanho da descriçao da occorrencia

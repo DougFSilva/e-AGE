@@ -20,19 +20,16 @@ public class StudentUserCreator {
 	private final StandardLogger logger;
 	
 	public StudentResponse createByID(String ID) {
-		
 		try {
 			Student student = repository.findByIdOrThrow(ID);
 			User user = userCreator.create(student);
 			student.setUser(user);
-			return StudentResponse.fromStudent(repository.save(student));
-		} catch (ObjectNotFoundException e) {
+			Student savedStudent = repository.save(student);
+			return StudentResponse.fromStudent(savedStudent);
+		} catch (ObjectNotFoundException | UserOperationException e) {
 			String message = String.format("Error while creating user to student %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new StudentOperationException(message, e);
-		} catch(UserOperationException e) {
-			logger.warn(e.getMessage(), e);
-			throw new StudentOperationException(e.getMessage(), e);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when creating user to student %s : %s", ID, e.getMessage());
 			logger.error(message, e);
