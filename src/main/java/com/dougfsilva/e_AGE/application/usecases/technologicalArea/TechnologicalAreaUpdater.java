@@ -20,10 +20,10 @@ public class TechnologicalAreaUpdater {
 	public TechnologicalArea update(UpdateTechnologicalAreaRequest request) {
 		try {
 			TechnologicalArea area = repository.findByIdOrThrow(request.getID());
-			updateTechnologicalAreaData(area, request);
-			TechnologicalArea updatedArea = repository.save(area);
-			logger.info(String.format("Updated Technological Area ID %s - %s", updatedArea.getID(), updatedArea.getTitle()));
-			return updatedArea;
+			TechnologicalArea updatedArea = updateTechnologicalAreaData(area, request);
+			TechnologicalArea savedArea = repository.save(updatedArea);
+			logger.info(String.format("Updated Technological Area ID %s - %s", savedArea.getID(), savedArea.getTitle()));
+			return savedArea;
 		} catch (ObjectNotFoundException | TechnologicalAreaValidationException e) {
 			String message = String.format("Error while updating technological area %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
@@ -35,7 +35,7 @@ public class TechnologicalAreaUpdater {
 		}
 	}
 
-	private void updateTechnologicalAreaData(TechnologicalArea area, UpdateTechnologicalAreaRequest request) {
+	private TechnologicalArea updateTechnologicalAreaData(TechnologicalArea area, UpdateTechnologicalAreaRequest request) {
 		if (request.getTitle() != null && !request.getTitle().isBlank() && !request.getTitle().equalsIgnoreCase(area.getTitle())) {
 			validator.uniqueTitle(request.getTitle());
 			area.setTitle(request.getTitle());
@@ -43,5 +43,6 @@ public class TechnologicalAreaUpdater {
 		if (request.getDescription() != null && !request.getDescription().isBlank()) {
 			area.setDescription(request.getDescription());
 		}
+		return area;
 	}
 }

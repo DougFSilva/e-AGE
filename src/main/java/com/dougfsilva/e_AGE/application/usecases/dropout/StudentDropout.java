@@ -23,11 +23,12 @@ public class StudentDropout {
 	public DropoutResponse dropout(CreateDropoutRequest request) {
 		try {
 			Enrollment enrollment = enrollmentRepository.findByIdOrThrow(request.getEnrollmentID());
-			updateEnrollmentStatus(enrollment);
+			enrollment.setStatus(EnrollmentStatus.DROPPED);
+			enrollmentRepository.save(enrollment);
 			Dropout dropout = new Dropout(enrollment.getStudent(), enrollment.getClazz(), request.getReason(), request.getDate());
-			Dropout createdDropout = repository.save(dropout);
-			logger.info(String.format("Student %s dropped out of class %s",createdDropout.getStudent().getName(), createdDropout.getClazz().getCode()));
-			return DropoutResponse.fromDropout(createdDropout);
+			Dropout savedDropout = repository.save(dropout);
+			logger.info(String.format("Student %s dropped out of class %s", savedDropout.getStudent().getName(), savedDropout.getClazz().getCode()));
+			return DropoutResponse.fromDropout(savedDropout);
 		} catch (ObjectNotFoundException e) {
 			String message = String.format("Error while dropping student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
@@ -38,10 +39,5 @@ public class StudentDropout {
 			logger.error(message, e);
 			throw new DropoutOperationException(message, e);
 		}
-	}
-	
-	private void updateEnrollmentStatus(Enrollment enrollment) {
-		enrollment.setStatus(EnrollmentStatus.DROPPED);
-		enrollmentRepository.save(enrollment);
 	}
 }

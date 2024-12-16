@@ -22,7 +22,9 @@ public class EmployeeImageDeleter {
 	public void deleteByID(String ID) {
 		try {
 			Employee employee = repository.findByIdOrThrow(ID);
-			deleteImage(employee);
+			imageService.deleteImage(ImageType.EMPLOYEE, ImageNameGenerator.byEmployee(employee));
+			employee.setImage(null);
+			repository.save(employee);
 			logger.info(String.format("Image deleted successfully for employee ID %s - %s", employee.getID(), employee.getName()));
 		} catch (ObjectNotFoundException | ImageOperationException e) {
 			String message = String.format("Error while deleting image of employee ID %s : %s", ID, e.getMessage());
@@ -35,9 +37,5 @@ public class EmployeeImageDeleter {
 		}
 	}
 	
-	private void deleteImage(Employee employee) {
-		imageService.deleteImage(ImageType.EMPLOYEE, ImageNameGenerator.byEmployee(employee));
-		employee.setImage(null);
-		repository.save(employee);
-	}
+	
 }

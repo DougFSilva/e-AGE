@@ -26,9 +26,11 @@ public class EmployeeImageUploader {
 		try {
 			validateImage(image);
 			Employee employee = repository.findByIdOrThrow(ID);
-			Employee updatedEmployee = uploadImage(employee, image);
-			logger.info(String.format("Image uploaded successfully for employee ID %s, %s ", employee.getID(), employee.getName()));
-			return EmployeeResponse.fromEmployee(updatedEmployee);
+			String imageUrl = imageService.uploadImage(image, ImageType.EMPLOYEE, ImageNameGenerator.byEmployee(employee));
+			employee.setImage(imageUrl);
+			Employee savedEmployee = repository.save(employee);
+			logger.info(String.format("Image uploaded successfully for employee ID %s, %s ", savedEmployee.getID(), savedEmployee.getName()));
+			return EmployeeResponse.fromEmployee(savedEmployee);
 		} catch (ObjectNotFoundException | IllegalArgumentException | ImageOperationException e) {
 			String message = String.format("Error while uploading employee image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -40,11 +42,7 @@ public class EmployeeImageUploader {
 		}
 	}
 
-	private Employee uploadImage(Employee employee, MultipartFile image) {
-		String imageUrl = imageService.uploadImage(image, ImageType.EMPLOYEE, ImageNameGenerator.byEmployee(employee));
-		employee.setImage(imageUrl);
-		return repository.save(employee);
-	}
+		
 
 	private void validateImage(MultipartFile image) {
 		if (image == null || image.isEmpty()) {

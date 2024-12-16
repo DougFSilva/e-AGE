@@ -25,9 +25,11 @@ public class TechnologicalAreaImageUploader {
 		try {
 			validateImage(image);
 			TechnologicalArea area = repository.findByIdOrThrow(ID);
-			TechnologicalArea updatedArea = uploadImage(area, image);
+			String imageUrl = imageService.uploadImage(image, ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(area));
+			area.setImage(imageUrl);
+			TechnologicalArea savedArea = repository.save(area);
 	        logger.info(String.format("Image uploaded successfully for technological area ID %s - %s ", area.getID(), area.getTitle()));
-			return updatedArea;
+			return savedArea;
 		} catch (ObjectNotFoundException | IllegalArgumentException | ImageOperationException e) {
 			String message = String.format("Error while uploading technological area image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -39,11 +41,6 @@ public class TechnologicalAreaImageUploader {
 		}
 	}
 	
-	private TechnologicalArea uploadImage(TechnologicalArea area, MultipartFile image) {
-		String imageUrl = imageService.uploadImage(image, ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(area));
-		area.setImage(imageUrl);
-		return repository.save(area);
-	}
 
 	private void validateImage(MultipartFile image) {
 		if (image == null || image.isEmpty()) {

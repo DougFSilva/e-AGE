@@ -26,10 +26,10 @@ public class EmployeeUpdater {
 	public EmployeeResponse update(UpdateEmployeeRequest request) {
 		try {
 			Employee employee = repository.findByIdOrThrow(request.getID());
-			updateEmployeeData(employee, request);
-			Employee updatedEmployee = repository.save(employee);
-			logger.info(String.format("Updated Employee ID %s, %s", employee.getID(), employee.getName()));
-			return EmployeeResponse.fromEmployee(updatedEmployee);
+			Employee updatedEmployee = updateEmployeeData(employee, request);
+			Employee savedEmployee = repository.save(updatedEmployee);
+			logger.info(String.format("Updated Employee ID %s, %s", savedEmployee.getID(), savedEmployee.getName()));
+			return EmployeeResponse.fromEmployee(savedEmployee);
 		} catch (ObjectNotFoundException | EmployeeValidationException | PersonValidationException e) {
 			String message = String.format("Error while updating employee %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
@@ -42,7 +42,7 @@ public class EmployeeUpdater {
 
 	}
 
-	private void updateEmployeeData(Employee employee, UpdateEmployeeRequest request) {
+	private Employee updateEmployeeData(Employee employee, UpdateEmployeeRequest request) {
 		if (request.getName() != null && !request.getName().isBlank()) {
 			employee.setName(request.getName());
 		}
@@ -77,5 +77,6 @@ public class EmployeeUpdater {
 		if (request.getActive() != null) {
 			employee.setActive(request.getActive());
 		}
+		return employee;
 	}
 }

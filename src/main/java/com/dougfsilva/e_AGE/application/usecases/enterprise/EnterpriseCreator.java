@@ -25,9 +25,9 @@ public class EnterpriseCreator {
 			validator.uniqueName(request.getName());
 			Address address = addressCreator.create(request.getAddress()); 
 			Enterprise enterprise = new Enterprise(request.getTIN(), request.getName(), address);
-			Enterprise createdEnterprise = repository.save(enterprise);
-			logger.info(String.format("Created enterprise ID %s, %s", createdEnterprise.getID(), createdEnterprise.getName()));
-			return createdEnterprise;
+			Enterprise savedEnterprise = repository.save(enterprise);
+			logger.info(String.format("Created enterprise ID %s, %s", savedEnterprise.getID(), savedEnterprise.getName()));
+			return savedEnterprise;
 		} catch (EnterpriseValidationException e) {
 			String message = String.format("Error while creating enterprise %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);

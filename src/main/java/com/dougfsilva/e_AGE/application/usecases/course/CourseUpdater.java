@@ -24,10 +24,10 @@ public class CourseUpdater {
 	public CourseResponse update(UpdateCourseRequest request) {
 		try {
 			Course course = repository.findByIdOrThrow(request.getID());
-			updateCourseData(course, request);
-			Course updatedCourse = repository.save(course);
-			logger.info(String.format("Updated Course ID %s, %s", updatedCourse.getID(), updatedCourse.getTitle()));
-			return CourseResponse.fromCourse(updatedCourse);
+			Course updatedCourse = updateCourseData(course, request);
+			Course savedCourse = repository.save(updatedCourse);
+			logger.info(String.format("Updated Course ID %s, %s", savedCourse.getID(), savedCourse.getTitle()));
+			return CourseResponse.fromCourse(savedCourse);
 		} catch (ObjectNotFoundException | CourseValidationException e) {
 			String message = String.format("Error while updating course %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);
@@ -40,7 +40,7 @@ public class CourseUpdater {
 
 	}
 
-	private void updateCourseData(Course course, UpdateCourseRequest request) {
+	private Course updateCourseData(Course course, UpdateCourseRequest request) {
 		if (request.getTitle() != null && !request.getTitle().isBlank() && !request.getTitle().equalsIgnoreCase(course.getTitle())) {
 			validator.uniqueTitle(request.getTitle());
 			course.setTitle(request.getTitle());
@@ -53,5 +53,6 @@ public class CourseUpdater {
 		if (request.getModality() != null) {
 			course.setModality(request.getModality());
 		}
+		return course;
 	}
 }

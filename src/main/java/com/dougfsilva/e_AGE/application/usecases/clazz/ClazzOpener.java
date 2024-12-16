@@ -19,9 +19,11 @@ public class ClazzOpener {
 	public ClazzResponse openByID(String ID) {
 		try {
 			Clazz clazz = repository.findByIdOrThrow(ID);
-			Clazz openedClazz = openClazz(clazz);
-			logger.info(String.format("Opened clazz ID %s, code %s", openedClazz.getID(), openedClazz.getCode()));
-			return ClazzResponse.fromClazz(openedClazz);
+			clazz.setClosingDate(null);
+			clazz.setIsClosed(false);
+			Clazz savedClazz = repository.save(clazz);
+			logger.info(String.format("Opened clazz ID %s, code %s", savedClazz.getID(), savedClazz.getCode()));
+			return ClazzResponse.fromClazz(savedClazz);
 		} catch (ObjectNotFoundException e) {
 			String message = String.format("Error while opening class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -33,9 +35,4 @@ public class ClazzOpener {
 		}
 	}
 	
-	private Clazz openClazz(Clazz clazz) {
-		clazz.setClosingDate(null);
-		clazz.setIsClosed(false);
-		return repository.save(clazz);
-	}
 }

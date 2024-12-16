@@ -1,6 +1,22 @@
+usar termo ensure
+Verificar todas classes validator
+EmployeeDeleter
+findClazzByStudent List
+StuedentDeleter
+Verificar criação de usuário default para alunos e empregados. Talvez usar UserCreator direto
+Mudar retorno dos objetos salvos como saved
+FindByUser para student?
+Validar tamanho da descriçao da occorrencia
+Se ocorrencia estiver assinada pelo aluno não pode mais ser editada
+Aluno confirmar ocorrencia com loggin no sistema
+Atributo na classe ocorrencia para registrar que o email foi enviado e a hora que foi enviado.fazer isso também para notificação whatssapp
+Criar email de usuário com senha em hash
+Atualizar criação de ocorrências e outros que dependem de horario de abertura com horarios com zonedatetime
+Verificar possibilidade de buscar horario online primeiramente
+OccurrenceReopener
+Assinatura de aluno e/ou responsável
 Rematricula em massa
 Cadastrar aluno e matricular no mesmo endpoit. Individual e em massa
-EnrollmentUpdater para atualizar data e status e matricula
 Ao deletar student deletar também Usuario, Adress, Responsible. Deletar as matrículas e ocorrências. Aluno depende de occurrence, Certificate e Dropout também
 Ao deletar employeer somente possivel se não tiver ocorrências.
 alunos countByCourse

@@ -24,10 +24,10 @@ public class ClazzUpdater {
 	public ClazzResponse update(UpdateClazzRequest request) {
 		try {
 			Clazz clazz = repository.findByIdOrThrow(request.getID());
-			updateClazzData(clazz, request);
-			Clazz updatedClazz = repository.save(clazz);
-			logger.info(String.format("Updated class ID %s, code %s", updatedClazz.getID(), updatedClazz.getCode()));
-			return ClazzResponse.fromClazz(updatedClazz);
+			Clazz updatedClazz = updateClazzData(clazz, request);
+			Clazz savedClazz = repository.save(updatedClazz);
+			logger.info(String.format("Updated class ID %s, code %s", savedClazz.getID(), savedClazz.getCode()));
+			return ClazzResponse.fromClazz(savedClazz);
 		} catch (ObjectNotFoundException | ClazzValidationException e) {
 			String message = String.format("Error while updating class code %s : %s", request.getCode(), e.getMessage());
 			logger.warn(message, e);
@@ -39,7 +39,7 @@ public class ClazzUpdater {
 		}
 	}
 
-	public void updateClazzData(Clazz clazz, UpdateClazzRequest request) {
+	public Clazz updateClazzData(Clazz clazz, UpdateClazzRequest request) {
 		if (request.getCode() != null && !request.getCode().isBlank()
 				&& !request.getCode().equalsIgnoreCase(clazz.getCode())) {
 			validator.uniqueCode(request.getCode());
@@ -53,6 +53,7 @@ public class ClazzUpdater {
 		if (request.getNumber() != null) {
 			clazz.setNumber(request.getNumber());
 		}
+		return clazz;
 	}
 
 }

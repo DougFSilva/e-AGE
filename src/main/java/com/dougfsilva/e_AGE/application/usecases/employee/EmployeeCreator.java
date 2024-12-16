@@ -46,10 +46,10 @@ public class EmployeeCreator {
 					request.getRegistration(),
 					request.getStaffRole(),
 					true);
-			Employee createdEmployee = repository.save(employee);
-			createUser(request, createdEmployee);
+			Employee savedEmployee = repository.save(employee);
+			createUser(request, savedEmployee);
 			logger.info(String.format("Created employee ID %s, %s", employee.getID(), employee.getName()));
-			return EmployeeResponse.fromEmployee(createdEmployee);
+			return EmployeeResponse.fromEmployee(savedEmployee);
 		} catch (ObjectNotFoundException | EmployeeValidationException | PersonValidationException | UserOperationException e) {
 			String message = String.format("Error while creating employee %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
@@ -62,7 +62,7 @@ public class EmployeeCreator {
 	}
 	
 	private void createUser(CreateEmployeeRequest request, Employee employee) {
-		if(request.getCreateDefaultUser() != null && request.getCreateDefaultUser()) {
+		if(request.getCreateDefaultUser()) {
 			employeeUserCreator.createByID(employee.getID());
 		}
 	}

@@ -32,11 +32,12 @@ public class Reenroller {
 			validator.studentNotEnrolledInClazz(currentEnrollment.getStudent(), clazz);
 			Enrollment newEnrollment = new Enrollment(currentEnrollment.getRegistration(),
 					currentEnrollment.getStudent(), clazz, request.getDate(), EnrollmentStatus.ENROLLED);
-			Enrollment createdEnrollment = repository.save(newEnrollment);
-			updateCurrentEnrollment(currentEnrollment);
-			logger.info(String.format("Stundent %s reenrolled to clazz %s", createdEnrollment.getStudent().getName(),
+			Enrollment savedEnrollment = repository.save(newEnrollment);
+			newEnrollment.setStatus(EnrollmentStatus.COMPLETED);
+			repository.save(newEnrollment);
+			logger.info(String.format("Stundent %s reenrolled to clazz %s", savedEnrollment.getStudent().getName(),
 					clazz.getCode()));
-			return EnrollmentResponse.fromEnrollment(createdEnrollment);
+			return EnrollmentResponse.fromEnrollment(savedEnrollment);
 		} catch (ObjectNotFoundException | EnrollmentValidationException e) {
 			String message = String.format("Error while reactivating enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
@@ -48,11 +49,6 @@ public class Reenroller {
 		}
 	}
 
-	private void updateCurrentEnrollment(Enrollment enrollment) {
-		enrollment.setStatus(EnrollmentStatus.COMPLETED);
-		repository.save(enrollment);
-	}
-	
 	private void checkEnrollmentStatus(Enrollment enrollment) {
 		if (enrollment.getStatus() == EnrollmentStatus.DROPPED) {
 			throw new CertificateValidationException("Cannot certify a dropout student");

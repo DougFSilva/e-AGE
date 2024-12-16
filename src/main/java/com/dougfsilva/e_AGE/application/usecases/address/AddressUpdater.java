@@ -19,8 +19,8 @@ public class AddressUpdater {
 	public Address update(UpdateAddressRequest request) {
 		try {
 			Address address = repository.findByIDOrThrow(request.getID());
-			updateClazzData(address, request);
-			return repository.save(address);
+			Address updatedAddress = updateAddressData(address, request);
+			return repository.save(updatedAddress);
 		} catch (ObjectNotFoundException e) {
 			String message = String.format("Error while updating address ID %s : %s", request.getID(), e.getMessage());
 			logger.warn(message, e);
@@ -32,7 +32,7 @@ public class AddressUpdater {
 		}
 	}
 
-	private void updateClazzData(Address address, UpdateAddressRequest request) {
+	private Address updateAddressData(Address address, UpdateAddressRequest request) {
 		if (request.getCountry() != null && request.getCountry().isBlank()) {
 			address.setCountry(request.getCountry());
 		}
@@ -54,5 +54,6 @@ public class AddressUpdater {
 		if (request.getNumber() != null && !request.getNumber().isBlank()) {
 			address.setNumber(request.getNumber());
 		}
+		return address;
 	}
 }

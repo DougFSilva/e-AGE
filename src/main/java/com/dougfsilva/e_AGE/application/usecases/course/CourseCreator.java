@@ -1,5 +1,7 @@
 package com.dougfsilva.e_AGE.application.usecases.course;
 
+import java.time.LocalDate;
+
 import com.dougfsilva.e_AGE.application.dto.request.CreateCourseRequest;
 import com.dougfsilva.e_AGE.application.dto.response.CourseResponse;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
@@ -33,11 +35,11 @@ public class CourseCreator {
 					request.getTitle(), 
 					technologicalArea, 
 					false,
-					request.getCreationDate(), 
+					LocalDate.now(), 
 					imageService.getDefaultImage(ImageType.COURSE));
-			Course createdCourse = repository.save(course);
-			logger.info(String.format("Created Course ID %s, %s", createdCourse.getID(), createdCourse.getTitle()));
-			return CourseResponse.fromCourse(createdCourse);
+			Course savedCourse = repository.save(course);
+			logger.info(String.format("Created Course ID %s, %s", savedCourse.getID(), savedCourse.getTitle()));
+			return CourseResponse.fromCourse(savedCourse);
 		} catch (ObjectNotFoundException | CourseValidationException e) {
 			String message = String.format("Error while creating course %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);

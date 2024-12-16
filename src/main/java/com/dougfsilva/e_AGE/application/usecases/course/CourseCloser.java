@@ -22,14 +22,16 @@ public class CourseCloser {
 	private final ClazzRepository clazzRepository;
 	private StandardLogger logger;
 
-	public CourseResponse closerByID(String ID, LocalDate date) {
+	public CourseResponse closerByID(String ID) {
 		try {
 			Course course = repository.findByIdOrThrow(ID);
 			List<Clazz> clazzes = clazzRepository.findAllByCourse(course);
 			checkForOpenedClazz(clazzes);
-			Course closedCourse = closeCourse(course, date);
-			logger.info(String.format("Closed Course ID %s, %s", closedCourse.getID(), closedCourse.getTitle()));
-			return CourseResponse.fromCourse(closedCourse);
+			course.setIsClosed(true);
+			course.setClosingDate(LocalDate.now());
+			Course saveddCourse = repository.save(course);
+			logger.info(String.format("Closed Course ID %s, %s", saveddCourse.getID(), saveddCourse.getTitle()));
+			return CourseResponse.fromCourse(saveddCourse);
 		} catch (ObjectNotFoundException | CourseValidationException e) {
 			String message = String.format("Error while closing course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -48,9 +50,4 @@ public class CourseCloser {
 		}
 	}
 
-	private Course closeCourse(Course course, LocalDate date) {
-		course.setIsClosed(true);
-		course.setClosingDate(date);
-		return repository.save(course);
-	}
 }

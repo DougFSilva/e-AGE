@@ -29,10 +29,10 @@ public class StudentCertifier {
 			updateEnrollmentStatus(enrollment);
 			Course course = enrollment.getClazz().getCourse();
 			Certificate certificate = new Certificate(enrollment.getStudent(), course, request.getCertificationDate());
-			Certificate createdCertificate = repository.save(certificate);
-			logger.info(String.format("Student %s certified in course %s", createdCertificate.getStudent().getName(),
-					createdCertificate.getCourse().getTitle()));
-			return CertificateResponse.fromCertificate(createdCertificate);
+			Certificate savedCertificate = repository.save(certificate);
+			logger.info(String.format("Student %s certified in course %s", savedCertificate.getStudent().getName(),
+					savedCertificate.getCourse().getTitle()));
+			return CertificateResponse.fromCertificate(savedCertificate);
 		} catch (ObjectNotFoundException | CertificateValidationException e) {
 			String message = String.format("Error while certifier student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);

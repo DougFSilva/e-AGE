@@ -1,9 +1,7 @@
 package com.dougfsilva.e_AGE.application.usecases.enterprise;
 
-import com.dougfsilva.e_AGE.domain.enterprise.Enterprise;
 import com.dougfsilva.e_AGE.domain.enterprise.EnterpriseRepository;
 import com.dougfsilva.e_AGE.domain.exception.EnterpriseValidationException;
-import com.dougfsilva.e_AGE.domain.student.StudentRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -11,7 +9,6 @@ import lombok.AllArgsConstructor;
 public class EnterpriseValidator {
 
 	private final EnterpriseRepository repository;
-	private final StudentRepository studentRepository;
 	
 	public void uniqueTIN(String TIN) {
 		if(repository.existsByTIN(TIN)) {
@@ -25,11 +22,4 @@ public class EnterpriseValidator {
 		}
 	}
 	
-	public void hasNoStudentsRegisteredInTheEnterprise(Enterprise enterprise) {
-		if(studentRepository.existsByEnterprise(enterprise)) {
-			throw new EnterpriseValidationException(
-					String.format("The Enterprise %s cannot be deleted because there are students still associated with it!", 
-							enterprise.getName()));
-		}
-	}
 }

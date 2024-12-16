@@ -39,7 +39,7 @@ public abstract class CreatePersonRequest {
 		this.email = (email != null && !email.isBlank()) ? new Email(email) : null;
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
-		this.createDefaultUser = createDefaultUser;
+		this.createDefaultUser = createDefaultUser != null ? createDefaultUser : false;
 	}
 
 }

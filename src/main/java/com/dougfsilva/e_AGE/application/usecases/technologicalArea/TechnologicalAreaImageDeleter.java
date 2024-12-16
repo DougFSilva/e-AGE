@@ -22,7 +22,9 @@ public class TechnologicalAreaImageDeleter {
 	public void deleteByID(String ID) {
 		try {
 			TechnologicalArea area = repository.findByIdOrThrow(ID);
-			deleteImage(area);
+			imageService.deleteImage(ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(area));
+			area.setImage(null);
+			repository.save(area);
 	        logger.info(String.format("Image deleted successfully for technological ID %s - %s ", area.getID(), area.getTitle()));
 		} catch (ObjectNotFoundException | ImageOperationException e) {
 			String message = String.format("Error while deleting technological area image ID %s : %s", ID, e.getMessage());
@@ -35,9 +37,4 @@ public class TechnologicalAreaImageDeleter {
 		}
 	}
 	
-	private void deleteImage(TechnologicalArea area) {
-		imageService.deleteImage(ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(area));
-		area.setImage(null);
-		repository.save(area);
-	}
 }

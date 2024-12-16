@@ -29,4 +29,8 @@ public class User {
 		this.passwordChanged = passwordChanged;
 	}
 	
+	public Boolean checkContainsProfile(ProfileType profileType) {
+		return this.getProfiles().stream().anyMatch(profile -> profile.getProfileType() == profileType);
+	}
+	
 }

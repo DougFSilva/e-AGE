@@ -23,14 +23,16 @@ public class ClazzCloser {
 	private final EnrollmentRepository enrollmentRepository;
 	private final StandardLogger logger;
 
-	public ClazzResponse closeByID(String ID, LocalDate date) {
+	public ClazzResponse closeByID(String ID) {
 		try {
 			Clazz clazz = repository.findByIdOrThrow(ID);
 			List<Enrollment> enrollments = enrollmentRepository.findAllByClazz(clazz);
 			checkForEnrolledStudents(enrollments);
-			Clazz closedClazz = closeClazz(clazz, date);
-			logger.info(String.format("Closed class ID %s, code %s", closedClazz.getID(), closedClazz.getCode()));
-			return ClazzResponse.fromClazz(closedClazz);
+			clazz.setIsClosed(true);
+			clazz.setClosingDate(LocalDate.now());
+			Clazz savedClazz = repository.save(clazz);
+			logger.info(String.format("Closed class ID %s, code %s", savedClazz.getID(), savedClazz.getCode()));
+			return ClazzResponse.fromClazz(savedClazz);
 		} catch (ObjectNotFoundException | ClazzValidationException e) {
 			String message = String.format("Error while closing class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -46,12 +48,6 @@ public class ClazzCloser {
 		if (enrollments.stream().anyMatch(enrollment -> enrollment.getStatus() == EnrollmentStatus.ENROLLED)) {
 			throw new ClazzValidationException("Class cannot be closed because there are enrolled students!");
 		}
-	}
-
-	private Clazz closeClazz(Clazz clazz, LocalDate date) {
-		clazz.setIsClosed(true);
-		clazz.setClosingDate(date);
-		return repository.save(clazz);
 	}
 
 }

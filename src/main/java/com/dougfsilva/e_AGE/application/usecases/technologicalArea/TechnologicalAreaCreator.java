@@ -27,9 +27,9 @@ public class TechnologicalAreaCreator {
 					request.getTitle(), 
 					request.getDescription(), 
 					imageService.getDefaultImage(ImageType.TECHNOLOGICAL_AREA));
-			TechnologicalArea createArea = repository.save(area);
-			logger.info(String.format("Create Technological Area ID %s - %s", createArea.getID(), createArea.getTitle()));
-			return createArea;
+			TechnologicalArea savedArea = repository.save(area);
+			logger.info(String.format("Create Technological Area ID %s - %s", savedArea.getID(), savedArea.getTitle()));
+			return savedArea;
 		} catch (TechnologicalAreaValidationException e) {
 			String message = String.format("Error while creating technological area %s : %s", request.getTitle(), e.getMessage());
 			logger.warn(message, e);

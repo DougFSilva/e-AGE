@@ -18,9 +18,11 @@ public class CourseOpener {
 	public CourseResponse openByID(String ID) {
 		try {
 			Course course = repository.findByIdOrThrow(ID);
-			Course openedCourse = openCourse(course);
-			logger.info(String.format("Opened Course ID %s,  %s", openedCourse.getID(), openedCourse.getTitle()));
-			return CourseResponse.fromCourse(openedCourse);
+			course.setClosingDate(null);
+			course.setIsClosed(false);
+			Course savedCourse = repository.save(course);
+			logger.info(String.format("Opened Course ID %s,  %s", savedCourse.getID(), savedCourse.getTitle()));
+			return CourseResponse.fromCourse(savedCourse);
 		} catch (ObjectNotFoundException e) {
 			String message = String.format("Error while opening course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -32,9 +34,4 @@ public class CourseOpener {
 		}
 	}
 	
-	private Course openCourse(Course course) {
-		course.setClosingDate(null);
-		course.setIsClosed(false);
-		return repository.save(course);
-	}
 }

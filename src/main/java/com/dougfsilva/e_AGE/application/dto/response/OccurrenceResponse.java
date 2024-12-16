@@ -27,7 +27,7 @@ public class OccurrenceResponse {
 	private String description;
 	private String resolutionDescription;
 	private Boolean open;
-	private String studantSignature;
+	private String studentSignature;
 	private EmployeeResponse closureResponsible;
 	
 	public OccurrenceResponse(Occurrence occurrence) {
@@ -35,7 +35,7 @@ public class OccurrenceResponse {
 		this.openingDate = occurrence.getOpeningDate();
 		this.closingDate = occurrence.getClosingDate();
 		this.reporter = EmployeeResponse.fromEmployee(occurrence.getReporter());
-		this.studant = StudentResponse.fromStudent(occurrence.getStudant());
+		this.studant = StudentResponse.fromStudent(occurrence.getStudent());
 		this.clazz = ClazzResponse.fromClazz(occurrence.getClazz());
 		this.curricularUnit = occurrence.getCurricularUnit();
 		this.occurrenceType = occurrence.getOccurrenceType();
@@ -44,7 +44,7 @@ public class OccurrenceResponse {
 		this.description = occurrence.getDescription();
 		this.resolutionDescription = occurrence.getResolutionDescription();
 		this.open = occurrence.getOpen();
-		this.studantSignature = occurrence.getStudantSignature();
+		this.studentSignature = occurrence.getStudentSignature();
 		this.closureResponsible = EmployeeResponse.fromEmployee(occurrence.getClosureResponsible());
 	}
 

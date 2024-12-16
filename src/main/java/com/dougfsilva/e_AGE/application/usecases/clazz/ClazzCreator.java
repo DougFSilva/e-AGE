@@ -1,5 +1,7 @@
 package com.dougfsilva.e_AGE.application.usecases.clazz;
 
+import java.time.LocalDate;
+
 import com.dougfsilva.e_AGE.application.dto.request.CreateClazzRequest;
 import com.dougfsilva.e_AGE.application.dto.response.ClazzResponse;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
@@ -26,11 +28,10 @@ public class ClazzCreator {
 			validator.uniqueCode(request.getCode());
 			Course course = courseRepository.findByIdOrThrow(request.getCourseID());
 			validator.openCourse(course);
-			Clazz clazz = new Clazz(request.getNumber(), request.getCode().toUpperCase(), course, false,
-					request.getCreationDate());
-			Clazz createdClazz = repository.save(clazz);
-			logger.info(String.format("Created class ID %s, code %s ", createdClazz.getID(), createdClazz.getCode()));
-			return ClazzResponse.fromClazz(createdClazz);
+			Clazz clazz = new Clazz(request.getNumber(), request.getCode().toUpperCase(), course, false, LocalDate.now());
+			Clazz savedClazz = repository.save(clazz);
+			logger.info(String.format("Created class ID %s, code %s ", savedClazz.getID(), savedClazz.getCode()));
+			return ClazzResponse.fromClazz(savedClazz);
 		} catch (ObjectNotFoundException | ClazzValidationException e) {
 			String message = String.format("Error while creating class code %s : %s", request.getCode(), e.getMessage());
 			logger.warn(message, e);

@@ -33,9 +33,9 @@ public class Enroller {
 			validator.clazzIsNotClosed(clazz);
 			validator.studentNotEnrolledInClazz(student, clazz);
 			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
-			Enrollment createEnrollment = repository.save(enrollment);
+			Enrollment savedEnrollment = repository.save(enrollment);
 			logger.info(String.format("Student %s enrolled in class %s", student.getName(), clazz.getCode()));
-			return EnrollmentResponse.fromEnrollment(createEnrollment);
+			return EnrollmentResponse.fromEnrollment(savedEnrollment);
 		} catch (ObjectNotFoundException | EnrollmentValidationException e) {
 			String message = String.format("Error while creating enrollment to student ID %s : %s", request.getStudentID(), e.getMessage());
 			logger.warn(message, e);

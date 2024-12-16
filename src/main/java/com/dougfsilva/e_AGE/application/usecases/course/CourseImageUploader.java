@@ -26,10 +26,12 @@ public class CourseImageUploader {
 		try {
 			validateImage(image);
 			Course course = repository.findByIdOrThrow(ID);
-			Course updatedCourse = uploadImage(course, image);
-			logger.info(String.format("Image uploaded successfully for course ID %s - %s ", updatedCourse.getID(),
-					updatedCourse.getTitle()));
-			return CourseResponse.fromCourse(updatedCourse);
+			String imageUrl = imageService.uploadImage(image, ImageType.COURSE, ImageNameGenerator.byCourse(course));
+			course.setImage(imageUrl);
+			Course savedCourse = repository.save(course);
+			logger.info(String.format("Image uploaded successfully for course ID %s - %s ", savedCourse.getID(),
+					savedCourse.getTitle()));
+			return CourseResponse.fromCourse(savedCourse);
 		} catch (ObjectNotFoundException | IllegalArgumentException | ImageOperationException e) {
 			String message = String.format("Error while uploading course image ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
@@ -39,12 +41,6 @@ public class CourseImageUploader {
 			logger.error(message, e);
 			throw new CourseOperationException(message, e);
 		}
-	}
-
-	private Course uploadImage(Course course, MultipartFile image) {
-		String imageUrl = imageService.uploadImage(image, ImageType.COURSE, ImageNameGenerator.byCourse(course));
-		course.setImage(imageUrl);
-		return repository.save(course);
 	}
 
 	private void validateImage(MultipartFile image) {

@@ -22,7 +22,9 @@ public class CourseImageDeleter {
 	public void deleteByID(String ID) {
 		try {
 			Course course = repository.findByIdOrThrow(ID);
-			deleteImage(course);
+			imageService.deleteImage(ImageType.COURSE, ImageNameGenerator.byCourse(course));
+			course.setImage(null);
+			repository.save(course);
 			logger.info(String.format("Image deleted successfully for course ID %s, %s ", course.getID(), course.getTitle()));
 		} catch (ObjectNotFoundException | ImageOperationException e) {
 			String message = String.format("Error while deleting course image ID %s : %s", ID, e.getMessage());
@@ -34,10 +36,5 @@ public class CourseImageDeleter {
 			throw new CourseOperationException(message, e);
 		}
 	}
-	
-	private void deleteImage(Course course) {
-		imageService.deleteImage(ImageType.COURSE, ImageNameGenerator.byCourse(course));
-		course.setImage(null);
-		repository.save(course);
-	}
+		
 }

@@ -49,10 +49,10 @@ public class StudentCreator {
 				Enterprise enterprise = enterpriseRepository.findByIdOrThrow(request.getEnterpriseID());
 				student.setEnterprise(enterprise);
 			}
-			Student createdStudent = repository.save(student);
-			createUser(request, createdStudent);
-			logger.info(String.format("Created student ID %s, %s", createdStudent.getID(), createdStudent.getName()));
-			return StudentResponse.fromStudent(createdStudent);
+			Student savedStudent = repository.save(student);
+			createUser(request, savedStudent);
+			logger.info(String.format("Created student ID %s, %s", savedStudent.getID(), savedStudent.getName()));
+			return StudentResponse.fromStudent(savedStudent);
 		} catch (ObjectNotFoundException | PersonValidationException | UserOperationException e) {
 			String message = String.format("Error while creating student %s : %s", request.getName(), e.getMessage());
 			logger.warn(message, e);
@@ -65,7 +65,7 @@ public class StudentCreator {
 	}
 	
 	private void createUser(CreateStudentRequest request, Student student) {
-		if(request.getCreateDefaultUser() != null && request.getCreateDefaultUser()) {
+		if(request.getCreateDefaultUser()) {
 			studentUserCreator.createByID(student.getID());
 		}
 	}

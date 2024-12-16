@@ -24,9 +24,9 @@ public class EnterpriseUpdater {
 	public Enterprise update(UpdateEnterpriseRequest request) {
 		try {
 			Enterprise enterprise = repository.findByIdOrThrow(request.getID());
-			updateEnterpriseData(enterprise, request);
-			Enterprise updatedEnterprise = repository.save(enterprise);
-			logger.info(String.format("Updated enterprise ID %s - %s", updatedEnterprise.getID(), updatedEnterprise.getName()));
+			Enterprise updatedEnterprise = updateEnterpriseData(enterprise, request);
+			Enterprise savedEnterprise = repository.save(updatedEnterprise);
+			logger.info(String.format("Updated enterprise ID %s, %s", savedEnterprise.getID(), savedEnterprise.getName()));
 			return updatedEnterprise;
 		} catch (ObjectNotFoundException | EnterpriseValidationException e) {
 			String message = String.format("Error while updating enterprise ID %s : %s", request.getID(), e.getMessage());
@@ -39,7 +39,7 @@ public class EnterpriseUpdater {
 		}
 	}
 	
-	private void updateEnterpriseData(Enterprise enterprise, UpdateEnterpriseRequest request) {
+	private Enterprise updateEnterpriseData(Enterprise enterprise, UpdateEnterpriseRequest request) {
 		if(request.getName() != null && !request.getName().isBlank() && !request.getName().equalsIgnoreCase(enterprise.getName())) {
 			validator.uniqueName(request.getName());
 			enterprise.setName(request.getName());
@@ -52,5 +52,6 @@ public class EnterpriseUpdater {
 			Address address = addressUpdater.update(request.getAddress());
 			enterprise.setAddress(address);
 		}
+		return enterprise;
 	}
 }

@@ -1,6 +1,7 @@
 package com.dougfsilva.e_AGE.domain.person;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import com.dougfsilva.e_AGE.domain.address.Address;
 import com.dougfsilva.e_AGE.domain.user.User;
@@ -53,6 +54,10 @@ public class Person {
 		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.image = image;
+	}
+	
+	public Integer calculateAge() {
+		return Period.between(this.dateOfBirth, LocalDate.now()).getYears();
 	}
 
 }

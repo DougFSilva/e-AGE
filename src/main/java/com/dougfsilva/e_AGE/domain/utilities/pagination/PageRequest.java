@@ -14,9 +14,7 @@ import lombok.ToString;
 public class PageRequest {
 
 	private Integer page;
-
 	private Integer size;
-
 	private Direction direction;
 
 }
