@@ -16,8 +16,6 @@ public class CreateOccurrenceRequest {
 	private OccurrenceType occurrenceType;
 	private Boolean restricted;
 	private String description;
-	private Boolean sendEmailNotification;
-	private Boolean sendPhoneNotification;
 
 	public CreateOccurrenceRequest(String reporterID, String studentID, String clazzID,
 			String curricularUnit, OccurrenceType occurrenceType, Boolean restricted,
@@ -48,8 +46,6 @@ public class CreateOccurrenceRequest {
 		this.occurrenceType = occurrenceType;
 		this.restricted = restricted != null ? restricted : false ;
 		this.description = description;
-		this.sendEmailNotification = sendEmailNotification != null ? sendEmailNotification : false;
-		this.sendPhoneNotification = sendPhoneNotification != null ? sendPhoneNotification : false;
 	}
 
 }

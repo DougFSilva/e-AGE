@@ -1,19 +1,11 @@
-Só permitir aluno assinar ocorrência depois da tratativa. Talvez quando houver um estado ou use case resolver ocorrência tipo ABERTA, ENCAMINHADA, RESOLVIDA, ASSINADA, FECHADA
-Editar UpdateOccurrerenRequest
+Configuração de envio de email
 Enviar email ao editar ocorrência e/ou tratar ocorrencia
-Reabrir ocorrencia
-Aluno confirmar ocorrencia com loggin no sistema
 Atributo na classe ocorrencia para registrar que o email foi enviado e a hora que foi enviado.fazer isso também para notificação whatssapp
 Criar email de usuário com senha em hash
-Atualizar criação de ocorrências e outros que dependem de horario de abertura com horarios com zonedatetime
-Verificar possibilidade de buscar horario online primeiramente
-OccurrenceReopener
 Exclamação nas mensagens das exceptions
 Assinatura de aluno e/ou responsável
 Rematricula em massa
 Cadastrar aluno e matricular no mesmo endpoit. Individual e em massa
-Ao deletar student deletar também Usuario, Adress, Responsible. Deletar as matrículas e ocorrências. Aluno depende de occurrence, Certificate e Dropout também
-Ao deletar employeer somente possivel se não tiver ocorrências.
 alunos countByCourse
 Fechar turma e formar turma
 transferir alunos de turma
@@ -27,26 +19,17 @@ Talvez FindAllByClose em cursos e turmas
 Colocar exclamação nas mensagens das exceções
 Comentar código
 
-Inserir Usuário no aluno
-Inserir Usuário no Responsible
-Inserir Usuário no Employee
-Desistir Aluno
-
+Cache na busca de configurações
 Enviar Email ao criar um usuário com as informações de login e senha?
 Criar uma tabela de configurações no banco de dados e adicionar cache
 Criar um usuário admin ao iniciar o sistema 
 Alterar senha
 Talvez usar Hashset
 Buscar alunos por empresa, mas somente alunos com matriculas ativas
-Ao deletar uma classe deve se deletar todas as matrículas da classe e todas as drop da classe. Então deixar a opção deletar todas as matrículas pela classe e
-	deletar todas as desistencias pela classe
 Opção para manter a matrícula do aluno ao transferir de turma. Ou outra classe para mover aluno usando o mesmo numero de matricula
 O email de quem envia deve estar salvo em configurações no banco de dados
-Criar usecase para enviar notificações
 Tratar Trim() no controller
-Updated password
 Atualizar perfil de usuário somente usuário admin e Management pode
-Registros de ocorrências privados só podem ser visualizados por quem criou e por usuários do tipo Management. Nem mesmo admim pode ver
 
 ###Frontend
 Adicionar empresa por grupo de alunos. No frontend filtrar alunos por turma e clicar sobre os alunos desejados e adicionar empresa

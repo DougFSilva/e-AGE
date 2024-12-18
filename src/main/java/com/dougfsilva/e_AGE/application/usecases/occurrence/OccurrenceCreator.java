@@ -7,6 +7,9 @@ import com.dougfsilva.e_AGE.application.dto.response.OccurrenceResponse;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
 import com.dougfsilva.e_AGE.domain.clazz.Clazz;
 import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
+import com.dougfsilva.e_AGE.domain.configuration.Configuration;
+import com.dougfsilva.e_AGE.domain.configuration.ConfigurationRepository;
+import com.dougfsilva.e_AGE.domain.configuration.SystemSettingKey;
 import com.dougfsilva.e_AGE.domain.employee.Employee;
 import com.dougfsilva.e_AGE.domain.employee.EmployeeRepository;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
@@ -26,6 +29,7 @@ public class OccurrenceCreator {
 	private final EmployeeRepository employeeRepository;
 	private final StudentRepository studentRepository;
 	private final ClazzRepository clazzRepository;
+	private final ConfigurationRepository configurationRepository;
 	private final OccurrenceNotificator occurrenceNotificator;
 	private final StandardLogger logger;
 
@@ -66,12 +70,15 @@ public class OccurrenceCreator {
 	}
 	
 	private void sendNotifications(CreateOccurrenceRequest request, Occurrence occurrence) {
-		if (request.getSendEmailNotification()) {
+		Configuration sendEmailConfig = configurationRepository.findByKey(SystemSettingKey.SEND_EMAIL_WHEN_CREATING_OCCURRENCE);
+		Configuration sendPhoneMessageConfig = configurationRepository.findByKey(SystemSettingKey.SEND_PHONE_MESSAGE_WHEN_CREATING_OCCURRENCE);
+		if (sendEmailConfig.getValue().equalsIgnoreCase("YES")) {
 			occurrenceNotificator.notifyByEmail(occurrence);
 		}
-		if (request.getSendPhoneNotification()) {
+		if (sendPhoneMessageConfig.getValue().equalsIgnoreCase("YES")) {
 			occurrenceNotificator.notifyByPhone(occurrence);
 		}
+		
 	}
 	
 }

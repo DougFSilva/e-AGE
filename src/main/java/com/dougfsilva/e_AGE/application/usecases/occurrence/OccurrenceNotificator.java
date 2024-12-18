@@ -51,7 +51,7 @@ public class OccurrenceNotificator {
 	}
 
 	private String messageBuilder(Occurrence occurrence) {
-		return notificationMessageGenerator.getOccurrenceNotificationMessage(occurrence);
+		return notificationMessageGenerator.getNotificationMessageByOcurrence(occurrence);
 	}
 	
 
