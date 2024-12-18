@@ -44,7 +44,7 @@ public class UserCreator {
 	}
 	
 	private User userBuilder(Person person) {
-		ensureNoUser(person);
+		ensureIsNoUser(person);
 		String username = person.getRg();
 		Password password = new Password("Ps" + person.getRg() + "@", encoder);
 		List<Profile> profiles = getProfile(person);
@@ -60,7 +60,7 @@ public class UserCreator {
 		};
 	}
 	
-	private void ensureNoUser(Person person) {
+	private void ensureIsNoUser(Person person) {
 		if (person.getUser() != null) {
 			throw new UserValidationException(String.format("%s already has a user", person.getName()));
 		}

@@ -39,7 +39,4 @@ public class EmployeeFinder {
 	public Page<EmployeeResponse> findAll(PageRequest pageRequest) {
 		return EmployeeResponse.fromPage(repository.findAll(pageRequest));
 	}
-	
-	
-
 }

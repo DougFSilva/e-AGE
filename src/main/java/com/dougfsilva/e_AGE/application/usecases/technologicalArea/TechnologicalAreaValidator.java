@@ -1,8 +1,6 @@
 package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
-import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidationException;
-import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalArea;
 import com.dougfsilva.e_AGE.domain.technologicalArea.TechnologicalAreaRepository;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +9,6 @@ import lombok.AllArgsConstructor;
 public class TechnologicalAreaValidator {
 
 	private final TechnologicalAreaRepository repository;
-	private final CourseRepository courseRepository;
 
 	public void uniqueTitle(String title) {
 		if (repository.existsByTitle(title)) {
@@ -21,11 +18,4 @@ public class TechnologicalAreaValidator {
 		}
 	}
 	
-	public void hasNoCoursesInTechnologicalArea(TechnologicalArea technologicalArea) {
-		if (courseRepository.existsByTechnologialArea(technologicalArea)) {
-			throw new TechnologicalAreaValidationException	(
-					String.format("The technological area %s cannot be deleted because there are courses still associated with it!", 
-							technologicalArea.getTitle()));
-		}
-	}
 }

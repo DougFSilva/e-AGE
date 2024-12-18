@@ -27,7 +27,7 @@ public class ClazzCreator {
 		try {
 			validator.uniqueCode(request.getCode());
 			Course course = courseRepository.findByIdOrThrow(request.getCourseID());
-			validator.openCourse(course);
+			ensureIsOpenCourse(course);
 			Clazz clazz = new Clazz(request.getNumber(), request.getCode().toUpperCase(), course, false, LocalDate.now());
 			Clazz savedClazz = repository.save(clazz);
 			logger.info(String.format("Created class ID %s, code %s ", savedClazz.getID(), savedClazz.getCode()));
@@ -41,7 +41,12 @@ public class ClazzCreator {
 			logger.error(message, e);
 			throw new ClazzOperationException(message, e);
 		}
-
+	}
+	
+	private void ensureIsOpenCourse(Course course) {
+		if (course.getIsClosed()) {
+			throw new ClazzValidationException("It is not possible to create a class for a closed course!");
+		}
 	}
 
 }

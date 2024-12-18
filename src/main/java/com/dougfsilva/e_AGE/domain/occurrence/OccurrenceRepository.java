@@ -16,6 +16,7 @@ public interface OccurrenceRepository {
 
 	Occurrence save(Occurrence occurrence);
 	void delete(Occurrence occurrence);
+	void deleteAllByStudent(Student stundent);
 	Optional<Occurrence> findByID(String ID);
 	default Occurrence findByIdOrThrow(String ID) {
 	    return findByID(ID)

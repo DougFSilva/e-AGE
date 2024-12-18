@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import com.dougfsilva.e_AGE.domain.occurrence.Occurrence;
 import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceType;
+import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceSignature;
+import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceStatus;
 import com.dougfsilva.e_AGE.domain.utilities.pagination.Page;
 
 import lombok.Getter;
@@ -16,36 +18,36 @@ public class OccurrenceResponse {
 
 	private String ID;
 	private LocalDateTime openingDate;
-	private LocalDateTime closingDate;
+	private LocalDateTime finishingDate;
 	private EmployeeResponse reporter;
 	private StudentResponse studant;
 	private ClazzResponse clazz;
 	private String curricularUnit;
 	private OccurrenceType occurrenceType;
+	private Boolean forwarded;
 	private Boolean restricted;
-	private Boolean forwarding;
 	private String description;
-	private String resolutionDescription;
-	private Boolean open;
-	private String studentSignature;
-	private EmployeeResponse closureResponsible;
+	private String treatmentDescription;
+	private OccurrenceStatus status;
+	private OccurrenceSignature studentSignature;
+	private EmployeeResponse responsibleForFinishing;
 	
 	public OccurrenceResponse(Occurrence occurrence) {
 		this.ID = occurrence.getID();
 		this.openingDate = occurrence.getOpeningDate();
-		this.closingDate = occurrence.getClosingDate();
+		this.finishingDate = occurrence.getFinishingDate();
 		this.reporter = EmployeeResponse.fromEmployee(occurrence.getReporter());
 		this.studant = StudentResponse.fromStudent(occurrence.getStudent());
 		this.clazz = ClazzResponse.fromClazz(occurrence.getClazz());
 		this.curricularUnit = occurrence.getCurricularUnit();
 		this.occurrenceType = occurrence.getOccurrenceType();
+		this.forwarded = occurrence.getForwarded();
 		this.restricted = occurrence.getRestricted();
-		this.forwarding = occurrence.getForwarding();
 		this.description = occurrence.getDescription();
-		this.resolutionDescription = occurrence.getResolutionDescription();
-		this.open = occurrence.getOpen();
+		this.treatmentDescription = occurrence.getTreatmentDescription();
+		this.status = occurrence.getStatus();
 		this.studentSignature = occurrence.getStudentSignature();
-		this.closureResponsible = EmployeeResponse.fromEmployee(occurrence.getClosureResponsible());
+		this.responsibleForFinishing = EmployeeResponse.fromEmployee(occurrence.getResponsibleForFinishing());
 	}
 
 

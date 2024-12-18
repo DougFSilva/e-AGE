@@ -39,21 +39,26 @@ public class ClazzUpdater {
 		}
 	}
 
-	public Clazz updateClazzData(Clazz clazz, UpdateClazzRequest request) {
-		if (request.getCode() != null && !request.getCode().isBlank()
-				&& !request.getCode().equalsIgnoreCase(clazz.getCode())) {
+	private Clazz updateClazzData(Clazz clazz, UpdateClazzRequest request) {
+		if (request.getCode() != null && !request.getCode().isBlank() && !request.getCode().equalsIgnoreCase(clazz.getCode())) {
 			validator.uniqueCode(request.getCode());
 			clazz.setCode(request.getCode());
 		}
 		if (request.getCourseID() != null && !request.getCourseID().isBlank()) {
 			Course course = courseRepository.findByIdOrThrow(request.getCourseID());
-			validator.openCourse(course);
+			ensureIsOpenCourse(course);
 			clazz.setCourse(course);
 		}
 		if (request.getNumber() != null) {
 			clazz.setNumber(request.getNumber());
 		}
 		return clazz;
+	}
+	
+	private void ensureIsOpenCourse(Course course) {
+		if (course.getIsClosed()) {
+			throw new ClazzValidationException("It is not possible to updated a class for a closed course!");
+		}
 	}
 
 }

@@ -13,6 +13,7 @@ import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.exception.OccurrenceOperationException;
 import com.dougfsilva.e_AGE.domain.occurrence.Occurrence;
 import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceRepository;
+import com.dougfsilva.e_AGE.domain.occurrence.OccurrenceStatus;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
 
@@ -30,19 +31,7 @@ public class OccurrenceCreator {
 
 	public OccurrenceResponse create(CreateOccurrenceRequest request) {
 		try {
-			Employee reporter = employeeRepository.findByIdOrThrow(request.getReporterID());
-			Student student = studentRepository.findByIdOrThrow(request.getStudentID());
-			Clazz clazz = clazzRepository.findByIdOrThrow(request.getClazzID());
-			Occurrence occurrence = new Occurrence(
-					LocalDateTime.now(), 
-					reporter, 
-					student, 
-					clazz,
-					request.getCurricularUnit(), 
-					request.getOccurrenceType(), 
-					request.getRestricted(),
-					request.getForwarding(), 
-					request.getDescription());
+			Occurrence occurrence = buildOccurrence(request);
 			Occurrence savedOccurrence = repository.save(occurrence);
 			sendNotifications(request, savedOccurrence);
 			logger.info(String.format("Created occurrence ID %s to student %s", savedOccurrence.getID(), savedOccurrence.getStudent().getName()));
@@ -56,6 +45,24 @@ public class OccurrenceCreator {
 			logger.error(message, e);
 			throw new OccurrenceOperationException(message, e);
 		}
+	}
+	
+	private Occurrence buildOccurrence(CreateOccurrenceRequest request) {
+		Employee reporter = employeeRepository.findByIdOrThrow(request.getReporterID());
+		Student student = studentRepository.findByIdOrThrow(request.getStudentID());
+		Clazz clazz = clazzRepository.findByIdOrThrow(request.getClazzID());
+		Occurrence occurrence = new Occurrence(
+				LocalDateTime.now(), 
+				reporter, 
+				student, 
+				clazz,
+				request.getCurricularUnit(), 
+				request.getOccurrenceType(), 
+				request.getRestricted(),
+				request.getDescription());
+		occurrence.setStatus(OccurrenceStatus.OPEN);
+		occurrence.setForwarded(false);
+		return occurrence;
 	}
 	
 	private void sendNotifications(CreateOccurrenceRequest request, Occurrence occurrence) {

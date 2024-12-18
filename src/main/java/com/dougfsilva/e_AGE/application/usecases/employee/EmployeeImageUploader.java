@@ -42,8 +42,6 @@ public class EmployeeImageUploader {
 		}
 	}
 
-		
-
 	private void validateImage(MultipartFile image) {
 		if (image == null || image.isEmpty()) {
 			throw new IllegalArgumentException("Image cannot be null or Empty");

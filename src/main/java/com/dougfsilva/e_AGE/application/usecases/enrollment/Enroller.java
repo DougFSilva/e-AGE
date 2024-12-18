@@ -9,8 +9,8 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.exception.EnrollmentOperationException;
-import com.dougfsilva.e_AGE.domain.exception.EnrollmentValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.OperationNotAllowedException;
 import com.dougfsilva.e_AGE.domain.student.Student;
 import com.dougfsilva.e_AGE.domain.student.StudentRepository;
 
@@ -30,13 +30,13 @@ public class Enroller {
 			validator.uniqueRegistration(request.getRegistration());
 			Student student = studentRepository.findByIdOrThrow(request.getStudentID());
 			Clazz clazz = clazzRepository.findByIdOrThrow(request.getClazzID());
-			validator.clazzIsNotClosed(clazz);
-			validator.studentNotEnrolledInClazz(student, clazz);
+			ensureIsNotClosed(clazz);
+			ensureIsNoStudentEnrolled(student, clazz);
 			Enrollment enrollment = new Enrollment(request.getRegistration(), student, clazz, request.getDate(), EnrollmentStatus.ENROLLED);
 			Enrollment savedEnrollment = repository.save(enrollment);
 			logger.info(String.format("Student %s enrolled in class %s", student.getName(), clazz.getCode()));
 			return EnrollmentResponse.fromEnrollment(savedEnrollment);
-		} catch (ObjectNotFoundException | EnrollmentValidationException e) {
+		} catch (ObjectNotFoundException | OperationNotAllowedException e) {
 			String message = String.format("Error while creating enrollment to student ID %s : %s", request.getStudentID(), e.getMessage());
 			logger.warn(message, e);
 			throw new EnrollmentOperationException(message, e);
@@ -46,4 +46,17 @@ public class Enroller {
 			throw new EnrollmentOperationException(message, e);
 		}
 	}
+	
+	private void ensureIsNotClosed(Clazz clazz) {
+		if(clazz.getIsClosed()) {
+			throw new OperationNotAllowedException("It is not possible to enroll a student in a closed class");
+		}
+	}
+	
+	private void ensureIsNoStudentEnrolled(Student student, Clazz clazz) {
+		if(repository.existsByClazzAndStudent(student, clazz)) {
+			throw new OperationNotAllowedException(String.format("The student %s is already enrolled in the class %s!", student.getName(), clazz.getCode()));
+		}
+	}
+	
 }

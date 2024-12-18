@@ -15,6 +15,7 @@ public interface EnrollmentRepository {
 
 	Enrollment save(Enrollment enrollment);
 	void delete(String ID);
+	void deleteAllByStudent(Student student);
 	Optional<Enrollment> findByID(String ID);
 	default Enrollment findByIdOrThrow(String ID) {
 	    return findByID(ID)

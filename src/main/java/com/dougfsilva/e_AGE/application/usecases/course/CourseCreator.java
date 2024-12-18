@@ -29,14 +29,7 @@ public class CourseCreator {
 	public CourseResponse create(CreateCourseRequest request) {
 		try {
 			validator.uniqueTitle(request.getTitle());
-			TechnologicalArea technologicalArea = technologicalAreaRepository.findByIdOrThrow(request.getTechnologicalAreaID());
-			Course course = new Course(
-					request.getModality(), 
-					request.getTitle(), 
-					technologicalArea, 
-					false,
-					LocalDate.now(), 
-					imageService.getDefaultImage(ImageType.COURSE));
+			Course course = buildCourse(request);
 			Course savedCourse = repository.save(course);
 			logger.info(String.format("Created Course ID %s, %s", savedCourse.getID(), savedCourse.getTitle()));
 			return CourseResponse.fromCourse(savedCourse);
@@ -49,6 +42,16 @@ public class CourseCreator {
 			logger.error(message, e);
 			throw new CourseOperationException(message, e);
 		}
+	}
 
+	private Course buildCourse(CreateCourseRequest request) {
+		TechnologicalArea technologicalArea = technologicalAreaRepository.findByIdOrThrow(request.getTechnologicalAreaID());
+		return new Course(
+				request.getModality(), 
+				request.getTitle(), 
+				technologicalArea, 
+				false, 
+				LocalDate.now(),
+				imageService.getDefaultImage(ImageType.COURSE));
 	}
 }

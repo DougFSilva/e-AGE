@@ -1,18 +1,14 @@
-usar termo ensure
-Verificar todas classes validator
-EmployeeDeleter
-findClazzByStudent List
-StuedentDeleter
-Mudar retorno dos objetos salvos como saved
-FindByUser para student?
-Validar tamanho da descriçao da occorrencia
-Se ocorrencia estiver assinada pelo aluno não pode mais ser editada
+Só permitir aluno assinar ocorrência depois da tratativa. Talvez quando houver um estado ou use case resolver ocorrência tipo ABERTA, ENCAMINHADA, RESOLVIDA, ASSINADA, FECHADA
+Editar UpdateOccurrerenRequest
+Enviar email ao editar ocorrência e/ou tratar ocorrencia
+Reabrir ocorrencia
 Aluno confirmar ocorrencia com loggin no sistema
 Atributo na classe ocorrencia para registrar que o email foi enviado e a hora que foi enviado.fazer isso também para notificação whatssapp
 Criar email de usuário com senha em hash
 Atualizar criação de ocorrências e outros que dependem de horario de abertura com horarios com zonedatetime
 Verificar possibilidade de buscar horario online primeiramente
 OccurrenceReopener
+Exclamação nas mensagens das exceptions
 Assinatura de aluno e/ou responsável
 Rematricula em massa
 Cadastrar aluno e matricular no mesmo endpoit. Individual e em massa
@@ -24,7 +20,6 @@ transferir alunos de turma
 formar alunos,
 Ao deletar aluno não pode haver nenhuma certificação
 Ordenar por nome os alunos da classe
-
 Endpoint para relatórios
 Imprimir PDF
 Importar por csv ou excel
@@ -36,7 +31,6 @@ Inserir Usuário no aluno
 Inserir Usuário no Responsible
 Inserir Usuário no Employee
 Desistir Aluno
-
 
 Enviar Email ao criar um usuário com as informações de login e senha?
 Criar uma tabela de configurações no banco de dados e adicionar cache
@@ -57,3 +51,4 @@ Registros de ocorrências privados só podem ser visualizados por quem criou e p
 ###Frontend
 Adicionar empresa por grupo de alunos. No frontend filtrar alunos por turma e clicar sobre os alunos desejados e adicionar empresa
 No frontend ao criar um responsible para o aluno inserir um box para copiar o endereço do aluno para o responsible
+Lista de verificação com o passo a passo que a ocorerncia está tomando, desde aberta até encerrada

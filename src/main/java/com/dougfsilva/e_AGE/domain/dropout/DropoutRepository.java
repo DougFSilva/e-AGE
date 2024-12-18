@@ -15,6 +15,7 @@ public interface DropoutRepository {
 
 	Dropout save(Dropout dropout);
 	void delete(Dropout dropout);
+	void deleleAllBydeleteAllByStudent(Student student);
 	Optional<Dropout> findByID(String ID);
 	default Dropout findByIdOrThrow(String ID) {
 	    return findByID(ID)

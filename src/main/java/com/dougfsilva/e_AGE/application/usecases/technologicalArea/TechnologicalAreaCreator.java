@@ -23,10 +23,7 @@ public class TechnologicalAreaCreator {
 
 		try {
 			validator.uniqueTitle(request.getTitle());
-			TechnologicalArea area = new TechnologicalArea(
-					request.getTitle(), 
-					request.getDescription(), 
-					imageService.getDefaultImage(ImageType.TECHNOLOGICAL_AREA));
+			TechnologicalArea area = buildArea(request);
 			TechnologicalArea savedArea = repository.save(area);
 			logger.info(String.format("Create Technological Area ID %s - %s", savedArea.getID(), savedArea.getTitle()));
 			return savedArea;
@@ -39,6 +36,12 @@ public class TechnologicalAreaCreator {
 			logger.error(message, e);
 			throw new TechnologicalAreaOperationException(message, e);
 		}
-
+	}
+	
+	private TechnologicalArea buildArea(CreateTechnologicalAreaRequest request) {
+		return new TechnologicalArea(
+				request.getTitle(), 
+				request.getDescription(), 
+				imageService.getDefaultImage(ImageType.TECHNOLOGICAL_AREA));
 	}
 }

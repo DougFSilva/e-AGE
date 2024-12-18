@@ -10,8 +10,8 @@ import com.dougfsilva.e_AGE.domain.clazz.ClazzRepository;
 import com.dougfsilva.e_AGE.domain.course.Course;
 import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.CourseOperationException;
-import com.dougfsilva.e_AGE.domain.exception.CourseValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.OperationNotAllowedException;
 
 import lombok.AllArgsConstructor;
 
@@ -26,13 +26,13 @@ public class CourseCloser {
 		try {
 			Course course = repository.findByIdOrThrow(ID);
 			List<Clazz> clazzes = clazzRepository.findAllByCourse(course);
-			checkForOpenedClazz(clazzes);
+			ensureIsNoOpenedClazz(clazzes);
 			course.setIsClosed(true);
 			course.setClosingDate(LocalDate.now());
-			Course saveddCourse = repository.save(course);
-			logger.info(String.format("Closed Course ID %s, %s", saveddCourse.getID(), saveddCourse.getTitle()));
-			return CourseResponse.fromCourse(saveddCourse);
-		} catch (ObjectNotFoundException | CourseValidationException e) {
+			Course savedCourse = repository.save(course);
+			logger.info(String.format("Closed Course ID %s, %s", savedCourse.getID(), savedCourse.getTitle()));
+			return CourseResponse.fromCourse(savedCourse);
+		} catch (ObjectNotFoundException | OperationNotAllowedException e) {
 			String message = String.format("Error while closing course ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new CourseOperationException(message, e);
@@ -43,11 +43,10 @@ public class CourseCloser {
 		}
 	}
 
-	private void checkForOpenedClazz(List<Clazz> clazzes) {
+	private void ensureIsNoOpenedClazz(List<Clazz> clazzes) {
 		if (clazzes.stream().anyMatch(clazz -> !clazz.getIsClosed())) {
-			throw new CourseValidationException(
+			throw new OperationNotAllowedException(
 					"It is not possible to close the course, as there are still open classes belonging to it!");
 		}
 	}
-
 }

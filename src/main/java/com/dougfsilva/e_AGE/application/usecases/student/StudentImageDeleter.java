@@ -23,7 +23,7 @@ public class StudentImageDeleter {
 		try {
 			Student student = repository.findByIdOrThrow(ID);
 			imageService.deleteImage(ImageType.STUDENT, ImageNameGenerator.byStudent(student));
-			student.setImage(null);
+			student.setImage(imageService.getDefaultImage(ImageType.STUDENT));
 			repository.save(student);
 			logger.info(String.format("Image deleted successfully for student ID %s - %s ", student.getID(), student.getName()));
 		} catch (ObjectNotFoundException | ImageOperationException e) {

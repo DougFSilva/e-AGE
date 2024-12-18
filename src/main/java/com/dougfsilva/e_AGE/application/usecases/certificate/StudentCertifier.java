@@ -10,8 +10,8 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.exception.CertificateOperationException;
-import com.dougfsilva.e_AGE.domain.exception.CertificateValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.OperationNotAllowedException;
 
 import lombok.AllArgsConstructor;
 
@@ -25,15 +25,16 @@ public class StudentCertifier {
 	public CertificateResponse certify(CreateCertificateRequest request) {
 		try {
 			Enrollment enrollment = enrollmentRepository.findByIdOrThrow(request.getEnrollmentID());
-			checkEnrollmentStatus(enrollment);
-			updateEnrollmentStatus(enrollment);
+			ensureIsNotDropped(enrollment);
+			enrollment.setStatus(EnrollmentStatus.COMPLETED);
+			enrollmentRepository.save(enrollment);
 			Course course = enrollment.getClazz().getCourse();
 			Certificate certificate = new Certificate(enrollment.getStudent(), course, request.getCertificationDate());
 			Certificate savedCertificate = repository.save(certificate);
 			logger.info(String.format("Student %s certified in course %s", savedCertificate.getStudent().getName(),
 					savedCertificate.getCourse().getTitle()));
 			return CertificateResponse.fromCertificate(savedCertificate);
-		} catch (ObjectNotFoundException | CertificateValidationException e) {
+		} catch (ObjectNotFoundException | OperationNotAllowedException e) {
 			String message = String.format("Error while certifier student with enrollment ID %s : %s", request.getEnrollmentID(), e.getMessage());
 			logger.warn(message, e);
 			throw new CertificateOperationException(message, e);
@@ -45,14 +46,9 @@ public class StudentCertifier {
 
 	}
 
-	private void updateEnrollmentStatus(Enrollment enrollment) {
-		enrollment.setStatus(EnrollmentStatus.COMPLETED);
-		enrollmentRepository.save(enrollment);
-	}
-
-	private void checkEnrollmentStatus(Enrollment enrollment) {
+	private void ensureIsNotDropped(Enrollment enrollment) {
 		if (enrollment.getStatus() == EnrollmentStatus.DROPPED) {
-			throw new CertificateValidationException("Cannot certify a dropout student");
+			throw new OperationNotAllowedException("Cannot certify a dropout student");
 		}
 	}
 }

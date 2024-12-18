@@ -15,13 +15,12 @@ public class CreateOccurrenceRequest {
 	private String curricularUnit;
 	private OccurrenceType occurrenceType;
 	private Boolean restricted;
-	private Boolean forwarding;
 	private String description;
 	private Boolean sendEmailNotification;
 	private Boolean sendPhoneNotification;
 
 	public CreateOccurrenceRequest(String reporterID, String studentID, String clazzID,
-			String curricularUnit, OccurrenceType occurrenceType, Boolean restricted, Boolean forwarding,
+			String curricularUnit, OccurrenceType occurrenceType, Boolean restricted,
 			String description, Boolean sendEmailNotification, Boolean sendPhoneNotification) {
 		if (reporterID == null || reporterID.isBlank()) {
 			throw new IllegalArgumentException("Reporter ID cannot be null or empty!");
@@ -47,8 +46,7 @@ public class CreateOccurrenceRequest {
 		this.clazzID = clazzID;
 		this.curricularUnit = curricularUnit;
 		this.occurrenceType = occurrenceType;
-		this.restricted = restricted;
-		this.forwarding = forwarding;
+		this.restricted = restricted != null ? restricted : false ;
 		this.description = description;
 		this.sendEmailNotification = sendEmailNotification != null ? sendEmailNotification : false;
 		this.sendPhoneNotification = sendPhoneNotification != null ? sendPhoneNotification : false;

@@ -11,8 +11,8 @@ import com.dougfsilva.e_AGE.domain.enrollment.Enrollment;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentRepository;
 import com.dougfsilva.e_AGE.domain.enrollment.EnrollmentStatus;
 import com.dougfsilva.e_AGE.domain.exception.ClazzOperationException;
-import com.dougfsilva.e_AGE.domain.exception.ClazzValidationException;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
+import com.dougfsilva.e_AGE.domain.exception.OperationNotAllowedException;
 
 import lombok.AllArgsConstructor;
 
@@ -27,13 +27,13 @@ public class ClazzCloser {
 		try {
 			Clazz clazz = repository.findByIdOrThrow(ID);
 			List<Enrollment> enrollments = enrollmentRepository.findAllByClazz(clazz);
-			checkForEnrolledStudents(enrollments);
+			ensureIsNoEnrolledStudents(enrollments);
 			clazz.setIsClosed(true);
 			clazz.setClosingDate(LocalDate.now());
 			Clazz savedClazz = repository.save(clazz);
 			logger.info(String.format("Closed class ID %s, code %s", savedClazz.getID(), savedClazz.getCode()));
 			return ClazzResponse.fromClazz(savedClazz);
-		} catch (ObjectNotFoundException | ClazzValidationException e) {
+		} catch (ObjectNotFoundException | OperationNotAllowedException e) {
 			String message = String.format("Error while closing class ID %s : %s", ID, e.getMessage());
 			logger.warn(message, e);
 			throw new ClazzOperationException(message, e);
@@ -44,9 +44,9 @@ public class ClazzCloser {
 		}
 	}
 
-	private void checkForEnrolledStudents(List<Enrollment> enrollments) {
+	private void ensureIsNoEnrolledStudents(List<Enrollment> enrollments) {
 		if (enrollments.stream().anyMatch(enrollment -> enrollment.getStatus() == EnrollmentStatus.ENROLLED)) {
-			throw new ClazzValidationException("Class cannot be closed because there are enrolled students!");
+			throw new OperationNotAllowedException("Class cannot be closed because there are enrolled students!");
 		}
 	}
 

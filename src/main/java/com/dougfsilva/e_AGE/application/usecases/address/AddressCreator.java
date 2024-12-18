@@ -16,19 +16,23 @@ public class AddressCreator {
 
 	public Address create(CreateAddressRequest request) {
 		try {
-			Address address = new Address(
-					request.getCountry(), 
-					request.getState(), 
-					request.getPostalCode(),
-					request.getCity(), 
-					request.getDistrict(), 
-					request.getStreet(), 
-					request.getNumber());
+			Address address = buildAddress(request);
 			return repository.save(address);
 		} catch (Exception e) {
 			String message = String.format("Unexpected error when creating address : %s", e.getMessage());
 			logger.error(message, e);
 			throw new AddressOperationException(message, e);
 		}
+	}
+	
+	private Address buildAddress(CreateAddressRequest request) {
+		return new Address(
+				request.getCountry(), 
+				request.getState(), 
+				request.getPostalCode(),
+				request.getCity(), 
+				request.getDistrict(), 
+				request.getStreet(), 
+				request.getNumber());
 	}
 }

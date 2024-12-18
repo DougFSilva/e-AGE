@@ -2,6 +2,7 @@ package com.dougfsilva.e_AGE.application.usecases.technologicalArea;
 
 import com.dougfsilva.e_AGE.application.usecases.utilities.ImageNameGenerator;
 import com.dougfsilva.e_AGE.application.usecases.utilities.StandardLogger;
+import com.dougfsilva.e_AGE.domain.course.CourseRepository;
 import com.dougfsilva.e_AGE.domain.exception.ObjectNotFoundException;
 import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaOperationException;
 import com.dougfsilva.e_AGE.domain.exception.TechnologicalAreaValidationException;
@@ -16,14 +17,14 @@ import lombok.AllArgsConstructor;
 public class TechnologicalAreaDeleter {
 
 	private final TechnologicalAreaRepository repository;
+	private final CourseRepository courseRepository;
 	private final ImageStorageService imageService ;
-	private final TechnologicalAreaValidator validator;
 	private final StandardLogger logger;
 	
 	public void deleteByID(String ID) {
 		try {
 			TechnologicalArea technologicalArea = repository.findByIdOrThrow(ID);
-			validator.hasNoCoursesInTechnologicalArea(technologicalArea);
+			ensureIsNoCoursesInTechnologicalArea(technologicalArea);
 			repository.delete(technologicalArea);
 			imageService.deleteImage(ImageType.TECHNOLOGICAL_AREA, ImageNameGenerator.byTechnologicalArea(technologicalArea));
 			logger.info(String.format("Deleted Technological Area ID %s - %s", technologicalArea.getID(), technologicalArea.getTitle()));
@@ -36,6 +37,13 @@ public class TechnologicalAreaDeleter {
 			logger.error(message, e);
 			throw new TechnologicalAreaOperationException(message, e);
 		}
-		
+	}
+	
+	public void ensureIsNoCoursesInTechnologicalArea(TechnologicalArea technologicalArea) {
+		if (courseRepository.existsByTechnologialArea(technologicalArea)) {
+			throw new TechnologicalAreaValidationException	(
+					String.format("The technological area %s cannot be deleted because there are courses still associated with it!", 
+							technologicalArea.getTitle()));
+		}
 	}
 }

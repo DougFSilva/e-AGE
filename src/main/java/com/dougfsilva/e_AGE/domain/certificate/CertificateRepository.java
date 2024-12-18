@@ -14,6 +14,7 @@ public interface CertificateRepository {
 
 	Certificate save(Certificate certificate);
 	void delete(Certificate certificate);
+	void deleteAllByStudent(Student student);
 	Optional<Certificate> findByID(String ID);
 	default Certificate findByIdOrThrow(String ID) {
 	    return findByID(ID)
