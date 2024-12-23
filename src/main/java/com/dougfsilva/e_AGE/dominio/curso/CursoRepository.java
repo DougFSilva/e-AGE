@@ -20,13 +20,13 @@ public interface CursoRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Curso com ID %s não encontrado", ID)));
 	}
 	
-	Pagina<Curso> buscarTodosPelaModalidade(Modalidade modalidade, RequisicaoDePagina requisicao);
+	Pagina<Curso> buscarPelaModalidade(Modalidade modalidade, RequisicaoDePagina requisicao);
 	
-	Pagina<Curso> buscarTodosPelaAreaTecnologica(AreaTecnologica area, RequisicaoDePagina requisicao);
+	Pagina<Curso> buscarPelaAreaTecnologica(AreaTecnologica area, RequisicaoDePagina requisicao);
 	
-	Pagina<Curso> buscarTodosPeloTituloContem(String titulom, RequisicaoDePagina requisicao);
+	Pagina<Curso> buscarPeloTituloContem(String titulom, RequisicaoDePagina requisicao);
 	
-	Pagina<Curso> buscarTodosPeloStatusAberto(Boolean aberto, RequisicaoDePagina requisicao);
+	Pagina<Curso> buscarPeloStatusAberto(Boolean aberto, RequisicaoDePagina requisicao);
 	
 	Pagina<Curso> buscarTodos(RequisicaoDePagina requisicao);
 }

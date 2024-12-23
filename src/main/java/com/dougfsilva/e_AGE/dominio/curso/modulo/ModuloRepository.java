@@ -21,7 +21,7 @@ public interface ModuloRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Modulo com ID %s não encontrado", ID)));
 	}
 
-	Pagina<Modulo> buscarTodosPeloCurso(Curso curso, RequisicaoDePagina requisicao);
+	Pagina<Modulo> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
 
 	Pagina<Turma> buscarTodos(RequisicaoDePagina requisicao);
 }

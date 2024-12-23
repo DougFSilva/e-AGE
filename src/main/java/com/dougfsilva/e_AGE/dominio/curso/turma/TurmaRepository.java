@@ -21,13 +21,13 @@ public interface TurmaRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Turma com ID %s não encontrada", ID)));
 	}
 
-	Pagina<Turma> buscarTodasPeloCurso(Curso curso, RequisicaoDePagina requisicao);
+	Pagina<Turma> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
 
-	Pagina<Turma> buscarTodasPeloStatusAberta(Boolean aberta, RequisicaoDePagina requisicao);
+	Pagina<Turma> buscarPeloStatusAberta(Boolean aberta, RequisicaoDePagina requisicao);
 
-	Pagina<Turma> buscarTodasPelaDataDeAbertura(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
+	Pagina<Turma> buscarPelaDataDeAbertura(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 
-	Pagina<Turma> buscarTodasPelaDataDeFechamento(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
+	Pagina<Turma> buscarPelaDataDeFechamento(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 
 	Pagina<Turma> buscarTodas(RequisicaoDePagina requisicao);
 }

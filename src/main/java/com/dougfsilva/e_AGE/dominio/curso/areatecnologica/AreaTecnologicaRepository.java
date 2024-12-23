@@ -18,7 +18,7 @@ public interface AreaTecnologicaRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Area tecnologica com ID %s não encontrada", ID)));
 	}
 	
-	List<AreaTecnologica> buscarTodasPeloTituloContem(String titulo);
+	List<AreaTecnologica> buscarPeloTituloContem(String titulo);
 	
 	List<AreaTecnologica> buscarTodas();
 	

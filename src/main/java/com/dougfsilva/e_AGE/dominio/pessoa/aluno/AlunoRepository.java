@@ -22,19 +22,19 @@ public interface AlunoRepository {
 	        .orElseThrow(() -> new ObjetoNaoEncontradoException(String.format("Aluno com ID %s não encontrado", ID)));
 	}
 	
-	Pagina<Aluno> buscarTodosPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Aluno> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
 	
-	Pagina<Aluno> buscarTodosPeloSexo(Sexo sexo, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Aluno> buscarPeloSexo(Sexo sexo, RequisicaoDePagina requisicaoDePagina);
 	
-	Pagina<Aluno> buscarTodosPelaEmpresa(Empresa empresa, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Aluno> buscarPelaEmpresa(Empresa empresa, RequisicaoDePagina requisicaoDePagina);
 	
-	Pagina<Aluno> buscarTodosPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Aluno> buscarPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicaoDePagina);
 	
-	Pagina<Aluno> buscarTodosPeloEstado(String estado, RequisicaoDePagina requisicao);
+	Pagina<Aluno> buscarPeloEstado(String estado, RequisicaoDePagina requisicao);
 	
-	Pagina<Aluno> buscarTodosPelaCidade(String cidade, RequisicaoDePagina requisicao);
+	Pagina<Aluno> buscarPelaCidade(String cidade, RequisicaoDePagina requisicao);
 	
-	Pagina<Aluno> buscarTodosPeloBairro(String bairro, RequisicaoDePagina requisicao);
+	Pagina<Aluno> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
 	
 	Pagina<Aluno> buscarTodos(RequisicaoDePagina requisicaoDePagina);
 }

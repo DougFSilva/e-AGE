@@ -20,13 +20,13 @@ public interface EmpresaRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Empresa com ID %s não encontrada", ID)));
 	}
 	
-	Pagina<Aluno> buscarTodasPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Aluno> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
 
-	Pagina<Empresa> buscarTodasPeloEstado(String estado, RequisicaoDePagina requisicao);
+	Pagina<Empresa> buscarPeloEstado(String estado, RequisicaoDePagina requisicao);
 
-	Pagina<Empresa> buscarTodasPelaCidade(String cidade, RequisicaoDePagina requisicao);
+	Pagina<Empresa> buscarPelaCidade(String cidade, RequisicaoDePagina requisicao);
 
-	Pagina<Empresa> buscarTodasPeloBairro(String bairro, RequisicaoDePagina requisicao);
+	Pagina<Empresa> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
 	
 	Pagina<Empresa> buscarTodas(RequisicaoDePagina requisicao);
 }

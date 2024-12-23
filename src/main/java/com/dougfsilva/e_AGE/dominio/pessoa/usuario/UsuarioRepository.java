@@ -21,7 +21,7 @@ public interface UsuarioRepository {
 	
 	Optional<Usuario> buscarPeloNomeDoUsuario(String nomeDoUsuario);
 	
-	Pagina<Usuario> buscarTodosPeloTipoDePerfil(TipoDePerfil tipo, RequisicaoDePagina requisicao);
+	Pagina<Usuario> buscarPeloTipoDePerfil(TipoDePerfil tipo, RequisicaoDePagina requisicao);
 	
 	Pagina<Usuario> buscarTodos(RequisicaoDePagina requisicao);
 	

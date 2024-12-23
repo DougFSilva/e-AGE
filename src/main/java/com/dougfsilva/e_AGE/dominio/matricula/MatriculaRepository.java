@@ -23,15 +23,15 @@ public interface MatriculaRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Matricula com ID %s não encontrada", ID)));
 	}
 	
-	Pagina<Matricula> buscarTodasPeloCurso(Curso curso, RequisicaoDePagina requisicao);
+	Pagina<Matricula> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
 	
-	Pagina<Matricula> buscarTodasPelaTurma(Turma turma, RequisicaoDePagina requisicao);
+	Pagina<Matricula> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao);
 	
-	Pagina<Matricula> buscarTodasPeloModulo(Modulo modulo, RequisicaoDePagina requisicao);
+	Pagina<Matricula> buscarPeloModulo(Modulo modulo, RequisicaoDePagina requisicao);
 	
-	Pagina<Matricula> buscarTodasPeloStatus(MatriculaStatus status, RequisicaoDePagina requisicao);
+	Pagina<Matricula> buscarPeloStatus(MatriculaStatus status, RequisicaoDePagina requisicao);
 	
-	Pagina<Matricula> buscarTodasPelaDataDaMatricula(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
+	Pagina<Matricula> buscarPelaDataDaMatricula(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 	
 	Pagina<Matricula> buscarTodas(RequisicaoDePagina requisicao);
 }

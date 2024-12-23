@@ -21,18 +21,18 @@ public interface FuncionarioRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Funcionário com ID %s não encontrado", ID)));
 	}
 
-	Pagina<Funcionario> buscarTodosPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Funcionario> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
 
-	Pagina<Funcionario> buscarTodosPeloSexo(Sexo sexo, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Funcionario> buscarPeloSexo(Sexo sexo, RequisicaoDePagina requisicaoDePagina);
 
-	Pagina<Funcionario> buscarTodosPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal,
+	Pagina<Funcionario> buscarPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal,
 			RequisicaoDePagina requisicaoDePagina);
 
-	Pagina<Funcionario> buscarTodosPeloEstado(String estado, RequisicaoDePagina requisicao);
+	Pagina<Funcionario> buscarPeloEstado(String estado, RequisicaoDePagina requisicao);
 
-	Pagina<Funcionario> buscarTodosPelaCidade(String cidade, RequisicaoDePagina requisicao);
+	Pagina<Funcionario> buscarPelaCidade(String cidade, RequisicaoDePagina requisicao);
 
-	Pagina<Funcionario> buscarTodosPeloBairro(String bairro, RequisicaoDePagina requisicao);
+	Pagina<Funcionario> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
 
 	Pagina<Funcionario> buscarTodos(RequisicaoDePagina requisicaoDePagina);
 }
