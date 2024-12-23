@@ -10,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"ID", "nomeDeUsuario"})
+@EqualsAndHashCode(of = {"nomeDeUsuario"})
 public class Usuario {
 
 	private String ID;
