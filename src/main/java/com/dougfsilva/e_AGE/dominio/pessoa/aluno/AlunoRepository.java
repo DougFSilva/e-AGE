@@ -30,5 +30,11 @@ public interface AlunoRepository {
 	
 	Pagina<Aluno> buscarTodosPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicaoDePagina);
 	
+	Pagina<Aluno> buscarTodosPeloEstado(String estado, RequisicaoDePagina requisicao);
+	
+	Pagina<Aluno> buscarTodosPelaCidade(String cidade, RequisicaoDePagina requisicao);
+	
+	Pagina<Aluno> buscarTodosPeloBairro(String bairro, RequisicaoDePagina requisicao);
+	
 	Pagina<Aluno> buscarTodos(RequisicaoDePagina requisicaoDePagina);
 }
