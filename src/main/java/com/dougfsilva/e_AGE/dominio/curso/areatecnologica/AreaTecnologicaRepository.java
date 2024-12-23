@@ -15,7 +15,7 @@ public interface AreaTecnologicaRepository {
 
 	default AreaTecnologica buscarPeloIDOuExcecao(String ID) {
 		return buscarPeloID(ID).orElseThrow(
-				() -> new ObjetoNaoEncontradoException(String.format("Area tecnologica com ID %s não encontrado", ID)));
+				() -> new ObjetoNaoEncontradoException(String.format("Area tecnologica com ID %s não encontrada", ID)));
 	}
 	
 	List<AreaTecnologica> buscarTodasPeloTituloContem(String titulo);
