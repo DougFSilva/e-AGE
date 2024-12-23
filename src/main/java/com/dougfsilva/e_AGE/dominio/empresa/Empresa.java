@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.dominio.empresa;
 
-import com.dougfsilva.e_AGE.dominio.pessoa.Endereco;
+import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

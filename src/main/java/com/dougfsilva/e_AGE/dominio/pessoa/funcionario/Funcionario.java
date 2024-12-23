@@ -2,8 +2,8 @@ package com.dougfsilva.e_AGE.dominio.pessoa.funcionario;
 
 import java.time.LocalDate;
 
+import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
-import com.dougfsilva.e_AGE.dominio.pessoa.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.Pessoa;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
 

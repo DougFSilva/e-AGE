@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.dominio.pessoa;
 import java.time.LocalDate;
 import java.time.Period;
 
+import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.Usuario;
 
 import lombok.AllArgsConstructor;

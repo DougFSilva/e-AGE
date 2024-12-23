@@ -18,7 +18,7 @@ public interface FuncionarioRepository {
 
 	default Funcionario buscarPeloIDOuExcecao(String ID) {
 		return buscarPeloID(ID).orElseThrow(
-				() -> new ObjetoNaoEncontradoException(String.format("Funcionario com ID %s não encontrado", ID)));
+				() -> new ObjetoNaoEncontradoException(String.format("Funcionário com ID %s não encontrado", ID)));
 	}
 
 	Pagina<Funcionario> buscarTodosPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);

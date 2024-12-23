@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.dominio.pessoa;
+package com.dougfsilva.e_AGE.dominio.endereco;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -21,7 +21,7 @@ public class Endereco {
 	private String bairro;
 	private String rua;
 	private String numero;
-	
+
 	public Endereco(String pais, String estado, String codigoPostal, String cidade, String bairro, String rua,
 			String numero) {
 		this.pais = pais;
@@ -32,6 +32,5 @@ public class Endereco {
 		this.rua = rua;
 		this.numero = numero;
 	}
-	
-	
+
 }
