@@ -26,7 +26,7 @@ public class Usuario {
 		this.perfis = perfis;
 	}
 	
-	public Boolean contemPerfil(TipoDePerfil tipo) {
+	public Boolean contemPerfil(TipoPerfil tipo) {
 		return this.getPerfis().stream().anyMatch(perfil -> perfil.getTipo() == tipo);
 	}
 }

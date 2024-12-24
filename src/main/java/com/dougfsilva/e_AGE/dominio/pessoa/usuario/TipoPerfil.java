@@ -7,7 +7,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @ToString
-public enum TipoDePerfil {
+public enum TipoPerfil {
 
 	ADMIN(1, "ROLE_ADMIN"), 
 	GESTOR(2, "ROLE_GESTOR"), 
@@ -18,11 +18,11 @@ public enum TipoDePerfil {
 	private long codigo;
 	private String descricao;
 
-	public static TipoDePerfil paraEnum(String descricao) {
+	public static TipoPerfil paraEnum(String descricao) {
 		if (descricao == null) {
 			return null;
 		}
-		for (TipoDePerfil x : TipoDePerfil.values()) {
+		for (TipoPerfil x : TipoPerfil.values()) {
 			if (descricao.equals(x.getDescricao())) {
 				return x;
 			}
@@ -31,9 +31,9 @@ public enum TipoDePerfil {
 		throw new IllegalArgumentException("Invalid Profile!");
 	}
 
-	public static TipoDePerfil peloCodigo(Long codigo) {
+	public static TipoPerfil peloCodigo(Long codigo) {
 		if (codigo != null) {
-			for (TipoDePerfil x : TipoDePerfil.values()) {
+			for (TipoPerfil x : TipoPerfil.values()) {
 				if (x.getCodigo() == codigo) {
 					return x;
 				}

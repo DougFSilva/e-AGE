@@ -1,0 +1,3 @@
+Substituir remover por excluir
+nome melhor para os metodos da interface que lançam excecao orThrow
+Concluir OcorrenciaRepository

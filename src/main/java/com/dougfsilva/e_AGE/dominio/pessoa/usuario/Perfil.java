@@ -13,5 +13,5 @@ import lombok.ToString;
 @ToString
 public class Perfil {
 
-	private TipoDePerfil tipo;
+	private TipoPerfil tipo;
 }
