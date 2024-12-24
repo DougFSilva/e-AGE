@@ -29,4 +29,6 @@ public interface CursoRepository {
 	Pagina<Curso> buscarPeloStatusAberto(Boolean aberto, RequisicaoDePagina requisicao);
 	
 	Pagina<Curso> buscarTodos(RequisicaoDePagina requisicao);
+	
+	Boolean existePeloTitulo(String titulo);
 }

@@ -27,11 +27,11 @@ public class ExcluiImagemDeAreaTecnologica {
 			log.info(String.format("Excluida imagem de area tecnologica %s", areaSalva.getTitulo()));
 			return areaSalva;
 		} catch (ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao excluir imagem de area tecnologica com ID %s ; %s", ID, e.getMessage());
+			String mensagem = String.format("Erro ao excluir imagem de area tecnologica com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao excluir imagem de area tecnologica com ID %s ; %s", ID, e.getMessage());
+			String mensagem = String.format("Erro inesperado ao excluir imagem de area tecnologica com ID %s : %s", ID, e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}

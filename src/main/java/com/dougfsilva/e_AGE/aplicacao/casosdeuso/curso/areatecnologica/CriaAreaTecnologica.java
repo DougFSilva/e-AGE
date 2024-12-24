@@ -1,7 +1,7 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnologica;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.RequisicaoParaCriarAreaTecnologica;
+import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaAreaTecnologicaForm;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAreaTecnologicaException;
@@ -19,22 +19,22 @@ public class CriaAreaTecnologica {
 	private final ValidaAreaTecnologica validador;
 	private final LogPadrao log;
 	
-	public AreaTecnologica criar(RequisicaoParaCriarAreaTecnologica requisicao) {
+	public AreaTecnologica criar(CriaAreaTecnologicaForm form) {
 		try {
-			validador.validarUnicoTitulo(requisicao.titulo());
+			validador.validarUnicoTitulo(form.titulo());
 			AreaTecnologica area = new AreaTecnologica(
-					requisicao.titulo(), 
-					requisicao.descricao(), 
+					form.titulo(), 
+					form.descricao(), 
 					imagemService.buscarImagemPadrao(TipoImagem.AREA_TECNOLOGICA));
 			AreaTecnologica areaSalva = repository.salvar(area);
 			log.info(String.format("Criada area tecnologica %s", areaSalva.getTitulo()));
 			return areaSalva;
 		} catch (ErroDeValidacaoDeAreaTecnologicaException e) {
-			String mensagem = String.format("Erro ao criar area tecnologica %s ; %s", requisicao.titulo(), e.getMessage());
+			String mensagem = String.format("Erro ao criar area tecnologica %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar area tecnologica %s ; %s", requisicao.titulo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao criar area tecnologica %s : %s", form.titulo(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}

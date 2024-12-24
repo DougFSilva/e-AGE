@@ -13,7 +13,7 @@ public class ValidaAreaTecnologica {
 	public void validarUnicoTitulo(String titulo) {
 		if (repository.existePeloTitulo(titulo)) {
 			throw new ErroDeValidacaoDeAreaTecnologicaException(
-					String.format("Area tecnologica com titulo %s já existe", titulo));
+					String.format("Titulo %s já existe na base dados", titulo));
 		}
 	}
 }

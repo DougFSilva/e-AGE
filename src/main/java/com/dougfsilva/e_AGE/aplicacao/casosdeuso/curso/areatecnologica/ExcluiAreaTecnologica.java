@@ -20,11 +20,11 @@ public class ExcluiAreaTecnologica {
 			repository.excluir(area);
 			log.info(String.format("Excluida area tecnologica com ID %s", ID));
 		} catch (ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao excluir area tecnologica com ID %s ; %s", ID, e.getMessage());
+			String mensagem = String.format("Erro ao excluir area tecnologica com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao excluir area tecnologica com ID %s ; %s", ID, e.getMessage());
+			String mensagem = String.format("Erro inesperado ao excluir area tecnologica com ID %s : %s", ID, e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}
