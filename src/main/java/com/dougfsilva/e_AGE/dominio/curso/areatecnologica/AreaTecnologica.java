@@ -18,9 +18,10 @@ public class AreaTecnologica {
 	private String descricao;
 	private String imagem;
 
-	public AreaTecnologica(String titulo, String descricao) {
+	public AreaTecnologica(String titulo, String descricao, String imagem) {
 		this.titulo = titulo;
 		this.descricao = descricao;
+		this.imagem = imagem;
 	}
 
 }

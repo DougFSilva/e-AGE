@@ -4,9 +4,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ImagemService {
 
-	String salvar(MultipartFile image, TipoDeImagem tipo, String name);
+	String salvar(MultipartFile image, TipoImagem tipo, String name);
 	
-	void remover(TipoDeImagem tipo, String name);
+	void remover(TipoImagem tipo, String name);
 	
-	String buscarImagemPadrao(TipoDeImagem tipo);
+	String buscarImagemPadrao(TipoImagem tipo);
 }

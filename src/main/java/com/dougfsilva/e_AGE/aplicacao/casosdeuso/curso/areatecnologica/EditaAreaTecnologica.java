@@ -1,11 +1,11 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnologica;
 
+import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.RequisicaoParaEditarAreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAreaTecnologicaException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
-import com.dougfsilva.e_AGE.dominio.utilidades.log.LogPadrao;
 
 import lombok.AllArgsConstructor;
 

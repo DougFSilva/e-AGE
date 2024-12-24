@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public enum TipoDeImagem {
+public enum TipoImagem {
 
 	AREA_TECNOLOGICA("Área tecnologica"), 
 	CURSO("Curso"), 
@@ -14,7 +14,7 @@ public enum TipoDeImagem {
 
 	private String descricao;
 
-	private TipoDeImagem(String descricao) {
+	private TipoImagem(String descricao) {
 		this.descricao = descricao;
 	}
 }

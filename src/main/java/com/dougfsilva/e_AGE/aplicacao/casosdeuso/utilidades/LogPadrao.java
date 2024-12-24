@@ -1,9 +1,10 @@
-package com.dougfsilva.e_AGE.dominio.utilidades.log;
+package com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades;
 
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.Usuario;
 import com.dougfsilva.e_AGE.dominio.utilidades.UsuarioAutenticado;
+import com.dougfsilva.e_AGE.dominio.utilidades.log.Logger;
 
 public class LogPadrao {
 
