@@ -31,7 +31,7 @@ public class CriaCurso {
 			Curso cursoSalvo = repository.salvar(curso);
 			log.info(String.format("Criado curso %s", cursoSalvo.getTitulo()));
 			return CursoResposta.deCurso(cursoSalvo);
-		}  catch (ErroDeValidacaoDeCursoException | ObjetoNaoEncontradoException e) {
+		} catch (ErroDeValidacaoDeCursoException | ObjetoNaoEncontradoException e) {
 			String mensagem = String.format("Erro ao criar curso %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComCursoException(mensagem, e);

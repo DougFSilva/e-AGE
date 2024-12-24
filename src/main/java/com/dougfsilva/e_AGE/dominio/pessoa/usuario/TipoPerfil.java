@@ -18,22 +18,9 @@ public enum TipoPerfil {
 	private long codigo;
 	private String descricao;
 
-	public static TipoPerfil paraEnum(String descricao) {
-		if (descricao == null) {
-			return null;
-		}
-		for (TipoPerfil x : TipoPerfil.values()) {
-			if (descricao.equals(x.getDescricao())) {
-				return x;
-			}
-
-		}
-		throw new IllegalArgumentException("Invalid Profile!");
-	}
-
 	public static TipoPerfil peloCodigo(Long codigo) {
 		if (codigo != null) {
-			for (TipoPerfil x : TipoPerfil.values()) {
+			for (TipoPerfil x : values()) {
 				if (x.getCodigo() == codigo) {
 					return x;
 				}

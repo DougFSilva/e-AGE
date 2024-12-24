@@ -3,12 +3,7 @@ package com.dougfsilva.e_AGE.aplicacao.dto.requisicao;
 import com.dougfsilva.e_AGE.dominio.curso.Modalidade;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCursoException;
 
-public record CriaCursoForm(
-		
-		Modalidade modalidade,
-		String areaTecnologicaID,
-		String titulo,
-		String descricao) {
+public record CriaCursoForm(Modalidade modalidade, String areaTecnologicaID, String titulo, String descricao) {
 
 	public CriaCursoForm(Modalidade modalidade, String areaTecnologicaID, String titulo, String descricao) {
 		if (modalidade == null) {

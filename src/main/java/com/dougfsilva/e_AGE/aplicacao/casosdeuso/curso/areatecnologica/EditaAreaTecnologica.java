@@ -5,6 +5,7 @@ import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaAreaTecnologicaForm;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAreaTecnologicaException;
+import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeAreaTecnologicaException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.AllArgsConstructor;
 public class EditaAreaTecnologica {
 
 	private final AreaTecnologicaRepository repository;
+	private final ValidaAreaTecnologica validador;
 	private final LogPadrao log;
 	
 	public AreaTecnologica editar(EditaAreaTecnologicaForm form) {
@@ -22,7 +24,7 @@ public class EditaAreaTecnologica {
 			AreaTecnologica areaSalva = repository.salvar(areaAtualizada);
 			log.info(String.format("Edita Area tecnologica com ID %S", form.ID()));
 			return areaSalva;
-		} catch (ObjetoNaoEncontradoException e) {
+		} catch (ObjetoNaoEncontradoException | ErroDeValidacaoDeAreaTecnologicaException e) {
 			String mensagem = String.format("Erro ao editar area tecnologica %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
@@ -34,7 +36,8 @@ public class EditaAreaTecnologica {
 	}
 	
 	private AreaTecnologica atualizarDados(EditaAreaTecnologicaForm form, AreaTecnologica area) {
-		if (form.titulo() != null && !form.titulo().isBlank()) {
+		if (form.titulo() != null && !form.titulo().isBlank() && !form.titulo().equalsIgnoreCase(area.getTitulo())) {
+			validador.validarUnicoTitulo(form.titulo());
 			area.setTitulo(form.titulo());
 		}
 		if (form.descricao() != null && !form.descricao().isBlank()) {
