@@ -13,6 +13,8 @@ public interface ModuloRepository {
 	Modulo salvar(Modulo modulo);
 
 	void excluir(Modulo modulo);
+	
+	void excluirTodosPeloCurso(Curso curso);
 
 	Optional<Modulo> buscarPeloID(String ID);
 
@@ -24,4 +26,5 @@ public interface ModuloRepository {
 	Pagina<Modulo> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
 
 	Pagina<Turma> buscarTodos(RequisicaoDePagina requisicao);
+	
 }

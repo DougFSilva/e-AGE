@@ -30,4 +30,6 @@ public interface CertificadoRepository {
 	Pagina<Certificado> buscarPelaDataDeCertificacao(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 	
 	Pagina<Certificado> buscarTodos(RequisicaoDePagina requisicao);
+	
+	Boolean existePeloCurso(Curso curso);
 }

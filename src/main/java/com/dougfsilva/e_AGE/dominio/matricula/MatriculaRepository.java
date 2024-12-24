@@ -34,4 +34,6 @@ public interface MatriculaRepository {
 	Pagina<Matricula> buscarPelaDataDaMatricula(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 	
 	Pagina<Matricula> buscarTodas(RequisicaoDePagina requisicao);
+	
+	Boolean existePelaTurma(Turma turma);
 }

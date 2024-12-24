@@ -31,4 +31,6 @@ public interface CursoRepository {
 	Pagina<Curso> buscarTodos(RequisicaoDePagina requisicao);
 	
 	Boolean existePeloTitulo(String titulo);
+	
+	Boolean existePelaAreaTecnologica(AreaTecnologica area);
 }

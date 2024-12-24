@@ -32,4 +32,6 @@ public interface TurmaRepository {
 	Pagina<Turma> buscarTodas(RequisicaoDePagina requisicao);
 	
 	Boolean existePeloCursoECodigo(Curso curso, String codigo);
+	
+	Boolean existePeloCurso(Curso curso);
 }

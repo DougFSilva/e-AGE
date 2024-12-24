@@ -30,14 +30,14 @@ public class SalvaImagemDeAreaTecnologica {
 			String url = imagemService.salvar(imagem, TipoImagem.AREA_TECNOLOGICA, GeraNomeDeImagem.pelaAreaTecnologica(area));
 			area.setImagem(url);
 			AreaTecnologica areaSalva = repository.salvar(area);
-			log.info(String.format("Salva imagem de area tecnologica %s", areaSalva.getTitulo()));
+			log.info(String.format("Salva imagem de área tecnológica %s", areaSalva.getTitulo()));
 			return areaSalva;
 		} catch (ErroDeValidacaoDeImagemException | ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao salvar imagem de area tecnologica com ID %s : %s", ID, e.getMessage());
+			String mensagem = String.format("Erro ao salvar imagem de área tecnológica com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao salvar imagem de area tecnologica com ID %s : %s", ID, e.getMessage());
+			String mensagem = String.format("Erro inesperado ao salvar imagem de área tecnológica com ID %s : %s", ID, e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}

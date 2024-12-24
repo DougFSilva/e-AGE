@@ -22,14 +22,14 @@ public class EditaAreaTecnologica {
 			AreaTecnologica area = repository.buscarPeloIDOuThrow(form.ID());
 			AreaTecnologica areaAtualizada = atualizarDados(form, area);
 			AreaTecnologica areaSalva = repository.salvar(areaAtualizada);
-			log.info(String.format("Edita Area tecnologica com ID %S", form.ID()));
+			log.info(String.format("Edita área tecnológica com ID %S", form.ID()));
 			return areaSalva;
 		} catch (ObjetoNaoEncontradoException | ErroDeValidacaoDeAreaTecnologicaException e) {
-			String mensagem = String.format("Erro ao editar area tecnologica %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro ao editar área tecnológica %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar area tecnologica %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao editar área tecnológica %s : %s", form.titulo(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}

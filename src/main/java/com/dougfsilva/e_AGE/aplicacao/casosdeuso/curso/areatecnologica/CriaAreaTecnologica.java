@@ -28,14 +28,14 @@ public class CriaAreaTecnologica {
 					form.descricao(), 
 					imagemService.buscarImagemPadrao(TipoImagem.AREA_TECNOLOGICA));
 			AreaTecnologica areaSalva = repository.salvar(area);
-			log.info(String.format("Criada area tecnologica %s", areaSalva.getTitulo()));
+			log.info(String.format("Criada área tecnológica %s", areaSalva.getTitulo()));
 			return areaSalva;
 		} catch (ErroDeValidacaoDeAreaTecnologicaException | ErroDeValidacaoDeCamposException e) {
-			String mensagem = String.format("Erro ao criar area tecnologica %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro ao criar área tecnológica %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar area tecnologica %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao criar área tecnológica %s : %s", form.titulo(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}

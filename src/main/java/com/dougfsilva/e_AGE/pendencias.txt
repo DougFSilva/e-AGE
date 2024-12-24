@@ -1,0 +1,1 @@
+- Não permitir excluir curso se houver turma nele ou certificado para ele e excluir modulos ao excluir curso
