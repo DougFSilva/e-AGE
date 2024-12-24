@@ -6,6 +6,7 @@ import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAreaTecnologicaException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeAreaTecnologicaException;
+import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.utilidades.imagem.ImagemService;
 import com.dougfsilva.e_AGE.dominio.utilidades.imagem.TipoImagem;
 
@@ -29,7 +30,7 @@ public class CriaAreaTecnologica {
 			AreaTecnologica areaSalva = repository.salvar(area);
 			log.info(String.format("Criada area tecnologica %s", areaSalva.getTitulo()));
 			return areaSalva;
-		} catch (ErroDeValidacaoDeAreaTecnologicaException e) {
+		} catch (ErroDeValidacaoDeAreaTecnologicaException | ErroDeValidacaoDeCamposException e) {
 			String mensagem = String.format("Erro ao criar area tecnologica %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);

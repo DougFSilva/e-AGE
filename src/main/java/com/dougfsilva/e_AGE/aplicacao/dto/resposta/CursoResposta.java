@@ -48,6 +48,6 @@ public class CursoResposta {
 	
 	 public static CursoResposta deCurso(Curso curso) {
 	        return new CursoResposta(curso);
-	    }
+	   }
 	
 }

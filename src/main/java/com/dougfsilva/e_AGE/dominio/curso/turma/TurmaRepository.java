@@ -30,4 +30,6 @@ public interface TurmaRepository {
 	Pagina<Turma> buscarPelaDataDeFechamento(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 
 	Pagina<Turma> buscarTodas(RequisicaoDePagina requisicao);
+	
+	Boolean existePeloCursoECodigo(Curso curso, String codigo);
 }

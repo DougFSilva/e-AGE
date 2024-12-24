@@ -8,11 +8,13 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = { "codigo", "curso" })
+@ToString
 public class Turma {
 
 	private String ID;
@@ -22,11 +24,11 @@ public class Turma {
 	private LocalDate dataDeAbertura;
 	private LocalDate dataDeFechamento;
 
-	public Turma(String codigo, Curso curso, Boolean aberta) {
+	public Turma(String codigo, Curso curso, LocalDate dataDeAbertura) {
 		this.codigo = codigo;
 		this.curso = curso;
-		this.aberta = aberta;
-		this.dataDeAbertura = LocalDate.now();
+		this.aberta = true;
+		this.dataDeAbertura = dataDeAbertura;
 	}
 
 }

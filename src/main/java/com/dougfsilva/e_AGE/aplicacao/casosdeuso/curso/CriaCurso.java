@@ -8,6 +8,7 @@ import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComCursoException;
+import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCursoException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.utilidades.imagem.ImagemService;
@@ -31,7 +32,7 @@ public class CriaCurso {
 			Curso cursoSalvo = repository.salvar(curso);
 			log.info(String.format("Criado curso %s", cursoSalvo.getTitulo()));
 			return CursoResposta.deCurso(cursoSalvo);
-		} catch (ErroDeValidacaoDeCursoException | ObjetoNaoEncontradoException e) {
+		} catch (ErroDeValidacaoDeCursoException | ObjetoNaoEncontradoException | ErroDeValidacaoDeCamposException e) {
 			String mensagem = String.format("Erro ao criar curso %s : %s", form.titulo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComCursoException(mensagem, e);
