@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnologica;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.RequisicaoAreaTecnologica;
+import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.RequisicaoParaCriarAreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAreaTecnologicaException;
@@ -16,7 +16,7 @@ public class CriaAreaTecnologica {
 	private final ValidaAreaTecnologica validador;
 	private final LogPadrao log;
 	
-	public AreaTecnologica criar(RequisicaoAreaTecnologica requisicao) {
+	public AreaTecnologica criar(RequisicaoParaCriarAreaTecnologica requisicao) {
 		try {
 			validador.validarUnicoTitulo(requisicao.titulo());
 			AreaTecnologica area = new AreaTecnologica(requisicao.titulo(), requisicao.descricao());
