@@ -16,7 +16,7 @@ public interface FuncionarioRepository {
 
 	Optional<Funcionario> buscarPeloID(String ID);
 
-	default Funcionario buscarPeloIDOuExcecao(String ID) {
+	default Funcionario buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Funcionário com ID %s não encontrado", ID)));
 	}

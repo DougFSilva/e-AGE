@@ -16,7 +16,7 @@ public interface TurmaRepository {
 
 	Optional<Turma> buscarPeloID(String ID);
 
-	default Turma buscarPeloIDOuExcecao(String ID) {
+	default Turma buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Turma com ID %s não encontrada", ID)));
 	}

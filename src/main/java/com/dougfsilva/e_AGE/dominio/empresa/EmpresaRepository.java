@@ -15,7 +15,7 @@ public interface EmpresaRepository {
 
 	Optional<Empresa> buscarPeloID(String ID);
 
-	default Empresa buscarPeloIDOuExcecao(String ID) {
+	default Empresa buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Empresa com ID %s não encontrada", ID)));
 	}

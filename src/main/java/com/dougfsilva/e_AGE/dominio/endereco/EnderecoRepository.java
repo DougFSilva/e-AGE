@@ -12,7 +12,7 @@ public interface EnderecoRepository {
 
 	Optional<Endereco> buscarPeloID(String ID);
 
-	default Endereco buscarPeloIDOuExcecao(String ID) {
+	default Endereco buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Endereço com ID %s não encontrado", ID)));
 	}

@@ -18,7 +18,7 @@ public interface MatriculaRepository {
 
 	Optional<Matricula> buscarPeloID(String ID);
 
-	default Matricula buscarPeloIDOuExcecao(String ID) {
+	default Matricula buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Matricula com ID %s não encontrada", ID)));
 	}

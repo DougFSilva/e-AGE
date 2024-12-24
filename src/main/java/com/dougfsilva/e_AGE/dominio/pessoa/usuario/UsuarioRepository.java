@@ -14,7 +14,7 @@ public interface UsuarioRepository {
 	
 	Optional<Usuario> buscarPeloID(String ID);
 	
-	default Usuario buscarPeloIDOuExcecao(String ID) {
+	default Usuario buscarPeloIDOuThrow(String ID) {
 	    return buscarPeloID(ID)
 	        .orElseThrow(() -> new ObjetoNaoEncontradoException(String.format("Usuário com ID %s não encontrado", ID)));
 	}

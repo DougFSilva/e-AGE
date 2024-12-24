@@ -15,7 +15,7 @@ public interface CursoRepository {
 
 	Optional<Curso> buscarPeloID(String ID);
 
-	default Curso buscarPeloIDOuExcecao(String ID) {
+	default Curso buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Curso com ID %s não encontrado", ID)));
 	}

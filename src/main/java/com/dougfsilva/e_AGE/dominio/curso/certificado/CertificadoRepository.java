@@ -18,7 +18,7 @@ public interface CertificadoRepository {
 
 	Optional<Certificado> buscarPeloID(String ID);
 
-	default Certificado buscarPeloIDOuExcecao(String ID) {
+	default Certificado buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Certificado com ID %s não encontrado", ID)));
 	}

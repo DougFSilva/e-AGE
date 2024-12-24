@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnolgica;
+package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnologica;
 
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeAreaTecnologicaException;

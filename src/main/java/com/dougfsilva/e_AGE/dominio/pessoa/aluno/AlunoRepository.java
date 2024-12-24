@@ -17,7 +17,7 @@ public interface AlunoRepository {
 
 	Optional<Aluno> buscarPeloID(String ID);
 	
-	default Aluno buscarPeloIDOuExcecao(String ID) {
+	default Aluno buscarPeloIDOuThrow(String ID) {
 	    return buscarPeloID(ID)
 	        .orElseThrow(() -> new ObjetoNaoEncontradoException(String.format("Aluno com ID %s não encontrado", ID)));
 	}

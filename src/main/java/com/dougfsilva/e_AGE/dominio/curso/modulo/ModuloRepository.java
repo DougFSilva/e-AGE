@@ -16,7 +16,7 @@ public interface ModuloRepository {
 
 	Optional<Modulo> buscarPeloID(String ID);
 
-	default Modulo buscarPeloIDOuExcecao(String ID) {
+	default Modulo buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Modulo com ID %s não encontrado", ID)));
 	}

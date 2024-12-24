@@ -16,7 +16,7 @@ public interface EvasaoRepository {
 
 	Optional<Evasao> buscarPeloID(String ID);
 
-	default Evasao buscarPeloIDOuExcecao(String ID) {
+	default Evasao buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Evasao com ID %s não encontrada", ID)));
 	}

@@ -13,7 +13,7 @@ public interface AreaTecnologicaRepository {
 
 	Optional<AreaTecnologica> buscarPeloID(String ID);
 
-	default AreaTecnologica buscarPeloIDOuExcecao(String ID) {
+	default AreaTecnologica buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Area tecnologica com ID %s não encontrada", ID)));
 	}
