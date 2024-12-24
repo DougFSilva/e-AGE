@@ -31,7 +31,7 @@ public class CursoResposta {
 		this.imagem = curso.getImagem();
 	}
 	
-	public static Pagina<CursoResposta> dePage(Pagina<Curso> courses) {
+	public static Pagina<CursoResposta> dePagina(Pagina<Curso> courses) {
 		return new Pagina<CursoResposta>(
 				courses.getConteudo()
 				.stream()

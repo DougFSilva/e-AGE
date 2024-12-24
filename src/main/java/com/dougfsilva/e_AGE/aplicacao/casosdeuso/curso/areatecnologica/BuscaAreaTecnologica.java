@@ -12,15 +12,15 @@ public class BuscaAreaTecnologica {
 
 	private final AreaTecnologicaRepository repository;
 
-	AreaTecnologica buscarPeloID(String ID) {
+	public AreaTecnologica buscarPeloID(String ID) {
 		return repository.buscarPeloIDOuThrow(ID);
 	}
 
-	List<AreaTecnologica> buscarPeloTituloContem(String titulo) {
+	public List<AreaTecnologica> buscarPeloTituloContem(String titulo) {
 		return repository.buscarPeloTituloContem(titulo);
 	}
 
-	List<AreaTecnologica> buscarTodas() {
+	public List<AreaTecnologica> buscarTodas() {
 		return repository.buscarTodas();
 	}
 
