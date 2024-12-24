@@ -12,7 +12,7 @@ public interface EvasaoRepository {
 
 	Evasao salvar(Evasao evasao);
 
-	void remover(Evasao evasao);
+	void excluir(Evasao evasao);
 
 	Optional<Evasao> buscarPeloID(String ID);
 

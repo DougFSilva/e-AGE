@@ -14,7 +14,7 @@ public interface CertificadoRepository {
 
 	Certificado salvar(Certificado certificado);
 
-	void remover(Certificado certificado);
+	void excluir(Certificado certificado);
 
 	Optional<Certificado> buscarPeloID(String ID);
 

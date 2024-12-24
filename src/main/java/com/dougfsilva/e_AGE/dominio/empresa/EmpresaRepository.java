@@ -11,7 +11,7 @@ public interface EmpresaRepository {
 
 	Empresa salvar(Empresa empresa);
 
-	void remover(Empresa empresa);
+	void excluir(Empresa empresa);
 
 	Optional<Empresa> buscarPeloID(String ID);
 

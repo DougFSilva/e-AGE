@@ -8,7 +8,7 @@ public interface EnderecoRepository {
 
 	Endereco salvar(Endereco endereco);
 
-	void remover(Endereco endereco);
+	void excluir(Endereco endereco);
 
 	Optional<Endereco> buscarPeloID(String ID);
 

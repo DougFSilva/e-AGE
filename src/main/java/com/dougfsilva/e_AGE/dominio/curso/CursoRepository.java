@@ -11,7 +11,7 @@ public interface CursoRepository {
 
 	Curso salvar(Curso curso);
 
-	void remover(Curso curso);
+	void excluir(Curso curso);
 
 	Optional<Curso> buscarPeloID(String ID);
 

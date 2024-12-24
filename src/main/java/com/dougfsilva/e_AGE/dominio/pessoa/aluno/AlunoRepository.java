@@ -13,7 +13,7 @@ public interface AlunoRepository {
 	
 	Aluno salvar(Aluno aluno);
 	
-	void remover(Aluno aluno);
+	void excluir(Aluno aluno);
 
 	Optional<Aluno> buscarPeloID(String ID);
 	

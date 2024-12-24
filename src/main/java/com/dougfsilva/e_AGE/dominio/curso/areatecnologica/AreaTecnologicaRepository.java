@@ -9,7 +9,7 @@ public interface AreaTecnologicaRepository {
 
 	AreaTecnologica salvar(AreaTecnologica area);
 
-	void remover(AreaTecnologica area);
+	void excluir(AreaTecnologica area);
 
 	Optional<AreaTecnologica> buscarPeloID(String ID);
 

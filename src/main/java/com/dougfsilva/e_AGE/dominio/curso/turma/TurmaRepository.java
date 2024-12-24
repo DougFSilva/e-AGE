@@ -12,7 +12,7 @@ public interface TurmaRepository {
 
 	Turma salvar(Turma turma);
 
-	void remover(Turma turma);
+	void excluir(Turma turma);
 
 	Optional<Turma> buscarPeloID(String ID);
 

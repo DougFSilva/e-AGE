@@ -12,7 +12,7 @@ public interface ModuloRepository {
 
 	Modulo salvar(Modulo modulo);
 
-	void remover(Modulo modulo);
+	void excluir(Modulo modulo);
 
 	Optional<Modulo> buscarPeloID(String ID);
 

@@ -12,7 +12,7 @@ public interface FuncionarioRepository {
 
 	Funcionario salvar(Funcionario funcionario);
 
-	void remover(Funcionario funcionario);
+	void excluir(Funcionario funcionario);
 
 	Optional<Funcionario> buscarPeloID(String ID);
 

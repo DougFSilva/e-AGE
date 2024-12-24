@@ -14,7 +14,7 @@ public interface MatriculaRepository {
 
 	Matricula salvar(Matricula matricula);
 
-	void remover(Matricula matricula);
+	void excluir(Matricula matricula);
 
 	Optional<Matricula> buscarPeloID(String ID);
 

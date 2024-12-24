@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ConfiguracaoRepository {
 
-	Configuracao salvar(Configuracao configuracao);
+	Configuracao atualiza(Configuracao configuracao);
 	
 	Configuracao buscarPelaChave(ChaveDeConfiguracao chave);
 	

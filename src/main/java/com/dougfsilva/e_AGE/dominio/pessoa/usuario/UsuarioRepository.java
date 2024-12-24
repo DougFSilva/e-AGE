@@ -10,7 +10,7 @@ public interface UsuarioRepository {
 
 	Usuario salvar(Usuario usuario);
 	
-	void remover(Usuario usuario);
+	void excluir(Usuario usuario);
 	
 	Optional<Usuario> buscarPeloID(String ID);
 	
