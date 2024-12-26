@@ -20,8 +20,8 @@ public class EditaAreaTecnologica {
 	public AreaTecnologica editar(EditaAreaTecnologicaForm form) {
 		try {
 			AreaTecnologica area = repository.buscarPeloIDOuThrow(form.ID());
-			AreaTecnologica areaAtualizada = editarDados(form, area);
-			AreaTecnologica areaSalva = repository.salvar(areaAtualizada);
+			AreaTecnologica areaEditada = editarDados(form, area);
+			AreaTecnologica areaSalva = repository.salvar(areaEditada);
 			log.info(String.format("Edita área tecnológica com ID %S", form.ID()));
 			return areaSalva;
 		} catch (ObjetoNaoEncontradoException | ErroDeValidacaoDeAreaTecnologicaException e) {

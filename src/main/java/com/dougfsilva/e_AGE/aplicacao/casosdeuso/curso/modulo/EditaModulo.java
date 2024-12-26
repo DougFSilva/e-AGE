@@ -24,8 +24,8 @@ public class EditaModulo {
 	public ModuloResposta editar(EditaModuloForm form) {
 		try {
 			Modulo modulo = repository.buscarPeloIDOuThrow(form.ID());
-			Modulo moduloAtualizado = editarDados(form, modulo);
-			Modulo moduloSalvo = repository.salvar(moduloAtualizado);
+			Modulo moduloEditado = editarDados(form, modulo);
+			Modulo moduloSalvo = repository.salvar(moduloEditado);
 			log.info(String.format("Editado módulo %s do curso %s", moduloSalvo.getCodigo(), moduloSalvo.getCurso().getTitulo()));
 			return ModuloResposta.deModulo(moduloSalvo);
 		} catch (ErroDeValidacaoDeModuloException | ObjetoNaoEncontradoException e) {

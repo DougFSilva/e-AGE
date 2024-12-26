@@ -24,8 +24,8 @@ public class EditaCurso {
 	public CursoResposta editar(EditaCursoForm form) {
 		try {
 			Curso curso = repository.buscarPeloIDOuThrow(form.ID());
-			Curso cursoAtualizado = editarDados(form, curso);
-			Curso cursoSalvo = repository.salvar(cursoAtualizado);
+			Curso cursoEditado = editarDados(form, curso);
+			Curso cursoSalvo = repository.salvar(cursoEditado);
 			log.info(String.format("Editado curso %s", cursoSalvo.getTitulo()));
 			return CursoResposta.deCurso(cursoSalvo);
 		} catch (ErroDeValidacaoDeCursoException | ObjetoNaoEncontradoException e) {

@@ -23,8 +23,8 @@ public class EditaEmpresa {
 	public Empresa editar(EditaEmpresaForm form) {
 		try {
 			Empresa empresa = repository.buscarPeloIDOuThrow(form.ID());
-			Empresa empresaAtualizada = editarDados(form, empresa);
-			Empresa empresaSalva = repository.salvar(empresaAtualizada);
+			Empresa empresaEditada = editarDados(form, empresa);
+			Empresa empresaSalva = repository.salvar(empresaEditada);
 			log.info(String.format("Editada empresa %s", empresaSalva.getNome()));
 			return empresaSalva;
 		} catch (ErroDeValidacaoDeEmpresaException | ObjetoNaoEncontradoException e) {
@@ -48,8 +48,8 @@ public class EditaEmpresa {
 			empresa.setNome(form.nome());
 		}
 		if (form.endereco() != null) {
-			Endereco enderecoAtualizado = editaEndereco.editar(form.endereco(), empresa.getEndereco());
-			empresa.setEndereco(enderecoAtualizado);
+			Endereco enderecoEditado = editaEndereco.editar(form.endereco(), empresa.getEndereco());
+			empresa.setEndereco(enderecoEditado);
 		}
 		return empresa;
 	}

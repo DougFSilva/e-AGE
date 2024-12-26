@@ -1,2 +1,3 @@
 - Novo modelo de configurações
 - Editar senha de usuário
+- Ao editar email editar também nome do usuário

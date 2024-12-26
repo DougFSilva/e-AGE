@@ -25,7 +25,7 @@ public class CriaUsuario {
 			validador.validarUnicoNomeDeUsuario(form.nomeDeUsuario());
 			SenhaDeUsuario senha = new SenhaDeUsuario(form.senha(), codificador);
 			Usuario usuario = new Usuario(form.nomeDeUsuario(), senha);
-			usuario.adicionarPerfil(form.tipoPerfil());
+			form.tiposPerfis().forEach(tipo -> usuario.adicionarPerfil(tipo));
 			Usuario usuarioSalvo = repository.salvar(usuario);
 			log.info(String.format("Criado usuário %s", usuarioSalvo.getNomeDeUsuario()));
 			return usuarioSalvo;

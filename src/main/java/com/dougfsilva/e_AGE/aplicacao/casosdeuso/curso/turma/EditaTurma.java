@@ -25,9 +25,9 @@ public class EditaTurma {
 		try {
 			Turma turma = repository.buscarPeloIDOuThrow(form.ID());
 			Turma turmaAtualizada = editarDados(form, turma);
-			Turma turmaSalva = repository.salvar(turmaAtualizada);
-			log.info(String.format("Editada turma %s", turmaSalva.getCodigo()));
-			return TurmaResposta.deTurma(turmaSalva);
+			Turma turmaEditada = repository.salvar(turmaAtualizada);
+			log.info(String.format("Editada turma %s", turmaEditada.getCodigo()));
+			return TurmaResposta.deTurma(turmaEditada);
 		} catch (ErroDeValidacaoDeTurmaException | ObjetoNaoEncontradoException e) {
 			String mensagem = String.format("Erro ao editar turma %s : %s", form.codigo(), e.getMessage());
 			log.warn(mensagem, e);
