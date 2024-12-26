@@ -9,7 +9,6 @@ import lombok.ToString;
 @Getter
 @EqualsAndHashCode(of = { "chave" })
 @ToString
-
 public class Configuracao {
 
 	private String ID;

@@ -2,6 +2,7 @@ package com.dougfsilva.e_AGE.aplicacao.dto.resposta;
 
 import java.util.stream.Collectors;
 
+import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 
@@ -16,12 +17,12 @@ public class ModuloResposta {
 
 	private String ID;
 	private String codigo;
-	private String curso;
+	private Curso curso;
 	
 	public ModuloResposta(Modulo modulo) {
 		this.ID = modulo.getID();
 		this.codigo = modulo.getCodigo();
-		this.curso = modulo.getCurso().getTitulo();
+		this.curso = modulo.getCurso();
 	}
 	
 	public static Pagina<ModuloResposta> dePagina(Pagina<Modulo> modulos) {

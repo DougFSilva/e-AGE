@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.aplicacao.dto.resposta;
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 
+import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 
@@ -17,7 +18,7 @@ public class TurmaResposta {
 
 	private String ID;
 	private String codigo;
-	private String curso;
+	private Curso curso;
 	private Boolean aberta;
 	private LocalDate dataDeAbertura;
 	private LocalDate dataDeFechamento;
@@ -25,7 +26,7 @@ public class TurmaResposta {
 	public TurmaResposta(Turma turma) {
 		this.ID = turma.getID();
 		this.codigo = turma.getCodigo();
-		this.curso = turma.getCurso().getTitulo();
+		this.curso = turma.getCurso();
 		this.aberta = turma.getAberta();
 		this.dataDeAbertura = turma.getDataDeAbertura();
 		this.dataDeFechamento = turma.getDataDeFechamento();

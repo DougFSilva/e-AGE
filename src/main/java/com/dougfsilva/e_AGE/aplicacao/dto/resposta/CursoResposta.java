@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.Modalidade;
+import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 
 import lombok.EqualsAndHashCode;
@@ -15,7 +16,7 @@ public class CursoResposta {
 
 	private String ID;
 	private Modalidade modalidade;
-	private String areaTecnologica;
+	private AreaTecnologica areaTecnologica;
 	private String titulo;
 	private String descricao;
 	private Boolean aberto;
@@ -24,7 +25,7 @@ public class CursoResposta {
 	public CursoResposta(Curso curso) {
 		this.ID = curso.getID();
 		this.modalidade = curso.getModalidade();
-		this.areaTecnologica = curso.getAreaTecnologica().getTitulo();
+		this.areaTecnologica = curso.getAreaTecnologica();
 		this.titulo = curso.getTitulo();
 		this.descricao = curso.getDescricao();
 		this.aberto = curso.getAberto();

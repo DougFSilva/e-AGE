@@ -11,11 +11,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = { "name", "email" })
+@EqualsAndHashCode(of = { "nome", "email" })
 @ToString
 public class Responsavel {
 
-	private String name;
+	private String nome;
 	private Email email;
 	private String telefone;
 

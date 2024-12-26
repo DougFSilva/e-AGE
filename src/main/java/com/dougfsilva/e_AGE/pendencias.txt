@@ -1,3 +1,8 @@
-- Novo modelo de configurações
+ 
 - Editar senha de usuário
 - Ao editar email editar também nome do usuário
+- Adiocionar usuario ao aluno
+- Adicionar usuario ao funcionario
+- Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
+- Cria usuario admin para sistema no usecase ou infraestrutura
+- Excluir usuario ao excluir aluno

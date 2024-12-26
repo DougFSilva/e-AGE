@@ -5,10 +5,13 @@ import java.util.List;
 
 public enum ChaveDeConfiguracao {
 
-	NOME_ESCOLA(null), EMAIL_DE_CONTATO(null), TELEFONE_DE_CONTATO(null),
+	NOME_ESCOLA(null), 
+	EMAIL_DE_CONTATO(null), 
+	TELEFONE_DE_CONTATO(null),
 	ENVIAR_EMAIL_PARA_FUNCIONARIO_AO_CRIAR_USUARIO(List.of("SIM", "NÃO")),
 	ENVIAR_EMAIL_PARA_ESTUDANTE_AO_CRIAR_USUARIO(List.of("SIM", "NÃO")),
-	ENVIAR_EMAIL_AO_CRIAR_OCORRENCIA(List.of("SIM", "NÃO")), ENVIAR_EMAIL_AO_EXCLUIR_OCORRENCIA(List.of("SIM", "NÃO")),
+	ENVIAR_EMAIL_AO_CRIAR_OCORRENCIA(List.of("SIM", "NÃO")), 
+	ENVIAR_EMAIL_AO_EXCLUIR_OCORRENCIA(List.of("SIM", "NÃO")),
 	ENVIAR_EMAIL_AO_ATUALIZAR_OCORRENCIA(List.of("SIM", "NÃO")),
 	ENVIAR_EMAIL_AO_ENCERRAR_OCORRENCIA(List.of("SIM", "NÃO")),
 	ENVIAR_MENSAGEM_PARA_FUNCIONARIO_AO_CRIAR_USUARIO(List.of("SIM", "NÃO")),
@@ -29,7 +32,10 @@ public enum ChaveDeConfiguracao {
 	}
 
 	public static ChaveDeConfiguracao deNomeChave(String nomeChave) {
-		return Arrays.stream(values()).filter(chave -> chave.name().equalsIgnoreCase(nomeChave)).findFirst()
+		return Arrays.stream(values())
+				.filter(chave -> chave.name()
+						.equalsIgnoreCase(nomeChave))
+				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException("Chave de configuração inválida: " + nomeChave));
 	}
 

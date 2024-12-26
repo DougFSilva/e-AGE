@@ -4,13 +4,12 @@ import java.time.LocalDate;
 
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
-import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Responsavel;
 
-public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
-		CriaEnderecoForm endereco, Responsavel responsavel, String empresaID, Boolean criarUsuario) {
+public record CriaPessoaForm(String nome, Sexo sexo, String RG, String telefone, String email,
+		LocalDate dataDeNascimento, CriaEnderecoForm endereco) {
 
-	public CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
-			CriaEnderecoForm endereco, Responsavel responsavel, String empresaID, Boolean criarUsuario) {
+	public CriaPessoaForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
+			CriaEnderecoForm endereco) {
 		if (nome == null || nome.isBlank()) {
 			throw new ErroDeValidacaoDeCamposException("O campo nome não pode ser nulo ou vazio");
 		}
@@ -24,7 +23,7 @@ public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, 
 			throw new ErroDeValidacaoDeCamposException("O campo telefone não pode ser nulo ou vazio");
 		}
 		if (email == null || email.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo email não pode ser nulo");
+			throw new ErroDeValidacaoDeCamposException("O campo email não pode ser nulo ou vazio");
 		}
 		if (dataDeNascimento == null) {
 			throw new ErroDeValidacaoDeCamposException("O campo data de nascimento não pode ser nulo");
@@ -39,8 +38,6 @@ public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, 
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;
 		this.endereco = endereco;
-		this.responsavel = responsavel;
-		this.empresaID = empresaID;
-		this.criarUsuario = criarUsuario != null ? criarUsuario : false;
 	}
+
 }
