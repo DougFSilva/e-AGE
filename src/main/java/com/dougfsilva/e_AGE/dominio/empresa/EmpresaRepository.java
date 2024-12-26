@@ -30,4 +30,8 @@ public interface EmpresaRepository {
 	
 	Pagina<Empresa> buscarTodas(RequisicaoDePagina requisicao);
 	
+	Boolean existePeloCNPJ(String CNPJ);
+	
+	Boolean existePeloNome(String nome);
+	
 }

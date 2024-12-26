@@ -18,8 +18,8 @@ public class Empresa {
 	private String nome;
 	private Endereco endereco;
 
-	public Empresa(String cNPJ, String nome, Endereco endereco) {
-		CNPJ = cNPJ;
+	public Empresa(String CNPJ, String nome, Endereco endereco) {
+		this.CNPJ = CNPJ;
 		this.nome = nome;
 		this.endereco = endereco;
 	}

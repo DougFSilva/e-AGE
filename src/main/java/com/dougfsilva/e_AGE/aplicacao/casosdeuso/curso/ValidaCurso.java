@@ -12,7 +12,7 @@ public class ValidaCurso {
 	
 	public void validarUnicoTitulo(String titulo) {
 		if(repository.existePeloTitulo(titulo)) {
-			throw new ErroDeValidacaoDeCursoException(String.format("Titulo %s já existe na base de dados"));
+			throw new ErroDeValidacaoDeCursoException(String.format("Titulo de curso %s já existe na base de dados", titulo));
 		}
 	}
 }
