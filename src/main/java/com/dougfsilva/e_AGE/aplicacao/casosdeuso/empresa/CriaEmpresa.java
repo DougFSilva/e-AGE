@@ -1,6 +1,5 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.empresa;
 
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.CriaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaEmpresaForm;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
@@ -16,7 +15,6 @@ import lombok.AllArgsConstructor;
 public class CriaEmpresa {
 
 	private final EmpresaRepository repository;
-	private final CriaEndereco criaEndereco;
 	private final ValidaEmpresa validador;
 	private final LogPadrao log;
 	
@@ -38,7 +36,14 @@ public class CriaEmpresa {
 	}
 	
 	private Empresa construirEmpresa(CriaEmpresaForm form) {
-		Endereco endereco = criaEndereco.criar(form.endereco());
+		Endereco endereco = new Endereco(
+				form.endereco().pais(),
+				form.endereco().estado(),
+				form.endereco().codigoPostal(),
+				form.endereco().cidade(),
+				form.endereco().bairro(),
+				form.endereco().rua(),
+				form.endereco().numero());
 		validador.validarUnicoCNPJ(form.CNPJ());
 		validador.validarUnicoNome(form.nome());
 		return new Empresa(form.CNPJ(),form.nome(), endereco);
