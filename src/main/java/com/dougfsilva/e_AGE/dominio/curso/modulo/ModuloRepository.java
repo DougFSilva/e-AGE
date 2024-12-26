@@ -3,7 +3,6 @@ package com.dougfsilva.e_AGE.dominio.curso.modulo;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
-import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
@@ -25,7 +24,7 @@ public interface ModuloRepository {
 
 	Pagina<Modulo> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
 
-	Pagina<Turma> buscarTodos(RequisicaoDePagina requisicao);
+	Pagina<Modulo> buscarTodos(RequisicaoDePagina requisicao);
 	
 	Boolean existePeloCursoECodigo(Curso curso, String codigo);
 	
