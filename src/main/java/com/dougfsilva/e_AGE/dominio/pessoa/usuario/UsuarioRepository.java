@@ -19,8 +19,6 @@ public interface UsuarioRepository {
 	        .orElseThrow(() -> new ObjetoNaoEncontradoException(String.format("Usuário com ID %s não encontrado", ID)));
 	}
 	
-	Optional<Usuario> buscarPeloNomeDoUsuario(String nomeDoUsuario);
-	
 	Pagina<Usuario> buscarPeloTipoDePerfil(TipoPerfil tipo, RequisicaoDePagina requisicao);
 	
 	Pagina<Usuario> buscarTodos(RequisicaoDePagina requisicao);

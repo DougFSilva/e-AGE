@@ -39,7 +39,7 @@ public class ModuloResposta {
 				modulos.getUltima());
 	}
 	
-	 public static ModuloResposta deModulo(Modulo modulo) {
+	public static ModuloResposta deModulo(Modulo modulo) {
 	        return new ModuloResposta(modulo);
 	}
 }
