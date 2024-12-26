@@ -37,4 +37,6 @@ public interface AlunoRepository {
 	Pagina<Aluno> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
 	
 	Pagina<Aluno> buscarTodos(RequisicaoDePagina requisicaoDePagina);
+	
+	Boolean existePelaEmpresa(Empresa empresa);
 }
