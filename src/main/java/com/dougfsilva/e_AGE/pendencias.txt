@@ -1,4 +1,4 @@
- 
+- Editar para verificar através de configuração se vai criar ou não usuário ao criar aluno???
 - Editar senha de usuário
 - Ao editar email editar também nome do usuário
 - Adiocionar usuario ao aluno

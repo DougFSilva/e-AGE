@@ -7,10 +7,10 @@ import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Responsavel;
 
 public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
-		CriaEnderecoForm endereco, Responsavel responsavel, String empresaID, Boolean criarUsuario) {
+		CriaEnderecoForm endereco, Responsavel responsavel, String empresaID) {
 
 	public CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
-			CriaEnderecoForm endereco, Responsavel responsavel, String empresaID, Boolean criarUsuario) {
+			CriaEnderecoForm endereco, Responsavel responsavel, String empresaID) {
 		if (nome == null || nome.isBlank()) {
 			throw new ErroDeValidacaoDeCamposException("O campo nome não pode ser nulo ou vazio");
 		}
@@ -41,6 +41,5 @@ public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, 
 		this.endereco = endereco;
 		this.responsavel = responsavel;
 		this.empresaID = empresaID;
-		this.criarUsuario = criarUsuario != null ? criarUsuario : false;
 	}
 }
