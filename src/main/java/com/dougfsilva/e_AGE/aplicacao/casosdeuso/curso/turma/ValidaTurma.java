@@ -13,7 +13,7 @@ public class ValidaTurma {
 	
 	public void validarUnicoCodigoPorCurso(Curso curso, String codigo) {
 		if (repository.existePeloCursoECodigo(curso, codigo)) {
-			throw new ErroDeValidacaoDeTurmaException(String.format("Código %s já existe para o curso %s", codigo, curso.getTitulo()));
+			throw new ErroDeValidacaoDeTurmaException(String.format("Código de turma %s já existe para o curso %s", codigo, curso.getTitulo()));
 		}
 	}
 }

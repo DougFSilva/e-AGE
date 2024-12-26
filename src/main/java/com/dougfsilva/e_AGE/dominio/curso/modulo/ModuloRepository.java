@@ -27,4 +27,6 @@ public interface ModuloRepository {
 
 	Pagina<Turma> buscarTodos(RequisicaoDePagina requisicao);
 	
+	Boolean existePeloCursoECodigo(Curso curso, String codigo);
+	
 }

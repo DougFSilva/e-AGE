@@ -6,15 +6,11 @@ import java.util.stream.Collectors;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
-@AllArgsConstructor
 @Getter
-@Setter
 @EqualsAndHashCode(of = { "codigo", "curso" })
 @ToString
 public class TurmaResposta {
@@ -27,7 +23,7 @@ public class TurmaResposta {
 	private LocalDate dataDeFechamento;
 	
 	public TurmaResposta(Turma turma) {
-		ID = turma.getID();
+		this.ID = turma.getID();
 		this.codigo = turma.getCodigo();
 		this.curso = turma.getCurso().getTitulo();
 		this.aberta = turma.getAberta();
@@ -52,6 +48,6 @@ public class TurmaResposta {
 	
 	 public static TurmaResposta deTurma(Turma turma) {
 	        return new TurmaResposta(turma);
-	   }
+	}
 	
 }
