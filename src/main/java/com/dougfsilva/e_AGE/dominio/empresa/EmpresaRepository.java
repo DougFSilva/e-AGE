@@ -29,4 +29,5 @@ public interface EmpresaRepository {
 	Pagina<Empresa> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
 	
 	Pagina<Empresa> buscarTodas(RequisicaoDePagina requisicao);
+	
 }
