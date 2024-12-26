@@ -24,7 +24,7 @@ public class EditaTurma {
 	public TurmaResposta editar(EditaTurmaForm form) {
 		try {
 			Turma turma = repository.buscarPeloIDOuThrow(form.ID());
-			Turma turmaAtualizada = atualizarDados(form, turma);
+			Turma turmaAtualizada = editarDados(form, turma);
 			Turma turmaSalva = repository.salvar(turmaAtualizada);
 			log.info(String.format("Editada turma %s", turmaSalva.getCodigo()));
 			return TurmaResposta.deTurma(turmaSalva);
@@ -39,7 +39,7 @@ public class EditaTurma {
 		}
 	}
 	
-	private Turma atualizarDados(EditaTurmaForm form, Turma turma) {
+	private Turma editarDados(EditaTurmaForm form, Turma turma) {
 		if (form.cursoID() != null && !form.cursoID().isBlank() && !form.cursoID().equalsIgnoreCase(turma.getCurso().getID())) {
 			Curso curso = cursoRepository.buscarPeloIDOuThrow(form.cursoID());
 			turma.setCurso(curso);

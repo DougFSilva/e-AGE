@@ -11,10 +11,10 @@ public record CriaTurmaForm(String codigo, String cursoID, LocalDate dataDeAbert
 			throw new ErroDeValidacaoDeCamposException("O campo codigo não pode ser nulo ou vazio");
 		}
 		if (cursoID == null || cursoID.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo cursoID não pode ser nulo ou vazio");
+			throw new ErroDeValidacaoDeCamposException("O campo Id do curso não pode ser nulo ou vazio");
 		}
 		if (dataDeAbertura == null) {
-			throw new ErroDeValidacaoDeCamposException("O campo dataDeAbertura não pode ser nulo");
+			throw new ErroDeValidacaoDeCamposException("O campo data de abertura não pode ser nulo");
 		}
 		this.codigo = codigo;
 		this.cursoID = cursoID;

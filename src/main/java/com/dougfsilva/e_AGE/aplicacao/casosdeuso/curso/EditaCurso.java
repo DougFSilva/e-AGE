@@ -24,7 +24,7 @@ public class EditaCurso {
 	public CursoResposta editar(EditaCursoForm form) {
 		try {
 			Curso curso = repository.buscarPeloIDOuThrow(form.ID());
-			Curso cursoAtualizado = atualizarDados(form, curso);
+			Curso cursoAtualizado = editarDados(form, curso);
 			Curso cursoSalvo = repository.salvar(cursoAtualizado);
 			log.info(String.format("Editado curso %s", cursoSalvo.getTitulo()));
 			return CursoResposta.deCurso(cursoSalvo);
@@ -39,7 +39,7 @@ public class EditaCurso {
 		}
 	}
 	
-	private Curso atualizarDados(EditaCursoForm form, Curso curso) {
+	private Curso editarDados(EditaCursoForm form, Curso curso) {
 		if (form.modalidade() != null) {
 			curso.setModalidade(form.modalidade());
 		}

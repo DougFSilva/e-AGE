@@ -24,7 +24,7 @@ public class EditaModulo {
 	public ModuloResposta editar(EditaModuloForm form) {
 		try {
 			Modulo modulo = repository.buscarPeloIDOuThrow(form.ID());
-			Modulo moduloAtualizado = atualizarDados(form, modulo);
+			Modulo moduloAtualizado = editarDados(form, modulo);
 			Modulo moduloSalvo = repository.salvar(moduloAtualizado);
 			log.info(String.format("Editado módulo %s do curso %s", moduloSalvo.getCodigo(), moduloSalvo.getCurso().getTitulo()));
 			return ModuloResposta.deModulo(moduloSalvo);
@@ -39,7 +39,7 @@ public class EditaModulo {
 		}
 	}
 	
-	private Modulo atualizarDados(EditaModuloForm form, Modulo modulo) {
+	private Modulo editarDados(EditaModuloForm form, Modulo modulo) {
 		if (form.cursoID() != null && !form.cursoID().isBlank() && !form.cursoID().equalsIgnoreCase(modulo.getCurso().getID())) {
 			Curso curso = cursoRepository.buscarPeloIDOuThrow(form.cursoID());
 			modulo.setCurso(curso);

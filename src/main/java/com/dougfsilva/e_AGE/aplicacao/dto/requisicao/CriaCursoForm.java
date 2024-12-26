@@ -10,13 +10,13 @@ public record CriaCursoForm(Modalidade modalidade, String areaTecnologicaID, Str
 			throw new ErroDeValidacaoDeCamposException("O campo modalidade não pode ser nulo");
 		}
 		if (areaTecnologicaID == null || areaTecnologicaID.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo areaTecnologicaID não pode ser nulo ou vazio");
+			throw new ErroDeValidacaoDeCamposException("O campo ID da área tecnológica não pode ser nulo ou vazio");
 		}
 		if (titulo == null || titulo.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo titulo não pode ser nulo ou vazio");
+			throw new ErroDeValidacaoDeCamposException("O campo título não pode ser nulo ou vazio");
 		}
 		if (descricao == null || descricao.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo descricao não pode ser nulo ou vazio");
+			throw new ErroDeValidacaoDeCamposException("O campo descrição não pode ser nulo ou vazio");
 		}
 		this.modalidade = modalidade;
 		this.areaTecnologicaID = areaTecnologicaID;

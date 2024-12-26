@@ -20,7 +20,7 @@ public class EditaAreaTecnologica {
 	public AreaTecnologica editar(EditaAreaTecnologicaForm form) {
 		try {
 			AreaTecnologica area = repository.buscarPeloIDOuThrow(form.ID());
-			AreaTecnologica areaAtualizada = atualizarDados(form, area);
+			AreaTecnologica areaAtualizada = editarDados(form, area);
 			AreaTecnologica areaSalva = repository.salvar(areaAtualizada);
 			log.info(String.format("Edita área tecnológica com ID %S", form.ID()));
 			return areaSalva;
@@ -35,7 +35,7 @@ public class EditaAreaTecnologica {
 		}
 	}
 	
-	private AreaTecnologica atualizarDados(EditaAreaTecnologicaForm form, AreaTecnologica area) {
+	private AreaTecnologica editarDados(EditaAreaTecnologicaForm form, AreaTecnologica area) {
 		if (form.titulo() != null && !form.titulo().isBlank() && !form.titulo().equalsIgnoreCase(area.getTitulo())) {
 			validador.validarUnicoTitulo(form.titulo());
 			area.setTitulo(form.titulo());
