@@ -1,1 +1,2 @@
-Novo modelo de configurações
+- Novo modelo de configurações
+- Editar senha de usuário
