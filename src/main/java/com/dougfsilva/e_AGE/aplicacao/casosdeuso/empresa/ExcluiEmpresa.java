@@ -22,7 +22,7 @@ public class ExcluiEmpresa {
 			Empresa empresa = repository.buscarPeloIDOuThrow(ID);
 			garantirEmpresaSemAluno(empresa);
 			repository.excluir(empresa);
-			log.info(String.format("Excluida empresa %s", empresa.getNome()));
+			log.info(String.format("Excluída empresa %s", empresa.getNome()));
 		} catch (ObjetoNaoEncontradoException | ErroDeEntidadeComVinculosException e) {
 			String mensagem = String.format("Erro ao excluir empresa com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);

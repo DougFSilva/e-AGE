@@ -20,7 +20,7 @@ public class ValidaMatricula {
 	
 	public void validarUnicoRegistro(String registro) {
 		if (repository.existePeloRegistro(registro)) {
-			throw new ErroDeValidacaoDeMatriculaException(String.format("Registro de matricula %s já existe na base de dados", registro));
+			throw new ErroDeValidacaoDeMatriculaException(String.format("Registro de matrícula %s já existe na base de dados", registro));
 		} 
 	}
 	

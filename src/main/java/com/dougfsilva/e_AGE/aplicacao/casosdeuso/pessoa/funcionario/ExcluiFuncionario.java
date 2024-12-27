@@ -31,7 +31,7 @@ public class ExcluiFuncionario {
 			imagemService.remover(TipoImagem.FUNCIONARIO, GeraNomeDeImagem.pelaPessoa(funcionario));
 			excluirUsuario(funcionario);
 			repository.excluir(funcionario);
-			log.info(String.format("Excluido funcionário %s com ID %s", funcionario.getNome(), funcionario.getID()));
+			log.info(String.format("Excluído funcionário %s com ID %s", funcionario.getNome(), funcionario.getID()));
 		} catch (ObjetoNaoEncontradoException | ErroDeEntidadeComVinculosException | ErroDeOperacaoComUsuarioException e) {
 			String mensagem = String.format("Erro ao excluir funcionário com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);

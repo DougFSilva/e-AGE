@@ -28,14 +28,14 @@ public class CriaModulo {
 			validador.validarUnicoCodigoPorTurma(turma, form.codigo());
 			Modulo modulo = new Modulo(form.codigo(), turma, form.dataDeAbertura());
 			Modulo moduloSalvo = repository.salvar(modulo);
-			log.info(String.format("Criado Modulo %s para a turma %s", moduloSalvo.getCodigo(), moduloSalvo.getTurma().getCodigo()));
+			log.info(String.format("Criado módulo %s para a turma %s", moduloSalvo.getCodigo(), moduloSalvo.getTurma().getCodigo()));
 			return ModuloResposta.deModulo(moduloSalvo);
 		} catch (ErroDeValidacaoDeModuloException | ObjetoNaoEncontradoException | ErroDeValidacaoDeCamposException e) {
-			String mensagem = String.format("Erro ao criar modulo %s : %s", form.codigo(), e.getMessage());
+			String mensagem = String.format("Erro ao criar módulo %s : %s", form.codigo(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComModuloException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar modulo %s : %s", form.codigo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao criar módulo %s : %s", form.codigo(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComModuloException(mensagem, e);
 		}

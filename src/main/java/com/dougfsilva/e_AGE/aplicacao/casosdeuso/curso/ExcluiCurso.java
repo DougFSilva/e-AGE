@@ -34,7 +34,7 @@ public class ExcluiCurso {
 			imagemService.remover(TipoImagem.CURSO, GeraNomeDeImagem.peloCurso(curso));
 			moduloRepository.excluirTodosPeloCurso(curso);
 			repository.excluir(curso);
-			log.info(String.format("Excluido curso %s", curso.getTitulo()));
+			log.info(String.format("Excluído curso %s", curso.getTitulo()));
 		} catch (ObjetoNaoEncontradoException | ErroDeOperacaoComImagemException e) {
 			String mensagem = String.format("Erro ao excluir curso com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);

@@ -29,7 +29,7 @@ public class ExcluiAluno {
 			garantirAlunoSemOcorrencias(aluno);
 			excluirUsuario(aluno);
 			repository.excluir(aluno);
-			log.info(String.format("Excluido aluno %s com ID %s", aluno.getNome(), aluno.getID()));
+			log.info(String.format("Excluído aluno %s com ID %s", aluno.getNome(), aluno.getID()));
 		} catch (ObjetoNaoEncontradoException | ErroDeEntidadeComVinculosException | ErroDeOperacaoComUsuarioException e) {
 			String mensagem = String.format("Erro ao excluir aluno com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);

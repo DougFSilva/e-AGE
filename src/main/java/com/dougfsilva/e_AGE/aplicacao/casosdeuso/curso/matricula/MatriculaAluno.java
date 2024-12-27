@@ -52,5 +52,4 @@ public class MatriculaAluno {
 		return new Matricula(form.registro(), modulo, aluno, form.dataDaMatricula(), MatriculaStatus.ATIVA);
 	}
 	
-	
 }

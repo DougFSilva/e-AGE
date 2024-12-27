@@ -27,7 +27,7 @@ public class ExcluiAreaTecnologica {
 			AreaTecnologica area = repository.buscarPeloIDOuThrow(ID);
 			imagemService.remover(TipoImagem.AREA_TECNOLOGICA, GeraNomeDeImagem.pelaAreaTecnologica(area));
 			repository.excluir(area);
-			log.info(String.format("Excluida área tecnológica %s", area.getTitulo()));
+			log.info(String.format("Excluída área tecnológica %s", area.getTitulo()));
 		} catch (ObjetoNaoEncontradoException | ErroDeOperacaoComImagemException | ErroDeEntidadeComVinculosException e) {
 			String mensagem = String.format("Erro ao excluir área tecnológica com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);
