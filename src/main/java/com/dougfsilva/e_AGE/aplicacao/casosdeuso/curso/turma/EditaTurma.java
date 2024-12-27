@@ -29,11 +29,11 @@ public class EditaTurma {
 			log.info(String.format("Editada turma %s", turmaEditada.getCodigo()));
 			return TurmaResposta.deTurma(turmaEditada);
 		} catch (ErroDeValidacaoDeTurmaException | ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao editar turma %s : %s", form.codigo(), e.getMessage());
+			String mensagem = String.format("Erro ao editar turma com ID %s : %s", form.ID(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComTurmaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar turma %s : %s", form.codigo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao editar turma com ID %s : %s", form.ID(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComTurmaException(mensagem, e);
 		}

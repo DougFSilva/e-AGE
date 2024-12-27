@@ -29,11 +29,11 @@ public class EditaModulo {
 			log.info(String.format("Editado módulo %s do curso %s", moduloSalvo.getCodigo(), moduloSalvo.getCurso().getTitulo()));
 			return ModuloResposta.deModulo(moduloSalvo);
 		} catch (ErroDeValidacaoDeModuloException | ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao editar módulo %s : %s", form.codigo(), e.getMessage());
+			String mensagem = String.format("Erro ao editar módulo com ID %s : %s", form.ID(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComModuloException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar módulo %s : %s", form.codigo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao editar módulo com ID %s : %s", form.ID(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComModuloException(mensagem, e);
 		}

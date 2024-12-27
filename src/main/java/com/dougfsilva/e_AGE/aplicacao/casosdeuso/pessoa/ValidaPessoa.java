@@ -10,7 +10,7 @@ public class ValidaPessoa {
 
 	private final PessoaRepository repository;
 	
-	public void validaUnicoRG(String RG) {
+	public void validarUnicoRG(String RG) {
 		if(repository.existePeloRG(RG)) {
 			throw new ErroDeValidacaoDePessoaException(String.format("RG de pessoa %s já existe na base de dados", RG));
 		}

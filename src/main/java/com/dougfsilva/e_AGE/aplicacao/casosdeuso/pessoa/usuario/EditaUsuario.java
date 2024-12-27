@@ -25,11 +25,11 @@ public class EditaUsuario {
 			log.info(String.format("Editado usuário %s", usuarioSalvo.getNomeDeUsuario()));
 			return usuario;
 		} catch (ErroDeValidacaoDeUsuarioException | ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao editar usuário %s : %s", form.nomeDeUsuario(), e.getMessage());
+			String mensagem = String.format("Erro ao editar usuário com ID %s : %s", form.ID(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComUsuarioException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar usuário %s : %s", form.nomeDeUsuario(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao editar usuário com ID %s : %s", form.ID(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComUsuarioException(mensagem, e);
 		}

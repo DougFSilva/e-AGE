@@ -29,11 +29,11 @@ public class EditaCurso {
 			log.info(String.format("Editado curso %s", cursoSalvo.getTitulo()));
 			return CursoResposta.deCurso(cursoSalvo);
 		} catch (ErroDeValidacaoDeCursoException | ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao editar curso %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro ao editar curso com ID %s : %s", form.ID(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComCursoException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar curso %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao editar curso com ID %s : %s", form.ID(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComCursoException(mensagem, e);
 		}

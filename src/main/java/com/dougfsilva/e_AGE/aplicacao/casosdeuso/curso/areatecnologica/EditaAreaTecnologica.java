@@ -25,11 +25,11 @@ public class EditaAreaTecnologica {
 			log.info(String.format("Edita área tecnológica com ID %S", form.ID()));
 			return areaSalva;
 		} catch (ObjetoNaoEncontradoException | ErroDeValidacaoDeAreaTecnologicaException e) {
-			String mensagem = String.format("Erro ao editar área tecnológica %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro ao editar área tecnológica com ID %s : %s", form.ID(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar área tecnológica %s : %s", form.titulo(), e.getMessage());
+			String mensagem = String.format("Erro inesperado ao editar área tecnológica com ID %s : %s", form.ID(), e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAreaTecnologicaException(mensagem, e);
 		}
