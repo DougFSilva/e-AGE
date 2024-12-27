@@ -61,4 +61,6 @@ public interface OcorrenciaRepository {
 	Pagina<Ocorrencia> buscarTodas(RequisicaoDePagina RequisicaoDePagina);
 	
 	Pagina<Ocorrencia> buscarTodasENaoRestritaOuTodasEUsuarioRelator(Boolean restrita, Usuario relator, RequisicaoDePagina RequisicaoDePagina);
+
+	Boolean existePeloAluno(Aluno aluno);
 }
