@@ -81,7 +81,7 @@ public class CriaFuncionario {
 				new Email(form.email()), 
 				form.dataDeNascimento(), 
 				endereco, 
-				imagemService.buscarImagemPadrao(TipoImagem.ALUNO),
+				imagemService.buscarImagemPadrao(TipoImagem.FUNCIONARIO),
 				form.registro(),
 				form.cargo());
 		return funcionario;

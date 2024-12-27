@@ -27,15 +27,15 @@ public class ExcluiAluno {
 			Aluno aluno = repository.buscarPeloIDOuThrow(ID);
 			garantirAlunoSemMatriculas(aluno);
 			garantirAlunoSemOcorrencias(aluno);
-			usuarioRepository.excluir(aluno.getUsuario());
+			excluirUsuario(aluno);
 			repository.excluir(aluno);
 			log.info(String.format("Excluido aluno %s com ID %s", aluno.getNome(), aluno.getID()));
 		} catch (ObjetoNaoEncontradoException | ErroDeEntidadeComVinculosException | ErroDeOperacaoComUsuarioException e) {
-			String mensagem = String.format("Erro ao excluir usuário com ID %s : %s", ID, e.getMessage());
+			String mensagem = String.format("Erro ao excluir aluno com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAlunoException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao excluir usuário com ID %s : %s", ID, e.getMessage());
+			String mensagem = String.format("Erro inesperado ao excluir aluno com ID %s : %s", ID, e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComAlunoException(mensagem, e);
 		}
@@ -50,6 +50,12 @@ public class ExcluiAluno {
 	private void garantirAlunoSemOcorrencias(Aluno aluno) {
 		if (ocorrenciaRepository.existePeloAluno(aluno)) {
 			throw new ErroDeEntidadeComVinculosException("Não é possível excluir o aluno porque existem ocorrências associadas a ele");
+		}
+	}
+	
+	private void excluirUsuario(Aluno aluno) {
+		if (aluno.getUsuario() != null) {
+			usuarioRepository.excluir(aluno.getUsuario());
 		}
 	}
 }

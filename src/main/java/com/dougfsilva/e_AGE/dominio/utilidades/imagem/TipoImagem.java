@@ -10,7 +10,7 @@ public enum TipoImagem {
 	AREA_TECNOLOGICA("Área tecnologica"), 
 	CURSO("Curso"), 
 	ALUNO("Aluno"), 
-	EMPREGADO("Empregado");
+	FUNCIONARIO("Empregado");
 
 	private String descricao;
 
