@@ -66,6 +66,7 @@ public class EditaAluno {
 			aluno.setEmail(new Email(form.email()));
 			aluno.getUsuario().setNomeDeUsuario(form.email());
 			usuarioRepository.salvar(aluno.getUsuario());
+			log.info(String.format("Editado usuario %s com ID %s", aluno.getUsuario().getNomeDeUsuario(), aluno.getUsuario().getID()));
 		}
 		if (form.dataDeNascimento() != null) {
 			aluno.setDataDeNascimento(form.dataDeNascimento());
