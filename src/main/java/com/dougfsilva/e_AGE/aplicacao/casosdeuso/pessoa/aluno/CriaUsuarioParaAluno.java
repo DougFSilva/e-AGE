@@ -16,7 +16,7 @@ import com.dougfsilva.e_AGE.dominio.pessoa.usuario.Usuario;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CriaUsuarioAoAluno {
+public class CriaUsuarioParaAluno {
 
 	private final AlunoRepository repository;
 	private final CriaUsuario criaUsuario;

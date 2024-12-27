@@ -28,7 +28,7 @@ public interface AlunoRepository {
 	
 	Pagina<Aluno> buscarPelaEmpresa(Empresa empresa, RequisicaoDePagina requisicaoDePagina);
 	
-	Pagina<Aluno> buscarPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicaoDePagina);
+	Pagina<Aluno> buscarPelaDataDeNascimento(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicaoDePagina);
 	
 	Pagina<Aluno> buscarPeloEstado(String estado, RequisicaoDePagina requisicao);
 	
