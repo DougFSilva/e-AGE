@@ -9,11 +9,12 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ValidaModulo {
 
-private final ModuloRepository repository;
-	
+	private final ModuloRepository repository;
+
 	public void validarUnicoCodigoPorTurma(Turma turma, String codigo) {
 		if (repository.existePelaTurmaECodigo(turma, codigo)) {
-			throw new ErroDeValidacaoDeModuloException(String.format("Código de módulo %s já existe para a turma %s", codigo, turma.getCodigo()));
+			throw new ErroDeValidacaoDeModuloException(
+					String.format("Código de módulo %s já existe para a turma %s", codigo, turma.getCodigo()));
 		}
 	}
 }

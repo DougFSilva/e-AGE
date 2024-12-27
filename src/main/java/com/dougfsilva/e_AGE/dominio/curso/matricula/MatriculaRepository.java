@@ -39,4 +39,8 @@ public interface MatriculaRepository {
 	Boolean existePelaTurma(Turma turma);
 	
 	Boolean existePeloAluno(Aluno aluno);
+	
+	Boolean existePeloModuloEAluno(Modulo modulo, Aluno aluno);
+	
+	Boolean existePeloRegistro(String registro);
 }

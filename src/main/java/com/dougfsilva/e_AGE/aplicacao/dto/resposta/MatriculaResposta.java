@@ -12,13 +12,12 @@ import lombok.Getter;
 import lombok.ToString;
 
 @Getter
-@EqualsAndHashCode(of = { "turma", "modulo", "aluno" })
+@EqualsAndHashCode(of = { "modulo", "aluno" })
 @ToString
 public class MatriculaResposta {
 
 	private String ID;
 	private String registro;
-	private TurmaResposta turma;
 	private ModuloResposta modulo;
 	private AlunoResposta aluno;
 	private LocalDate dataDaMatricula;
@@ -27,7 +26,6 @@ public class MatriculaResposta {
 	public MatriculaResposta(Matricula matricula) {
 		this.ID = matricula.getID();
 		this.registro = matricula.getRegistro();
-		this.turma = TurmaResposta.deTurma(matricula.getTurma());
 		this.modulo = ModuloResposta.deModulo(matricula.getModulo());
 		this.aluno = AlunoResposta.deAluno(matricula.getAluno());
 		this.dataDaMatricula = matricula.getDataDaMatricula();
