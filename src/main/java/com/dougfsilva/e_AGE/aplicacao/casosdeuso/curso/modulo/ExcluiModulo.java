@@ -18,7 +18,7 @@ public class ExcluiModulo {
 		try {
 			Modulo modulo = repository.buscarPeloIDOuThrow(ID);
 			repository.excluir(modulo);
-			log.info(String.format("Excluido módulo %s do curso %s", modulo.getCodigo(), modulo.getCurso()));
+			log.info(String.format("Excluido módulo %s da turma %s", modulo.getCodigo(), modulo.getTurma().getCodigo()));
 		} catch (ObjetoNaoEncontradoException e) {
 			String mensagem = String.format("Erro ao excluir módulo com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);

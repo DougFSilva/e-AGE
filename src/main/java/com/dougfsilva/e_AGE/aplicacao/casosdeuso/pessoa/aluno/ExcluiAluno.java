@@ -1,11 +1,11 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.aluno;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
+import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeEntidadeComVinculosException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAlunoException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComUsuarioException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
-import com.dougfsilva.e_AGE.dominio.matricula.MatriculaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.AlunoRepository;

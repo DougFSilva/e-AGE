@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.dominio.curso.evasao;
 
 import java.time.LocalDate;
 
-import com.dougfsilva.e_AGE.dominio.matricula.Matricula;
+import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

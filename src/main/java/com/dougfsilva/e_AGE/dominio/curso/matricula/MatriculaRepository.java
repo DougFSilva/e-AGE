@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.dominio.matricula;
+package com.dougfsilva.e_AGE.dominio.curso.matricula;
 
 import java.time.LocalDate;
 import java.util.Optional;

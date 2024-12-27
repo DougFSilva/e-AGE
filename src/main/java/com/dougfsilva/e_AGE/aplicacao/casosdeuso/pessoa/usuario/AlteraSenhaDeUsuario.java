@@ -2,7 +2,6 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComUsuarioException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeUsuarioException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.exception.SenhaDeUsuarioInvalidaException;
