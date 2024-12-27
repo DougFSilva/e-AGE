@@ -25,7 +25,7 @@ public interface FuncionarioRepository {
 
 	Pagina<Funcionario> buscarPeloSexo(Sexo sexo, RequisicaoDePagina requisicaoDePagina);
 
-	Pagina<Funcionario> buscarPelaDataDeNascimentoEntre(LocalDate dataInicial, LocalDate dataFinal,
+	Pagina<Funcionario> buscarPelaDataDeNascimento(LocalDate dataInicial, LocalDate dataFinal,
 			RequisicaoDePagina requisicaoDePagina);
 
 	Pagina<Funcionario> buscarPeloEstado(String estado, RequisicaoDePagina requisicao);
