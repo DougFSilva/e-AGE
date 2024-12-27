@@ -44,9 +44,7 @@ public class CriaAluno {
 			Aluno alunoSalvo = repository.salvar(aluno);
 			log.info(String.format("Criado aluno %s com ID %s ", alunoSalvo.getNome(), alunoSalvo.getID()));
 			return AlunoResposta.deAluno(alunoSalvo);
-		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException 
-				
-				| ErroDeValidacaoDeCamposException e) {
+		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException | ErroDeValidacaoDeCamposException e) {
 			String mensagem = String.format("Erro ao criar aluno %s : %s", form.nome(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComAlunoException(mensagem, e);

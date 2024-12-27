@@ -29,6 +29,4 @@ public class Funcionario extends Pessoa {
 		this.cargo = cargo;
 		this.ativo = true;
 	}
-	
-	
 }

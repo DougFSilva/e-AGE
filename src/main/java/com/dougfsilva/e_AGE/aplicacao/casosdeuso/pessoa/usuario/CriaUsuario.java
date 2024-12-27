@@ -18,7 +18,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class CriaUsuario {
-
+	
 	private final UsuarioRepository repository;
 	private final CodificadorDeSenha codificador;
 	private final ValidaUsuario validador;
@@ -45,27 +45,14 @@ public class CriaUsuario {
 	}
 	
 	public Usuario criarUsuarioDefaultParaPessoa(Pessoa pessoa, List<TipoPerfil> tiposPerfis) {
-		try {
 			String nomeDeUsuario = pessoa.getEmail().getEndereco();
-			validador.validarUnicoNomeDeUsuario(nomeDeUsuario);
-			Usuario usuario = new Usuario(nomeDeUsuario, gerarSenhaParaPessoa(pessoa));
-			tiposPerfis.forEach(tipo -> usuario.adicionarPerfil(tipo));
-			Usuario usuarioSalvo = repository.salvar(usuario);
-			log.info(String.format("Criado usuário %s", usuarioSalvo.getNomeDeUsuario()));
-			return usuarioSalvo;
-		} catch (ErroDeValidacaoDeUsuarioException | ErroDeValidacaoDeCamposException e) {
-			String mensagem = String.format("Erro ao criar usuário para pessoa %s com ID %s : %s", pessoa.getNome(), pessoa.getID(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComUsuarioException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar usuário para pessoa %s com ID %s : %s", pessoa.getNome(), pessoa.getID(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComUsuarioException(mensagem, e);
-		}
+			String senha = gerarSenhaParaPessoa(pessoa);
+			CriaUsuarioForm form = new CriaUsuarioForm(nomeDeUsuario, senha, tiposPerfis);
+			return criarUsuario(form);
 	}
 	
-	private SenhaDeUsuario gerarSenhaParaPessoa(Pessoa pessoa) {
+	private String gerarSenhaParaPessoa(Pessoa pessoa) {
 		String primeiros4DigitosDoRG = pessoa.getRG().substring(0, 4);
-		return new SenhaDeUsuario("Pw" + primeiros4DigitosDoRG + "@", codificador);
+		return "Pw" + primeiros4DigitosDoRG + "@";
 	}
 }
