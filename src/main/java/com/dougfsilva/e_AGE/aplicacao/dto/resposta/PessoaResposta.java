@@ -12,14 +12,14 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-@EqualsAndHashCode(of = { "RG" })
+@EqualsAndHashCode(of = { "CPF" })
 public class PessoaResposta {
 
 	private String ID;
 	private UsuarioResposta usuario;
 	private String nome;
 	private Sexo sexo;
-	private String RG;
+	private String CPF;
 	private String telefone;
 	private String email;
 	private LocalDate dataDeNascimento;
@@ -31,7 +31,7 @@ public class PessoaResposta {
 		this.usuario = UsuarioResposta.deUsuario(pessoa.getUsuario());
 		this.nome = pessoa.getNome();
 		this.sexo = pessoa.getSexo();
-		this.RG = pessoa.getRG();
+		this.CPF = pessoa.getCPF();
 		this.telefone = pessoa.getTelefone();
 		this.email = pessoa.getEmail().getEndereco();
 		this.dataDeNascimento = pessoa.getDataDeNascimento();

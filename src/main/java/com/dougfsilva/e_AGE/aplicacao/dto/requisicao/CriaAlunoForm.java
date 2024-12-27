@@ -6,10 +6,10 @@ import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Responsavel;
 
-public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
+public record CriaAlunoForm(String nome, Sexo sexo, String CPF, String telefone, String email, LocalDate dataDeNascimento,
 		CriaEnderecoForm endereco, Responsavel responsavel, String empresaID) {
 
-	public CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, String email, LocalDate dataDeNascimento,
+	public CriaAlunoForm(String nome, Sexo sexo, String CPF, String telefone, String email, LocalDate dataDeNascimento,
 			CriaEnderecoForm endereco, Responsavel responsavel, String empresaID) {
 		if (nome == null || nome.isBlank()) {
 			throw new ErroDeValidacaoDeCamposException("O campo nome não pode ser nulo ou vazio");
@@ -17,8 +17,8 @@ public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, 
 		if (sexo == null) {
 			throw new ErroDeValidacaoDeCamposException("O campo sexo não pode ser nulo");
 		}
-		if (RG == null || RG.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo RG não pode ser nulo ou vazio");
+		if (CPF == null || CPF.isBlank()) {
+			throw new ErroDeValidacaoDeCamposException("O campo CPF não pode ser nulo ou vazio");
 		}
 		if (telefone == null || telefone.isBlank()) {
 			throw new ErroDeValidacaoDeCamposException("O campo telefone não pode ser nulo ou vazio");
@@ -34,7 +34,7 @@ public record CriaAlunoForm(String nome, Sexo sexo, String RG, String telefone, 
 		}
 		this.nome = nome;
 		this.sexo = sexo;
-		this.RG = RG;
+		this.CPF = CPF;
 		this.telefone = telefone;
 		this.email = email;
 		this.dataDeNascimento = dataDeNascimento;

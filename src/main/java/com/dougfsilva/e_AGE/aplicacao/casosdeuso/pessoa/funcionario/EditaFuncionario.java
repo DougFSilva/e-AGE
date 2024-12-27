@@ -52,18 +52,18 @@ public class EditaFuncionario {
 		if (form.sexo() != null) {
 			funcionario.setSexo(form.sexo());
 		}
-		if (form.RG() != null && !form.RG().isBlank() && !form.RG().equalsIgnoreCase(funcionario.getRG())) {
-			validador.validarUnicoRG(form.RG());
-			funcionario.setRG(form.RG());
+		if (form.CPF() != null && !form.CPF().isBlank() && !form.CPF().equalsIgnoreCase(funcionario.getCPF())) {
+			validador.validarUnicoCPF(form.CPF());
+			funcionario.setCPF(form.CPF());
+			funcionario.getUsuario().setNomeDeUsuario(form.CPF());
+			usuarioRepository.salvar(funcionario.getUsuario());
+			log.info(String.format("Editado usuário %s com ID %s", funcionario.getUsuario().getNomeDeUsuario(), funcionario.getUsuario().getID()));
 		}
 		if (form.telefone() != null && !form.telefone().isBlank()) {
 			funcionario.setTelefone(form.telefone());
 		}
 		if (form.email() != null && !form.email().isBlank()) {
 			funcionario.setEmail(new Email(form.email()));
-			funcionario.getUsuario().setNomeDeUsuario(form.email());
-			usuarioRepository.salvar(funcionario.getUsuario());
-			log.info(String.format("Editado usuario %s com ID %s", funcionario.getUsuario().getNomeDeUsuario(), funcionario.getUsuario().getID()));
 		}
 		if (form.dataDeNascimento() != null) {
 			funcionario.setDataDeNascimento(form.dataDeNascimento());

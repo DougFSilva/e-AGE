@@ -35,25 +35,7 @@ public class CriaFuncionario {
 	
 	public FuncionarioResposta criar(CriaFuncionarioForm form) {
 		try {
-			validador.validarUnicoRG(form.RG());
-			Funcionario funcionario = construirFuncionario(form);
-			Funcionario funcionarioSalvo = repository.salvar(funcionario);
-			log.info(String.format("Criado funcionário %s com ID %s", funcionarioSalvo.getNome(), funcionarioSalvo.getID()));
-			return FuncionarioResposta.deFuncionario(funcionarioSalvo);
-		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException | ErroDeValidacaoDeCamposException e) {
-			String mensagem = String.format("Erro ao criar funcionário %s : %s", form.nome(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComFuncionarioException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar funcionário %s : %s", form.nome(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComFuncionarioException(mensagem, e);
-		}
-	}
-	
-	public FuncionarioResposta criarComUsuario(CriaFuncionarioForm form) {
-		try {
-			validador.validarUnicoRG(form.RG());
+			validador.validarUnicoCPF(form.CPF());
 			Funcionario funcionario = construirFuncionario(form);
 			Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(funcionario, Arrays.asList(TipoPerfil.FUNCIONARIO));
 			funcionario.setUsuario(usuario);
@@ -76,7 +58,7 @@ public class CriaFuncionario {
 		Funcionario funcionario = new Funcionario(
 				form.nome(), 
 				form.sexo(), 
-				form.RG(), 
+				form.CPF(), 
 				form.telefone(), 
 				new Email(form.email()), 
 				form.dataDeNascimento(), 

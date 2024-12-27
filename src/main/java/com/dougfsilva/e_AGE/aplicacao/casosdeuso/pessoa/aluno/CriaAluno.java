@@ -39,25 +39,7 @@ public class CriaAluno {
 	
 	public AlunoResposta criar(CriaAlunoForm form) {
 		try {
-			validador.validarUnicoRG(form.RG());
-			Aluno aluno = construirAluno(form);
-			Aluno alunoSalvo = repository.salvar(aluno);
-			log.info(String.format("Criado aluno %s com ID %s ", alunoSalvo.getNome(), alunoSalvo.getID()));
-			return AlunoResposta.deAluno(alunoSalvo);
-		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException | ErroDeValidacaoDeCamposException e) {
-			String mensagem = String.format("Erro ao criar aluno %s : %s", form.nome(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComAlunoException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar aluno %s : %s", form.nome(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComAlunoException(mensagem, e);
-		}
-	}
-	
-	public AlunoResposta criarComUsuario(CriaAlunoForm form) {
-		try {
-			validador.validarUnicoRG(form.RG());
+			validador.validarUnicoCPF(form.CPF());
 			Aluno aluno = construirAluno(form);
 			Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(aluno, Arrays.asList(TipoPerfil.ALUNO));
 			aluno.setUsuario(usuario);
@@ -81,7 +63,7 @@ public class CriaAluno {
 		Aluno aluno = new Aluno(
 				form.nome(), 
 				form.sexo(), 
-				form.RG(), 
+				form.CPF(), 
 				form.telefone(), 
 				new Email(form.email()), 
 				form.dataDeNascimento(), 

@@ -7,6 +7,7 @@ import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaUsuarioForm;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComUsuarioException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeUsuarioException;
+import com.dougfsilva.e_AGE.dominio.exception.SenhaDeUsuarioInvalidaException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Pessoa;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.CodificadorDeSenha;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.SenhaDeUsuario;
@@ -33,7 +34,7 @@ public class CriaUsuario {
 			Usuario usuarioSalvo = repository.salvar(usuario);
 			log.info(String.format("Criado usuário %s", usuarioSalvo.getNomeDeUsuario()));
 			return usuarioSalvo;
-		} catch (ErroDeValidacaoDeUsuarioException | ErroDeValidacaoDeCamposException e) {
+		} catch (ErroDeValidacaoDeUsuarioException | ErroDeValidacaoDeCamposException | SenhaDeUsuarioInvalidaException e) {
 			String mensagem = String.format("Erro ao criar usuário %s : %s", form.nomeDeUsuario(), e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComUsuarioException(mensagem, e);
@@ -45,14 +46,14 @@ public class CriaUsuario {
 	}
 	
 	public Usuario criarUsuarioDefaultParaPessoa(Pessoa pessoa, List<TipoPerfil> tiposPerfis) {
-			String nomeDeUsuario = pessoa.getEmail().getEndereco();
+			String nomeDeUsuario = pessoa.getCPF();
 			String senha = gerarSenhaParaPessoa(pessoa);
 			CriaUsuarioForm form = new CriaUsuarioForm(nomeDeUsuario, senha, tiposPerfis);
 			return criarUsuario(form);
 	}
 	
 	private String gerarSenhaParaPessoa(Pessoa pessoa) {
-		String primeiros4DigitosDoRG = pessoa.getRG().substring(0, 4);
-		return "Pw" + primeiros4DigitosDoRG + "@";
+		String primeiros4DigitosDoCPF = pessoa.getCPF().substring(0, 4);
+		return "Pw" + primeiros4DigitosDoCPF + "@";
 	}
 }

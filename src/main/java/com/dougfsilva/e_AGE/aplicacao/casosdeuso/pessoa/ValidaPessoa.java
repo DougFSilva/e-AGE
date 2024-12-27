@@ -10,9 +10,10 @@ public class ValidaPessoa {
 
 	private final PessoaRepository repository;
 	
-	public void validarUnicoRG(String RG) {
-		if(repository.existePeloRG(RG)) {
-			throw new ErroDeValidacaoDePessoaException(String.format("RG de pessoa %s já existe na base de dados", RG));
+	public void validarUnicoCPF(String CPF) {
+		if(repository.existePeloCPF(CPF)) {
+			throw new ErroDeValidacaoDePessoaException(String.format("CPF de pessoa %s já existe na base de dados", CPF));
 		}
 	}
+	
 }
