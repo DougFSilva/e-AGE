@@ -1,5 +1,5 @@
 **** Usecase
-
+- Nao permitir mudar staus de matricula dependendo do status atual
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura
 - Melhorar Response de métodos que trazem uma lista ou página, pois nem todos dados são úteis para quando realizar essa busca

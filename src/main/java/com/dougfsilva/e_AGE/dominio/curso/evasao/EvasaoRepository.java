@@ -21,6 +21,8 @@ public interface EvasaoRepository {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Evasao com ID %s não encontrada", ID)));
 	}
+	
+	Optional<Evasao> buscarPelaMatricula(Matricula matricula);
 
 	List<Evasao> buscarPeloAluno(Aluno aluno);
 

@@ -6,6 +6,7 @@ import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaStatus;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComMatriculaException;
+import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeMatriculaException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 
 import lombok.AllArgsConstructor;
@@ -19,6 +20,7 @@ public class AprovarAluno {
 	public MatriculaResposta aprovarPeloID(String ID) {
 		try {
 			Matricula matricula = repository.buscarPeloIDOuThrow(ID);
+			garantirMatriculaAtivaOuAlunoReprovado(matricula);
 			matricula.setStatus(MatriculaStatus.ALUNO_APROVADO);
 			Matricula matriculaSalva = repository.salvar(matricula);
 			log.info(String.format("Aluno %s aprovado no módulo %s", matriculaSalva.getAluno().getNome(), matriculaSalva.getModulo().getCodigo()));
@@ -31,6 +33,12 @@ public class AprovarAluno {
 			String mensagem = String.format("Erro inesperado aprovar aluno  da matrícula com ID %s : %s", ID, e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComMatriculaException(mensagem, e);
+		}
+	}
+	
+	private void garantirMatriculaAtivaOuAlunoReprovado(Matricula matricula) {
+		if (matricula.getStatus() != MatriculaStatus.MATRICULA_ATIVA && matricula.getStatus() != MatriculaStatus.ALUNO_REPROVADO) {
+			throw new ErroDeValidacaoDeMatriculaException("Não é possível aprovar um aluno cujo status de matrícula é diferente de ativa ou reprovado");
 		}
 	}
 }

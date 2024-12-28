@@ -21,4 +21,12 @@ public class Evasao {
 	private Matricula matricula;
 	private String motivo;
 	private LocalDate data;
+	
+	public Evasao(Matricula matricula, String motivo) {
+		this.matricula = matricula;
+		this.motivo = motivo;
+		this.data = LocalDate.now();
+	}
+	
+	
 }
