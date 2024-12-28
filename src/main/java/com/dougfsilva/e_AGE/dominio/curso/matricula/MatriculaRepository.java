@@ -1,6 +1,7 @@
 package com.dougfsilva.e_AGE.dominio.curso.matricula;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
@@ -14,6 +15,8 @@ import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 public interface MatriculaRepository {
 
 	Matricula salvar(Matricula matricula);
+	
+	List<Matricula> salvarTodas(List<Matricula> matriculas);
 
 	void excluir(Matricula matricula);
 
@@ -29,6 +32,8 @@ public interface MatriculaRepository {
 	Pagina<Matricula> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao);
 	
 	Pagina<Matricula> buscarPeloModulo(Modulo modulo, RequisicaoDePagina requisicao);
+	
+	List<Matricula> buscarPeloModulo(Modulo modulo);
 	
 	Pagina<Matricula> buscarPeloStatus(MatriculaStatus status, RequisicaoDePagina requisicao);
 	

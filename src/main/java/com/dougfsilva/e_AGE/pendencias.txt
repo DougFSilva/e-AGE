@@ -1,7 +1,5 @@
 **** Usecase
-- Talvez permitir mudar sequência de módulos
-- Alterar modulo para final e ajustar sequencia
-- Inserir sequencia numeria em módulo (usar count do repository)
+
 - Não permitir matricular aluno se este estiver evadido na mesma turma
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura
