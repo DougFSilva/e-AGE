@@ -49,7 +49,7 @@ public class MatriculaAluno {
 		Aluno aluno = alunoRepository.buscarPeloIDOuThrow(form.alunoID());
 		validador.validarUnicoAlunoPorModulo(modulo, aluno);
 		validador.validarUnicoRegistro(form.registro());
-		return new Matricula(form.registro(), modulo, aluno, form.dataDaMatricula(), MatriculaStatus.ATIVA);
+		return new Matricula(form.registro(), modulo, aluno, form.dataDaMatricula(), MatriculaStatus.MATRICULA_ATIVA);
 	}
 	
 }

@@ -11,24 +11,24 @@ import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ConcluiModuloDeMatricula {
+public class ReprovarAluno {
 
 	private final MatriculaRepository repository;
 	private final LogPadrao log;
 	
-	public MatriculaResposta concluirPeloID(String ID) {
+	public MatriculaResposta reprovarPeloID(String ID) {
 		try {
 			Matricula matricula = repository.buscarPeloIDOuThrow(ID);
-			matricula.setStatus(MatriculaStatus.CONCLUIDA);
+			matricula.setStatus(MatriculaStatus.ALUNO_REPROVADO);
 			Matricula matriculaSalva = repository.salvar(matricula);
-			log.info(String.format("Módulo %s concluído pelo aluno %s", matriculaSalva.getModulo().getCodigo(), matriculaSalva.getAluno().getNome()));
+			log.info(String.format("Aluno %s reprovado no módulo %s", matriculaSalva.getAluno().getNome(), matriculaSalva.getModulo().getCodigo()));
 			return MatriculaResposta.deMatricula(matriculaSalva);
 		} catch (ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao concluir módulo de matrícula com ID %s : %s", ID, e.getMessage());
+			String mensagem = String.format("Erro ao reprovar aluno da matrícula com ID %s : %s", ID, e.getMessage());
 			log.warn(mensagem, e);
 			throw new ErroDeOperacaoComMatriculaException(mensagem, e);
 		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado concluir módulo de matrícula com ID %s : %s", ID, e.getMessage());
+			String mensagem = String.format("Erro inesperado reprovar aluno da matrícula com ID %s : %s", ID, e.getMessage());
 			log.error(mensagem, e);
 			throw new ErroDeOperacaoComMatriculaException(mensagem, e);
 		}
