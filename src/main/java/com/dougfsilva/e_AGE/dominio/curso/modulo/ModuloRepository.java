@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.dominio.curso.modulo;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
@@ -11,6 +12,8 @@ import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 public interface ModuloRepository {
 
 	Modulo salvar(Modulo modulo);
+	
+	List<Modulo> salvarTodos(List<Modulo> modulos);
 
 	void excluir(Modulo modulo);
 	
@@ -22,12 +25,16 @@ public interface ModuloRepository {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Modulo com ID %s não encontrado", ID)));
 	}
+	
+	Optional<Modulo> buscarPeloNumeroDoModulo(Integer numero);
 
-	Pagina<Modulo> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao);
+	List<Modulo> buscarPelaTurma(Turma turma);
 
 	Pagina<Modulo> buscarTodos(RequisicaoDePagina requisicao);
 	
 	Boolean existePelaTurma(Turma turma);
 	
 	Boolean existePelaTurmaECodigo(Turma turma, String codigo);
+	
+	Integer contarModulosPorTurma(Turma turma);
 }

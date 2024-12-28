@@ -12,7 +12,7 @@ import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ReprovarAluno {
+public class ReprovaAluno {
 
 	private final MatriculaRepository repository;
 	private final LogPadrao log;

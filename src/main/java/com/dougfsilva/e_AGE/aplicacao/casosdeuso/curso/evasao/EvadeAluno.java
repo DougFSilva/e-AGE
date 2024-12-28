@@ -10,6 +10,7 @@ import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaStatus;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComMatriculaException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
+import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeEvasaoException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeMatriculaException;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 
@@ -25,6 +26,7 @@ public class EvadeAluno {
 	public EvasaoResposta evadir(CriaEvasaoForm form) {
 		try {
 			Matricula matricula = matriculaRepository.buscarPeloIDOuThrow(form.matriculaID());
+			garantirUnicaEvasaoPorMatricula(matricula);
 			garantirMatriculaAtivaOuAlunoAprovado(matricula);
 			Matricula matriculaAtualizada = atualizarStatusDaMatricula(matricula);
 			Evasao evasao = new Evasao(matriculaAtualizada, form.motivo());
@@ -51,6 +53,12 @@ public class EvadeAluno {
 	private void garantirMatriculaAtivaOuAlunoAprovado(Matricula matricula) {
 		if (matricula.getStatus() != MatriculaStatus.MATRICULA_ATIVA && matricula.getStatus() != MatriculaStatus.ALUNO_REPROVADO) {
 			throw new ErroDeValidacaoDeMatriculaException("Não é possível evadir um aluno cujo status de matrícula é diferente de ativa ou reprovado");
+		}
+	}
+	
+	private void garantirUnicaEvasaoPorMatricula(Matricula matricula) {
+		if (repository.existePelaMatricula(matricula)) {
+			throw new ErroDeValidacaoDeEvasaoException(String.format("Evasão para a matrícula com ID %s já existe na base de dados", matricula.getID()));
 		}
 	}
 }

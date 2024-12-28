@@ -23,6 +23,8 @@ public class Modulo {
 	private Boolean aberto;
 	private LocalDate dataDeAbertura;
 	private LocalDate dataDeFechamento;
+	private Integer numeroDoModulo;
+	private Boolean moduloFinal;
 
 	public Modulo(String codigo, Turma turma, LocalDate dataDeAbertura) {
 		this.codigo = codigo;

@@ -22,6 +22,8 @@ public class ModuloResposta {
 	private Boolean aberto;
 	private LocalDate dataDeAbertura;
 	private LocalDate dataDeFechamento;
+	private Integer numeroDoModulo;
+	private Boolean moduloFinal;
 	
 	public ModuloResposta(Modulo modulo) {
 		this.ID = modulo.getID();
@@ -30,6 +32,8 @@ public class ModuloResposta {
 		this.aberto = modulo.getAberto();
 		this.dataDeAbertura = modulo.getDataDeAbertura();
 		this.dataDeFechamento = modulo.getDataDeFechamento();
+		this.numeroDoModulo = modulo.getNumeroDoModulo();
+		this.moduloFinal = modulo.getModuloFinal();
 	}
 	
 	public static Pagina<ModuloResposta> dePagina(Pagina<Modulo> modulos) {

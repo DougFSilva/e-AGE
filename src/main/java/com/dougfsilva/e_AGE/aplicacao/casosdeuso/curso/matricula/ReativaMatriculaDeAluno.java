@@ -15,7 +15,7 @@ import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class ReativarMatriculaDeAluno {
+public class ReativaMatriculaDeAluno {
 
 	private final MatriculaRepository repository;
 	private final EvasaoRepository evasaoRepository;

@@ -1,5 +1,8 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.modulo;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.ModuloResposta;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -17,8 +20,8 @@ public class BuscaModulo {
 		return ModuloResposta.deModulo(repository.buscarPeloIDOuThrow(ID));
 	}
 	
-	public Pagina<ModuloResposta> buscarPeloCurso(Turma turma, RequisicaoDePagina requisicao){
-		return ModuloResposta.dePagina(repository.buscarPelaTurma(turma, requisicao));
+	public List<ModuloResposta> buscarPeloCurso(Turma turma){
+		return repository.buscarPelaTurma(turma).stream().map(ModuloResposta::new).collect(Collectors.toList());
 	}
 
 	public Pagina<ModuloResposta> buscarTodos(RequisicaoDePagina requisicao){

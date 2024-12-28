@@ -1,6 +1,9 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.matricula;
 
+import java.util.Optional;
+
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
+import com.dougfsilva.e_AGE.dominio.curso.evasao.Evasao;
 import com.dougfsilva.e_AGE.dominio.curso.evasao.EvasaoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
@@ -20,7 +23,7 @@ public class ExcluiMatricula {
 	public void excluirPeloID(String ID) {
 		try {
 			Matricula matricula = repository.buscarPeloIDOuThrow(ID);
-			garantirEvasaoSemMatriculas(matricula);
+			excluirEvasao(matricula);
 			repository.excluir(matricula);
 			log.info(String.format("Excluída matrícula do aluno %s no módulo %s", matricula.getAluno().getNome(), matricula.getModulo().getCodigo()));
 		} catch (ObjetoNaoEncontradoException | ErroDeEntidadeComVinculosException e) {
@@ -34,9 +37,11 @@ public class ExcluiMatricula {
 		}
 	}
 
-	private void garantirEvasaoSemMatriculas(Matricula matricula) {
-		if (evasaoRepository.existePelaMatricula(matricula)) {
-			throw new ErroDeEntidadeComVinculosException("Não é possível excluir a matrícula porque existem evasões associadas a ela");
+	private void excluirEvasao(Matricula matricula) {
+		Optional<Evasao> evasao = evasaoRepository.buscarPelaMatricula(matricula);
+		if (evasao.isPresent()) {
+			evasaoRepository.excluir(evasao.get());
+			log.info(String.format("Excluída evasão com ID %s", evasao.get().getID()));
 		}
 	}
 }
