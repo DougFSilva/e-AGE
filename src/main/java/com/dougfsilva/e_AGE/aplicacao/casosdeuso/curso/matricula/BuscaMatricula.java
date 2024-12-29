@@ -4,10 +4,13 @@ import java.time.LocalDate;
 
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.MatriculaResposta;
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
+import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaStatus;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
+import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
+import com.dougfsilva.e_AGE.dominio.curso.turma.TurmaRepository;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 
@@ -17,20 +20,26 @@ import lombok.AllArgsConstructor;
 public class BuscaMatricula {
 
 	private final MatriculaRepository repository;
+	private final CursoRepository cursoRepository;
+	private final TurmaRepository turmaRepository;
+	private final ModuloRepository moduloRepository;
 
 	public MatriculaResposta buscarPeloID(String ID) {
 		return MatriculaResposta.deMatricula(repository.buscarPeloIDOuThrow(ID));
 	}
 
-	public Pagina<MatriculaResposta> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao){
+	public Pagina<MatriculaResposta> buscarPeloCurso(String cursoID, RequisicaoDePagina requisicao){
+		Curso curso = cursoRepository.buscarPeloIDOuThrow(cursoID);
 		return MatriculaResposta.dePagina(repository.buscarPeloCurso(curso, requisicao));
 	}
 
-	public Pagina<MatriculaResposta> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao){
+	public Pagina<MatriculaResposta> buscarPelaTurma(String turmaID, RequisicaoDePagina requisicao){
+		Turma turma = turmaRepository.buscarPeloIDOuThrow(turmaID);
 		return MatriculaResposta.dePagina(repository.buscarPelaTurma(turma, requisicao));
 	}
 
-	public Pagina<MatriculaResposta> buscarPeloModulo(Modulo modulo, RequisicaoDePagina requisicao){
+	public Pagina<MatriculaResposta> buscarPeloModulo(String moduloID, RequisicaoDePagina requisicao){
+		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(moduloID);
 		return MatriculaResposta.dePagina(repository.buscarPeloModulo(modulo, requisicao));
 	}
 
