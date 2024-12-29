@@ -12,12 +12,12 @@ public interface AreaTecnologicaRepository {
 	void excluir(AreaTecnologica area);
 
 	Optional<AreaTecnologica> buscarPeloID(String ID);
-
+	
 	default AreaTecnologica buscarPeloIDOuThrow(String ID) {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Area tecnologica com ID %s não encontrada", ID)));
 	}
-	
+
 	List<AreaTecnologica> buscarPeloTituloContem(String titulo);
 	
 	List<AreaTecnologica> buscarTodas();

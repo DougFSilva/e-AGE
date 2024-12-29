@@ -2,16 +2,11 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.aluno;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaAlunoForm;
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.AlunoResposta;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComAlunoException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComUsuarioException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDePessoaException;
-import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.AlunoRepository;
@@ -28,24 +23,12 @@ public class EditaAluno {
 	private final UsuarioRepository usuarioRepository;
 	private final EditaEndereco editaEndereco;
 	private final ValidaPessoa validador;
-	private final LogPadrao log;
 
 	public AlunoResposta editar(EditaAlunoForm form) {
-		try {
-			Aluno aluno = repository.buscarPeloIDOuThrow(form.ID());
-			Aluno alunoEditado = editarDados(form, aluno);
-			Aluno alunoSalvo = repository.salvar(alunoEditado);
-			log.info(String.format("Editado aluno %s com ID %s", alunoSalvo.getNome(), alunoSalvo.getID()));
-			return AlunoResposta.deAluno(alunoSalvo);
-		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException | ErroDeOperacaoComUsuarioException e) {
-			String mensagem = String.format("Erro ao editar aluno com ID %s : %s", form.ID(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComAlunoException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar aluno com ID %s : %s", form.ID(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComAlunoException(mensagem, e);
-		}
+		Aluno aluno = repository.buscarPeloIDOuThrow(form.ID());
+		Aluno alunoEditado = editarDados(form, aluno);
+		Aluno alunoSalvo = repository.salvar(alunoEditado);
+		return AlunoResposta.deAluno(alunoSalvo);
 	}
 
 	private Aluno editarDados(EditaAlunoForm form, Aluno aluno) {
@@ -60,7 +43,6 @@ public class EditaAluno {
 			aluno.setCPF(form.CPF());
 			aluno.getUsuario().setNomeDeUsuario(form.CPF());
 			usuarioRepository.salvar(aluno.getUsuario());
-			log.info(String.format("Editado usuário %s com ID %s", aluno.getUsuario().getNomeDeUsuario(), aluno.getUsuario().getID()));
 		}
 		if (form.telefone() != null && !form.telefone().isBlank()) {
 			aluno.setTelefone(form.telefone());

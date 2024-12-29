@@ -5,14 +5,9 @@ import java.util.Arrays;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.CriaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario.CriaUsuario;
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaFuncionarioForm;
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.FuncionarioResposta;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComFuncionarioException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDePessoaException;
-import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.FuncionarioRepository;
@@ -31,26 +26,14 @@ public class CriaFuncionario {
 	private final CriaEndereco criaEndereco;
 	private final CriaUsuario criaUsuario;
 	private final ValidaPessoa validador;
-	private final LogPadrao log;
 	
 	public FuncionarioResposta criar(CriaFuncionarioForm form) {
-		try {
-			validador.validarUnicoCPF(form.CPF());
-			Funcionario funcionario = construirFuncionario(form);
-			Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(funcionario, Arrays.asList(TipoPerfil.FUNCIONARIO));
-			funcionario.setUsuario(usuario);
-			Funcionario funcionarioSalvo = repository.salvar(funcionario);
-			log.info(String.format("Criado funcionário %s com ID %s", funcionarioSalvo.getNome(), funcionarioSalvo.getID()));
-			return FuncionarioResposta.deFuncionario(funcionarioSalvo);
-		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException | ErroDeValidacaoDeCamposException e) {
-			String mensagem = String.format("Erro ao criar funcionário %s : %s", form.nome(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComFuncionarioException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao criar funcionário %s : %s", form.nome(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComFuncionarioException(mensagem, e);
-		}
+		validador.validarUnicoCPF(form.CPF());
+		Funcionario funcionario = construirFuncionario(form);
+		Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(funcionario, Arrays.asList(TipoPerfil.FUNCIONARIO));
+		funcionario.setUsuario(usuario);
+		Funcionario funcionarioSalvo = repository.salvar(funcionario);
+		return FuncionarioResposta.deFuncionario(funcionarioSalvo);
 	}
 	
 	private Funcionario construirFuncionario(CriaFuncionarioForm form) {

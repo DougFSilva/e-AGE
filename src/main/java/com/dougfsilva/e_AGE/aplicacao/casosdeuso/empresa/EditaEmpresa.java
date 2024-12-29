@@ -1,14 +1,10 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.empresa;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaEmpresaForm;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComEmpresaException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeEmpresaException;
-import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 
 import lombok.AllArgsConstructor;
 
@@ -18,24 +14,12 @@ public class EditaEmpresa {
 	private final EmpresaRepository repository;
 	private final EditaEndereco editaEndereco;
 	private final ValidaEmpresa validador;
-	private final LogPadrao log;
 	
 	public Empresa editar(EditaEmpresaForm form) {
-		try {
-			Empresa empresa = repository.buscarPeloIDOuThrow(form.ID());
-			Empresa empresaEditada = editarDados(form, empresa);
-			Empresa empresaSalva = repository.salvar(empresaEditada);
-			log.info(String.format("Editada empresa %s", empresaSalva.getNome()));
-			return empresaSalva;
-		} catch (ErroDeValidacaoDeEmpresaException | ObjetoNaoEncontradoException e) {
-			String mensagem = String.format("Erro ao editar empresa com ID %s : %s", form.ID(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComEmpresaException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar empresa com ID %s : %s", form.ID(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComEmpresaException(mensagem, e);
-		}
+		Empresa empresa = repository.buscarPeloIDOuThrow(form.ID());
+		Empresa empresaEditada = editarDados(form, empresa);
+		Empresa empresaSalva = repository.salvar(empresaEditada);
+		return empresaSalva;
 	}
 	
 	private Empresa editarDados(EditaEmpresaForm form, Empresa empresa) {

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -19,7 +18,6 @@ public class RedefineSequenciaDeModulos {
 
 	private final ModuloRepository repository;
 	private final TurmaRepository turmaRepository;
-	private final LogPadrao log;
 
 	public void redefinir(String turmaID, List<String> IDsModulosOrdenados) {
 		Turma turma = turmaRepository.buscarPeloIDOuThrow(turmaID);
@@ -27,7 +25,6 @@ public class RedefineSequenciaDeModulos {
 		validarQuantidadeDeModulos(modulos, IDsModulosOrdenados);
 		List<Modulo> modulosReorganizados = reorganizarModulos(modulos, IDsModulosOrdenados);
 		repository.salvarTodos(modulosReorganizados);
-		log.info(String.format("Reordenado módulos da turma %s", turma.getCodigo()));
 	}
 
 	private void validarQuantidadeDeModulos(List<Modulo> modulos, List<String> IDsModulosOrdenados) {

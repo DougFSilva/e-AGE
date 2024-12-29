@@ -2,14 +2,9 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.LogPadrao;
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaFuncionarioForm;
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.FuncionarioResposta;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComFuncionarioException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeOperacaoComUsuarioException;
-import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDePessoaException;
-import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.FuncionarioRepository;
@@ -24,25 +19,12 @@ public class EditaFuncionario {
 	private final UsuarioRepository usuarioRepository;
 	private final EditaEndereco editaEndereco;
 	private final ValidaPessoa validador;
-	private final LogPadrao log;
 	
 	public FuncionarioResposta editar(EditaFuncionarioForm form) {
-		try {
-			Funcionario funcionario = repository.buscarPeloIDOuThrow(form.ID());
-			Funcionario funcionarioEditado = editarDados(form, funcionario);
-			Funcionario funcionarioSalvo = repository.salvar(funcionarioEditado);
-			log.info(String.format("Editado funcionário %s com ID %s", funcionarioSalvo.getNome(), funcionarioSalvo.getID()));
-			return FuncionarioResposta.deFuncionario(funcionarioSalvo);
-		} catch (ErroDeValidacaoDePessoaException | ObjetoNaoEncontradoException | ErroDeOperacaoComUsuarioException e) {
-			String mensagem = String.format("Erro ao editar funcionário com ID %s : %s", form.ID(), e.getMessage());
-			log.warn(mensagem, e);
-			throw new ErroDeOperacaoComFuncionarioException(mensagem, e);
-		} catch (Exception e) {
-			String mensagem = String.format("Erro inesperado ao editar funcionário com ID %s : %s", form.ID(), e.getMessage());
-			log.error(mensagem, e);
-			throw new ErroDeOperacaoComFuncionarioException(mensagem, e);
-		}
-		
+		Funcionario funcionario = repository.buscarPeloIDOuThrow(form.ID());
+		Funcionario funcionarioEditado = editarDados(form, funcionario);
+		Funcionario funcionarioSalvo = repository.salvar(funcionarioEditado);
+		return FuncionarioResposta.deFuncionario(funcionarioSalvo);
 	}
 	
 	private Funcionario editarDados(EditaFuncionarioForm form, Funcionario funcionario) {
@@ -57,7 +39,6 @@ public class EditaFuncionario {
 			funcionario.setCPF(form.CPF());
 			funcionario.getUsuario().setNomeDeUsuario(form.CPF());
 			usuarioRepository.salvar(funcionario.getUsuario());
-			log.info(String.format("Editado usuário %s com ID %s", funcionario.getUsuario().getNomeDeUsuario(), funcionario.getUsuario().getID()));
 		}
 		if (form.telefone() != null && !form.telefone().isBlank()) {
 			funcionario.setTelefone(form.telefone());
