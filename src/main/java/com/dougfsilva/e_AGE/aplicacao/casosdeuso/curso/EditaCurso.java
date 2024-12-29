@@ -19,8 +19,7 @@ public class EditaCurso {
 	public CursoResposta editar(EditaCursoForm form) {
 		Curso curso = repository.buscarPeloIDOuThrow(form.ID());
 		Curso cursoEditado = editarDados(form, curso);
-		Curso cursoSalvo = repository.salvar(cursoEditado);
-		return CursoResposta.deCurso(cursoSalvo);
+		return CursoResposta.deCurso(repository.salvar(cursoEditado));
 	}
 	
 	private Curso editarDados(EditaCursoForm form, Curso curso) {

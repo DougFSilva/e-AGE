@@ -1,6 +1,4 @@
 **** Usecase
-- Rever os use cases de busca, por exemplo buscar por modulo deve receber o ID do modulo e não o modulo
-- Aprovar alunos ativos em lote
 - Matricular alunos em lote por excel
 - Não permitir matricular aluno se este estiver evadido na mesma turma
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo

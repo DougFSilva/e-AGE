@@ -18,7 +18,6 @@ public class CriaAreaTecnologica {
 	public AreaTecnologica criar(CriaAreaTecnologicaForm form) {
 		validador.validarUnicoTitulo(form.titulo());
 		AreaTecnologica area = new AreaTecnologica(form.titulo(), form.descricao(), imagemService.buscarImagemPadrao(TipoImagem.AREA_TECNOLOGICA));
-		AreaTecnologica areaSalva = repository.salvar(area);
-		return areaSalva;
+		return repository.salvar(area);
 	}
 }

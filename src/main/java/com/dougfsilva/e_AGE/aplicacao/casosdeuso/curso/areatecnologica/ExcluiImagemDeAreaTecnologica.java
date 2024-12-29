@@ -18,7 +18,6 @@ public class ExcluiImagemDeAreaTecnologica {
 		AreaTecnologica area = repository.buscarPeloIDOuThrow(ID);
 		imagemService.remover(TipoImagem.AREA_TECNOLOGICA, GeraNomeDeImagem.pelaAreaTecnologica(area));
 		area.setImagem(imagemService.buscarImagemPadrao(TipoImagem.AREA_TECNOLOGICA));
-		AreaTecnologica areaSalva = repository.salvar(area);
-		return areaSalva;
+		return repository.salvar(area);
 	}
 }

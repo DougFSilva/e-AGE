@@ -24,7 +24,6 @@ public class SalvaImagemDeFuncionario {
 		Funcionario funcionario = repository.buscarPeloIDOuThrow(ID);
 		String url = imagemService.salvar(imagem, TipoImagem.FUNCIONARIO, GeraNomeDeImagem.pelaPessoa(funcionario));
 		funcionario.setFoto(url);
-		Funcionario funcionarioSalvo = repository.salvar(funcionario);
-		return FuncionarioResposta.deFuncionario(funcionarioSalvo);
+		return FuncionarioResposta.deFuncionario(repository.salvar(funcionario));
 	}
 }

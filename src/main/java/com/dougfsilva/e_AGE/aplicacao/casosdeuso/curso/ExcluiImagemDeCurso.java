@@ -19,7 +19,6 @@ public class ExcluiImagemDeCurso {
 		Curso curso = repository.buscarPeloIDOuThrow(ID);
 		imagemService.remover(TipoImagem.CURSO, GeraNomeDeImagem.peloCurso(curso));
 		curso.setImagem(imagemService.buscarImagemPadrao(TipoImagem.CURSO));
-		Curso cursoSalvo = repository.salvar(curso);
-		return CursoResposta.deCurso(cursoSalvo);
+		return CursoResposta.deCurso( repository.salvar(curso));
 	}
 }

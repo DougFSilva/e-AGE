@@ -19,7 +19,6 @@ public class ExcluiImagemDeFuncionario {
 		Funcionario funcionario = repository.buscarPeloIDOuThrow(ID);
 		imagemService.remover(TipoImagem.FUNCIONARIO, GeraNomeDeImagem.pelaPessoa(funcionario));
 		funcionario.setFoto(imagemService.buscarImagemPadrao(TipoImagem.ALUNO));
-		Funcionario funcionarioSalvo = repository.salvar(funcionario);
-		return FuncionarioResposta.deFuncionario(funcionarioSalvo);
+		return FuncionarioResposta.deFuncionario(repository.salvar(funcionario));
 	}
 }

@@ -24,7 +24,6 @@ public class SalvaImagemDeAluno {
 		Aluno aluno = repository.buscarPeloIDOuThrow(ID);
 		String url = imagemService.salvar(imagem, TipoImagem.ALUNO, GeraNomeDeImagem.pelaPessoa(aluno));
 		aluno.setFoto(url);
-		Aluno alunoSalvo = repository.salvar(aluno);
-		return AlunoResposta.deAluno(alunoSalvo);
+		return AlunoResposta.deAluno(repository.salvar(aluno));
 	}
 }

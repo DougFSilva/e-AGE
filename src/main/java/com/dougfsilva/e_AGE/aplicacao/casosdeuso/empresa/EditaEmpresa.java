@@ -18,8 +18,7 @@ public class EditaEmpresa {
 	public Empresa editar(EditaEmpresaForm form) {
 		Empresa empresa = repository.buscarPeloIDOuThrow(form.ID());
 		Empresa empresaEditada = editarDados(form, empresa);
-		Empresa empresaSalva = repository.salvar(empresaEditada);
-		return empresaSalva;
+		return repository.salvar(empresaEditada);
 	}
 	
 	private Empresa editarDados(EditaEmpresaForm form, Empresa empresa) {

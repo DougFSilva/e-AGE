@@ -32,8 +32,7 @@ public class CriaFuncionario {
 		Funcionario funcionario = construirFuncionario(form);
 		Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(funcionario, Arrays.asList(TipoPerfil.FUNCIONARIO));
 		funcionario.setUsuario(usuario);
-		Funcionario funcionarioSalvo = repository.salvar(funcionario);
-		return FuncionarioResposta.deFuncionario(funcionarioSalvo);
+		return FuncionarioResposta.deFuncionario(repository.salvar(funcionario));
 	}
 	
 	private Funcionario construirFuncionario(CriaFuncionarioForm form) {

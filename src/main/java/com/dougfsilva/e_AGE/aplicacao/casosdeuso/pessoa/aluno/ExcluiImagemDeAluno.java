@@ -19,7 +19,6 @@ public class ExcluiImagemDeAluno {
 		Aluno aluno = repository.buscarPeloIDOuThrow(ID);
 		imagemService.remover(TipoImagem.ALUNO, GeraNomeDeImagem.pelaPessoa(aluno));
 		aluno.setFoto(imagemService.buscarImagemPadrao(TipoImagem.ALUNO));
-		Aluno alunoSalvo = repository.salvar(aluno);
-		return AlunoResposta.deAluno(alunoSalvo);
+		return AlunoResposta.deAluno(repository.salvar(aluno));
 	}
 }

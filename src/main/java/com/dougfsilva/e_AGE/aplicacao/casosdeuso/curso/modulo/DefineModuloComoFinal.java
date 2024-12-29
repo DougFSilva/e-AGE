@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.modulo;
 import java.util.Comparator;
 import java.util.List;
 
+import com.dougfsilva.e_AGE.aplicacao.dto.resposta.ModuloResposta;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 
@@ -13,7 +14,7 @@ public class DefineModuloComoFinal {
 
 	private final ModuloRepository repository;
 	
-	public void definirPeloID(String ID) {
+	public ModuloResposta definirPeloID(String ID) {
 		Modulo modulo = repository.buscarPeloIDOuThrow(ID);
 		List<Modulo> modulos = repository.buscarPelaTurma(modulo.getTurma());
 		modulos.removeIf(m -> m.equals(modulo));
@@ -26,5 +27,6 @@ public class DefineModuloComoFinal {
 		modulo.setNumeroDoModulo(modulos.size() + 1);
 		modulos.add(modulo);
 		repository.salvarTodos(modulos);
+		return ModuloResposta.deModulo(modulo);
 	}
 }

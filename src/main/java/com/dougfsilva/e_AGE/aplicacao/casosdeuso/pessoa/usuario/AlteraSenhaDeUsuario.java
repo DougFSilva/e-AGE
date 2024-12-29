@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario;
 
+import com.dougfsilva.e_AGE.aplicacao.dto.resposta.UsuarioResposta;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeUsuarioException;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.CodificadorDeSenha;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.SenhaDeUsuario;
@@ -16,11 +17,11 @@ public class AlteraSenhaDeUsuario {
 	private final UsuarioAutenticado usuarioAutenticado;
 	private final CodificadorDeSenha codificador;
 	
-	public void alterar(String senhaAtual, String novaSenha) {
+	public UsuarioResposta alterar(String senhaAtual, String novaSenha) {
 		Usuario usuario = usuarioAutenticado.buscarUsuarioAtualOuThrow();
 		compararSenha(senhaAtual, usuario.getSenha().getSenha());
 		usuario.setSenha(new SenhaDeUsuario(novaSenha, codificador));
-		repository.salvar(usuario);
+		return UsuarioResposta.deUsuario(repository.salvar(usuario));
 	}
 	
 	private void compararSenha(String senhaAtual, String senhaCodificada) {

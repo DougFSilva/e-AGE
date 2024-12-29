@@ -24,8 +24,7 @@ public class CriaUsuario {
 		SenhaDeUsuario senha = new SenhaDeUsuario(form.senha(), codificador);
 		Usuario usuario = new Usuario(form.nomeDeUsuario(), senha);
 		form.tiposPerfis().forEach(tipo -> usuario.adicionarPerfil(tipo));
-		Usuario usuarioSalvo = repository.salvar(usuario);
-		return usuarioSalvo;
+		return repository.salvar(usuario);
 	}
 	
 	public Usuario criarUsuarioDefaultParaPessoa(Pessoa pessoa, List<TipoPerfil> tiposPerfis) {

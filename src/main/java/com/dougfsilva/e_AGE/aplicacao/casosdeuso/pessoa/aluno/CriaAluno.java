@@ -35,8 +35,7 @@ public class CriaAluno {
 		Aluno aluno = construirAluno(form);
 		Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(aluno, Arrays.asList(TipoPerfil.ALUNO));
 		aluno.setUsuario(usuario);
-		Aluno alunoSalvo = repository.salvar(aluno);
-		return AlunoResposta.deAluno(alunoSalvo);
+		return AlunoResposta.deAluno(repository.salvar(aluno));
 	}
 	
 	private Aluno construirAluno(CriaAlunoForm form) {

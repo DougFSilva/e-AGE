@@ -24,7 +24,6 @@ public class SalvaImagemDeCurso {
 		Curso curso = repository.buscarPeloIDOuThrow(ID);
 		String url = imagemService.salvar(imagem, TipoImagem.CURSO, GeraNomeDeImagem.peloCurso(curso));
 		curso.setImagem(url);
-		Curso cursoSalvo = repository.salvar(curso);
-		return CursoResposta.deCurso(cursoSalvo);
+		return CursoResposta.deCurso(repository.salvar(curso));
 	}
 }

@@ -21,8 +21,7 @@ public class ReativaMatriculaDeAluno {
 		Matricula matricula = repository.buscarPeloIDOuThrow(ID);
 		excluirEvasao(matricula);
 		matricula.setStatus(MatriculaStatus.MATRICULA_ATIVA);
-		Matricula matriculaSalva = repository.salvar(matricula);
-		return MatriculaResposta.deMatricula(matriculaSalva);
+		return MatriculaResposta.deMatricula(repository.salvar(matricula));
 	}
 	
 	private void excluirEvasao(Matricula matricula) {

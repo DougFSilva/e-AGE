@@ -17,8 +17,7 @@ public class ReprovaAluno {
 		Matricula matricula = repository.buscarPeloIDOuThrow(ID);
 		garantirMatriculaAtivaOuAlunoAprovado(matricula);
 		matricula.setStatus(MatriculaStatus.ALUNO_REPROVADO);
-		Matricula matriculaSalva = repository.salvar(matricula);
-		return MatriculaResposta.deMatricula(matriculaSalva);
+		return MatriculaResposta.deMatricula(repository.salvar(matricula));
 	}
 	
 	private void garantirMatriculaAtivaOuAlunoAprovado(Matricula matricula) {

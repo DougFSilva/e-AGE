@@ -22,8 +22,7 @@ public class MatriculaAluno {
 	
 	public MatriculaResposta matricular(MatriculaAlunoForm form) {
 		Matricula matricula = construirMatricula(form);
-		Matricula matriculaSalva = repository.salvar(matricula);
-		return MatriculaResposta.deMatricula(matriculaSalva);
+		return MatriculaResposta.deMatricula(repository.salvar(matricula));
 	}
 	
 	private Matricula construirMatricula(MatriculaAlunoForm form) {

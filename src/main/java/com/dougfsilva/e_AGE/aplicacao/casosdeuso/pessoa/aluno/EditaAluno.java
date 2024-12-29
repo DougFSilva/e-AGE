@@ -27,8 +27,7 @@ public class EditaAluno {
 	public AlunoResposta editar(EditaAlunoForm form) {
 		Aluno aluno = repository.buscarPeloIDOuThrow(form.ID());
 		Aluno alunoEditado = editarDados(form, aluno);
-		Aluno alunoSalvo = repository.salvar(alunoEditado);
-		return AlunoResposta.deAluno(alunoSalvo);
+		return AlunoResposta.deAluno(repository.salvar(alunoEditado));
 	}
 
 	private Aluno editarDados(EditaAlunoForm form, Aluno aluno) {

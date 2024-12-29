@@ -23,8 +23,7 @@ public class SalvaImagemDeAreaTecnologica {
 		AreaTecnologica area = repository.buscarPeloIDOuThrow(ID);
 		String url = imagemService.salvar(imagem, TipoImagem.AREA_TECNOLOGICA, GeraNomeDeImagem.pelaAreaTecnologica(area));
 		area.setImagem(url);
-		AreaTecnologica areaSalva = repository.salvar(area);
-		return areaSalva;
+		return repository.salvar(area);
 	}
 
 }

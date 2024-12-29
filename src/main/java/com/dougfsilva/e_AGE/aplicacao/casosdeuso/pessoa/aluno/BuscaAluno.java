@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.AlunoResposta;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
+import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.AlunoRepository;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 public class BuscaAluno {
 
 	private final AlunoRepository repository;
+	private final EmpresaRepository empresaRepository;
 
 	public AlunoResposta buscarPeloID(String ID) {
 		return AlunoResposta.deAluno(repository.buscarPeloIDOuThrow(ID));
@@ -28,7 +30,8 @@ public class BuscaAluno {
 		return AlunoResposta.dePagina(repository.buscarPeloSexo(sexo, requisicaoDePagina));
 	}
 
-	public Pagina<AlunoResposta> buscarPelaEmpresa(Empresa empresa, RequisicaoDePagina requisicaoDePagina) {
+	public Pagina<AlunoResposta> buscarPeloIDdaEmpresa(String empresaID, RequisicaoDePagina requisicaoDePagina) {
+		Empresa empresa = empresaRepository.buscarPeloIDOuThrow(empresaID);
 		return AlunoResposta.dePagina(repository.buscarPelaEmpresa(empresa, requisicaoDePagina));
 	}
 

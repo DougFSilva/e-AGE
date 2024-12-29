@@ -28,17 +28,17 @@ public class BuscaMatricula {
 		return MatriculaResposta.deMatricula(repository.buscarPeloIDOuThrow(ID));
 	}
 
-	public Pagina<MatriculaResposta> buscarPeloCurso(String cursoID, RequisicaoDePagina requisicao){
+	public Pagina<MatriculaResposta> buscarPeloIDdoCurso(String cursoID, RequisicaoDePagina requisicao){
 		Curso curso = cursoRepository.buscarPeloIDOuThrow(cursoID);
 		return MatriculaResposta.dePagina(repository.buscarPeloCurso(curso, requisicao));
 	}
 
-	public Pagina<MatriculaResposta> buscarPelaTurma(String turmaID, RequisicaoDePagina requisicao){
+	public Pagina<MatriculaResposta> buscarPeloIDdaTurma(String turmaID, RequisicaoDePagina requisicao){
 		Turma turma = turmaRepository.buscarPeloIDOuThrow(turmaID);
 		return MatriculaResposta.dePagina(repository.buscarPelaTurma(turma, requisicao));
 	}
 
-	public Pagina<MatriculaResposta> buscarPeloModulo(String moduloID, RequisicaoDePagina requisicao){
+	public Pagina<MatriculaResposta> buscarPeloIDdoModulo(String moduloID, RequisicaoDePagina requisicao){
 		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(moduloID);
 		return MatriculaResposta.dePagina(repository.buscarPeloModulo(modulo, requisicao));
 	}

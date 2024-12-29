@@ -19,8 +19,7 @@ public class EditaTurma {
 	public TurmaResposta editar(EditaTurmaForm form) {
 		Turma turma = repository.buscarPeloIDOuThrow(form.ID());
 		Turma turmaAtualizada = editarDados(form, turma);
-		Turma turmaEditada = repository.salvar(turmaAtualizada);
-		return TurmaResposta.deTurma(turmaEditada);
+		return TurmaResposta.deTurma(repository.salvar(turmaAtualizada));
 	}
 	
 	private Turma editarDados(EditaTurmaForm form, Turma turma) {

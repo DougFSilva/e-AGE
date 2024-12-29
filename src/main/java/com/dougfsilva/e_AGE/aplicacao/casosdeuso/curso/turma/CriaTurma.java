@@ -20,8 +20,7 @@ public class CriaTurma {
 		Curso curso = cursoRepository.buscarPeloIDOuThrow(form.cursoID());
 		validador.validarUnicoCodigoPorCurso(curso, form.codigo());
 		Turma turma = construirTurma(form, curso);
-		Turma turmaSalva = repository.salvar(turma);
-		return TurmaResposta.deTurma(turmaSalva);
+		return TurmaResposta.deTurma(repository.salvar(turma));
 	}
 	
 	private Turma construirTurma(CriaTurmaForm form, Curso curso) {

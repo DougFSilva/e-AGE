@@ -23,8 +23,7 @@ public class EditaFuncionario {
 	public FuncionarioResposta editar(EditaFuncionarioForm form) {
 		Funcionario funcionario = repository.buscarPeloIDOuThrow(form.ID());
 		Funcionario funcionarioEditado = editarDados(form, funcionario);
-		Funcionario funcionarioSalvo = repository.salvar(funcionarioEditado);
-		return FuncionarioResposta.deFuncionario(funcionarioSalvo);
+		return FuncionarioResposta.deFuncionario(repository.salvar(funcionarioEditado));
 	}
 	
 	private Funcionario editarDados(EditaFuncionarioForm form, Funcionario funcionario) {

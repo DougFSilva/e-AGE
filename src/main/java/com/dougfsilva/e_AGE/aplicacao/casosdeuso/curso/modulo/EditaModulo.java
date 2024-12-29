@@ -19,8 +19,7 @@ public class EditaModulo {
 	public ModuloResposta editar(EditaModuloForm form) {
 		Modulo modulo = repository.buscarPeloIDOuThrow(form.ID());
 		Modulo moduloEditado = editarDados(form, modulo);
-		Modulo moduloSalvo = repository.salvar(moduloEditado);
-		return ModuloResposta.deModulo(moduloSalvo);
+		return ModuloResposta.deModulo(repository.salvar(moduloEditado));
 
 	}
 

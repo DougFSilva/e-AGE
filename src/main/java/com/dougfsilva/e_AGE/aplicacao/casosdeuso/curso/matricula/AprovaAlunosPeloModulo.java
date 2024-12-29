@@ -18,7 +18,7 @@ public class AprovaAlunosPeloModulo {
 	private final MatriculaRepository repository;
 	private final ModuloRepository moduloRepository;
 	
-	public List<MatriculaResposta> aprovarPeloIDDoModulo(String ID){
+	public List<MatriculaResposta> aprovarPeloIDdoModulo(String ID){
 		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(ID);
 		List<Matricula> matriculas = repository.buscarPeloModulo(modulo)
 				.stream()

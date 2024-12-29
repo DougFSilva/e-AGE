@@ -20,7 +20,7 @@ public class MatriculaAlunosNoProximoModulo {
 	private final MatriculaRepository repository;
 	private final ModuloRepository moduloRepository;
 	
-	public List<Matricula> avancarPeloIDDoModulo(String ID) {
+	public List<Matricula> avancarPeloIDdoModulo(String ID) {
 		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(ID);
 		garantirModuloNaoFinal(modulo);
 		List<Matricula> matriculas = repository.buscarPeloModulo(modulo);

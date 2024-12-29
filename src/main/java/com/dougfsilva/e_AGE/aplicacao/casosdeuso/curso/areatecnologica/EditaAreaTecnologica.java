@@ -15,8 +15,7 @@ public class EditaAreaTecnologica {
 	public AreaTecnologica editar(EditaAreaTecnologicaForm form) {
 		AreaTecnologica area = repository.buscarPeloIDOuThrow(form.ID());
 		AreaTecnologica areaEditada = editarDados(form, area);
-		AreaTecnologica areaSalva = repository.salvar(areaEditada);
-		return areaSalva;
+		return repository.salvar(areaEditada);
 	}
 	
 	private AreaTecnologica editarDados(EditaAreaTecnologicaForm form, AreaTecnologica area) {

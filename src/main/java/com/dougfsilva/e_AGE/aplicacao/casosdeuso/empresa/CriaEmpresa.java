@@ -17,8 +17,7 @@ public class CriaEmpresa {
 	
 	public Empresa criar(CriaEmpresaForm form) {
 		Empresa empresa = construirEmpresa(form);
-		Empresa empresaSalva = repository.salvar(empresa);
-		return empresaSalva;
+		return repository.salvar(empresa);
 	}
 	
 	private Empresa construirEmpresa(CriaEmpresaForm form) {
