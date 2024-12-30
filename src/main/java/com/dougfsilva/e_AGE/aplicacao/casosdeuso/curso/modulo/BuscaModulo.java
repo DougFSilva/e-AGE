@@ -1,9 +1,8 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.modulo;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.ModuloResposta;
+import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.curso.turma.TurmaRepository;
@@ -18,16 +17,16 @@ public class BuscaModulo {
 	private final ModuloRepository repository;
 	private final TurmaRepository turmaRepository;
 	
-	public ModuloResposta buscarPeloID(String ID) {
-		return ModuloResposta.deModulo(repository.buscarPeloIDOuThrow(ID));
+	public Modulo buscarPeloID(String ID) {
+		return repository.buscarPeloIDOuThrow(ID);
 	}
 	
-	public List<ModuloResposta> buscarPeloIDdaTurma(String turmaID){
+	public List<Modulo> buscarPeloIDdaTurma(String turmaID){
 		Turma turma = turmaRepository.buscarPeloIDOuThrow(turmaID);
-		return repository.buscarPelaTurma(turma).stream().map(ModuloResposta::new).collect(Collectors.toList());
+		return repository.buscarPelaTurma(turma);
 	}
 
-	public Pagina<ModuloResposta> buscarTodos(RequisicaoDePagina requisicao){
-		return ModuloResposta.dePagina(repository.buscarTodos(requisicao));
+	public Pagina<Modulo> buscarTodos(RequisicaoDePagina requisicao){
+		return repository.buscarTodos(requisicao);
 	}
 }

@@ -1,5 +1,5 @@
 **** Usecase
-- Matricular alunos em lote por excel
+- Cria alunos e matricula no modulo automaticamente
 - Enviar email para usuário com senha
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura

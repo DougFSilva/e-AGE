@@ -4,7 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.GeraNomeDeImagem;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.utilidades.ValidaImagem;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.FuncionarioResposta;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.FuncionarioRepository;
 import com.dougfsilva.e_AGE.dominio.utilidades.imagem.ImagemService;
@@ -19,11 +18,11 @@ public class SalvaImagemDeFuncionario {
 	private final ImagemService imagemService;
 	private final ValidaImagem validador;
 	
-	public FuncionarioResposta salvar(String ID, MultipartFile imagem) {
+	public Funcionario salvar(String ID, MultipartFile imagem) {
 		validador.validar(imagem);
 		Funcionario funcionario = repository.buscarPeloIDOuThrow(ID);
 		String url = imagemService.salvar(imagem, TipoImagem.FUNCIONARIO, GeraNomeDeImagem.pelaPessoa(funcionario));
 		funcionario.setFoto(url);
-		return FuncionarioResposta.deFuncionario(repository.salvar(funcionario));
+		return repository.salvar(funcionario);
 	}
 }

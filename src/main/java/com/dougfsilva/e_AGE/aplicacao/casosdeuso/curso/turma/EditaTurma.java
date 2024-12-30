@@ -1,7 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.turma;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaTurmaForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.TurmaResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.EditaTurmaForm;
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -16,10 +15,10 @@ public class EditaTurma {
 	private final CursoRepository cursoRepository;
 	private final ValidaTurma validador;
 	
-	public TurmaResposta editar(EditaTurmaForm form) {
+	public Turma editar(EditaTurmaForm form) {
 		Turma turma = repository.buscarPeloIDOuThrow(form.ID());
 		Turma turmaAtualizada = editarDados(form, turma);
-		return TurmaResposta.deTurma(repository.salvar(turmaAtualizada));
+		return repository.salvar(turmaAtualizada);
 	}
 	
 	private Turma editarDados(EditaTurmaForm form, Turma turma) {

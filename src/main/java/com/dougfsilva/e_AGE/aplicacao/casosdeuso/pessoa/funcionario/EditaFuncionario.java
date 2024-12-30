@@ -2,8 +2,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaFuncionarioForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.FuncionarioResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.EditaFuncionarioForm;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
@@ -20,10 +19,10 @@ public class EditaFuncionario {
 	private final EditaEndereco editaEndereco;
 	private final ValidaPessoa validador;
 	
-	public FuncionarioResposta editar(EditaFuncionarioForm form) {
+	public Funcionario editar(EditaFuncionarioForm form) {
 		Funcionario funcionario = repository.buscarPeloIDOuThrow(form.ID());
 		Funcionario funcionarioEditado = editarDados(form, funcionario);
-		return FuncionarioResposta.deFuncionario(repository.salvar(funcionarioEditado));
+		return repository.salvar(funcionarioEditado);
 	}
 	
 	private Funcionario editarDados(EditaFuncionarioForm form, Funcionario funcionario) {

@@ -5,8 +5,7 @@ import java.util.Arrays;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.CriaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario.CriaUsuario;
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaFuncionarioForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.FuncionarioResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaFuncionarioForm;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
@@ -27,12 +26,12 @@ public class CriaFuncionario {
 	private final CriaUsuario criaUsuario;
 	private final ValidaPessoa validador;
 	
-	public FuncionarioResposta criar(CriaFuncionarioForm form) {
+	public Funcionario criar(CriaFuncionarioForm form) {
 		validador.validarUnicoCPF(form.CPF());
 		Funcionario funcionario = construirFuncionario(form);
 		Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(funcionario, Arrays.asList(TipoPerfil.FUNCIONARIO));
 		funcionario.setUsuario(usuario);
-		return FuncionarioResposta.deFuncionario(repository.salvar(funcionario));
+		return repository.salvar(funcionario);
 	}
 	
 	private Funcionario construirFuncionario(CriaFuncionarioForm form) {

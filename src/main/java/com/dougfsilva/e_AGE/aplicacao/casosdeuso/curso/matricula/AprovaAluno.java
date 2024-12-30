@@ -1,6 +1,5 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.matricula;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.MatriculaResposta;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaStatus;
@@ -13,11 +12,11 @@ public class AprovaAluno {
 
 	private final MatriculaRepository repository;
 	
-	public MatriculaResposta aprovarPeloID(String ID) {
+	public Matricula aprovarPeloID(String ID) {
 		Matricula matricula = repository.buscarPeloIDOuThrow(ID);
 		garantirMatriculaAtivaOuAlunoReprovado(matricula);
 		matricula.setStatus(MatriculaStatus.ALUNO_APROVADO);
-		return MatriculaResposta.deMatricula(repository.salvar(matricula));
+		return repository.salvar(matricula);
 	}
 	
 	private void garantirMatriculaAtivaOuAlunoReprovado(Matricula matricula) {

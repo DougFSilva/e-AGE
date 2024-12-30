@@ -1,7 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.modulo;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaModuloForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.ModuloResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.EditaModuloForm;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -16,10 +15,10 @@ public class EditaModulo {
 	private final TurmaRepository turmaRepository;
 	private final ValidaModulo validador;
 
-	public ModuloResposta editar(EditaModuloForm form) {
+	public Modulo editar(EditaModuloForm form) {
 		Modulo modulo = repository.buscarPeloIDOuThrow(form.ID());
 		Modulo moduloEditado = editarDados(form, modulo);
-		return ModuloResposta.deModulo(repository.salvar(moduloEditado));
+		return repository.salvar(moduloEditado);
 
 	}
 

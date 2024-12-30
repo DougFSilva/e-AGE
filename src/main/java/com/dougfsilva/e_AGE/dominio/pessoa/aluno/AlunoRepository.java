@@ -22,6 +22,8 @@ public interface AlunoRepository {
 	        .orElseThrow(() -> new ObjetoNaoEncontradoException(String.format("Aluno com ID %s não encontrado", ID)));
 	}
 	
+	Optional<Aluno> buscarPeloCPF(String CPF);
+	
 	Pagina<Aluno> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
 	
 	Pagina<Aluno> buscarPeloSexo(Sexo sexo, RequisicaoDePagina requisicaoDePagina);

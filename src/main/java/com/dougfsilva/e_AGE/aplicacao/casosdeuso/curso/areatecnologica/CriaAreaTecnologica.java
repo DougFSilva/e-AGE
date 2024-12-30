@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnologica;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaAreaTecnologicaForm;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaAreaTecnologicaForm;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 import com.dougfsilva.e_AGE.dominio.utilidades.imagem.ImagemService;

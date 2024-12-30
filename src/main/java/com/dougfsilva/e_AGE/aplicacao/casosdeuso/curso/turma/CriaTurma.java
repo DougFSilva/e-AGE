@@ -1,7 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.turma;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaTurmaForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.TurmaResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaTurmaForm;
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -16,11 +15,11 @@ public class CriaTurma {
 	private final CursoRepository cursoRepository;
 	private final ValidaTurma validador;
 	
-	public TurmaResposta criar(CriaTurmaForm form) {
+	public Turma criar(CriaTurmaForm form) {
 		Curso curso = cursoRepository.buscarPeloIDOuThrow(form.cursoID());
 		validador.validarUnicoCodigoPorCurso(curso, form.codigo());
 		Turma turma = construirTurma(form, curso);
-		return TurmaResposta.deTurma(repository.salvar(turma));
+		return repository.salvar(turma);
 	}
 	
 	private Turma construirTurma(CriaTurmaForm form, Curso curso) {

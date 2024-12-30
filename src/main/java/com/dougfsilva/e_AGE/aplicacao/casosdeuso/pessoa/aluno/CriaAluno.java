@@ -5,8 +5,7 @@ import java.util.Arrays;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.CriaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario.CriaUsuario;
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaAlunoForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.AlunoResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaAlunoForm;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
@@ -30,12 +29,12 @@ public class CriaAluno {
 	private final CriaUsuario criaUsuario;
 	private final ValidaPessoa validador;
 	
-	public AlunoResposta criar(CriaAlunoForm form) {
+	public Aluno criar(CriaAlunoForm form) {
 		validador.validarUnicoCPF(form.CPF());
 		Aluno aluno = construirAluno(form);
 		Usuario usuario = criaUsuario.criarUsuarioDefaultParaPessoa(aluno, Arrays.asList(TipoPerfil.ALUNO));
 		aluno.setUsuario(usuario);
-		return AlunoResposta.deAluno(repository.salvar(aluno));
+		return repository.salvar(aluno);
 	}
 	
 	private Aluno construirAluno(CriaAlunoForm form) {

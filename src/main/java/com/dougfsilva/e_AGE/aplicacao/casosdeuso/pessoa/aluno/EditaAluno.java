@@ -2,8 +2,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.aluno;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaAlunoForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.AlunoResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.EditaAlunoForm;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
@@ -24,10 +23,10 @@ public class EditaAluno {
 	private final EditaEndereco editaEndereco;
 	private final ValidaPessoa validador;
 
-	public AlunoResposta editar(EditaAlunoForm form) {
+	public Aluno editar(EditaAlunoForm form) {
 		Aluno aluno = repository.buscarPeloIDOuThrow(form.ID());
 		Aluno alunoEditado = editarDados(form, aluno);
-		return AlunoResposta.deAluno(repository.salvar(alunoEditado));
+		return repository.salvar(alunoEditado);
 	}
 
 	private Aluno editarDados(EditaAlunoForm form, Aluno aluno) {

@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario;
 
 import java.util.List;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaUsuarioForm;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaUsuarioForm;
 import com.dougfsilva.e_AGE.dominio.pessoa.Pessoa;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.CodificadorDeSenha;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.SenhaDeUsuario;

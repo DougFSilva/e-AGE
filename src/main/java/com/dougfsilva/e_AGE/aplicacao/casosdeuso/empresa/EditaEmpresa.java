@@ -1,7 +1,7 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.empresa;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.EditaEmpresaForm;
+import com.dougfsilva.e_AGE.aplicacao.dto.EditaEmpresaForm;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;

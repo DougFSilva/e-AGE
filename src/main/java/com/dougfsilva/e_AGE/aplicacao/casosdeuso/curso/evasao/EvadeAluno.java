@@ -1,7 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.evasao;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaEvasaoForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.EvasaoResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaEvasaoForm;
 import com.dougfsilva.e_AGE.dominio.curso.evasao.Evasao;
 import com.dougfsilva.e_AGE.dominio.curso.evasao.EvasaoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
@@ -18,14 +17,13 @@ public class EvadeAluno {
 	private final EvasaoRepository repository;
 	private final MatriculaRepository matriculaRepository;
 	
-	public EvasaoResposta evadir(CriaEvasaoForm form) {
+	public Evasao evadir(CriaEvasaoForm form) {
 		Matricula matricula = matriculaRepository.buscarPeloIDOuThrow(form.matriculaID());
 		garantirUnicaEvasaoPorMatricula(matricula);
 		garantirMatriculaAtivaOuAlunoAprovado(matricula);
 		Matricula matriculaAtualizada = atualizarStatusDaMatricula(matricula);
 		Evasao evasao = new Evasao(matriculaAtualizada, form.motivo());
-		Evasao evasaoSalva = repository.salvar(evasao);
-		return EvasaoResposta.deEvasao(evasaoSalva);
+		return repository.salvar(evasao);
 	}
 	
 	private Matricula atualizarStatusDaMatricula(Matricula matricula) {

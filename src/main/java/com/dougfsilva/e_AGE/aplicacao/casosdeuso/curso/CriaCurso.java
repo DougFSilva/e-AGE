@@ -1,7 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.CriaCursoForm;
-import com.dougfsilva.e_AGE.aplicacao.dto.resposta.CursoResposta;
+import com.dougfsilva.e_AGE.aplicacao.dto.CriaCursoForm;
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
@@ -19,11 +18,11 @@ public class CriaCurso {
 	private final ImagemService imagemService;
 	private final ValidaCurso validador;
 	
-	public CursoResposta criar(CriaCursoForm form) {
+	public Curso criar(CriaCursoForm form) {
 		validador.validarUnicoTitulo(form.titulo());
 		Curso curso = construirCurso(form);
 		Curso cursoSalvo = repository.salvar(curso);
-		return CursoResposta.deCurso(cursoSalvo);
+		return cursoSalvo;
 	}
 	
 	private Curso construirCurso(CriaCursoForm form) {
