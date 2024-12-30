@@ -1,6 +1,10 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.matricula;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.MatriculaAlunoForm;
+import com.dougfsilva.e_AGE.aplicacao.dto.requisicao.MatriculaAlunosForm;
 import com.dougfsilva.e_AGE.aplicacao.dto.resposta.MatriculaResposta;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.curso.matricula.MatriculaRepository;
@@ -21,16 +25,28 @@ public class MatriculaAluno {
 	private final ValidaMatricula validador;
 	
 	public MatriculaResposta matricular(MatriculaAlunoForm form) {
-		Matricula matricula = construirMatricula(form);
+		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(form.moduloID());
+		Aluno aluno = alunoRepository.buscarPeloIDOuThrow(form.alunoID());
+		validar(modulo, aluno, form.registro());
+		Matricula matricula = new Matricula(form.registro(), modulo, aluno, form.dataDaMatricula(), MatriculaStatus.MATRICULA_ATIVA);
 		return MatriculaResposta.deMatricula(repository.salvar(matricula));
 	}
 	
-	private Matricula construirMatricula(MatriculaAlunoForm form) {
-		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(form.moduloID());
-		Aluno aluno = alunoRepository.buscarPeloIDOuThrow(form.alunoID());
+	public List<Matricula> matricular(MatriculaAlunosForm forms){
+		List<Matricula> matriculas = new ArrayList<>();
+		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(forms.moduloID());
+		forms.alunos().forEach(form -> {
+			Aluno aluno = alunoRepository.buscarPeloIDOuThrow(form.alunoID());
+			validar(modulo, aluno, form.registro());
+			matriculas.add(new Matricula(form.registro(), modulo, aluno, form.dataDaMatricula(), MatriculaStatus.MATRICULA_ATIVA));
+		});
+		return repository.salvarTodas(matriculas);
+	}
+	
+	private void validar(Modulo modulo, Aluno aluno, String registro) {
 		validador.validarUnicoAlunoPorModulo(modulo, aluno);
-		validador.validarUnicoRegistro(form.registro());
-		return new Matricula(form.registro(), modulo, aluno, form.dataDaMatricula(), MatriculaStatus.MATRICULA_ATIVA);
+		validador.validarUnicoRegistro(registro);
+		validador.validarAlunoNaoEvadidoNaTurma(modulo.getTurma(), aluno);
 	}
 	
 }
