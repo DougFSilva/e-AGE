@@ -29,4 +29,6 @@ public interface TurmaRepository {
 	Boolean existePeloCursoECodigo(Curso curso, String codigo);
 	
 	Boolean existePeloCurso(Curso curso);
+	
+	Boolean existePeloCursoEStatusAberta(Curso curso, Boolean aberta);
 }
