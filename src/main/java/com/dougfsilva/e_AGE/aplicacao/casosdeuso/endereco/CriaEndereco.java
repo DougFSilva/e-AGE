@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.CriaEnderecoForm;
+import com.dougfsilva.e_AGE.aplicacao.formulario.CriaEnderecoForm;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 
 public class CriaEndereco {

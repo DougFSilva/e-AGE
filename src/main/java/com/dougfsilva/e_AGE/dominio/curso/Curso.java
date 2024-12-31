@@ -23,13 +23,12 @@ public class Curso {
 	private Boolean aberto;
 	private String imagem;
 
-	public Curso(Modalidade modalidade, AreaTecnologica areaTecnologica, String titulo, String descricao,
-			String imagem) {
+	public Curso(Modalidade modalidade, AreaTecnologica areaTecnologica, String titulo, String descricao, Boolean aberto, String imagem) {
 		this.modalidade = modalidade;
 		this.areaTecnologica = areaTecnologica;
 		this.titulo = titulo;
 		this.descricao = descricao;
-		this.aberto = true;
+		this.aberto = aberto;
 		this.imagem = imagem;
 	}
 

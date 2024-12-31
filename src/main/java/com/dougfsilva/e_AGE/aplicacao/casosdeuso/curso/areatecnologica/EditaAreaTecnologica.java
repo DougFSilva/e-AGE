@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.areatecnologica;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.EditaAreaTecnologicaForm;
+import com.dougfsilva.e_AGE.aplicacao.formulario.EditaAreaTecnologicaForm;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologica;
 import com.dougfsilva.e_AGE.dominio.curso.areatecnologica.AreaTecnologicaRepository;
 

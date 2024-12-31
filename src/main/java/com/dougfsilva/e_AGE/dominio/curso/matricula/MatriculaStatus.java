@@ -7,9 +7,9 @@ import lombok.ToString;
 @ToString
 public enum MatriculaStatus {
 
-	MATRICULA_ATIVA("Aluno com matricula ativa no módulo"),
-	ALUNO_APROVADO("Aluno foi aprovado no módulo"),
-	ALUNO_REPROVADO("Aluno foi reprovado no módulo"),
+	ALUNO_MATRICULADO("Aluno está matriculado no curso"),
+	ALUNO_CERTIFICADO("Aluno foi certificado no curso"),
+	ALUNO_REPROVADO("Aluno foi reprovado no curso"),
 	ALUNO_EVADIDO("Aluno evadiu do curso");
 	
 	private String descricao;

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
-import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
@@ -33,10 +32,6 @@ public interface MatriculaRepository {
 	
 	List<Matricula> buscarPelaTurmaEAluno(Turma turma, Aluno aluno);
 	
-	Pagina<Matricula> buscarPeloModulo(Modulo modulo, RequisicaoDePagina requisicao);
-	
-	List<Matricula> buscarPeloModulo(Modulo modulo);
-	
 	List<Matricula> buscarPeloAluno(Aluno aluno);
 	
 	Pagina<Matricula> buscarPeloStatus(MatriculaStatus status, RequisicaoDePagina requisicao);
@@ -49,7 +44,9 @@ public interface MatriculaRepository {
 	
 	Boolean existePeloAluno(Aluno aluno);
 	
-	Boolean existePeloModuloEAluno(Modulo modulo, Aluno aluno);
+	Boolean existePelaTurmaEAluno(Turma turma, Aluno aluno);
+	
+	Boolean existePelaTurmaEStatus(Turma turma, MatriculaStatus status);
 	
 	Boolean existePeloRegistro(String registro);
 }

@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
-import com.dougfsilva.e_AGE.aplicacao.dto.EditaFuncionarioForm;
+import com.dougfsilva.e_AGE.aplicacao.formulario.EditaFuncionarioForm;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;

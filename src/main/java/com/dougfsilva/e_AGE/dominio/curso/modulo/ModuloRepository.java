@@ -3,7 +3,6 @@ package com.dougfsilva.e_AGE.dominio.curso.modulo;
 import java.util.List;
 import java.util.Optional;
 
-import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
@@ -17,8 +16,6 @@ public interface ModuloRepository {
 
 	void excluir(Modulo modulo);
 	
-	void excluirTodosPeloCurso(Curso curso);
-
 	Optional<Modulo> buscarPeloID(String ID);
 
 	default Modulo buscarPeloIDOuThrow(String ID) {
@@ -29,7 +26,7 @@ public interface ModuloRepository {
 	Optional<Modulo> buscarPeloNumeroDoModulo(Integer numero);
 
 	List<Modulo> buscarPelaTurma(Turma turma);
-
+	
 	Pagina<Modulo> buscarTodos(RequisicaoDePagina requisicao);
 	
 	Boolean existePelaTurma(Turma turma);

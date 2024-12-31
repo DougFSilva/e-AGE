@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.aluno;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.EditaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
-import com.dougfsilva.e_AGE.aplicacao.dto.EditaAlunoForm;
+import com.dougfsilva.e_AGE.aplicacao.formulario.EditaAlunoForm;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;

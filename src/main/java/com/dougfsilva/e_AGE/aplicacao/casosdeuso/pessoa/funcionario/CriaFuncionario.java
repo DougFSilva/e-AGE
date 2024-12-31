@@ -5,7 +5,7 @@ import java.util.Arrays;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.endereco.CriaEndereco;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.ValidaPessoa;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.usuario.CriaUsuario;
-import com.dougfsilva.e_AGE.aplicacao.dto.CriaFuncionarioForm;
+import com.dougfsilva.e_AGE.aplicacao.formulario.CriaFuncionarioForm;
 import com.dougfsilva.e_AGE.dominio.endereco.Endereco;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;

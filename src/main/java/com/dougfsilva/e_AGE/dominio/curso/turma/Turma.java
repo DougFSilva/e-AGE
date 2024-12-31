@@ -1,7 +1,5 @@
 package com.dougfsilva.e_AGE.dominio.curso.turma;
 
-import java.time.LocalDate;
-
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 
 import lombok.AllArgsConstructor;
@@ -21,14 +19,11 @@ public class Turma {
 	private String codigo;
 	private Curso curso;
 	private Boolean aberta;
-	private LocalDate dataDeAbertura;
-	private LocalDate dataDeFechamento;
 
-	public Turma(String codigo, Curso curso, LocalDate dataDeAbertura) {
+	public Turma(String codigo, Curso curso, Boolean aberta) {
 		this.codigo = codigo;
 		this.curso = curso;
-		this.aberta = true;
-		this.dataDeAbertura = dataDeAbertura;
+		this.aberta = aberta;
 	}
 
 }

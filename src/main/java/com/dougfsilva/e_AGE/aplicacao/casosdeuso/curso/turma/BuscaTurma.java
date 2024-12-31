@@ -1,7 +1,5 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.turma;
 
-import java.time.LocalDate;
-
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -28,14 +26,6 @@ public class BuscaTurma {
 
 	public Pagina<Turma> buscarPeloStatusAberta(Boolean aberta, RequisicaoDePagina requisicao) {
 		return repository.buscarPeloStatusAberta(aberta, requisicao);
-	}
-
-	public Pagina<Turma> buscarPelaDataDeAbertura(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao) {
-		return repository.buscarPelaDataDeAbertura(dataInicial, dataFinal, requisicao);
-	}
-
-	public Pagina<Turma> buscarPelaDataDeFechamento(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao) {
-		return repository.buscarPelaDataDeFechamento(dataInicial, dataFinal, requisicao);
 	}
 
 	public Pagina<Turma> buscarTodas(RequisicaoDePagina requisicao){

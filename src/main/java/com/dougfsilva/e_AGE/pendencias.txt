@@ -1,5 +1,16 @@
 **** Usecase
-- Cria alunos e matricula no modulo automaticamente
+- Abre e fecha curso
+- Inicia Módulo se não tiver outro iniciado pela turma
+- Criar e matricular aluno
+- Ao excluir matricula nao deixar devido progresso existente
+- Ao excluir modulo nao deixar devido progresso existente
+- Só conluir turmas com todos modulos concluidos
+- Ao iniciar modulo, criar alunoprogresso
+- Não deixar iniciar o módulo se  o anterior não tiver concluído
+- Ao concluir ultimo modulo gerar certificado
+- Ao excluir matricula excluir também aluno progresso
+- Só deixar concluir progresso em modulo que esteja iniciado
+- Buscar dados gerais de aluno, incuindo matriculas e progresso
 - Enviar email para usuário com senha
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura

@@ -1,6 +1,6 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.curso.turma;
 
-import com.dougfsilva.e_AGE.aplicacao.dto.EditaTurmaForm;
+import com.dougfsilva.e_AGE.aplicacao.formulario.EditaTurmaForm;
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
 import com.dougfsilva.e_AGE.dominio.curso.CursoRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
@@ -29,9 +29,6 @@ public class EditaTurma {
 		if (form.codigo() != null && !form.codigo().isBlank() && !form.codigo().equalsIgnoreCase(turma.getCodigo())) {
 			validador.validarUnicoCodigoPorCurso(turma.getCurso(), form.codigo());
 			turma.setCodigo(form.codigo());
-		}
-		if (form.dataDeAbertura() != null) {
-			turma.setDataDeAbertura(form.dataDeAbertura());
 		}
 		return turma;
 	}

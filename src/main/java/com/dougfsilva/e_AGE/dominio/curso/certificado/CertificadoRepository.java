@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
+import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
@@ -26,6 +27,8 @@ public interface CertificadoRepository {
 	List<Certificado> buscarPeloAluno(Aluno aluno);
 	
 	Pagina<Certificado> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
+	
+	Pagina<Certificado> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao);
 	
 	Pagina<Certificado> buscarPelaDataDeCertificacao(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 	
