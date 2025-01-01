@@ -2,7 +2,8 @@ package com.dougfsilva.e_AGE.dominio.curso.evasao;
 
 import java.time.LocalDate;
 
-import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
+import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
+import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -13,20 +14,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = { "matricula" })
+@EqualsAndHashCode(of = { "aluno", "modulo" })
 @ToString
 public class Evasao {
 
 	private String ID;
-	private Matricula matricula;
-	private String motivo;
+	private Aluno aluno;
+	private Modulo modulo;
 	private LocalDate data;
-	
-	public Evasao(Matricula matricula, String motivo) {
-		this.matricula = matricula;
+	private String motivo;
+
+	public Evasao(Aluno aluno, Modulo modulo, LocalDate data, String motivo) {
+		this.aluno = aluno;
+		this.modulo = modulo;
+		this.data = data;
 		this.motivo = motivo;
-		this.data = LocalDate.now();
 	}
-	
-	
 }

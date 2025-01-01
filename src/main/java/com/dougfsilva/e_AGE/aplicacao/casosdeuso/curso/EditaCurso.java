@@ -16,12 +16,12 @@ public class EditaCurso {
 	private final ValidaCurso validador;
 
 	public Curso editar(EditaCursoForm form) {
-		Curso curso = repository.buscarPeloIDOuThrow(form.ID());
-		Curso cursoEditado = editarDados(form, curso);
-		return repository.salvar(cursoEditado);
+		Curso curso = editarDados(form);
+		return repository.salvar(curso);
 	}
 	
-	private Curso editarDados(EditaCursoForm form, Curso curso) {
+	private Curso editarDados(EditaCursoForm form) {
+		Curso curso = repository.buscarPeloIDOuThrow(form.ID());
 		if (form.modalidade() != null) {
 			curso.setModalidade(form.modalidade());
 		}

@@ -20,12 +20,13 @@ public class EditaFuncionario {
 	private final ValidaPessoa validador;
 	
 	public Funcionario editar(EditaFuncionarioForm form) {
-		Funcionario funcionario = repository.buscarPeloIDOuThrow(form.ID());
-		Funcionario funcionarioEditado = editarDados(form, funcionario);
-		return repository.salvar(funcionarioEditado);
+		Funcionario funcionario = editarDados(form);
+		return repository.salvar(funcionario);
 	}
 	
-	private Funcionario editarDados(EditaFuncionarioForm form, Funcionario funcionario) {
+	private Funcionario editarDados(EditaFuncionarioForm form) {
+		Funcionario funcionario = repository.buscarPeloIDOuThrow(form.ID());
+
 		if (form.nome() != null && !form.nome().isBlank()) {
 			funcionario.setNome(form.nome());
 		}

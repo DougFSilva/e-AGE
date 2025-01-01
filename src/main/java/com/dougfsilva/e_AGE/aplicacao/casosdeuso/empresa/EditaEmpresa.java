@@ -16,12 +16,13 @@ public class EditaEmpresa {
 	private final ValidaEmpresa validador;
 	
 	public Empresa editar(EditaEmpresaForm form) {
-		Empresa empresa = repository.buscarPeloIDOuThrow(form.ID());
-		Empresa empresaEditada = editarDados(form, empresa);
-		return repository.salvar(empresaEditada);
+		Empresa empresa = editarDados(form);
+		return repository.salvar(empresa);
 	}
 	
-	private Empresa editarDados(EditaEmpresaForm form, Empresa empresa) {
+	private Empresa editarDados(EditaEmpresaForm form) {
+		Empresa empresa = repository.buscarPeloIDOuThrow(form.ID());
+
 		if (form.CNPJ() != null && !form.CNPJ().isBlank() && !form.CNPJ().equalsIgnoreCase(empresa.getCNPJ())) {
 			validador.validarUnicoCNPJ(form.CNPJ());
 			empresa.setCNPJ(form.CNPJ());

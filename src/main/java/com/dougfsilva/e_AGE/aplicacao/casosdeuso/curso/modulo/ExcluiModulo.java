@@ -15,16 +15,12 @@ public class ExcluiModulo {
 	
 	public void excluirPeloID(String ID) {
 		Modulo modulo = repository.buscarPeloIDOuThrow(ID);
+		repository.excluir(modulo);
 		List<Modulo> modulos = repository.buscarPelaTurma(modulo.getTurma());
-		if (modulo.getModuloFinal() && modulos.size() > 1) {
-			modulos.stream().max(Comparator.comparingInt(Modulo::getNumeroDoModulo)).get().setModuloFinal(true);
-		}
 		modulos.sort(Comparator.comparingInt(Modulo::getNumeroDoModulo));
 		for (int i = 0; i < modulos.size(); i++) {
 			modulos.get(i).setNumeroDoModulo(i + 1);
 		}
-		repository.excluir(modulo);
 		repository.salvarTodos(modulos);
 	}
-	
 }

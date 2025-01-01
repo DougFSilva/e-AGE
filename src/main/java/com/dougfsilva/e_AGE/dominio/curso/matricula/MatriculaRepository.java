@@ -30,7 +30,7 @@ public interface MatriculaRepository {
 	
 	Pagina<Matricula> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao);
 	
-	List<Matricula> buscarPelaTurmaEAluno(Turma turma, Aluno aluno);
+	List<Matricula> buscarPelaTurma(Turma turma);
 	
 	List<Matricula> buscarPeloAluno(Aluno aluno);
 	

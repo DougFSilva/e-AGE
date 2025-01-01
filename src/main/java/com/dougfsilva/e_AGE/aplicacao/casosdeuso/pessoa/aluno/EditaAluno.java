@@ -24,12 +24,12 @@ public class EditaAluno {
 	private final ValidaPessoa validador;
 
 	public Aluno editar(EditaAlunoForm form) {
-		Aluno aluno = repository.buscarPeloIDOuThrow(form.ID());
-		Aluno alunoEditado = editarDados(form, aluno);
-		return repository.salvar(alunoEditado);
+		Aluno aluno = editarDados(form);
+		return repository.salvar(aluno);
 	}
 
-	private Aluno editarDados(EditaAlunoForm form, Aluno aluno) {
+	private Aluno editarDados(EditaAlunoForm form) {
+		Aluno aluno = repository.buscarPeloIDOuThrow(form.ID());
 		if (form.nome() != null && !form.nome().isBlank()) {
 			aluno.setNome(form.nome());
 		}

@@ -20,13 +20,11 @@ public class Modulo {
 	private Turma turma;
 	private ModuloStatus status;
 	private Integer numeroDoModulo;
-	private Boolean moduloFinal;
 
-	public Modulo(String codigo, Turma turma, Integer numeroDoModulo, ModuloStatus status, Boolean moduloFinal) {
+	public Modulo(String codigo, Turma turma, Integer numeroDoModulo, ModuloStatus status) {
 		this.codigo = codigo;
 		this.turma = turma;
 		this.numeroDoModulo = numeroDoModulo;
 		this.status = status;
-		this.moduloFinal = moduloFinal;
 	}
 }

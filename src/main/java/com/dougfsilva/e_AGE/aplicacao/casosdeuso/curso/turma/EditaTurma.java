@@ -16,12 +16,12 @@ public class EditaTurma {
 	private final ValidaTurma validador;
 	
 	public Turma editar(EditaTurmaForm form) {
-		Turma turma = repository.buscarPeloIDOuThrow(form.ID());
-		Turma turmaAtualizada = editarDados(form, turma);
-		return repository.salvar(turmaAtualizada);
+		Turma turma = editarDados(form);
+		return repository.salvar(turma);
 	}
 	
-	private Turma editarDados(EditaTurmaForm form, Turma turma) {
+	private Turma editarDados(EditaTurmaForm form) {
+		Turma turma = repository.buscarPeloIDOuThrow(form.ID());
 		if (form.cursoID() != null && !form.cursoID().isBlank() && !form.cursoID().equalsIgnoreCase(turma.getCurso().getID())) {
 			Curso curso = cursoRepository.buscarPeloIDOuThrow(form.cursoID());
 			turma.setCurso(curso);

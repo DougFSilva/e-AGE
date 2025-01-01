@@ -24,6 +24,8 @@ public interface ModuloRepository {
 	}
 	
 	Optional<Modulo> buscarPeloNumeroDoModulo(Integer numero);
+	
+	Optional<Modulo> buscarPelaTurmaEStatus(Turma turma, ModuloStatus status);
 
 	List<Modulo> buscarPelaTurma(Turma turma);
 	
@@ -33,5 +35,8 @@ public interface ModuloRepository {
 	
 	Boolean existePelaTurmaECodigo(Turma turma, String codigo);
 	
-	Integer contarModulosPorTurma(Turma turma);
+	Boolean existePelaTurmaEStatus(Turma turma, ModuloStatus status);
+	
+	Long contarPelaTurma(Turma turma);
+	
 }

@@ -13,12 +13,12 @@ public class EditaAreaTecnologica {
 	private final ValidaAreaTecnologica validador;
 	
 	public AreaTecnologica editar(EditaAreaTecnologicaForm form) {
-		AreaTecnologica area = repository.buscarPeloIDOuThrow(form.ID());
-		AreaTecnologica areaEditada = editarDados(form, area);
-		return repository.salvar(areaEditada);
+		AreaTecnologica area = editarDados(form);
+		return repository.salvar(area);
 	}
 	
-	private AreaTecnologica editarDados(EditaAreaTecnologicaForm form, AreaTecnologica area) {
+	private AreaTecnologica editarDados(EditaAreaTecnologicaForm form) {
+		AreaTecnologica area = repository.buscarPeloIDOuThrow(form.ID());
 		if (form.titulo() != null && !form.titulo().isBlank() && !form.titulo().equalsIgnoreCase(area.getTitulo())) {
 			validador.validarUnicoTitulo(form.titulo());
 			area.setTitulo(form.titulo());

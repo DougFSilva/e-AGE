@@ -1,10 +1,10 @@
 **** Usecase
-- Abre e fecha curso
+- Transferir aluno de turma
+- Não permitir matricular aluno em modulo que nao pertença a turma
 - Inicia Módulo se não tiver outro iniciado pela turma
 - Criar e matricular aluno
 - Ao excluir matricula nao deixar devido progresso existente
 - Ao excluir modulo nao deixar devido progresso existente
-- Só conluir turmas com todos modulos concluidos
 - Ao iniciar modulo, criar alunoprogresso
 - Não deixar iniciar o módulo se  o anterior não tiver concluído
 - Ao concluir ultimo modulo gerar certificado
@@ -15,7 +15,7 @@
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura
 - Melhorar Response de métodos que trazem uma lista ou página, pois nem todos dados são úteis para quando realizar essa busca
-
+- Melhorar nomes das exceções de validacao
 **** Infraestrutura
 
 
