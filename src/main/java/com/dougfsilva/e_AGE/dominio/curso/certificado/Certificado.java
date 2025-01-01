@@ -2,8 +2,7 @@ package com.dougfsilva.e_AGE.dominio.curso.certificado;
 
 import java.time.LocalDate;
 
-import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
-import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
+import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -13,18 +12,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(of = { "aluno", "turma" })
+@EqualsAndHashCode(of = { "matricula" })
 public class Certificado {
 
 	private String ID;
-	private Aluno aluno;
-	private Turma turma;
+	private Matricula matricula;
 	private LocalDate dataDaCertificacao;
-
-	public Certificado(Aluno aluno, Turma turma, LocalDate dataDaCertificacao) {
-		this.aluno = aluno;
-		this.turma = turma;
+	
+	public Certificado(Matricula matricula, LocalDate dataDaCertificacao) {
+		this.matricula = matricula;
 		this.dataDaCertificacao = dataDaCertificacao;
 	}
-
 }

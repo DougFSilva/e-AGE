@@ -1,7 +1,9 @@
 package com.dougfsilva.e_AGE.dominio.curso.reprova;
 
-import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
-import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
+import java.time.LocalDate;
+
+import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
+import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -12,18 +14,20 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "matricula" })
 @ToString
 public class Reprova {
 
 	private String ID;
-	private Aluno aluno;
-	private Turma turma;
+	private Matricula matricula;
+	private Modulo modulo;
+	private LocalDate data;
 	private CausaReprova causa;
 
-	public Reprova(Aluno aluno, Turma turma, CausaReprova causa) {
-		this.aluno = aluno;
-		this.turma = turma;
+	public Reprova(Matricula matricula, Modulo modulo, LocalDate data, CausaReprova causa) {
+		this.matricula = matricula;
+		this.modulo = modulo;
+		this.data = data;
 		this.causa = causa;
 	}
 }

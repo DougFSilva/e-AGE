@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.curso.Curso;
+import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
@@ -24,6 +25,8 @@ public interface CertificadoRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Certificado com ID %s não encontrado", ID)));
 	}
 	
+	Optional<Certificado> buscaPelaMatricula(Matricula matricula);
+	
 	List<Certificado> buscarPeloAluno(Aluno aluno);
 	
 	Pagina<Certificado> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
@@ -35,4 +38,5 @@ public interface CertificadoRepository {
 	Pagina<Certificado> buscarTodos(RequisicaoDePagina requisicao);
 	
 	Boolean existePeloCurso(Curso curso);
+	
 }
