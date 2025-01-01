@@ -25,13 +25,13 @@ public interface CertificadoRepository {
 				() -> new ObjetoNaoEncontradoException(String.format("Certificado com ID %s não encontrado", ID)));
 	}
 	
-	Optional<Certificado> buscaPelaMatricula(Matricula matricula);
+	Optional<Certificado> buscarPelaMatricula(Matricula matricula);
 	
 	List<Certificado> buscarPeloAluno(Aluno aluno);
 	
 	Pagina<Certificado> buscarPeloCurso(Curso curso, RequisicaoDePagina requisicao);
 	
-	Pagina<Certificado> buscarPelaTurma(Turma turma, RequisicaoDePagina requisicao);
+	List<Certificado> buscarPelaTurma(Turma turma);
 	
 	Pagina<Certificado> buscarPelaDataDeCertificacao(LocalDate dataInicial, LocalDate dataFinal, RequisicaoDePagina requisicao);
 	
