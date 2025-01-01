@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import com.dougfsilva.e_AGE.dominio.curso.reprova.CausaReprova;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 
-public record ReprovaAlunoForm(String matriculaID, String moduloID, LocalDate data, CausaReprova causa) {
+public record ReprovaAlunoForm(String matriculaID, String moduloID, LocalDate data, CausaReprova causa, String detalhes) {
 
 	public ReprovaAlunoForm {
         if (matriculaID == null || matriculaID.isBlank()) {

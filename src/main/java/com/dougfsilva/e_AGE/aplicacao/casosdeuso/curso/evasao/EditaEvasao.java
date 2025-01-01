@@ -53,6 +53,4 @@ public class EditaEvasao {
 					"Não é possível editar a evasão pois o módulo %s ainda não foi iniciado", modulo.getCodigo()));
 		}
 	}
-	
-	
 }

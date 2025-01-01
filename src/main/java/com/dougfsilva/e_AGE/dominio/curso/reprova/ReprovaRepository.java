@@ -41,4 +41,6 @@ public interface ReprovaRepository {
 	Pagina<Reprova> buscarPelaCausa(CausaReprova causa, RequisicaoDePagina requisicao);
 	
 	Pagina<Reprova> buscarTodas(RequisicaoDePagina requisicao);
+	
+	Boolean existePelaMatricula(Matricula matricula);
 }

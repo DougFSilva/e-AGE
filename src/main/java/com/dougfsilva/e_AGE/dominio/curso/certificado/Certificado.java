@@ -17,10 +17,10 @@ public class Certificado {
 
 	private String ID;
 	private Matricula matricula;
-	private LocalDate dataDaCertificacao;
+	private LocalDate data;
 	
-	public Certificado(Matricula matricula, LocalDate dataDaCertificacao) {
+	public Certificado(Matricula matricula, LocalDate data) {
 		this.matricula = matricula;
-		this.dataDaCertificacao = dataDaCertificacao;
+		this.data = data;
 	}
 }

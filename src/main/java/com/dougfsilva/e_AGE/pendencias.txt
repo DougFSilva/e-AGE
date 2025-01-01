@@ -1,4 +1,5 @@
 **** Usecase
+- BuscaEvasao falta
 - Ao excluir certificado alterar matricula para matriculado
 - Ao excluir reprova alterar matricula para matriculado
 - Criar e matricular aluno

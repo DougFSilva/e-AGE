@@ -23,11 +23,13 @@ public class Reprova {
 	private Modulo modulo;
 	private LocalDate data;
 	private CausaReprova causa;
+	private String detalhes;
 
-	public Reprova(Matricula matricula, Modulo modulo, LocalDate data, CausaReprova causa) {
+	public Reprova(Matricula matricula, Modulo modulo, LocalDate data, CausaReprova causa, String detalhes) {
 		this.matricula = matricula;
 		this.modulo = modulo;
 		this.data = data;
 		this.causa = causa;
+		this.detalhes = detalhes;
 	}
 }

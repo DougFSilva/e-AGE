@@ -37,6 +37,6 @@ public interface CertificadoRepository {
 	
 	Pagina<Certificado> buscarTodos(RequisicaoDePagina requisicao);
 	
-	Boolean existePeloCurso(Curso curso);
+	Boolean existePelaMatricula(Matricula matricula);
 	
 }

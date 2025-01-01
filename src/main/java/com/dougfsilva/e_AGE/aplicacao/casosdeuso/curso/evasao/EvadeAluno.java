@@ -20,7 +20,6 @@ public class EvadeAluno {
 	private final EvasaoRepository repository;
 	private final MatriculaRepository matriculaRepository;
 	private final ModuloRepository moduloRepository;
-	private final ValidaEvasao validador;
 
 	public Evasao evadir(EvadeAlunoForm form) {
 		Matricula matricula = matriculaRepository.buscarPeloIDOuThrow(form.matriculaID());
@@ -34,7 +33,7 @@ public class EvadeAluno {
 	}
 	
 	private void validarMatricula(Matricula matricula) {
-		validador.validarUnicaEvasaoPorMatricula(matricula);
+		garantirUnicaEvasaoPorMatricula(matricula);
 		garantirStatusAlunoMatriculado(matricula);
 	}
 	
@@ -43,6 +42,11 @@ public class EvadeAluno {
 		garantirModuloPertencenteATurma(modulo, turma);
 	}
 	
+	private void garantirUnicaEvasaoPorMatricula(Matricula matricula) {
+		if(repository.existePelaMatricula(matricula)) {
+			throw new ErroDeValidacaoDeEvasaoException(String.format("Já existe evasão para matrícula %s", matricula.getRegistro()));
+		}
+	}
 
 	private void garantirStatusAlunoMatriculado(Matricula matricula) {
 		if (matricula.getStatus() != MatriculaStatus.ALUNO_MATRICULADO) {
