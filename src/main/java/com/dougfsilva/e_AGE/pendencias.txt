@@ -1,7 +1,6 @@
 **** Usecase
 - Criar e matricular aluno
-- Ao excluir matricula excluir também evasao, certificado e reprova
-- Buscar dados gerais de aluno, incuindo matriculas e progresso
+- Buscar dados gerais de aluno, incuindo matriculas, ocorrencias e outros no alunoService
 - Enviar email para usuário com senha
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura
@@ -9,6 +8,6 @@
 - Melhorar nomes das exceções de validacao
 **** Infraestrutura
 
-
+- Desabilitar usuarios que nao estejam matriculados atraves de schedule
 
 **** Frontend

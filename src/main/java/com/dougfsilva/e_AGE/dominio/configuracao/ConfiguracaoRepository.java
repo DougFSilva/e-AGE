@@ -7,7 +7,7 @@ import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 
 public interface ConfiguracaoRepository {
 
-	Configuracao atualiza(Configuracao configuracao);
+	Configuracao salvar(Configuracao configuracao);
 
 	Optional<Configuracao> buscarPelaChave(ChaveDeConfiguracao chave);
 
@@ -16,7 +16,7 @@ public interface ConfiguracaoRepository {
 				String.format("Chave de configuracao %s não encontrada", chave.name())));
 	}
 
-	List<Configuracao> findAll();
+	List<Configuracao> buscarTodas();
 
 	Boolean ExistePelaChave(ChaveDeConfiguracao chave);
 }
