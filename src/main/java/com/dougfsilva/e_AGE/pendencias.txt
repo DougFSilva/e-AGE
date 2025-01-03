@@ -1,7 +1,4 @@
 **** Usecase
-- BuscaEvasao falta
-- Ao excluir certificado alterar matricula para matriculado
-- Ao excluir reprova alterar matricula para matriculado
 - Criar e matricular aluno
 - Ao excluir matricula excluir também evasao, certificado e reprova
 - Buscar dados gerais de aluno, incuindo matriculas e progresso
