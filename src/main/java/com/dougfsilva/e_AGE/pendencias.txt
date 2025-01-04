@@ -1,4 +1,6 @@
 **** Usecase
+- Reabrir ocorrencia
+- Remover tratamento de ocorrencia é necessário?
 - Buscar ocorrencias pelo curso
 - Criar e matricular aluno
 - Buscar dados gerais de aluno, incuindo matriculas, ocorrencias e outros no alunoService
