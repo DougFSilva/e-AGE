@@ -84,7 +84,9 @@ public class EnviaNotificacaoDeOcorrencia {
 	private void enviarEmail(Ocorrencia ocorrencia, String assunto, String mensagemDeIntroducao) {
 		Email destinatario = ocorrencia.getMatricula().getAluno().getEmail();
 		List<Email> cc = new ArrayList<>();
-		cc.addAll(buscarEmailsDeGestores());
+		if (ocorrencia.getEncaminhada() || ocorrencia.getMatricula().getAluno().calcularIdade() < 18) {
+			cc.addAll(buscarEmailsDeGestores());
+		}
 		if (ocorrencia.getMatricula().getAluno().calcularIdade() < 18) {
 			cc.add(ocorrencia.getMatricula().getAluno().getResponsavel().getEmail());
 		}

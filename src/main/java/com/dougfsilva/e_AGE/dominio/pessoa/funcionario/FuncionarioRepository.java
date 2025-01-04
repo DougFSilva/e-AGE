@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
+import com.dougfsilva.e_AGE.dominio.pessoa.usuario.Usuario;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 
@@ -21,6 +22,8 @@ public interface FuncionarioRepository {
 		return buscarPeloID(ID).orElseThrow(
 				() -> new ObjetoNaoEncontradoException(String.format("Funcionário com ID %s não encontrado", ID)));
 	}
+	
+	Optional<Funcionario> buscarPeloUsuario(Usuario usuario);
 
 	Pagina<Funcionario> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
 
