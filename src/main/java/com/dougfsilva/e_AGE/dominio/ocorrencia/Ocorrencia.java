@@ -2,7 +2,7 @@ package com.dougfsilva.e_AGE.dominio.ocorrencia;
 
 import java.time.LocalDateTime;
 
-import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
+import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class Ocorrencia {
 	private LocalDateTime dataDeAbertura;
 	private LocalDateTime dataDeFechamento;
 	private Funcionario relator;
-	private Aluno aluno;
+	private Matricula matricula;
 	private TipoOcorrencia tipo;
 	private Boolean encaminhada;
 	private Boolean restrita;
@@ -30,11 +30,11 @@ public class Ocorrencia {
 	private AssinaturaDeOcorrencia assinatura;
 	private Funcionario responsavelPeloFechamento;
 
-	public Ocorrencia(LocalDateTime dataDeAbertura, Funcionario relator, Aluno aluno, TipoOcorrencia tipo,
+	public Ocorrencia(LocalDateTime dataDeAbertura, Funcionario relator, Matricula matricula, TipoOcorrencia tipo,
 			Boolean encaminhada, Boolean restrita, String descricao) {
 		this.dataDeAbertura = dataDeAbertura;
 		this.relator = relator;
-		this.aluno = aluno;
+		this.matricula = matricula;
 		this.tipo = tipo;
 		this.encaminhada = encaminhada;
 		this.restrita = restrita;

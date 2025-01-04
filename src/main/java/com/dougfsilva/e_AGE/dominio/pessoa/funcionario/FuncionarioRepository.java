@@ -1,6 +1,7 @@
 package com.dougfsilva.e_AGE.dominio.pessoa.funcionario;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
@@ -33,6 +34,10 @@ public interface FuncionarioRepository {
 	Pagina<Funcionario> buscarPelaCidade(String cidade, RequisicaoDePagina requisicao);
 
 	Pagina<Funcionario> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
+	
+	List<Funcionario> buscarPeloCargo(Cargo cargo);
+	
+	Pagina<Funcionario> buscarPeloCargo(Cargo cargo, RequisicaoDePagina requisicao);
 
 	Pagina<Funcionario> buscarTodos(RequisicaoDePagina requisicaoDePagina);
 }

@@ -17,6 +17,6 @@ public interface ConfiguracaoRepository {
 	}
 
 	List<Configuracao> buscarTodas();
-
+	
 	Boolean ExistePelaChave(ChaveDeConfiguracao chave);
 }

@@ -1,4 +1,5 @@
 **** Usecase
+- Buscar ocorrencias pelo curso
 - Criar e matricular aluno
 - Buscar dados gerais de aluno, incuindo matriculas, ocorrencias e outros no alunoService
 - Enviar email para usuário com senha
