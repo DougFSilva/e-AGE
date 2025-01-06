@@ -10,7 +10,8 @@ public enum OcorrenciaStatus {
 	ABERTA("A ocorrência foi aberta"),
 	FECHADA("A ocorrência foi tratada e fechada"),
 	ASSINADA("A ocorrência foi assinada pelo aluno"),
-	ENCERRADA("A ocorrência foi finalizada");
+	ENCERRADA("A ocorrência foi finalizada"),
+	BLOQUEADA("A ocorrência foi bloqueada");
 
 	private String descricao;
 

@@ -2,7 +2,8 @@ package com.dougfsilva.e_AGE.dominio.ocorrencia;
 
 public interface CodificadorDeAssinatura {
 
-	AssinaturaDeOcorrencia assinar(Ocorrencia ocorrencia);
+	String codificar(String dadosParaAssinatura);
 	
-	Boolean validar(Ocorrencia ocorrencia);
+	Boolean validarAssinatura(String dadosParaAssinatura, String assinaturaCodificada);
+	
 }

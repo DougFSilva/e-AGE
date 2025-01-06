@@ -4,9 +4,11 @@ import java.time.LocalDate;
 
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.empresa.EmpresaRepository;
+import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.AlunoRepository;
+import com.dougfsilva.e_AGE.dominio.utilidades.UsuarioAutenticado;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 
@@ -17,9 +19,15 @@ public class BuscaAluno {
 
 	private final AlunoRepository repository;
 	private final EmpresaRepository empresaRepository;
+	private final UsuarioAutenticado usuarioAutenticado;
 
 	public Aluno buscarPeloID(String ID) {
 		return repository.buscarPeloIDOuThrow(ID);
+	}
+	
+	public Aluno buscarPeloUsuarioAutenticado() {
+		return repository.buscarPeloUsuario(usuarioAutenticado.buscarUsuarioAtualOuThrow()).orElseThrow(() -> 
+			new ObjetoNaoEncontradoException("Aluno não encontrado pelo usuário autenticado"));
 	}
 
 	public Pagina<Aluno> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina) {

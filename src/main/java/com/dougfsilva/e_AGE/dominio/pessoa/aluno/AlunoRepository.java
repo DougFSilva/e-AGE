@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.dougfsilva.e_AGE.dominio.empresa.Empresa;
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
+import com.dougfsilva.e_AGE.dominio.pessoa.usuario.Usuario;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 
@@ -23,6 +24,8 @@ public interface AlunoRepository {
 	}
 	
 	Optional<Aluno> buscarPeloCPF(String CPF);
+	
+	Optional<Aluno> buscarPeloUsuario(Usuario usuario);
 	
 	Pagina<Aluno> buscarPeloNomeContem(String nome, RequisicaoDePagina requisicaoDePagina);
 	

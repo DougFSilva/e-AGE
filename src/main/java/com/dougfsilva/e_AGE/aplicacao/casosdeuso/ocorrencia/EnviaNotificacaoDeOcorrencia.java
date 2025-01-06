@@ -1,159 +1,64 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.configuracao.BuscaConfiguracao;
 import com.dougfsilva.e_AGE.dominio.configuracao.ChaveDeConfiguracao;
+import com.dougfsilva.e_AGE.dominio.mensagem.celular.EnviadorDeMensagemDeCelular;
+import com.dougfsilva.e_AGE.dominio.mensagem.email.EnviadorDeEmail;
+import com.dougfsilva.e_AGE.dominio.mensagem.email.GeraConteudoDeEmail;
+import com.dougfsilva.e_AGE.dominio.mensagem.email.MensagemDeEmail;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Cargo;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.FuncionarioRepository;
-import com.dougfsilva.e_AGE.dominio.utilidades.notificacao.EnviadorDeEmail;
-import com.dougfsilva.e_AGE.dominio.utilidades.notificacao.EnviadorDeMensagemDeCelular;
 
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
 public class EnviaNotificacaoDeOcorrencia {
 
 	private final EnviadorDeEmail enviadorDeEmail;
 	private final EnviadorDeMensagemDeCelular enviadorDeMensagemDeCelular;
-	private final BuscaConfiguracao buscaConfiguracao;
 	private final FuncionarioRepository funcionarioRepository;
-	private Map<ChaveDeConfiguracao, String> configuracoes;
-	
-	public EnviaNotificacaoDeOcorrencia(EnviadorDeEmail enviadorDeEmail,
-			EnviadorDeMensagemDeCelular enviadorDeMensagemDeCelular, BuscaConfiguracao buscaConfiguracao, FuncionarioRepository funcionarioRepository) {
-		this.enviadorDeEmail = enviadorDeEmail;
-		this.enviadorDeMensagemDeCelular = enviadorDeMensagemDeCelular;
-		this.buscaConfiguracao = buscaConfiguracao;
-		this.configuracoes = buscaConfiguracao.buscarTodas();
-		this.funcionarioRepository = funcionarioRepository;
-	}
+	private final GeraConteudoDeEmail geraConteudoDeEmail;
+	private final Map<ChaveDeConfiguracao, String> configs;
 
 	public void aoAbrirOcorrencia(Ocorrencia ocorrencia) {
-		this.configuracoes = buscaConfiguracao.buscarTodas();
-		String assunto = String.format("Ocorrência aberta para aluno %s", ocorrencia.getMatricula().getAluno().getNome());
-		String mensagemDeIntroducao = "Olá, uma nova ocorrência foi aberta:%n%n";
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_EMAIL_AO_ABRIR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarEmail(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_AO_ABRIR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarMensagemCelular(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-	}
-	
-	public void aoExcluirOcorrencia(Ocorrencia ocorrencia) {
-		this.configuracoes = buscaConfiguracao.buscarTodas();
-		String assunto = String.format("Ocorrência excluída para aluno %s", ocorrencia.getMatricula().getAluno().getNome());
-		String mensagemDeIntroducao = "Olá, a ocorrência abaixo foi excluída:%n%n";
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_EMAIL_AO_EXCLUIR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarEmail(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_AO_EXCLUIR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarMensagemCelular(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-	}
-	
-	public void aoAtualizarOcorrencia(Ocorrencia ocorrencia) {
-		this.configuracoes = buscaConfiguracao.buscarTodas();
-		String assunto = String.format("Ocorrência atualizada para aluno %s", ocorrencia.getMatricula().getAluno().getNome());
-		String mensagemDeIntroducao = "Olá, a ocorrência abaixo foi atualizada:%n%n";
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_EMAIL_AO_ATUALIZAR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarEmail(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_AO_ATUALIZAR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarMensagemCelular(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-	}
-	
-	public void aoEncerrarOcorrencia(Ocorrencia ocorrencia) {
-		this.configuracoes = buscaConfiguracao.buscarTodas();
-		String assunto = String.format("Ocorrência encerrada para aluno %s", ocorrencia.getMatricula().getAluno().getNome());
-		String mensagemDeIntroducao = "Olá, a ocorrência abaixo foi encerrada:%n%n";
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_EMAIL_AO_ENCERRAR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarEmail(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-		if (configuracoes.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_AO_ENCERRAR_OCORRENCIA).equalsIgnoreCase("YES")) {
-			enviarMensagemCelular(ocorrencia, assunto, mensagemDeIntroducao);
-		}
-	}
-	
-	private void enviarEmail(Ocorrencia ocorrencia, String assunto, String mensagemDeIntroducao) {
+		String assunto = String.format("Nova ocorrência aberta para aluno %s", ocorrencia.getMatricula().getAluno().getNome());
 		Email destinatario = ocorrencia.getMatricula().getAluno().getEmail();
-		List<Email> cc = new ArrayList<>();
-		if (ocorrencia.getEncaminhada() || ocorrencia.getMatricula().getAluno().calcularIdade() < 18) {
-			cc.addAll(buscarEmailsDeGestores());
+		String corpo = "Olá, uma nova ocorrência foi aberta para o aluno abaixo"
+				+ geraConteudoDeEmail.formatarDetalhesDaOcorrencia(ocorrencia)
+				+ geraConteudoDeEmail.gerarInformacoesDeContato();
+		MensagemDeEmail mensagemDeEmail = new MensagemDeEmail(destinatario, assunto, corpo);
+		enviadorDeEmail.enviar(mensagemDeEmail);
+		if (configs.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_CELULAR_AO_ABRIR_OCORRENCIA).equals("YES")) {
+			enviadorDeMensagemDeCelular.enviar(Arrays.asList(ocorrencia.getMatricula().getAluno().getTelefone()), corpo);
 		}
-		if (ocorrencia.getMatricula().getAluno().calcularIdade() < 18) {
-			cc.add(ocorrencia.getMatricula().getAluno().getResponsavel().getEmail());
-		}
-		String corpo = mensagemDeIntroducao + construirDelalhesDaOcorrencia(ocorrencia) + construirInformacoesDeContato();
-		enviadorDeEmail.enviar(destinatario, cc, assunto, corpo);
 	}
-	
-	private void enviarMensagemCelular(Ocorrencia ocorrencia, String assunto, String mensagemDeIntroducao) {
-		List<String> destinatarios = new ArrayList<>();
-		destinatarios.add(ocorrencia.getMatricula().getAluno().getTelefone());
-		if (ocorrencia.getMatricula().getAluno().calcularIdade() < 18) {
-			destinatarios.add(ocorrencia.getMatricula().getAluno().getResponsavel().getTelefone());
-		}
-		String mensagem = assunto + construirDelalhesDaOcorrencia(ocorrencia) + construirInformacoesDeContato();
-		enviadorDeMensagemDeCelular.enviar(destinatarios, mensagem);
+
+	public void aoAbrirOcorrenciaComCopiaParaGestores(Ocorrencia ocorrencia) {
+
 	}
-	
-	private String construirDelalhesDaOcorrencia(Ocorrencia ocorrencia) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy, HH:mm");
-		String body = "Aluno: %s%n" 
-				+ "Tipo: %s%n"
-				+ "Descrição: %s%n" 
-				+ "Tratamento: %s%n" 
-				+ "Data de abertura: %s%n"
-				+ "Data de fechamento: %s%n" 
-				+ "Status: %s%n%n" 
-				+ "Detalhes da ocorrência:%n%n" 
-				+ "ID: %s%n" 
-				+ "Curso: %s%n" 
-				+ "Turma: %s%n"
-				+ "Relator: %s (%s)%n" 
-				+ "Assinatura do aluno: %s%n" 
-				+ "Fechado por: %s%n%n";
-		
-		return String.format(body,
-				ocorrencia.getMatricula().getAluno().getNome(),
-				ocorrencia.getTipo().name(),
-				ocorrencia.getDescricao(),
-				ocorrencia.getTratamento(),
-				ocorrencia.getDataDeAbertura() != null ? ocorrencia.getDataDeAbertura().format(formatter) : null,
-				ocorrencia.getDataDeFechamento() != null ? ocorrencia.getDataDeFechamento().format(formatter) : null,
-				ocorrencia.getStatus().name(),
-				ocorrencia.getID(),
-				ocorrencia.getMatricula().getTurma().getCurso().getTitulo(),
-				ocorrencia.getMatricula().getTurma().getCodigo(),
-				ocorrencia.getRelator().getNome(),
-				ocorrencia.getRelator().getCargo().name(),
-				ocorrencia.getAssinatura(),
-				ocorrencia.getResponsavelPeloFechamento().getNome());
+
+	public void aoAbrirOcorrenciaComCopiaParaResponsavel(Ocorrencia ocorrencia) {
+
 	}
-	
-	private String construirInformacoesDeContato() {
-		String info = "Atenciosamente, equipe escolar%n%n"
-				+ "%s%n" // nome da escola
-				+ "Email de contato: %s%n"
-				+ "Telefone de contato: %s%n";
-		return String.format(info, 
-				configuracoes.get(ChaveDeConfiguracao.NOME_ESCOLA), 
-				configuracoes.get(ChaveDeConfiguracao.EMAIL_DE_CONTATO),
-				configuracoes.get(ChaveDeConfiguracao.TELEFONE_DE_CONTATO));
+
+	public void aoAbrirOcorrenciaParaResponsavelComPIN(Ocorrencia ocorrencia, String PIN) {
+
 	}
-	
+
 	private List<Email> buscarEmailsDeGestores() {
-		List<Funcionario> funcionarios = new ArrayList<>();
-		funcionarios.addAll(funcionarioRepository.buscarPeloCargo(Cargo.COORDENADOR));
-		funcionarios.addAll(funcionarioRepository.buscarPeloCargo(Cargo.AQV));
-		return funcionarios.stream().map(Funcionario::getEmail).collect(Collectors.toList());
+		List<Email> emails = new ArrayList<Email>();
+		emails.addAll(funcionarioRepository.buscarPeloCargo(Cargo.COORDENADOR).stream().map(Funcionario::getEmail).collect(Collectors.toList()));
+		emails.addAll(funcionarioRepository.buscarPeloCargo(Cargo.AQV).stream().map(Funcionario::getEmail).collect(Collectors.toList()));
+		return emails;
 	}
-	
+
 }

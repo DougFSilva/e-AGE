@@ -10,11 +10,13 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @AllArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(of = { "ID" })
+@ToString
 public class Ocorrencia {
 
 	private String ID;
@@ -28,7 +30,8 @@ public class Ocorrencia {
 	private String descricao;
 	private List<TratamentoDeOcorrencia> tratamento;
 	private OcorrenciaStatus status;
-	private AssinaturaDeOcorrencia assinatura;
+	private AssinaturaDeOcorrenciaAluno assinaturaAluno;
+	private AssinaturaDeOcorrenciaResponsavel assinaturaResponsavel;
 	private Funcionario responsavelPeloFechamento;
 	private Funcionario responsavelPeloEncerramento;
 

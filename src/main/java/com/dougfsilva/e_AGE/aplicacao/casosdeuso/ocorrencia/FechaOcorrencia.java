@@ -16,6 +16,7 @@ public class FechaOcorrencia {
 	
 	public Ocorrencia fecharPeloID(String ID) {
 		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(ID);
+		return null;
 	}
 	
 	private Funcionario buscaFuncionarioAutenticado() {

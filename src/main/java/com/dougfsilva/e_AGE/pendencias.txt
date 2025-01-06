@@ -1,5 +1,8 @@
 **** Usecase
+- Enviar email ao assinar uma ocorencia manualmente
+- Tratar ocorrencias sobre enviar email e quando enviar nos usecases, passando so o email para ser disparado
 - Reabrir ocorrencia
+- Classe RegistroEmail absctract
 - Remover tratamento de ocorrencia é necessário?
 - Buscar ocorrencias pelo curso
 - Criar e matricular aluno

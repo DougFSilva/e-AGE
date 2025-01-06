@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.dominio.utilidades.notificacao;
+package com.dougfsilva.e_AGE.dominio.mensagem.celular;
 
 import java.util.List;
 
