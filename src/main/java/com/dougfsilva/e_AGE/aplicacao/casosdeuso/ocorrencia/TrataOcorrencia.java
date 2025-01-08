@@ -3,6 +3,7 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia;
 import java.time.LocalDateTime;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario.BuscaFuncionario;
+import com.dougfsilva.e_AGE.aplicacao.formulario.TrataOcorrenciaForm;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
@@ -19,10 +20,10 @@ public class TrataOcorrencia {
 	private final BuscaFuncionario buscaFuncionario;
 	private final EnviaNotificacaoDeOcorrencia notifica;
 
-	public Ocorrencia tratar(String ID, String tratamento) {
-		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(ID);
+	public Ocorrencia tratar(TrataOcorrenciaForm form) {
+		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(form.ocorrenciaID());
 		garantirOcorrenciaAberta(ocorrencia);
-		ocorrencia.addTratamento(new TratamentoDeOcorrencia(buscarFuncionarioAutenticado(), LocalDateTime.now(), tratamento));
+		ocorrencia.addTratamento(new TratamentoDeOcorrencia(buscarFuncionarioAutenticado(), LocalDateTime.now(), form.tratamento()));
 		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
 		notificar(ocorrenciaSalva);
 		return ocorrenciaSalva;
@@ -30,7 +31,7 @@ public class TrataOcorrencia {
 	
 	private void notificar(Ocorrencia ocorrencia) {
 		Boolean encaminhada = ocorrencia.getEncaminhada();
-		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().calcularIdade() < 18;
+		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().menorDeIdade();
 		if (!encaminhada && !alunoMenorDeIdade) {
 			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.ATUALIZADA);
 		} else if (encaminhada && !alunoMenorDeIdade) {

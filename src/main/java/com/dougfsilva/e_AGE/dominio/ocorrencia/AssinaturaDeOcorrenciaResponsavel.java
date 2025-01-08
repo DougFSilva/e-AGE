@@ -34,4 +34,8 @@ public class AssinaturaDeOcorrenciaResponsavel {
 	public AssinaturaDeOcorrenciaResponsavel(String PIN) {
 		this.PIN = PIN;
 	}
+	
+	public boolean assinada() {
+		return this.assinatura != null && !this.assinatura.isBlank();
+	}
 }

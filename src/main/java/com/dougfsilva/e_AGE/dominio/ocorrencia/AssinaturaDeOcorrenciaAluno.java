@@ -26,4 +26,8 @@ public class AssinaturaDeOcorrenciaAluno {
 		this.salt = salt;
 	}
 	
+	public boolean assinada() {
+		return this.assinatura != null && !this.assinatura.isBlank();
+	}
+	
 }

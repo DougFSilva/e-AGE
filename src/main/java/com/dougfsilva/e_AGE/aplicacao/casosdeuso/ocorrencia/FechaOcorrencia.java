@@ -21,6 +21,8 @@ public class FechaOcorrencia {
 	
 	public Ocorrencia fecharPeloID(String ID) {
 		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(ID);
+		garantirOcorrenciaAberta(ocorrencia);
+		garantirOcorrenciaTratada(ocorrencia);
 		Funcionario funcionarioAutenticado = buscarFuncionarioAutenticado();
 		garantirUsuarioGestorSeOcorrenciaForEncaminhada(ocorrencia, funcionarioAutenticado);
 		ocorrencia.setStatus(OcorrenciaStatus.FECHADA);
@@ -33,7 +35,7 @@ public class FechaOcorrencia {
 	
 	private void notificar(Ocorrencia ocorrencia) {
 		Boolean encaminhada = ocorrencia.getEncaminhada();
-		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().calcularIdade() < 18;
+		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().menorDeIdade();
 		if (!encaminhada && !alunoMenorDeIdade) {
 			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.FECHADA);
 		} else if (encaminhada && !alunoMenorDeIdade) {
@@ -42,6 +44,20 @@ public class FechaOcorrencia {
 			notifica.enviarNotificacaoParaAlunoComCopiaParaResponsavel(ocorrencia, OperacaoDeOcorrencia.FECHADA);
 		} else if (encaminhada && alunoMenorDeIdade) {
 			notifica.enviarNotificacaoParaAlunoComCopiaParaGestoresEResponsavel(ocorrencia, OperacaoDeOcorrencia.FECHADA);
+		}
+	}
+	
+	private void garantirOcorrenciaAberta(Ocorrencia ocorrencia) {
+		if (ocorrencia.getStatus() != OcorrenciaStatus.ABERTA) {
+			throw new ErroDeValidacaoDeOcorrenciaException(
+					String.format("A ocorrência %s está %s. Somente uma ocorrência aberta pode ser fechada",
+							ocorrencia.getID(), ocorrencia.getStatus().name()));
+		}
+	}
+	
+	private void garantirOcorrenciaTratada(Ocorrencia ocorrencia) {
+		if (ocorrencia.getTratamento().size() < 1) {
+			throw new ErroDeValidacaoDeOcorrenciaException("Somente uma ocorrência com tratamentos pode ser fechada");
 		}
 	}
 	

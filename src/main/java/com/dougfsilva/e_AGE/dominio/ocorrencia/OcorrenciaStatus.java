@@ -9,7 +9,6 @@ public enum OcorrenciaStatus {
 
 	ABERTA("Ocorrência aberta"),
 	FECHADA("Ocorrência tratada e fechada"),
-	ASSINADA("Ocorrência assinada pelo aluno"),
 	ENCERRADA("Ocorrência finalizada"),
 	BLOQUEADA("Ocorrência bloqueada");
 

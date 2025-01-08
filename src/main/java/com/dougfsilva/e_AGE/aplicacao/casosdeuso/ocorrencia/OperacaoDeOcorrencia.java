@@ -9,7 +9,6 @@ public enum OperacaoDeOcorrencia {
 
 	ABERTA("Ocorrência aberta"),
 	ATUALIZADA("Ocorrência atualizada"),
-	ASSINADA("Ocorrencia assinada"),
 	FECHADA("Ocorrencia fechada"),
 	ENCERRADA("Ocorrencia encerrada"),
 	BLOQUEADA("Ocorrencia bloqueada");

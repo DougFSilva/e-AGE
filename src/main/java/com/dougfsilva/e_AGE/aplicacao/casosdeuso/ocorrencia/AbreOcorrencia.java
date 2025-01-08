@@ -41,7 +41,7 @@ public class AbreOcorrencia {
 	
 	private Ocorrencia notificar(Ocorrencia ocorrencia) {
 		Boolean encaminhada = ocorrencia.getEncaminhada();
-		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().calcularIdade() < 18;
+		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().menorDeIdade();
 		if (!encaminhada && !alunoMenorDeIdade) {
 			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.ABERTA);
 		} else if (encaminhada && !alunoMenorDeIdade) {

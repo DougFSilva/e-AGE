@@ -40,8 +40,8 @@ public class Pessoa {
 		this.foto = foto;
 	}
 
-	public Integer calcularIdade() {
-		return Period.between(this.dataDeNascimento, LocalDate.now()).getYears();
+	public boolean menorDeIdade() {
+		return Period.between(this.dataDeNascimento, LocalDate.now()).getYears() < 18;
 	}
 
 }
