@@ -7,11 +7,11 @@ import lombok.ToString;
 @ToString
 public enum OcorrenciaStatus {
 
-	ABERTA("A ocorrência foi aberta"),
-	FECHADA("A ocorrência foi tratada e fechada"),
-	ASSINADA("A ocorrência foi assinada pelo aluno"),
-	ENCERRADA("A ocorrência foi finalizada"),
-	BLOQUEADA("A ocorrência foi bloqueada");
+	ABERTA("Ocorrência aberta"),
+	FECHADA("Ocorrência tratada e fechada"),
+	ASSINADA("Ocorrência assinada pelo aluno"),
+	ENCERRADA("Ocorrência finalizada"),
+	BLOQUEADA("Ocorrência bloqueada");
 
 	private String descricao;
 

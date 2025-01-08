@@ -10,6 +10,7 @@ import com.dougfsilva.e_AGE.dominio.ocorrencia.CodificadorDeAssinatura;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.GeradorDeSalt;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 
 import lombok.AllArgsConstructor;
@@ -22,13 +23,31 @@ public class AssinaOcorrenciaPeloAluno {
 	private final GeradorDeSalt geradorDeSalt;
 	private final ChaveSecreta chaveSecreta;
 	private final BuscaAluno buscaAluno;
+	private final EnviaNotificacaoDeOcorrencia notifica;
 
 	public Ocorrencia assinarOcorrenciaPeloID(String ID) {
 		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(ID);
 		garantirOcorrenciaPertencenteAoUsuarioAutenticado(ocorrencia);
 		AssinaturaDeOcorrenciaAluno assinatura = gerarAssinatura(ocorrencia);
 		ocorrencia.setAssinaturaAluno(assinatura);
-		return repository.salvar(ocorrencia);
+		ocorrencia.setStatus(OcorrenciaStatus.ASSINADA);
+		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
+		notificar(ocorrenciaSalva);
+		return ocorrenciaSalva;
+	}
+	
+	private void notificar(Ocorrencia ocorrencia) {
+		Boolean encaminhada = ocorrencia.getEncaminhada();
+		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().calcularIdade() < 18;
+		if (!encaminhada && !alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.ASSINADA);
+		} else if (encaminhada && !alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaGestores(ocorrencia, OperacaoDeOcorrencia.ASSINADA);
+		} else if (!encaminhada && alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaResponsavel(ocorrencia, OperacaoDeOcorrencia.ASSINADA);
+		} else if (encaminhada && alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaGestoresEResponsavel(ocorrencia, OperacaoDeOcorrencia.ASSINADA);
+		}
 	}
 	
 	private AssinaturaDeOcorrenciaAluno gerarAssinatura(Ocorrencia ocorrencia) {

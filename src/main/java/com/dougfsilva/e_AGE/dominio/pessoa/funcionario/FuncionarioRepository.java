@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.pessoa.Sexo;
+import com.dougfsilva.e_AGE.dominio.pessoa.usuario.TipoPerfil;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.Usuario;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
@@ -39,6 +40,8 @@ public interface FuncionarioRepository {
 	Pagina<Funcionario> buscarPeloBairro(String bairro, RequisicaoDePagina requisicao);
 	
 	List<Funcionario> buscarPeloCargo(Cargo cargo);
+	
+	List<Funcionario> buscarPeloPerfilDoUsuario(TipoPerfil perfil);
 	
 	Pagina<Funcionario> buscarPeloCargo(Cargo cargo, RequisicaoDePagina requisicao);
 

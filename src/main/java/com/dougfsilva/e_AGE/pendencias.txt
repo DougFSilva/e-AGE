@@ -2,7 +2,7 @@
 - Enviar email ao assinar uma ocorencia manualmente
 - Tratar ocorrencias sobre enviar email e quando enviar nos usecases, passando so o email para ser disparado
 - Reabrir ocorrencia
-- Classe RegistroEmail absctract
+- Classe RegistroEmail para registrar emails
 - Remover tratamento de ocorrencia é necessário?
 - Buscar ocorrencias pelo curso
 - Criar e matricular aluno
@@ -15,5 +15,5 @@
 **** Infraestrutura
 
 - Desabilitar usuarios que nao estejam matriculados atraves de schedule
-
+- Nos testes tentar assinar uma ocorrencia com usuario funcionario como se fosse aluno e verificar a mensagem de erro
 **** Frontend

@@ -24,8 +24,22 @@ public class TrataOcorrencia {
 		garantirOcorrenciaAberta(ocorrencia);
 		ocorrencia.addTratamento(new TratamentoDeOcorrencia(buscarFuncionarioAutenticado(), LocalDateTime.now(), tratamento));
 		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
-		notifica.aoAtualizarOcorrencia(ocorrenciaSalva);
+		notificar(ocorrenciaSalva);
 		return ocorrenciaSalva;
+	}
+	
+	private void notificar(Ocorrencia ocorrencia) {
+		Boolean encaminhada = ocorrencia.getEncaminhada();
+		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().calcularIdade() < 18;
+		if (!encaminhada && !alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.ATUALIZADA);
+		} else if (encaminhada && !alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaGestores(ocorrencia, OperacaoDeOcorrencia.ATUALIZADA);
+		} else if (!encaminhada && alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaResponsavel(ocorrencia, OperacaoDeOcorrencia.ATUALIZADA);
+		} else if (encaminhada && alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaGestoresEResponsavel(ocorrencia, OperacaoDeOcorrencia.ABERTA);
+		}
 	}
 
 	private void garantirOcorrenciaAberta(Ocorrencia ocorrencia) {

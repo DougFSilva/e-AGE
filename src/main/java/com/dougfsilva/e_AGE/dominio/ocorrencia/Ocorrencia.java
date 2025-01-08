@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
+import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ public class Ocorrencia {
 	private LocalDateTime dataDeFechamento;
 	private Funcionario relator;
 	private Matricula matricula;
+	private Modulo modulo;
 	private TipoOcorrencia tipo;
 	private Boolean encaminhada;
 	private Boolean restrita;
@@ -35,7 +37,7 @@ public class Ocorrencia {
 	private Funcionario responsavelPeloFechamento;
 	private Funcionario responsavelPeloEncerramento;
 
-	public Ocorrencia(LocalDateTime dataDeAbertura, Funcionario relator, Matricula matricula, TipoOcorrencia tipo,
+	public Ocorrencia(LocalDateTime dataDeAbertura, Funcionario relator, Matricula matricula, Modulo modulo, TipoOcorrencia tipo,
 			Boolean encaminhada, Boolean restrita, String descricao) {
 		this.dataDeAbertura = dataDeAbertura;
 		this.relator = relator;

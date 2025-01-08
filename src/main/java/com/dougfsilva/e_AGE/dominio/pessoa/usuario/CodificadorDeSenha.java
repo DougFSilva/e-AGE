@@ -4,5 +4,5 @@ public interface CodificadorDeSenha {
 
 	String codificar(String senha);
 	
-	Boolean comparar(String senha, String senhaCodificada);
+	boolean comparar(String senha, String senhaCodificada);
 }

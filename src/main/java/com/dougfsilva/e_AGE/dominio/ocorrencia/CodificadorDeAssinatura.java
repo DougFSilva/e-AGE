@@ -4,6 +4,6 @@ public interface CodificadorDeAssinatura {
 
 	String codificar(String dadosParaAssinatura);
 	
-	Boolean validarAssinatura(String dadosParaAssinatura, String assinaturaCodificada);
+	boolean validarAssinatura(String dadosParaAssinatura, String assinaturaCodificada);
 	
 }

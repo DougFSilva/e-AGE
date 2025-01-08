@@ -3,7 +3,7 @@ package com.dougfsilva.e_AGE.aplicacao.formulario;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.TipoOcorrencia;
 
-public record AbreOcorrenciaForm(String matriculaID, TipoOcorrencia tipo, Boolean encaminhada, Boolean restrita,
+public record AbreOcorrenciaForm(String matriculaID, String moduloID, TipoOcorrencia tipo, Boolean encaminhada, Boolean restrita,
 		String descricao) {
 
 	public AbreOcorrenciaForm {

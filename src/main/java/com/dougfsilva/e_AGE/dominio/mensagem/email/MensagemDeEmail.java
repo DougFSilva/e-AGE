@@ -14,10 +14,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "ID" })
 @ToString
 public class MensagemDeEmail {
 
+	private String ID;
 	private Email destinatario;
 	private List<Email> CC;
 	private String assunto;
@@ -25,11 +26,18 @@ public class MensagemDeEmail {
 	private LocalDateTime dataHoraDeEnvio;
 	private Boolean enviadoComSucesso;
 	private String erro;
-	
+
 	public MensagemDeEmail(Email destinatario, String assunto, String corpo) {
 		this.destinatario = destinatario;
 		this.assunto = assunto;
 		this.corpo = corpo;
 	}
-	
+
+	public void addCC(Email email) {
+		this.CC.add(email);
+	}
+
+	public void addAllCC(List<Email> email) {
+		this.CC.addAll(email);
+	}
 }
