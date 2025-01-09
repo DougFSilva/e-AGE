@@ -2,7 +2,8 @@ package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia;
 
 import java.time.LocalDateTime;
 
-import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.aluno.BuscaAluno;
+import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario.BuscaFuncionario;
+import com.dougfsilva.e_AGE.aplicacao.formulario.AssinaOcorrenciaPeloAlunoForm;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.AssinaturaDeOcorrenciaAluno;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.ChaveSecreta;
@@ -11,7 +12,8 @@ import com.dougfsilva.e_AGE.dominio.ocorrencia.GeradorDeSalt;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
-import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
+import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
+import com.dougfsilva.e_AGE.dominio.pessoa.usuario.TipoPerfil;
 
 import lombok.AllArgsConstructor;
 
@@ -22,40 +24,41 @@ public class AssinaOcorrenciaPeloAluno {
 	private final CodificadorDeAssinatura codificadorDeAssinatura;
 	private final GeradorDeSalt geradorDeSalt;
 	private final ChaveSecreta chaveSecreta;
-	private final BuscaAluno buscaAluno;
+	private final BuscaFuncionario buscaFuncionario;
 
-	public Ocorrencia assinarOcorrenciaPeloID(String ID) {
-		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(ID);
+	public Ocorrencia assinar(AssinaOcorrenciaPeloAlunoForm form) {
+		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(form.ocorrenciaID());
 		garantirOcorrenciaFechada(ocorrencia);
-		garantirOcorrenciaPertencenteAoUsuarioAutenticado(ocorrencia);
-		AssinaturaDeOcorrenciaAluno assinatura = gerarAssinatura(ocorrencia);
+		Funcionario funcionarioAutenticado = buscaFuncionario.buscarPeloUsuarioAutenticado();
+		validarPermissoesDeUsuario(ocorrencia, funcionarioAutenticado);
+		AssinaturaDeOcorrenciaAluno assinatura = gerarAssinaturaCodificada(ocorrencia, form.assinatura(), funcionarioAutenticado);
 		ocorrencia.setAssinaturaAluno(assinatura);
 		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
 		return ocorrenciaSalva;
-	}
-	
-	private AssinaturaDeOcorrenciaAluno gerarAssinatura(Ocorrencia ocorrencia) {
-		String salt = geradorDeSalt.gerar();
-		LocalDateTime timestamp = LocalDateTime.now();
-		String dadosParaHash = ocorrencia.getID() + ocorrencia.getMatricula().getID() + timestamp + salt + chaveSecreta.buscarChave();
-		String assinatura = codificadorDeAssinatura.codificar(dadosParaHash);
-		return new AssinaturaDeOcorrenciaAluno(assinatura, timestamp, salt);
 	}
 	
 	private void garantirOcorrenciaFechada(Ocorrencia ocorrencia) {
 		if (ocorrencia.getStatus() != OcorrenciaStatus.FECHADA) {
 			throw new ErroDeValidacaoDeOcorrenciaException(
 					String.format("A ocorrência %s está %s. Somente uma ocorrência fechada pode ser assinada pelo aluno",
-							ocorrencia.getID(), ocorrencia.getStatus().name()));
+							ocorrencia.getID(), ocorrencia.getStatus().name().toLowerCase()));
 		}
 	}
 	
-	private void garantirOcorrenciaPertencenteAoUsuarioAutenticado(Ocorrencia ocorrencia) {
-		Aluno aluno = buscaAluno.buscarPeloUsuarioAutenticado();
-		if(!ocorrencia.getMatricula().getAluno().equals(aluno)) {
-			throw new ErroDeValidacaoDeOcorrenciaException(
-					String.format("Ocorrência %s não pertence ao aluno autenticado %s", ocorrencia.getID(), aluno.getNome()));
-		}
+	private void validarPermissoesDeUsuario(Ocorrencia ocorrencia, Funcionario funcionarioAutenticado) {
+	    boolean usuarioGestor = funcionarioAutenticado.getUsuario().contemPerfil(TipoPerfil.GESTOR);
+	    if (ocorrencia.getEncaminhada() && !usuarioGestor) {
+	        throw new ErroDeValidacaoDeOcorrenciaException(
+	            "Somente usuário com perfil gestor pode coletar assinatura do aluno de uma ocorrência encaminhada");
+	    }
+	}
+	
+	private AssinaturaDeOcorrenciaAluno gerarAssinaturaCodificada(Ocorrencia ocorrencia, String assinatura, Funcionario funcionarioAutenticado) {
+		String salt = geradorDeSalt.gerar();
+		LocalDateTime timestamp = LocalDateTime.now();
+		String dadosParaHash = ocorrencia.getID() + assinatura + timestamp + salt + chaveSecreta.buscarChave();
+		String assinaturaCodificada = codificadorDeAssinatura.codificar(dadosParaHash);
+		return new AssinaturaDeOcorrenciaAluno(assinaturaCodificada, timestamp, funcionarioAutenticado, salt);
 	}
 	
 }

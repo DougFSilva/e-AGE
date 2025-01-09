@@ -9,8 +9,7 @@ public enum OcorrenciaStatus {
 
 	ABERTA("Ocorrência aberta"),
 	FECHADA("Ocorrência tratada e fechada"),
-	ENCERRADA("Ocorrência finalizada"),
-	BLOQUEADA("Ocorrência bloqueada");
+	ENCERRADA("Ocorrência finalizada");
 
 	private String descricao;
 

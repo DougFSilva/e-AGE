@@ -22,7 +22,7 @@ public class Ocorrencia {
 
 	private String ID;
 	private LocalDateTime dataDeAbertura;
-	private LocalDateTime dataDeFechamento;
+	private LocalDateTime dataDeEncerramento;
 	private Funcionario relator;
 	private Matricula matricula;
 	private Modulo modulo;

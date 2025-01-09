@@ -24,7 +24,7 @@ public class AbreOcorrencia {
 	private final OcorrenciaRepository repository;
 	private final MatriculaRepository matriculaRepository;
 	private final ModuloRepository moduloRepository;
-	private final PINService PINService;
+	private final PINService pinService;
 	private final BuscaFuncionario buscaFuncionario;
 	private final EnviaNotificacaoDeOcorrencia notifica;
 
@@ -32,35 +32,14 @@ public class AbreOcorrencia {
 		Matricula matricula = matriculaRepository.buscarPeloIDOuThrow(form.matriculaID());
 		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(form.moduloID());
 		garantirModuloPertencenteATurma(modulo, matricula.getTurma());
-		Funcionario relator = buscarFuncionarioAutenticado();
-		Ocorrencia ocorrencia = new Ocorrencia(LocalDateTime.now(), relator, matricula, modulo, form.tipo(), form.encaminhada(),
-				form.restrita(), form.descricao());
+		Funcionario relator = buscaFuncionario.buscarPeloUsuarioAutenticado();
+		Ocorrencia ocorrencia = new Ocorrencia(LocalDateTime.now(), relator, matricula, modulo, form.tipo(),
+				form.encaminhada(), form.restrita(), form.descricao());
+		if (ocorrencia.getRestrita()) {
+			ocorrencia.setEncaminhada(true);
+		}
 		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
 		return notificar(ocorrenciaSalva);
-	}
-	
-	private Ocorrencia notificar(Ocorrencia ocorrencia) {
-		Boolean encaminhada = ocorrencia.getEncaminhada();
-		Boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().menorDeIdade();
-		if (!encaminhada && !alunoMenorDeIdade) {
-			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.ABERTA);
-		} else if (encaminhada && !alunoMenorDeIdade) {
-			notifica.enviarNotificacaoParaAlunoComCopiaParaGestores(ocorrencia, OperacaoDeOcorrencia.ABERTA);
-		} else if (!encaminhada && alunoMenorDeIdade) {
-			notifica.enviarNotificacaoParaAlunoComCopiaParaResponsavel(ocorrencia, OperacaoDeOcorrencia.ABERTA);
-		} else if (encaminhada && alunoMenorDeIdade) {
-			String PIN = PINService.gerarPIN();
-			String PINCodificado = PINService.codificar(PIN);
-			ocorrencia.setAssinaturaResponsavel(new AssinaturaDeOcorrenciaResponsavel(PINCodificado));
-			Ocorrencia ocorrenciaAtualizadaComPIN = repository.salvar(ocorrencia);
-			notifica.enviarNotificacaoParaAlunoComCopiaParaGestoresEResponsavelComPIN(ocorrenciaAtualizadaComPIN, OperacaoDeOcorrencia.ABERTA, PIN);
-			return ocorrenciaAtualizadaComPIN;
-		}
-		return ocorrencia;
-	}
-
-	private Funcionario buscarFuncionarioAutenticado() {
-		return buscaFuncionario.buscarPeloUsuarioAutenticado();
 	}
 
 	private void garantirModuloPertencenteATurma(Modulo modulo, Turma turma) {
@@ -70,4 +49,30 @@ public class AbreOcorrencia {
 							modulo.getCodigo(), turma.getCodigo()));
 		}
 	}
+
+	private Ocorrencia notificar(Ocorrencia ocorrencia) {
+		boolean encaminhada = ocorrencia.getEncaminhada();
+		boolean alunoMenorDeIdade = ocorrencia.getMatricula().getAluno().menorDeIdade();
+		if (!encaminhada && !alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAluno(ocorrencia, OperacaoDeOcorrencia.ABERTA);
+		} else if (encaminhada && !alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaGestores(ocorrencia, OperacaoDeOcorrencia.ABERTA);
+		} else if (!encaminhada && alunoMenorDeIdade) {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaResponsavel(ocorrencia, OperacaoDeOcorrencia.ABERTA);
+		} else {
+			notifica.enviarNotificacaoParaAlunoComCopiaParaGestores(ocorrencia, OperacaoDeOcorrencia.ABERTA);
+			return notificarResponsavelComPIN(ocorrencia);
+		}
+		return ocorrencia;
+	}
+
+	private Ocorrencia notificarResponsavelComPIN(Ocorrencia ocorrencia) {
+		String PIN = pinService.gerarPIN();
+		String PINCodificado = pinService.codificar(PIN);
+		ocorrencia.setAssinaturaResponsavel(new AssinaturaDeOcorrenciaResponsavel(PINCodificado));
+		Ocorrencia ocorrenciaAtualizadaComPIN = repository.salvar(ocorrencia);
+		notifica.enviarNotificacaoParaResponsavelComPIN(ocorrenciaAtualizadaComPIN, OperacaoDeOcorrencia.ABERTA, PIN);
+		return ocorrenciaAtualizadaComPIN;
+	}
+
 }

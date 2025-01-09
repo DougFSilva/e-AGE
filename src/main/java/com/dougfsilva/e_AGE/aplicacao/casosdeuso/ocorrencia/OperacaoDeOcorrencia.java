@@ -11,7 +11,7 @@ public enum OperacaoDeOcorrencia {
 	ATUALIZADA("Ocorrência atualizada"),
 	FECHADA("Ocorrencia fechada"),
 	ENCERRADA("Ocorrencia encerrada"),
-	BLOQUEADA("Ocorrencia bloqueada");
+	NOVO_PIN_GERADO("Novo PIN reenviado");
 	
 	private String descricao;
 	

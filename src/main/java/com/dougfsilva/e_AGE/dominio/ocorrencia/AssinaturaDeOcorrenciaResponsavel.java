@@ -21,7 +21,6 @@ public class AssinaturaDeOcorrenciaResponsavel {
 	private String assinatura;
 	private String PIN;
 	private LocalDateTime timestamp;
-	private Integer tentativasFalhasDeAssinatura;
 	private Funcionario responsavelPelaColetaDaAssinatura;
 	
 	public AssinaturaDeOcorrenciaResponsavel(String assinatura, String PIN, LocalDateTime timestamp, Funcionario responsavelPelaColetaDaAssinatura) {
@@ -38,4 +37,5 @@ public class AssinaturaDeOcorrenciaResponsavel {
 	public boolean assinada() {
 		return this.assinatura != null && !this.assinatura.isBlank();
 	}
+	
 }

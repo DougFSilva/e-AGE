@@ -1,8 +1,9 @@
 **** Usecase
+- Corrigir envio de mensagem de celular
+- Não deixar apagar funcionario caso haja responsável pela coleta de assinatura
 - Em quais outras condições o pai deve assinar ocorrência
-- Reabrir ocorrencia
+- Reenviar PIN
 - Enviar email ao assinar uma ocorencia manualmente
-- Tratar ocorrencias sobre enviar email e quando enviar nos usecases, passando so o email para ser disparado
 - Reabrir ocorrencia
 - Classe RegistroEmail para registrar emails
 - Remover tratamento de ocorrencia é necessário?
