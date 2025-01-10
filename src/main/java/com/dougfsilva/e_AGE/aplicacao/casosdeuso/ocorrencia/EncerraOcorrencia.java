@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario.BuscaFuncionario;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.EncerramentoDeOcorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
@@ -25,8 +26,7 @@ public class EncerraOcorrencia {
 		validarPermissoesDeUsuario(ocorrencia, funcionario);
 		garantirOcorrenciaAssinada(ocorrencia);
 		ocorrencia.setStatus(OcorrenciaStatus.ENCERRADA);
-		ocorrencia.setDataDeEncerramento(LocalDateTime.now());
-		ocorrencia.setResponsavelPeloEncerramento(funcionario);
+		ocorrencia.setEncerramento(new EncerramentoDeOcorrencia(LocalDateTime.now(), funcionario));
 		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
 		notificar(ocorrenciaSalva);
 		return ocorrenciaSalva;
@@ -34,9 +34,16 @@ public class EncerraOcorrencia {
 	
 	private void validarPermissoesDeUsuario(Ocorrencia ocorrencia, Funcionario funcionarioAutenticado) {
 	    boolean usuarioGestor = funcionarioAutenticado.getUsuario().contemPerfil(TipoPerfil.GESTOR);
-	    if (ocorrencia.getEncaminhada() && !usuarioGestor) {
+	    boolean usuarioRelator = ocorrencia.getAberturaDeOcorrencia().getRelator().equals(funcionarioAutenticado);
+	    boolean restrita = ocorrencia.getRestrita();
+	    boolean encaminhada = ocorrencia.getEncaminhada();
+	    if (encaminhada && !usuarioGestor) {
 	        throw new ErroDeValidacaoDeOcorrenciaException(
-	            "Somente usuário com perfil Gestor pode encerrar uma ocorrência encaminhada");
+	            "Somente usuário com perfil gestor pode encerrar uma ocorrência encaminhada");
+	    }
+	    if (restrita && !usuarioGestor && !usuarioRelator) {
+	    	throw new ErroDeValidacaoDeOcorrenciaException(
+		            String.format("A ocorrência %s é restrita. Apenas o relator ou um usuário gestor pode encerrá-la.", ocorrencia.getID()));
 	    }
 	}
 	

@@ -10,6 +10,7 @@ import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeEvasaoException;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.AberturaDeOcorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.AssinaturaDeOcorrenciaResponsavel;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
@@ -33,7 +34,8 @@ public class AbreOcorrencia {
 		Modulo modulo = moduloRepository.buscarPeloIDOuThrow(form.moduloID());
 		garantirModuloPertencenteATurma(modulo, matricula.getTurma());
 		Funcionario relator = buscaFuncionario.buscarPeloUsuarioAutenticado();
-		Ocorrencia ocorrencia = new Ocorrencia(LocalDateTime.now(), relator, matricula, modulo, form.tipo(),
+		AberturaDeOcorrencia abertura = new AberturaDeOcorrencia(LocalDateTime.now(), relator);
+		Ocorrencia ocorrencia = new Ocorrencia(abertura, relator, matricula, modulo, form.tipo(),
 				form.encaminhada(), form.restrita(), form.descricao());
 		if (ocorrencia.getRestrita()) {
 			ocorrencia.setEncaminhada(true);

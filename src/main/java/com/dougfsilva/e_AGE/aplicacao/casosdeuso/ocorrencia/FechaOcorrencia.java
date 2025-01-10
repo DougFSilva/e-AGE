@@ -1,7 +1,10 @@
 package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia;
 
+import java.time.LocalDateTime;
+
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario.BuscaFuncionario;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.FechamentoDeOcorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
@@ -24,7 +27,7 @@ public class FechaOcorrencia {
 		Funcionario funcionarioAutenticado = buscaFuncionario.buscarPeloUsuarioAutenticado();
 		validarPermissoesDeUsuario(ocorrencia, funcionarioAutenticado);
 		ocorrencia.setStatus(OcorrenciaStatus.FECHADA);
-		ocorrencia.setResponsavelPeloFechamento(funcionarioAutenticado);
+		ocorrencia.setFechamento(new FechamentoDeOcorrencia(LocalDateTime.now(), funcionarioAutenticado));
 		Ocorrencia ocorrenciaSalva = repository.salvar(ocorrencia);
 		notificar(ocorrenciaSalva);
 		return ocorrenciaSalva;
@@ -46,9 +49,16 @@ public class FechaOcorrencia {
 	
 	private void validarPermissoesDeUsuario(Ocorrencia ocorrencia, Funcionario funcionarioAutenticado) {
 	    boolean usuarioGestor = funcionarioAutenticado.getUsuario().contemPerfil(TipoPerfil.GESTOR);
-	    if (ocorrencia.getEncaminhada() && !usuarioGestor) {
+	    boolean usuarioRelator = ocorrencia.getAberturaDeOcorrencia().getRelator().equals(funcionarioAutenticado);
+	    boolean restrita = ocorrencia.getRestrita();
+	    boolean encaminhada = ocorrencia.getEncaminhada();
+	    if (encaminhada && !usuarioGestor) {
 	        throw new ErroDeValidacaoDeOcorrenciaException(
-	            "Somente usuário com perfil Gestor pode fechar uma ocorrência encaminhada");
+	            "Somente usuário com perfil gestor pode fechar uma ocorrência encaminhada");
+	    }
+	    if (restrita && !usuarioGestor && !usuarioRelator) {
+	    	throw new ErroDeValidacaoDeOcorrenciaException(
+		            String.format("A ocorrência %s é restrita. Apenas o relator ou um usuário gestor pode fechá-la.", ocorrencia.getID()));
 	    }
 	}
 	

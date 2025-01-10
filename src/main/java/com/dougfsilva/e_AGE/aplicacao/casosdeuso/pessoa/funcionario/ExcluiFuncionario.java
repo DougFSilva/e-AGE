@@ -28,7 +28,7 @@ public class ExcluiFuncionario {
 	}
 	
 	private void garantirFuncionarioSemOcorrencias(Funcionario funcionario) {
-		if (ocorrenciaRepository.existePeloFuncionario(funcionario)) {
+		if (ocorrenciaRepository.existePeloResponsavelDeAberturaOuFechamentoOuEncerramentoOuAssinaturaDeAlunoOuResponsavel(funcionario)) {
 			throw new ErroDeEntidadeComVinculosException("Não é possível excluir o funcionário porque existem ocorrências associadas a ele");
 		}
 	}

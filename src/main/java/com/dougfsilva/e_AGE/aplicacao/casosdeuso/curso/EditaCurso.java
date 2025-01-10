@@ -31,7 +31,7 @@ public class EditaCurso {
 			AreaTecnologica area = areaTecnologicaRepository.buscarPeloIDOuThrow(form.areaTecnologicaID());
 			curso.setAreaTecnologica(area);
 		}
-		if (form.titulo() != null && !form.titulo().isBlank() && !form.titulo().equalsIgnoreCase(curso.getTitulo())) {
+		if (form.titulo() != null && !form.titulo().isBlank() && !form.titulo().equals(curso.getTitulo())) {
 			validador.validarUnicoTitulo(form.titulo());
 			curso.setTitulo(form.titulo());
 		}

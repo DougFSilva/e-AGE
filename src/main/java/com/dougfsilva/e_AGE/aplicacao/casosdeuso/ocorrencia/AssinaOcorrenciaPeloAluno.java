@@ -47,9 +47,17 @@ public class AssinaOcorrenciaPeloAluno {
 	
 	private void validarPermissoesDeUsuario(Ocorrencia ocorrencia, Funcionario funcionarioAutenticado) {
 	    boolean usuarioGestor = funcionarioAutenticado.getUsuario().contemPerfil(TipoPerfil.GESTOR);
-	    if (ocorrencia.getEncaminhada() && !usuarioGestor) {
-	        throw new ErroDeValidacaoDeOcorrenciaException(
-	            "Somente usuário com perfil gestor pode coletar assinatura do aluno de uma ocorrência encaminhada");
+	    boolean usuarioRelator = ocorrencia.getAberturaDeOcorrencia().getRelator().equals(funcionarioAutenticado);
+	    boolean restrita = ocorrencia.getRestrita();
+	    boolean encaminhada = ocorrencia.getEncaminhada();
+	    if (encaminhada && !usuarioGestor) {
+	    	throw new ErroDeValidacaoDeOcorrenciaException(
+	    			"Somente usuário com perfil gestor pode coletar assinatura do aluno de uma ocorrência encaminhada");
+	    }
+	    if (restrita && !usuarioGestor && !usuarioRelator) {
+	    	throw new ErroDeValidacaoDeOcorrenciaException(
+		            String.format("A ocorrência %s é restrita. Apenas o relator ou um usuário gestor pode coletar a assinatura do aluno", 
+		            		ocorrencia.getID()));
 	    }
 	}
 	

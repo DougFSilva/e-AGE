@@ -1,8 +1,9 @@
 **** Usecase
-- Corrigir envio de mensagem de celular
-- Não deixar apagar funcionario caso haja responsável pela coleta de assinatura
+- Verificar encaminhamento de ocorrência para responsáveis de alunos em ocorrencias não encaminhadas
+- Remover todos ignorecaseeequals do editar para equals somente
+- Editar ocorrencias
+- Busca Ocorrencias
 - Em quais outras condições o pai deve assinar ocorrência
-- Reenviar PIN
 - Enviar email ao assinar uma ocorencia manualmente
 - Reabrir ocorrencia
 - Classe RegistroEmail para registrar emails

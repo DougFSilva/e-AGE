@@ -66,7 +66,7 @@ public class EnviaNotificacaoDeOcorrencia {
 			mensagemDeEmail.addCC(ocorrencia.getMatricula().getAluno().getResponsavel().getEmail());
 		}
 		enviadorDeEmail.enviar(mensagemDeEmail);
-		if (configs.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_CELULAR_AO_ABRIR_OCORRENCIA).equals("YES")) {
+		if (configs.get(ChaveDeConfiguracao.ENVIAR_MENSAGEM_CELULAR_AO_OPERAR_OCORRENCIA).equals("YES")) {
 			MensagemDeCelular mensagemDeCelular = new MensagemDeCelular(ocorrencia.getMatricula().getAluno().getTelefone(), corpo);
 			if (copiaResponsavel) {
 				mensagemDeCelular.addCC(ocorrencia.getMatricula().getAluno().getResponsavel().getTelefone());
@@ -163,20 +163,20 @@ public class EnviaNotificacaoDeOcorrencia {
 				ocorrencia.getTipo().name(),
 				ocorrencia.getDescricao(), 
 				ocorrencia.getTratamento(),
-				ocorrencia.getDataDeAbertura() != null ? ocorrencia.getDataDeAbertura().format(formatter) : null,
-				ocorrencia.getDataDeEncerramento() != null ? ocorrencia.getDataDeEncerramento().format(formatter): null,
+				ocorrencia.getAberturaDeOcorrencia().getDataHora() != null ? ocorrencia.getAberturaDeOcorrencia().getDataHora().format(formatter) : null,
+				ocorrencia.getEncerramento().getDataHora() != null ? ocorrencia.getEncerramento().getDataHora().format(formatter): null,
 				ocorrencia.getStatus().name(), 
 				
 				ocorrencia.getID(),
 				ocorrencia.getMatricula().getTurma().getCurso().getTitulo(),
 				ocorrencia.getMatricula().getTurma().getCodigo(), 
-				ocorrencia.getRelator().getNome(),
-				ocorrencia.getRelator().getCargo().name(), 
+				ocorrencia.getAberturaDeOcorrencia().getRelator().getNome(),
+				ocorrencia.getAberturaDeOcorrencia().getRelator().getCargo().name(), 
 				ocorrencia.getAssinaturaAluno().getAssinatura(),
 				ocorrencia.getAssinaturaAluno().getTimestamp() != null? ocorrencia.getAssinaturaAluno().getTimestamp().format(formatter): null,
 				ocorrencia.getAssinaturaResponsavel().getAssinatura(),
 				ocorrencia.getAssinaturaResponsavel().getTimestamp() != null ? ocorrencia.getAssinaturaResponsavel().getTimestamp().format(formatter) : null,
-				ocorrencia.getResponsavelPeloFechamento().getNome());
+				ocorrencia.getFechamento().getResponsavel().getNome());
 	}
 
 	private String gerarInformacoesDeContato() {

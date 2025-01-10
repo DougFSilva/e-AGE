@@ -42,7 +42,7 @@ public class TrataOcorrencia {
 	
 	private void validarPermissoesDeUsuario(Ocorrencia ocorrencia, Funcionario funcionarioAutenticado) {
 	    boolean ocorrenciaRestrita = ocorrencia.getRestrita();
-	    boolean usuarioRelator = ocorrencia.getRelator().equals(funcionarioAutenticado);
+	    boolean usuarioRelator = ocorrencia.getAberturaDeOcorrencia().getRelator().equals(funcionarioAutenticado);
 	    boolean usuarioGestor = funcionarioAutenticado.getUsuario().contemPerfil(TipoPerfil.GESTOR);
 
 	    if (ocorrenciaRestrita && !usuarioRelator && !usuarioGestor) {

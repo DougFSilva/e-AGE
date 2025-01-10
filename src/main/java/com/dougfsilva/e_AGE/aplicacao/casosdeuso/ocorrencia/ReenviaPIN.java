@@ -22,6 +22,7 @@ public class ReenviaPIN {
 	public Ocorrencia reenviar(String ocorrenciaID) {
 		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(ocorrenciaID);
 		garantirOcorrenciaNaoEncerrada(ocorrencia);
+		garantirOCorrenciaEncaminhaEAlunoMenor(ocorrencia);
 		Funcionario funcionarioAutenticado = buscaFuncionario.buscarPeloUsuarioAutenticado();
 		validarPermissoesDeUsuario(ocorrencia, funcionarioAutenticado);
 		String PIN = pinService.gerarPIN();
@@ -36,6 +37,14 @@ public class ReenviaPIN {
 		if (ocorrencia.getStatus() == OcorrenciaStatus.ENCERRADA) {
 			throw new ErroDeValidacaoDeOcorrenciaException(String
 					.format("Não é possível reenviar o PIN porque a ocorrência %s está encerrada", ocorrencia.getID()));
+		}
+	}
+	
+	private void garantirOCorrenciaEncaminhaEAlunoMenor(Ocorrencia ocorrencia) {
+		boolean alunoMenor = ocorrencia.getMatricula().getAluno().menorDeIdade();
+		boolean encaminhada = ocorrencia.getEncaminhada();
+		if (!alunoMenor || !encaminhada) {
+			throw new ErroDeValidacaoDeOcorrenciaException("Só é possível gerar um PIN para uma ocorrência encaminhada de um aluno menor de idade");
 		}
 	}
 

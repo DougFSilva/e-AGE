@@ -71,5 +71,5 @@ public interface OcorrenciaRepository {
 
 	Boolean existePeloAluno(Aluno aluno);
 	
-	Boolean existePeloFuncionario(Funcionario funcionario);
+	Boolean existePeloResponsavelDeAberturaOuFechamentoOuEncerramentoOuAssinaturaDeAlunoOuResponsavel(Funcionario funcionario);
 }
