@@ -103,6 +103,10 @@ public class EnviaNotificacaoDeOcorrencia {
 			case NOVO_PIN_GERADO: {
 				return String.format("Ocorrência %s - Novo PIN gerado", ocorrencia.getID());
 			}
+			case EXCLUIDA: {
+				return String.format("Ocorrência %s - Excluída ocorrência do aluno %s", 
+						ocorrencia.getID(), ocorrencia.getMatricula().getAluno().getNome());
+			}
 			default:
 				throw new IllegalArgumentException("Valor inesperado de operação: " + operacao);
 			}
@@ -128,6 +132,10 @@ public class EnviaNotificacaoDeOcorrencia {
 			}
 			case NOVO_PIN_GERADO: {
 				return String.format("Olá, um novo PIN para assinatura da ocorrência %s foi gerado. Detalhes abaixo:%n%n", ocorrencia.getID());
+			}
+			case EXCLUIDA: {
+				return String.format("Olá, a ocorrência %s do aluno %s foi excluída. Detalhes abaixo:%n%n", 
+						ocorrencia.getID(), ocorrencia.getMatricula().getAluno().getNome());
 			}
 			default:
 				throw new IllegalArgumentException("Valor inesperado de operação: " + operacao);
