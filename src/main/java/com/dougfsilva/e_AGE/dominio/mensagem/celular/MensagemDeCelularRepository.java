@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.dominio.mensagem.celular;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,7 +8,7 @@ import com.dougfsilva.e_AGE.dominio.exception.ObjetoNaoEncontradoException;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.Pagina;
 import com.dougfsilva.e_AGE.dominio.utilidades.paginacao.RequisicaoDePagina;
 
-public interface MensagemDeCelularRepotory {
+public interface MensagemDeCelularRepository {
 
 	MensagemDeCelular salvar(MensagemDeCelular mensagem);
 
@@ -23,4 +24,9 @@ public interface MensagemDeCelularRepotory {
 	List<MensagemDeCelular> buscarPeloDestinatario(String telefone);
 
 	Pagina<MensagemDeCelular> buscarPeloSucessoDeEnvio(boolean enviadoComSucesso, RequisicaoDePagina requisicao);
+	
+	Pagina<MensagemDeCelular> buscarPelaDataDeEnvio(LocalDateTime min, LocalDateTime max, RequisicaoDePagina requisicao);
+	
+	Pagina<MensagemDeCelular> buscarTodas(RequisicaoDePagina requisicao);
+
 }

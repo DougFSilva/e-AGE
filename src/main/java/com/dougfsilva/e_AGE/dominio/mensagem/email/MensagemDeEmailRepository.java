@@ -1,5 +1,6 @@
 package com.dougfsilva.e_AGE.dominio.mensagem.email;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,4 +25,8 @@ public interface MensagemDeEmailRepository {
 	List<MensagemDeEmail> buscarPeloDestinatario(Email email);
 	
 	Pagina<MensagemDeEmail> buscarPeloSucessoDeEnvio(boolean enviadoComSucesso, RequisicaoDePagina requisicao);
+	
+	Pagina<MensagemDeEmail> buscarPelaDataDeEnvio(LocalDateTime min, LocalDateTime max, RequisicaoDePagina requisicao);
+	
+	Pagina<MensagemDeEmail> buscarTodas(RequisicaoDePagina requisicao);
 }

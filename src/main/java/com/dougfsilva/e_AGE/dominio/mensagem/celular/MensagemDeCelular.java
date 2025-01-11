@@ -24,6 +24,16 @@ public class MensagemDeCelular {
 	private Boolean enviadoComSucesso;
 	private String erro;
 	
+	public MensagemDeCelular(String destinatario, List<String> CC, String mensagem, LocalDateTime dataHoraDeEnvio,
+			Boolean enviadoComSucesso, String erro) {
+		this.destinatario = destinatario;
+		this.CC = CC;
+		this.mensagem = mensagem;
+		this.dataHoraDeEnvio = dataHoraDeEnvio;
+		this.enviadoComSucesso = enviadoComSucesso;
+		this.erro = erro;
+	}
+	
 	public MensagemDeCelular(String destinatario,  String mensagem) {
 		this.destinatario = destinatario;
 		this.mensagem = mensagem;
@@ -36,4 +46,5 @@ public class MensagemDeCelular {
 	public void addAllCC(List<String> telefone) {
 		this.CC.addAll(telefone);
 	}
+	
 }

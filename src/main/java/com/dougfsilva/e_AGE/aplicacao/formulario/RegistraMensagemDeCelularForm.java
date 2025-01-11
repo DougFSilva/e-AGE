@@ -4,20 +4,16 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeCamposException;
-import com.dougfsilva.e_AGE.dominio.pessoa.Email;
 
-public record RegistraMensagemDeEmailForm(Email destinatario, List<Email> CC, String assunto, String corpo,
+public record RegistraMensagemDeCelularForm(String destinatario, List<String> CC, String mensagem,
 		LocalDateTime dataHoraDeEnvio, Boolean enviadoComSucesso, String erro) {
 
-	public RegistraMensagemDeEmailForm {
-		if (destinatario == null) {
+	public RegistraMensagemDeCelularForm {
+		if (destinatario == null || destinatario.isBlank()) {
 			throw new ErroDeValidacaoDeCamposException("O campo destinatário não pode ser nulo");
 		}
-		if (assunto == null || assunto.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo assunto não pode ser nulo ou vazio");
-		}
-		if (corpo == null || corpo.isBlank()) {
-			throw new ErroDeValidacaoDeCamposException("O campo corpo não pode ser nulo ou vazio");
+		if (mensagem == null || mensagem.isBlank()) {
+			throw new ErroDeValidacaoDeCamposException("O campo mensagem não pode ser nulo ou vazio");
 		}
 		if (dataHoraDeEnvio == null) {
 			throw new ErroDeValidacaoDeCamposException("O campo data e hora de envio não pode ser nulo");
