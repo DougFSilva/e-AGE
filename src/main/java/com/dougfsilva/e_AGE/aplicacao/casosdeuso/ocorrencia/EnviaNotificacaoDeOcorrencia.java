@@ -148,7 +148,7 @@ public class EnviaNotificacaoDeOcorrencia {
 	}
 
 	private String gerarDetalhesDaOcorrencia(Ocorrencia ocorrencia) {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy, HH:mm");
+		DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd 'de' MMMM 'de' yyyy, HH:mm");
 		String corpo = "Aluno: %s%n" 
 				+ "Tipo: %s%n" 
 				+ "Descrição: %s%n" 
@@ -164,15 +164,16 @@ public class EnviaNotificacaoDeOcorrencia {
 				+ "Relator: %s (%s)%n" 
 				+ "Assinatura do aluno: %s (%s)%n"
 				+ "Assinatura do responsável: %s (%s)%n" 
+				+ "Assinatura manual: %s (%s)%n" 
 				+ "Fechado por: %s%n%n";
 
 		return String.format(corpo, 
 				ocorrencia.getMatricula().getAluno().getNome(), 
 				ocorrencia.getTipo().name(),
 				ocorrencia.getDescricao(), 
-				ocorrencia.getTratamento(),
-				ocorrencia.getAberturaDeOcorrencia().getDataHora() != null ? ocorrencia.getAberturaDeOcorrencia().getDataHora().format(formatter) : null,
-				ocorrencia.getEncerramento().getDataHora() != null ? ocorrencia.getEncerramento().getDataHora().format(formatter): null,
+				ocorrencia.getTratamentos(),
+				ocorrencia.getAberturaDeOcorrencia().getDataHora() != null ? ocorrencia.getAberturaDeOcorrencia().getDataHora().format(formatador) : null,
+				ocorrencia.getEncerramento().getDataHora() != null ? ocorrencia.getEncerramento().getDataHora().format(formatador): null,
 				ocorrencia.getStatus().name(), 
 				
 				ocorrencia.getID(),
@@ -181,9 +182,11 @@ public class EnviaNotificacaoDeOcorrencia {
 				ocorrencia.getAberturaDeOcorrencia().getRelator().getNome(),
 				ocorrencia.getAberturaDeOcorrencia().getRelator().getCargo().name(), 
 				ocorrencia.getAssinaturaAluno().getAssinatura(),
-				ocorrencia.getAssinaturaAluno().getTimestamp() != null? ocorrencia.getAssinaturaAluno().getTimestamp().format(formatter): null,
+				ocorrencia.getAssinaturaAluno().getDataHora() != null ? ocorrencia.getAssinaturaAluno().getDataHora().format(formatador): null,
 				ocorrencia.getAssinaturaResponsavel().getAssinatura(),
-				ocorrencia.getAssinaturaResponsavel().getTimestamp() != null ? ocorrencia.getAssinaturaResponsavel().getTimestamp().format(formatter) : null,
+				ocorrencia.getAssinaturaResponsavel().getDataHora() != null ? ocorrencia.getAssinaturaResponsavel().getDataHora().format(formatador) : null,
+				ocorrencia.getAssinaturaManual().getAssinatura(),
+				ocorrencia.getAssinaturaManual().getDataHora() != null ? ocorrencia.getAssinaturaManual().getDataHora().format(formatador) : null,
 				ocorrencia.getFechamento().getResponsavel().getNome());
 	}
 

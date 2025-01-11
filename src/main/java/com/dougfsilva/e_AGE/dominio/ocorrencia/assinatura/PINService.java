@@ -1,4 +1,4 @@
-package com.dougfsilva.e_AGE.dominio.ocorrencia;
+package com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura;
 
 public interface PINService {
 	

@@ -7,11 +7,11 @@ import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeEvasaoException;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.AssinaturaDeOcorrenciaResponsavel;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.PINService;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.AssinaturaDeResponsavel;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.PINService;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 
 import lombok.AllArgsConstructor;
@@ -54,7 +54,7 @@ public class EditaOcorrencia {
 	}
 	
 	private void garantirOcorrenciaSemTratamento(Ocorrencia ocorrencia) {
-		if (ocorrencia.getTratamento().size() > 0) {
+		if (ocorrencia.getTratamentos().size() > 0) {
 			throw new ErroDeValidacaoDeOcorrenciaException("Somente ocorrência sem tratamento pode ser editada");
 		}
 	}
@@ -108,7 +108,7 @@ public class EditaOcorrencia {
 		if (ocorrencia.getAssinaturaResponsavel() == null) {
 			String PIN = pinService.gerarPIN();
 			String PINCodificado = pinService.codificar(PIN);
-			ocorrencia.setAssinaturaResponsavel(new AssinaturaDeOcorrenciaResponsavel(PINCodificado));
+			ocorrencia.setAssinaturaResponsavel(new AssinaturaDeResponsavel(PINCodificado));
 			Ocorrencia ocorrenciaAtualizadaComPIN = repository.salvar(ocorrencia);
 			notifica.enviarNotificacaoParaResponsavelComPIN(ocorrenciaAtualizadaComPIN, OperacaoDeOcorrencia.ATUALIZADA, PIN);
 			return ocorrenciaAtualizadaComPIN;

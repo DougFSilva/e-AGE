@@ -1,23 +1,16 @@
 **** Usecase
-- Verificar encaminhamento de ocorrência para responsáveis de alunos em ocorrencias não encaminhadas
-- Remover todos ignorecaseeequals do editar para equals somente
-- Editar ocorrencias
-- Busca Ocorrencias
-- Em quais outras condições o pai deve assinar ocorrência
-- Enviar email ao assinar uma ocorencia manualmente
-- Reabrir ocorrencia
-- Classe RegistroEmail para registrar emails
-- Remover tratamento de ocorrencia é necessário?
-- Buscar ocorrencias pelo curso
-- Criar e matricular aluno
-- Buscar dados gerais de aluno, incuindo matriculas, ocorrencias e outros no alunoService
-- Enviar email para usuário com senha
+- Verificar se envia email de ocorrência para gestores em ocorrencias nao encaminhadas e alunos menores
+- Criar usecases para RegistrarEmailEnviados
+- Criar usecases para RegistrarMEnsagens envidas
+- Criar e matricular aluno inclusive em massa
+- Enviar email para usuário com senha ???
 - Se não conseguir enviar email para responsável por esse não existir, de alguma forma informar isso em algum lugar, como banco de dados por exemplo
 - Cria usuario admin para sistema na infrasestrutura
-- Melhorar Response de métodos que trazem uma lista ou página, pois nem todos dados são úteis para quando realizar essa busca
-- Melhorar nomes das exceções de validacao
+- Melhorar nomes das exceções de validacao??? talvez
 **** Infraestrutura
-
+- Não permitir que usuários que não mudaram a senha possam realizar operações. Talvez algum atributo do usuário spring security seja alterado 
+	ao alterar a senha, ou reflita o mesmo estado da senhaAlterada
+- Buscar dados gerais de aluno, incuindo matriculas, ocorrencias e outros no alunoService
 - Desabilitar usuarios que nao estejam matriculados atraves de schedule
 - Nos testes tentar assinar uma ocorrencia com usuario funcionario como se fosse aluno e verificar a mensagem de erro
 **** Frontend

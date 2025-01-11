@@ -26,6 +26,17 @@ public class MensagemDeEmail {
 	private LocalDateTime dataHoraDeEnvio;
 	private Boolean enviadoComSucesso;
 	private String erro;
+	
+	public MensagemDeEmail(Email destinatario, List<Email> CC, String assunto, String corpo,
+			LocalDateTime dataHoraDeEnvio, Boolean enviadoComSucesso, String erro) {
+		this.destinatario = destinatario;
+		this.CC = CC;
+		this.assunto = assunto;
+		this.corpo = corpo;
+		this.dataHoraDeEnvio = dataHoraDeEnvio;
+		this.enviadoComSucesso = enviadoComSucesso;
+		this.erro = erro;
+	}
 
 	public MensagemDeEmail(Email destinatario, String assunto, String corpo) {
 		this.destinatario = destinatario;
@@ -40,4 +51,5 @@ public class MensagemDeEmail {
 	public void addAllCC(List<Email> email) {
 		this.CC.addAll(email);
 	}
+
 }

@@ -1,11 +1,13 @@
-package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia;
+package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia.assinatura;
 
+import com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia.EnviaNotificacaoDeOcorrencia;
+import com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia.OperacaoDeOcorrencia;
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario.BuscaFuncionario;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.PINService;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.PINService;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.TipoPerfil;
 

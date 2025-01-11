@@ -4,6 +4,9 @@ import java.util.List;
 
 import com.dougfsilva.e_AGE.dominio.curso.matricula.Matricula;
 import com.dougfsilva.e_AGE.dominio.curso.modulo.Modulo;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.AssinaturaDeAluno;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.AssinaturaDeResponsavel;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.AssinaturaManual;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 
 import lombok.AllArgsConstructor;
@@ -26,10 +29,11 @@ public class Ocorrencia {
 	private Boolean encaminhada;
 	private Boolean restrita;
 	private String descricao;
-	private List<TratamentoDeOcorrencia> tratamento;
+	private List<TratamentoDeOcorrencia> tratamentos;
 	private OcorrenciaStatus status;
-	private AssinaturaDeOcorrenciaAluno assinaturaAluno;
-	private AssinaturaDeOcorrenciaResponsavel assinaturaResponsavel;
+	private AssinaturaDeAluno assinaturaAluno;
+	private AssinaturaDeResponsavel assinaturaResponsavel;
+	private AssinaturaManual assinaturaManual;
 	private AberturaDeOcorrencia aberturaDeOcorrencia;
 	private FechamentoDeOcorrencia fechamento;
 	private EncerramentoDeOcorrencia encerramento;
@@ -46,11 +50,11 @@ public class Ocorrencia {
 	}
 	
 	public void addTratamento(TratamentoDeOcorrencia tratamento) {
-		this.tratamento.add(tratamento);
+		this.tratamentos.add(tratamento);
 	}
 	
 	public void removeTratamento(TratamentoDeOcorrencia tratamento) {
-		this.tratamento.removeIf(t -> t.equals(tratamento));
+		this.tratamentos.removeIf(t -> t.equals(tratamento));
 	}
 
 }

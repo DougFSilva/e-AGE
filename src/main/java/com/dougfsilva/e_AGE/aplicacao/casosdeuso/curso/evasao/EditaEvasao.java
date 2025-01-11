@@ -24,7 +24,7 @@ public class EditaEvasao {
 	
 	private Evasao editarDados(EditaEvasaoForm form) {
 		Evasao evasao = repository.buscarPeloIDOuThrow(form.ID());
-		if (form.moduloID() != null && !form.moduloID().isBlank() && !form.moduloID().equalsIgnoreCase(evasao.getModulo().getID())) {
+		if (form.moduloID() != null && !form.moduloID().isBlank() && !form.moduloID().equals(evasao.getModulo().getID())) {
 			Modulo modulo = moduloRepository.buscarPeloIDOuThrow(form.moduloID());
 			garantirModuloPertencenteATurma(modulo, evasao.getMatricula().getTurma());
 			garantirModuloEmAndamentoOuConcluído(modulo);

@@ -43,7 +43,7 @@ public class ExcluiOcorrencia {
 	}
 	
 	private void garantirOcorrenciaSemTratamento(Ocorrencia ocorrencia) {
-		if (ocorrencia.getTratamento().size() > 0) {
+		if (ocorrencia.getTratamentos().size() > 0) {
 			throw new ErroDeValidacaoDeOcorrenciaException("Somente ocorrência sem tratamento pode ser excluída");
 		}
 	}

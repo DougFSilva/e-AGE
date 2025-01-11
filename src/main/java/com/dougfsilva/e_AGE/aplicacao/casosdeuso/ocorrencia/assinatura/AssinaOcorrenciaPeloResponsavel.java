@@ -1,16 +1,13 @@
-package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia;
-
-import java.time.LocalDateTime;
+package com.dougfsilva.e_AGE.aplicacao.casosdeuso.ocorrencia.assinatura;
 
 import com.dougfsilva.e_AGE.aplicacao.casosdeuso.pessoa.funcionario.BuscaFuncionario;
 import com.dougfsilva.e_AGE.aplicacao.formulario.AssinaOcorrenciaPeloResponsavelForm;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeOcorrenciaException;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.ChaveSecreta;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.CodificadorDeAssinatura;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaStatus;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.PINService;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.AssinaturaDeResponsavel;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.PINService;
 import com.dougfsilva.e_AGE.dominio.pessoa.aluno.Aluno;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 import com.dougfsilva.e_AGE.dominio.pessoa.usuario.TipoPerfil;
@@ -22,9 +19,8 @@ public class AssinaOcorrenciaPeloResponsavel {
 
 	private final OcorrenciaRepository repository;
 	private final PINService pinService;
-	private final CodificadorDeAssinatura codificadorDeAssinatura;
-	private final ChaveSecreta chaveSecreta;
 	private final BuscaFuncionario buscaFuncionario;
+	private final AssinaturaDeResponsavelService assinaturaService;
 
 	public Ocorrencia assinarOcorrenciaPeloID(AssinaOcorrenciaPeloResponsavelForm form) {
 		Ocorrencia ocorrencia = repository.buscarPeloIDOuThrow(form.ocorrenciaID());
@@ -76,13 +72,10 @@ public class AssinaOcorrenciaPeloResponsavel {
 	}
 
 	private Ocorrencia gerarAssinaturaEAtualizarOcorrencia(Ocorrencia ocorrencia, String PIN, Funcionario funcionarioAutenticado) {
-		LocalDateTime timestamp = LocalDateTime.now();
-		String dadosParaHash = ocorrencia.getID() + timestamp + PIN + chaveSecreta.buscarChave();
-		String assinatura = codificadorDeAssinatura.codificar(dadosParaHash);
-		ocorrencia.getAssinaturaResponsavel().setResponsavelPelaColetaDaAssinatura(funcionarioAutenticado);
-		ocorrencia.getAssinaturaResponsavel().setTimestamp(timestamp);
-		ocorrencia.getAssinaturaResponsavel().setAssinatura(assinatura);
+		AssinaturaDeResponsavel assinaturaDeResponsavel = assinaturaService.gerarAssinaturaCodificada(PIN, funcionarioAutenticado);
+		ocorrencia.getAssinaturaResponsavel().setDataHora(assinaturaDeResponsavel.getDataHora());
+		ocorrencia.getAssinaturaResponsavel().setAssinatura(assinaturaDeResponsavel.getAssinatura());
+		ocorrencia.getAssinaturaResponsavel().setResponsavelPelaColeta(assinaturaDeResponsavel.getResponsavelPelaColeta());
 		return ocorrencia;
 	}
-	
 }

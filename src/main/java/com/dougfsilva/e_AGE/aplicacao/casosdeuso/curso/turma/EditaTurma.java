@@ -22,7 +22,7 @@ public class EditaTurma {
 	
 	private Turma editarDados(EditaTurmaForm form) {
 		Turma turma = repository.buscarPeloIDOuThrow(form.ID());
-		if (form.cursoID() != null && !form.cursoID().isBlank() && !form.cursoID().equalsIgnoreCase(turma.getCurso().getID())) {
+		if (form.cursoID() != null && !form.cursoID().isBlank() && !form.cursoID().equals(turma.getCurso().getID())) {
 			Curso curso = cursoRepository.buscarPeloIDOuThrow(form.cursoID());
 			turma.setCurso(curso);
 		}

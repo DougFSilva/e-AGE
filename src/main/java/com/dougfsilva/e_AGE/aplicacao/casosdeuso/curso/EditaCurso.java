@@ -27,7 +27,7 @@ public class EditaCurso {
 		}
 		if (form.areaTecnologicaID() != null 
 				&& !form.areaTecnologicaID().isBlank() 
-				&& !form.areaTecnologicaID().equalsIgnoreCase(curso.getAreaTecnologica().getID())) {
+				&& !form.areaTecnologicaID().equals(curso.getAreaTecnologica().getID())) {
 			AreaTecnologica area = areaTecnologicaRepository.buscarPeloIDOuThrow(form.areaTecnologicaID());
 			curso.setAreaTecnologica(area);
 		}

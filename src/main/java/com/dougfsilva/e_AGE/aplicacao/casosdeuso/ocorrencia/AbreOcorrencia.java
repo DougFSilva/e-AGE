@@ -11,10 +11,10 @@ import com.dougfsilva.e_AGE.dominio.curso.modulo.ModuloRepository;
 import com.dougfsilva.e_AGE.dominio.curso.turma.Turma;
 import com.dougfsilva.e_AGE.dominio.exception.ErroDeValidacaoDeEvasaoException;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.AberturaDeOcorrencia;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.AssinaturaDeOcorrenciaResponsavel;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.Ocorrencia;
 import com.dougfsilva.e_AGE.dominio.ocorrencia.OcorrenciaRepository;
-import com.dougfsilva.e_AGE.dominio.ocorrencia.PINService;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.AssinaturaDeResponsavel;
+import com.dougfsilva.e_AGE.dominio.ocorrencia.assinatura.PINService;
 import com.dougfsilva.e_AGE.dominio.pessoa.funcionario.Funcionario;
 
 import lombok.AllArgsConstructor;
@@ -71,7 +71,7 @@ public class AbreOcorrencia {
 	private Ocorrencia notificarResponsavelComPIN(Ocorrencia ocorrencia) {
 		String PIN = pinService.gerarPIN();
 		String PINCodificado = pinService.codificar(PIN);
-		ocorrencia.setAssinaturaResponsavel(new AssinaturaDeOcorrenciaResponsavel(PINCodificado));
+		ocorrencia.setAssinaturaResponsavel(new AssinaturaDeResponsavel(PINCodificado));
 		Ocorrencia ocorrenciaAtualizadaComPIN = repository.salvar(ocorrencia);
 		notifica.enviarNotificacaoParaResponsavelComPIN(ocorrenciaAtualizadaComPIN, OperacaoDeOcorrencia.ABERTA, PIN);
 		return ocorrenciaAtualizadaComPIN;

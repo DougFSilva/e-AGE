@@ -24,7 +24,7 @@ public class EditaReprova {
 	
 	private Reprova editarDados(EditaReprovaForm form) {
 		Reprova reprova = repository.buscarPeloIDOuThrow(form.ID());
-		if (form.moduloID() != null && !form.moduloID().isBlank() && !form.moduloID().equalsIgnoreCase(reprova.getModulo().getID())) {
+		if (form.moduloID() != null && !form.moduloID().isBlank() && !form.moduloID().equals(reprova.getModulo().getID())) {
 			Modulo modulo = moduloRepository.buscarPeloIDOuThrow(form.moduloID());
 			garantirModuloPertencenteATurma(modulo, reprova.getMatricula().getTurma());
 			garantirModuloEmAndamentoOuConcluído(modulo);

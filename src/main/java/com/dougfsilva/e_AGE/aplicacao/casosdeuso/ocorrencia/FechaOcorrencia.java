@@ -42,7 +42,7 @@ public class FechaOcorrencia {
 	}
 	
 	private void garantirOcorrenciaTratada(Ocorrencia ocorrencia) {
-		if (ocorrencia.getTratamento().size() < 1) {
+		if (ocorrencia.getTratamentos().size() < 1) {
 			throw new ErroDeValidacaoDeOcorrenciaException("Somente uma ocorrência com tratamentos pode ser fechada");
 		}
 	}
